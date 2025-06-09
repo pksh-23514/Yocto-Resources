@@ -1,0 +1,32 @@
+Embedded Linux:
+===============
+1. The Embedded Linux is a customized version of the Linux OS optimized to run on an Embedded system.
+2. The Embedded systems are Devices with certain specific functionalities and have resource constraints.
+3. The major elements of Embedded Linux are:
+	1) Toolchain
+	2) Bootloader
+	3) Linux Kernel
+	4) Root Filesystem (RootFS)
+	5) Embedded Applications specific to the system
+
+Toolchain:
+**********
+1. It consists of the Cross-Compilation tools for building the binaries for a Target Architecture.
+2. They provide the necessary Compilers, Assemblers, Linkers, Debuggers and other utilities for the Cross-Compilation.
+
+Bootloader:
+***********
+1. It initializes the HW, loads the Kernel into the Memory and passes the control to the Kernel.
+2. It provides a basic Shell, Environment variables and has the ability to load the Kernel and the Device Tree from the Flash Memory or Network.
+3. The most popular Bootloader is the U-Boot.
+
+Kernel:
+*******
+1. It is the core of the OS that manages the system resources and provides and interface to interact with the HW.
+2. The Linux Kernel is customized for the Embedded systems with the features included on-demand.
+
+RootFS:
+*******
+1. It consits of the essential File systems and directories (/bin, /sbin, /lib, /etc, /dev, /proc, /sys, /usr).
+2. The programs and libraries are available once the Kernel is up in the Memory.
+3. The RootFS can be made Read-only for security purposes.
