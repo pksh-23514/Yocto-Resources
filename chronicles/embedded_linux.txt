@@ -44,3 +44,34 @@ Target System:
 1. It refers to the actual Embedded HW that will execute the SW developed on the Host Machine.
 2. After the development, the code is Cross-Compiled and Cross-Assembled and Linked to the Target Processor Instruction Set.
 3. All the other elements of the Embedded Linux except the Toolchain are present on the Target system.
+
+Cross-Compiler:
+***************
+1. It is a Compiler that runs on the Host system and generates the executable code for the Target system having a different architecture.
+2. Since there is a constraint on the Embedded systems resources, all the Cross-Compilation is performed on the Host Machine.
+3. The example of a Cross-Compiler for a Target Architecture is:
+	=> ARM (32-bit) with hard-float (ARM Cortex-A7 with Vector Floating Point) ---> arm-linux-gnueabihf-gcc
+4. The usage of a Cross-Compiler on the Host Machine is:
+	=> arm-linux-gnueabihf-gcc -o hello_world hello_world.c
+
+Cross-Assembler:
+****************
+1. It is an Assembler that runs on the Host system and generates the machine code for the Target system having a different architecture.
+2. They are very useful in scenarios where precise timing and instruction flow (like the Bootloader or Start-up code) is required.
+3. The example of a Cross-Assembler for a Target Architecture is:
+	=> ARM (32-bit) with hard-float (ARM Cortex-A7 with Vector Floating Point) ---> arm-linux-gnueabihf-as
+4. The usage of a Cross-Assembler on the Host Machine is:
+	=> arm-linux-gnueabihf-as -o startup.o startup.s
+
+Linker:
+*******
+1. It is used to transform Object files (the Compiled code) into a final executable like a Kernel, Bootloader or an Application binary.
+2. It performs the following functions:
+	1) Resolves the Symbol references between the Object files.
+	2) Arranges the code into various Sections like '.text', '.data', '.bss' etc.
+	3) Places these Sections into their respective Memory Address according to the Linker script (.ld).
+	4) Produces a final binary such as an ELF or a raw Bin file.
+3. The example of a Linker for a Target Architecture is:
+	=> ARM (32-bit) with hard-float (ARM Cortex-A7 with Vector Floating Point) ---> arm-linux-gnueabihf-ld
+4. The usage of a Linker on the Host Machine is:
+	=> arm-linux-gnueabihf-ld -T linker.ld -o output.elf startup.o hello_world.o
