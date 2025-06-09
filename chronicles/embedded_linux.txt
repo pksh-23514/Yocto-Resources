@@ -30,3 +30,17 @@ RootFS:
 1. It consits of the essential File systems and directories (/bin, /sbin, /lib, /etc, /dev, /proc, /sys, /usr).
 2. The programs and libraries are available once the Kernel is up in the Memory.
 3. The RootFS can be made Read-only for security purposes.
+
+Terminologies:
+==============
+
+Host Machine:
+*************
+1. It refers to the development PC that contains the Toolchain for development of the Embedded Linux.
+2. It is used for development, compilation, translation, linking, testing, debugging and optimization of the SW to be executed on the Target Embedded system.
+
+Target System:
+**************
+1. It refers to the actual Embedded HW that will execute the SW developed on the Host Machine.
+2. After the development, the code is Cross-Compiled and Cross-Assembled and Linked to the Target Processor Instruction Set.
+3. All the other elements of the Embedded Linux except the Toolchain are present on the Target system.
