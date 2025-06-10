@@ -19,8 +19,8 @@ Workflow of the Yocto Project:
 					   |
 					   V
 			--------------------------------------------------------------------	   -----------------
-User			| Source							   |	   | Package Feeds |
-Configuration	---->	| Fetching	 ----------------				   | ----> |		   |
+User			| Source							   |	   |     Package   |
+Configuration	---->	| Fetching	 ----------------				   | ----> |	  Feeds	   |
 			|    |		 | Output       |				   |	   -----------------
 Meta-Layers		|    V		 | Analysis     |	-----------		   |		|	|
 (.bb + Patches)	---->	|  Patch	 | for Package  |	| .deb or |		   |		V	V
@@ -31,3 +31,19 @@ Configuration	---->	|    V		 | Package      |	-----------		   |  | Generation | 
 Policy			| Compile  ----> |              |				   |  -------------- -----------------------------
 Configuration	---->	| Autoconf	 ----------------				   |   Linux Images   Application Development SDK
 			--------------------------------------------------------------------  -------------- -----------------------------
+
+Host Machine Requirements:
+==========================
+1. At least 90 GB of free Disk space.
+2. At least 8 GB of RAM and as many CPU Cores as possible.
+3. A supported Linux Distribution i.e. recent releases of Fedora, openSUSE, CentOS, Debian or Ubuntu.
+4. Ensure that the following utilities have these minimum version numbers:
+	1) Git 1.8.3.1 or greater
+	2) tar 1.28 or greater
+	3) Python 3.9.0 or greater.
+	4) gcc 10.1 or greater.
+	5) GNU make 4.0 or greater
+5. The essential Packages that must be installed are:
+	=> sudo apt-get install build-essential chrpath cpio debianutils diffstat file gawk gcc git iputils-ping libacl1 liblz4-tool locales \
+		python3 python3-git python3-jinja2 python3-pexpect python3-pip python3-subunit socat texinfo unzip wget xz-utils zstd
+	---> Check the 'Yocto Project Quick Build' in the Yocto Project documentation for any changes.
