@@ -1,0 +1,33 @@
+The Yocto Project:
+==================
+1. The Yocto Project is an Open-Source collaboration project that helps the developers create custom Linux based Distributions for any HW Architecture.
+2. It provides a flexible toolset and a development environment that allows the developers to collaborate and develop the custom Linux Images.
+3. It is a standard framework accepted worldwide for Embedded Linux development.
+4. It was officially announced in March 2010 by the Linux Foundation.
+
+Workflow of the Yocto Project:
+==============================
+
+			Upstream	Local		SCMs
+			Project		Projects	(Optional)
+			Releases	   |		  |
+			    |		   |		  |
+			    V		   V		  V
+			-----------------------------------------
+			|	     Source Materials		|
+			-----------------------------------------
+					   |
+					   V
+			--------------------------------------------------------------------	   -----------------
+User			| Source							   |	   | Package Feeds |
+Configuration	---->	| Fetching	 ----------------				   | ----> |		   |
+			|    |		 | Output       |				   |	   -----------------
+Meta-Layers		|    V		 | Analysis     |	-----------		   |		|	|
+(.bb + Patches)	---->	|  Patch	 | for Package  |	| .deb or |		   |		V	V
+			| Application	 | splitting    | ----> | .rpm or | ----> QA Tests |  -------------- --------------
+Machins BSP		|    |		 | plus         |	| .ipk    |		   |  |    Image   | |   SDK      |
+Configuration	---->	|    V		 | Package      |	-----------		   |  | Generation | | Generation |
+			| Config	 | relationship |				   |  -------------- --------------
+Policy			| Compile  ----> |              |				   |  -------------- -----------------------------
+Configuration	---->	| Autoconf	 ----------------				   |   Linux Images   Application Development SDK
+			--------------------------------------------------------------------  -------------- -----------------------------
