@@ -47,3 +47,11 @@ Host Machine Requirements:
 	=> sudo apt-get install build-essential chrpath cpio debianutils diffstat file gawk gcc git iputils-ping libacl1 liblz4-tool locales \
 		python3 python3-git python3-jinja2 python3-pexpect python3-pip python3-subunit socat texinfo unzip wget xz-utils zstd
 	---> Check the 'Yocto Project Quick Build' in the Yocto Project documentation for any changes.
+
+The Yocto Project Layer Model:
+==============================
+1. It is a development model for Embedded Linux creation that distinguishes the Yocto Project from the other Build systems.
+2. It simultaneously supports collaboration and customization.
+3. The Layers are repositories that contain related sets of instructions to tell the Build system about what to execute.
+4. A Layer contains changes to the previous instructions or settings at any given time. This is a very powerful override capability provided by the Yocto Project.
+5. The use of Layers logically separate the infromation in your Build. Putting entire infromation in one directory limits and complicates future customization and reuse.
