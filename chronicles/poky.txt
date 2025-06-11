@@ -55,4 +55,4 @@ Difference between Poky and the Yocto Project:
 	1) The Yocto Project supports a larger ecosystem of HW platform through the various tools, configurations, Layers and documentation. It is HW-agnostic.
 	2) Poky is a specific implementation within the Yocto Project. It supports only a few selected HW platforms by default but can be extended through BSP Layers.
 4. Therefore, Poky is a sub-set of the Yocto Project.
-5. Analogy - Given that the Yocto Project is like the Cannonical, then Poky is like the Ubuntu.
+5. Analogy => Given that the Yocto Project is like the Cannonical, then Poky is like the Ubuntu.
