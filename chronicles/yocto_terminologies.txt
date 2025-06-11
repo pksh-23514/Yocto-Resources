@@ -1,0 +1,17 @@
+The Yocto Project Terminologies:
+================================
+
+Meta-data:
+**********
+1. It is a key element of the Yocto Project which refers to the information that describe how the SW Package should be built, configured and integrated into the Image.
+2. These information are logically stored in the Layers and they are parsed by the Build system during the Build process.
+3. It includes the following:
+	1) Recipe files (.bb)
+	2) Class files (.bbclass)
+	3) Configuration files (.conf)
+	4) Include files (.inc)
+4. It refers to the Build instruction itself as well as the data to control the Build. It includes the following commands and data:
+	1) To indicate the version of SW used in the Build.
+	2) To point the source from where the SW is obtained.
+	3) To customize the SW (i.e. applying Patches) in a certain manner as per the requirements.
+5. It is essential to generate a complete Linux Distribution tailored to a specific HW Device. It allows the Yocto Project to be highly flexible.
