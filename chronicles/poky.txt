@@ -1,6 +1,6 @@
 Poky:
 =====
-1. It is the Yocto Project's reference Distribution that provides a starting point or example to Build a custom Linux Distro (short for Distribution).
+1. It is the Yocto Project's reference Distribution that provides a starting point or example to Build a Linux Distro (short for Distribution).
 2. It contains the following components:
 	1) The OpenEmbedded Build system
 	2) Core Meta-data and Recipes
@@ -21,7 +21,7 @@ Poky:
 	13) SECURITY
 	14) oe-init-build-env
 4. The link to the Poky Git repository is: https://git.yoctoproject.org/poky
-5. It does not contain any binary files as it is a working example of how to Build a custom Linux Distribution from the Source.
+5. It does not contain any binary files as it is a working example of how to Build a Linux Distribution from the Source.
 6. The link to the Poky Releases information is: https://wiki.yoctoproject.org/wiki/Releases
 7. It has a regular and well established 6-month Release cycle under its own version.
 8. The Major Releases happen at the same time of the Major Releases for the Yocto Project.
@@ -32,7 +32,7 @@ Graphical Representation of the Poky:
 ---------------------------------------------------------------------------------------------------------------------------------------
 |									Yocto Project						      |
 |																      |
-|    -------------------------------------------------------------	- Yocto Project compatible BSPs (like meta-ti, meta-imx etc.) |
+|    -------------------------------------------------------------	- Yocto Project compatible BSPs (like meta-ti, meta-nxp etc.) |
 |    |	---------------------------------	Poky		 |	- Yocto Project compatible Layers			      |
 |    |	| OpenEmbedded Core (Meta-data)	|	- meta-poky	 |	- Yocto Project Autobuilder (QA)			      |
 |    |	| BitBake Build Engine		|	- meta-yocto-bsp |	- Development Tools for Users				      |
@@ -45,3 +45,14 @@ Graphical Representation of the Poky:
 	| OpenEmbedded			|
 	---------------------------------
 
+Difference between Poky and the Yocto Project:
+==============================================
+1. The Yocto Project and Poky are closely related, but they serve different purposes within the embedded Linux development ecosystem.
+2. By the definition of both:
+	1) The Yocto Project is a collaborative Open-Source project that provides the tools, Meta-data and the processes for building custom Linux Distributions.
+	2) Poky is a reference Distribution provided by the Yocto Project. It serves as an example to Build a Linux Distribution.
+3. By the scope of both:
+	1) The Yocto Project supports a larger ecosystem of HW platform through the various tools, configurations, Layers and documentation. It is HW-agnostic.
+	2) Poky is a specific implementation within the Yocto Project. It supports only a few selected HW platforms by default but can be extended through BSP Layers.
+4. Therefore, Poky is a sub-set of the Yocto Project.
+5. Analogy - Given that the Yocto Project is like the Cannonical, then Poky is like the Ubuntu.
