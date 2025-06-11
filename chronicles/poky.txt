@@ -1,0 +1,47 @@
+Poky:
+=====
+1. It is the Yocto Project's reference Distribution that provides a starting point or example to Build a custom Linux Distro (short for Distribution).
+2. It contains the following components:
+	1) The OpenEmbedded Build system
+	2) Core Meta-data and Recipes
+	3) Configuration Templates
+3. At the repository level, it consists of the following files/directories:
+	1) bitbake
+	2) contrib
+	3) documentation
+	4) meta-poky
+	5) meta-selftest
+	6) meta-skeleton
+	7) meta-yocto-bsp
+	8) meta
+	9) scripts
+	10) LICENSE(s)
+	11) MAINTAINERS
+	12) README(s)
+	13) SECURITY
+	14) oe-init-build-env
+4. The link to the Poky Git repository is: https://git.yoctoproject.org/poky
+5. It does not contain any binary files as it is a working example of how to Build a custom Linux Distribution from the Source.
+6. The link to the Poky Releases information is: https://wiki.yoctoproject.org/wiki/Releases
+7. It has a regular and well established 6-month Release cycle under its own version.
+8. The Major Releases happen at the same time of the Major Releases for the Yocto Project.
+9. It can be used to create Linux Images ranging from a Shell-accessible Minimal Image to a Standard Base-compliant Sato Image.
+
+Graphical Representation of the Poky:
+=====================================
+---------------------------------------------------------------------------------------------------------------------------------------
+|									Yocto Project						      |
+|																      |
+|    -------------------------------------------------------------	- Yocto Project compatible BSPs (like meta-ti, meta-imx etc.) |
+|    |	---------------------------------	Poky		 |	- Yocto Project compatible Layers			      |
+|    |	| OpenEmbedded Core (Meta-data)	|	- meta-poky	 |	- Yocto Project Autobuilder (QA)			      |
+|    |	| BitBake Build Engine		|	- meta-yocto-bsp |	- Development Tools for Users				      |
+|    |	|				|	- documentation  |	- Production Tools to Build Projects			      |
+|    ---|				|-------------------------	- Miscellaneous Layers and Project Components		      |
+|	|				|				- Pseudo (for Super-User privileges during Build)	      |
+|	|				|				- Documentation						      |
+--------|				|----------------------------------------------------------------------------------------------
+	| meta-openembedded		|
+	| OpenEmbedded			|
+	---------------------------------
+
