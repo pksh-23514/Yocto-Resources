@@ -39,7 +39,7 @@ Graphical Representation of the Poky:
 |    |	|				|	- documentation  |	- Production Tools to Build Projects			      |
 |    ---|				|-------------------------	- Miscellaneous Layers and Project Components		      |
 |	|				|				- Pseudo (for Super-User privileges during Build)	      |
-|	|				|				- Documentation						      |
+|	|				|				- documentation						      |
 --------|				|----------------------------------------------------------------------------------------------
 	| meta-openembedded		|
 	| OpenEmbedded			|
