@@ -18,3 +18,4 @@ meta-yocto-bsp:
 	5) beaglebone
 5. It is useful for testing Yocto without the need of real HW i.e. by using the emulated Target QEMU.
 6. It acts as a reference to create a custom BSP Layer for any other HW.
+7. It depends on the 'meta' Layer in the Poky.
