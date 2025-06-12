@@ -1,0 +1,20 @@
+BitBake:
+========
+1. The BitBake is a core component of the Yocto Project and it is at the heart of the OpenEmbedded Project.
+2. It is the tool that parses the Meta-data, generates a list of Tasks from it and then executes these Tasks in an orderly manner.
+3. Conceptually, it is similar to the GNU Make but they have significant differences among them.
+	1) Both the Make and BitBake control the process of SW Build.
+	2) Make achieves this control through Makefiles. BitBake achieves this control through Recipes.
+	3) BitBake extends the capabilities of a simple tool like Make by allowing for the definition of much more complex Tasks such as assembling entire Linux Distributions.
+4. It is written in Python.
+5. The link to the BitBake Git repository is: https://git.openembedded.org/bitbake/
+6. It is a Task scheduler that performs the following tasks:
+	1) It parses the Recipe (.bb) files and the associated files (.bbclass, .inc and .conf) to understand how to fetch, configure, compile and package the SW.
+	2) It resolves the Build-time and Run-time dependencies in the Recipes.
+	3) It ensures all the required components are Build in the right order.
+	4) It executes all the Tasks defined in the Recipes (like do_fetch, do_unpack, do_patch, do_configure, do_compile, do_install, do_package).
+	5) It packages the SW (usually as .ipk, .rpm or .deb files) after the Build is completed.
+	6) It tracks the Build State for completion and uses checksums (signatures) to determine if something needs to be Build again.
+	7) It Caches the Build to avoid any redundant Builds and speed up the Build process.
+7. It automates the complete Build process for the custom Linux Distributions.
+8. The link to the BitBake documentation is: https://docs.yoctoproject.org/bitbake/2.12/index.html
