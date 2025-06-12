@@ -3,7 +3,7 @@ The Yocto Project Terminologies:
 
 Meta-data:
 **********
-1. It is a key element of the Yocto Project which refers to the information that describe how the SW Package should be built, configured and integrated into the Image.
+1. Meta-data is a key element of the Yocto Project which refers to the information that describe how the SW Package should be built, configured and integrated into the Image.
 2. These information are logically stored in the Layers and they are parsed by the Build system during the Build process.
 3. It includes the following:
 	1) Recipe files (.bb)

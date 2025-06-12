@@ -1,6 +1,6 @@
 Poky:
 =====
-1. It is the Yocto Project's reference Distribution that provides a starting point or example to Build a Linux Distro (short for Distribution).
+1. Poky is the Yocto Project's reference Distribution that provides a starting point or example to Build a Linux Distro (short for Distribution).
 2. It contains the following components:
 	1) The OpenEmbedded Build system
 	2) Core Meta-data and Recipes
