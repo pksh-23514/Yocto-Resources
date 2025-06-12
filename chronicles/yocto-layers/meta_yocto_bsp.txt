@@ -5,4 +5,16 @@ meta-yocto-bsp:
 	1) Texas Instruments Beaglebone (beaglebone-yocto)
 	2) General 64-bit ARM SystemReady platforms (genericarm64)
 	3) General Intel Architecture platforms (genericx86 and genericx86-64)
-3. It provides the Machine Configuration files (.conf), Kernel Recipes and other HW-specific Meta-data to build the complete Linux Image for the Target HW.
+3. It provides HW-specific Meta-data to build the complete Linux Image for the Target:
+	1) Machine Configuration files (.conf)
+	2) Kernel Recipes
+	3) Bootloader Configuration
+	4) Device-specific initializations
+4. The Machines supported include:
+	1) qemux86
+	2) qemux86-64
+	3) qemuarm
+	4) qemuarm64
+	5) beaglebone
+5. It is useful for testing Yocto without the need of real HW i.e. by using the emulated Target QEMU.
+6. It acts as a reference to create a custom BSP Layer for any other HW.
