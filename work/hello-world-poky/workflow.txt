@@ -2,7 +2,7 @@ Host Machine Requirements:
 ==========================
 1. 1. At least 90 GB of free Disk space.
 2. At least 8 GB of RAM and as many CPU Cores as possible.
-3. A supported Linux Distribution i.e. recent releases of Fedora, openSUSE, CentOS, Debian or Ubuntu.
+3. A supported Linux Distribution i.e. recent Releases of Fedora, openSUSE, CentOS, Debian or Ubuntu.
 4. The Yocto Project version => 4.0
 5. The codename of Poky with the Yocto Project version => Kirkstone
 

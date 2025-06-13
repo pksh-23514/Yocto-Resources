@@ -37,7 +37,7 @@ Host Machine Requirements:
 ==========================
 1. At least 90 GB of free Disk space.
 2. At least 8 GB of RAM and as many CPU Cores as possible.
-3. A supported Linux Distribution i.e. recent releases of Fedora, openSUSE, CentOS, Debian or Ubuntu.
+3. A supported Linux Distribution i.e. recent Releases of Fedora, openSUSE, CentOS, Debian or Ubuntu.
 4. Ensure that the following utilities have these minimum version numbers:
 	1) Git 1.8.3.1 or greater
 	2) tar 1.28 or greater
