@@ -59,3 +59,21 @@ Image Build using BitBake:
 	=> bitbake core-image-minimal
 2. In the 'conf' directory, the Target Machine is selected by default as 'qemux86-64'. This can be updated to others by updating the 'local.conf' file.
 
+Image Simulation using QEMU:
+============================
+1. For testing the Built Yocto Image on the Host, QEMU is used to execute the Image on an Emulator mimicking the Target HW.
+2. QEMU (Quick Emulator) is a free and Open-Source SW package that performs the Hardware virtualization.
+3. It allows test and development without the need of a real Hardware. Currently, it supports the following Target architectures:
+	1) ARM / AArch64 (32-bit and 64-bit ARM Architecture)
+	2) MIPS / MIPS64 (Including little-Endian and big-Endian variants)
+	3) RISC-V (rv32 and rv64 Architecture)
+	4) PowerPC / PowerPC64
+	5) x86 / x86-64
+4. Poky repository provides a script 'runqemu' which allows to start the QEMU for running the Yocto Image.
+	=> The 'scripts directory in the cloned repository contains the 'runqemu' script.
+5. The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
+	=> runqemu qemux86-64
+	---> A graphical Console will appear on the Standard Output displaying the Booting process.
+	---> The QEMU can be run without the graphical console using the 'nographic' option in the command. In terms of visiual clarity, this method is preferred.
+6. The QEMU can be closed by powering OFF the virtual HW.
+	=> poweroff
