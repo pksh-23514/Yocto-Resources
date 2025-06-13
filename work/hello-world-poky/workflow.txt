@@ -1,0 +1,28 @@
+Host Machine Requirements:
+==========================
+1. 1. At least 90 GB of free Disk space.
+2. At least 8 GB of RAM and as many CPU Cores as possible.
+3. A supported Linux Distribution i.e. recent releases of Fedora, openSUSE, CentOS, Debian or Ubuntu.
+4. The Yocto Project version => 4.0
+5. The codename of Poky with the Yocto Project version => Kirkstone
+
+Preparing the Build Host Machine:
+=================================
+1. For the below commands, it is assumed that the Host Machine has Ubuntu installed on it.
+2. The essential Packages that must be installed are:
+	=> sudo apt install build-essential chrpath cpio debianutils diffstat file gawk gcc git iputils-ping libacl1 liblz4-tool locales \
+		python3 python3-git python3-jinja2 python3-pexpect python3-pip python3-subunit socat texinfo unzip wget xz-utils zstd
+2. Ensure that the following utilities have these minimum version numbers:
+	1) Git 1.8.3.1 or greater
+	2) tar 1.28 or greater
+	3) Python 3.6.0 or greater
+	4) gcc 7.5 or greater
+	5) GNU make 4.0 or greater
+3. Ensure that the 'en_US.UTF-8' locale is enabled on the Host:
+	=> locale --all-locales | grep en_US.utf8
+	1) If the locale is not present, it has to be configured in the 'locales' Package:
+		=> sudo dpkg-reconfigure locales
+		---> The above command requires an interactive Shell i.e GUI on the Host Machine.
+4. If required, the Packages needed to Build the Project manuals:
+	=> sudo apt install git inkscape locales make python3-saneyaml python3-sphinx-rtd-theme sphinx texlive-latex-extra
+
