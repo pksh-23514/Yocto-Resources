@@ -1,0 +1,70 @@
+Initializing the Build Environment:
+===================================
+
+1. From within the cloned repository directory, run the 'oe-init-build-env' Environment setup script to setup the OpenEmbedded Build Environment on the Host Machine.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
+bitbake  documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-poky      meta-skeleton   oe-init-build-env   README.md          README.poky.md  scripts
+contrib  LICENSE        LICENSE.MIT           Makefile        meta      meta-selftest  meta-yocto-bsp  README.hardware.md  README.OE-Core.md  README.qemu.md
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ source oe-init-build-env 
+You had no conf/local.conf file. This configuration file has therefore been
+created for you from /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-poky/conf/local.conf.sample
+You may wish to edit it to, for example, select a different MACHINE (target
+hardware). See conf/local.conf for more information as common configuration
+options are commented.
+
+You had no conf/bblayers.conf file. This configuration file has therefore been
+created for you from /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-poky/conf/bblayers.conf.sample
+To add additional metadata layers into your configuration please add entries
+to conf/bblayers.conf.
+
+The Yocto Project has extensive documentation about OE including a reference
+manual which can be found at:
+    https://docs.yoctoproject.org
+
+For more information about OpenEmbedded see the website:
+    https://www.openembedded.org/
+
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-full-cmdline
+    core-image-sato
+    core-image-weston
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86'
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+
+2. After the 'oe-init-build-env' script execution, the Build Environment is setup under the './build' directory as no argument was passed to the script.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
+bitbake  contrib        LICENSE               LICENSE.MIT     Makefile  meta       meta-selftest  meta-yocto-bsp     README.hardware.md  README.OE-Core.md  README.qemu.md
+build    documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-poky  meta-skeleton  oe-init-build-env  README.md           README.poky.md     scripts
+
+3. After the setup of the Build Environment, the Configuration files are created in the 'build/conf' directory. These Configurations are required for the Build process.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ls
+conf
+
+4. On checking the 'PATH' variable value, the directory path for 'bitbake' is added in the Environment and the Build can be started.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ echo $PATH
+/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/scripts:/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/bitbake/bin:...
+
+5. To verify if the Build Environment is setup successfully, run the Help option for the BitBake.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ bitbake -h
+Usage: bitbake [options] [recipename/target recipe:do_task ...]
+
+    Executes the specified task (default is 'build') for a given set of target recipes (.bb files).
+    It is assumed there is a conf/bblayers.conf available in cwd or in BBPATH which
+    will provide the layer, BBFILES and other configuration information.
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
