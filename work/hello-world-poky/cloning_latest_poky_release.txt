@@ -1,0 +1,89 @@
+Cloning and Check-out the required Poky Branch:
+===============================================
+
+1. Clone the Poky Source repository on the Host Machine.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky$ git clone git://git.yoctoproject.org/poky
+Cloning into 'poky'...
+remote: Enumerating objects: 614364, done.
+remote: Counting objects: 100% (496/496), done.
+remote: Compressing objects: 100% (342/342), done.
+remote: Total 614364 (delta 254), reused 268 (delta 151), pack-reused 613868
+Receiving objects: 100% (614364/614364), 196.06 MiB | 395.00 KiB/s, done.
+Resolving deltas: 100% (447273/447273), done.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky$ git branch -a
+fatal: not a git repository (or any of the parent directories): .git
+
+2. Check all the current branches present in the cloned repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky$ ls
+poky
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky$ cd poky/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ git branch -a
+* master
+  remotes/origin/1.1_M1
+  remotes/origin/1.1_M2
+  remotes/origin/1.1_M3
+  remotes/origin/1.1_M4
+  remotes/origin/1.2_M1
+  remotes/origin/1.2_M2
+  remotes/origin/1.2_M3
+  remotes/origin/1.2_M4
+  remotes/origin/1.3_M1
+  remotes/origin/1.3_M2
+  remotes/origin/1.3_M3
+  remotes/origin/1.3_M4
+  remotes/origin/1.3_M5
+  remotes/origin/1.3_beta
+  remotes/origin/1.4_M1
+  remotes/origin/1.4_M3
+  remotes/origin/1.4_M4
+  remotes/origin/1.4_M5
+  remotes/origin/1.6_M5
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/bernard
+  remotes/origin/blinky
+  remotes/origin/clyde
+  remotes/origin/daisy
+  remotes/origin/danny
+  remotes/origin/denzil
+  remotes/origin/dizzy
+  remotes/origin/dora
+  remotes/origin/dora-toaster
+  remotes/origin/dunfell
+  remotes/origin/dylan
+  remotes/origin/edison
+  remotes/origin/elroy
+  remotes/origin/fido
+  remotes/origin/gatesgarth
+  remotes/origin/green
+  remotes/origin/hardknott
+  remotes/origin/honister
+  remotes/origin/jethro
+  remotes/origin/kirkstone
+  remotes/origin/krogoth
+  remotes/origin/langdale
+  remotes/origin/laverne
+  remotes/origin/master
+  remotes/origin/master-next
+  remotes/origin/master-uninative
+  remotes/origin/mickledore
+  remotes/origin/mickledore-next
+  remotes/origin/morty
+  remotes/origin/pinky
+  remotes/origin/purple
+  remotes/origin/pyro
+  remotes/origin/rocko
+  remotes/origin/sumo
+  remotes/origin/thud
+  remotes/origin/warrior
+  remotes/origin/zeus
+
+3. Check for the Release Page to choose the Yocto Project version and codename for Poky required.
+	1) The link to the Poky Releases information is: https://wiki.yoctoproject.org/wiki/Releases
+	2) Remember to choose the codename corresponding to either the latest Stable Release or the Long Term Support Release. 
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ git checkout -t origin/kirkstone -b my-kirkstone
+Branch 'my-kirkstone' set up to track remote branch 'kirkstone' from 'origin'.
+Switched to a new branch 'my-kirkstone'
+
+4. Note to regularly update the same directory to keep the local branch in sync with the remote branch.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ git pull
+Already up to date.
