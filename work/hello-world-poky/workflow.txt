@@ -32,8 +32,8 @@ Accessing the Source Repository:
 	1) The link to the Poky Releases information is: https://wiki.yoctoproject.org/wiki/Releases
 	2) Remember to choose the codename corresponding to either the latest Stable Release or the Long Term Support Release.
 
-Cloning and Check-out Branch:
-=============================
+Cloning and Check-out the Correct Poky Branch:
+==============================================
 1. In the working directory, clone the complete Poky repository.
 	=> git clone git://git.yoctoproject.org/poky
 	---> Once the cloning is completed, the 'master' branch is checked-out by default.
@@ -44,8 +44,8 @@ Cloning and Check-out Branch:
 3. The local branch must be kept in sync with the remote branch periodically.
 	=> git pull
 
-Initialize the Build Environment:
-=================================
+Initializing the Build Environment:
+===================================
 1. The script 'oe-init-build-env' is used to setup the OpenEmbedded Build Environment.
 	=> cd poky
 	=> source oe-init-build-env [build_dir]
@@ -53,14 +53,14 @@ Initialize the Build Environment:
 2. It adds the BitBake utility to the 'PATH' variable of the Host Machine.
 3. It moves the control to the Build directory with the 'conf' directory containing the necessary Configuration files.
 
-Image Build using BitBake:
-==========================
+Image Build using the BitBake:
+==============================
 1. The final step to Build the Image is by selecting the Target Image and passing it to the BitBake.
 	=> bitbake core-image-minimal
 2. In the 'conf' directory, the Target Machine is selected by default as 'qemux86-64'. This can be updated to others by updating the 'local.conf' file.
 
-Image Simulation using QEMU:
-============================
+Image Simulation using the QEMU:
+================================
 1. For testing the Built Yocto Image on the Host, QEMU is used to execute the Image on an Emulator mimicking the Target HW.
 2. QEMU (Quick Emulator) is a free and Open-Source SW package that performs the Hardware virtualization.
 3. It allows test and development without the need of a real Hardware. Currently, it supports the following Target architectures:
@@ -78,8 +78,8 @@ Image Simulation using QEMU:
 6. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
 
-Image Build for ARM Architecture:
-=================================
+Image Build for the ARM Architecture:
+=====================================
 1. Instead of Intel Architecture (x86), the Image for ARM Architecture can be Built using the same Build directory.
 2. The changes shall be made to the 'local.conf' file in the 'build/conf' directory.
 	=> MACHINE = qemuarm
