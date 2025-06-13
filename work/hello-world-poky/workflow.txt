@@ -70,11 +70,11 @@ Image Simulation using the QEMU:
 	4) PowerPC / PowerPC64
 	5) x86 / x86-64
 4. Poky repository provides a script 'runqemu' which allows to start the QEMU for running the Yocto Image.
-	=> The 'scripts directory in the cloned repository contains the 'runqemu' script.
+	1) The 'scripts' directory in the cloned repository contains the 'runqemu' script.
 5. The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
 	=> runqemu qemux86-64 core-image-minimal
-	---> A graphical Console will appear on the Standard Output displaying the Booting process.
-	---> The QEMU can be run without the graphical console using the 'nographic' option in the command. In terms of visiual clarity, this method is preferred.
+	---> A video Console will appear on the Standard Output displaying the Booting process.
+	---> The QEMU can be run without the video console using the 'nographic' option in the command. In terms of visiual clarity, this method is preferred.
 6. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
 
