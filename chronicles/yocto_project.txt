@@ -1,7 +1,7 @@
 The Yocto Project:
 ==================
 1. The Yocto Project is an Open-Source collaboration project that helps the developers create custom Linux based Distributions for any HW Architecture.
-2. It provides a flexible toolset and a development environment that allows the developers to collaborate and develop the custom Linux Images.
+2. It provides a flexible toolset and a development Environment that allows the developers to collaborate and develop the custom Linux Images.
 3. It is a standard framework accepted worldwide for Embedded Linux development.
 4. It was officially announced in March 2010 by the Linux Foundation.
 5. The link to the Yocto Project is: https://www.yoctoproject.org/

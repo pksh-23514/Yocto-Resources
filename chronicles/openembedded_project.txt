@@ -1,7 +1,7 @@
 The OpenEmbedded Project:
 =========================
 1. The OpenEmbedded Project is an Open-Source framework used primarily for creating complete Embedded Linux Distributions.
-2. It provides a best in-class Cross-Compile environment containing all the tools and Meta-data to create custom Linux Images.
+2. It provides a best in-class Cross-Compile Environment containing all the tools and Meta-data to create custom Linux Images.
 3. The key features of the OpenEmbedded Project are:
 	1) It automates the Build process of Cross-Compilation and packaging SW for different HW Architectures.
 	2) It uses a Task executor called the BitBake which is similar the Make but optimized for Embedded Linux development.
