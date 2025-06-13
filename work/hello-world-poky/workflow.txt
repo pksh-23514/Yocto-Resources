@@ -72,8 +72,17 @@ Image Simulation using QEMU:
 4. Poky repository provides a script 'runqemu' which allows to start the QEMU for running the Yocto Image.
 	=> The 'scripts directory in the cloned repository contains the 'runqemu' script.
 5. The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
-	=> runqemu qemux86-64
+	=> runqemu qemux86-64 core-image-minimal
 	---> A graphical Console will appear on the Standard Output displaying the Booting process.
 	---> The QEMU can be run without the graphical console using the 'nographic' option in the command. In terms of visiual clarity, this method is preferred.
 6. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
+
+Image Build for ARM Architecture:
+=================================
+1. Instead of Intel Architecture (x86), the Image for ARM Architecture can be Built using the same Build directory.
+2. The changes shall be made to the 'local.conf' file in the 'build/conf' directory.
+	=> MACHINE = qemuarm
+3. The rest of the steps to Build the Image remains same.
+4. For testing the Image on the Host, again QEMU can be executed.
+	=> runqemu qemuarm core-image-minimal
