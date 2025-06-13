@@ -1,0 +1,32 @@
+Quick Build using the BitBake:
+==============================
+
+1. For verifying the Build on the Host Machine, run the 'bitbake' command with Target Image as 'core-image-minimal' for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake core-image-minimal
+Loading cache: 100% |                                                                                                                                                         | ETA:  --:--:--
+Loaded 0 entries from dependency cache.
+Parsing recipes: 100% |########################################################################################################################################################| Time: 0:00:17
+Parsing of 883 .bb files complete (0 cached, 883 parsed). 1644 targets, 45 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-20.04"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.12"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "my-kirkstone:e19a76951b61ef7403dd64af844a3cfe16fda118"
+
+NOTE: Fetching uninative binary shim http://downloads.yoctoproject.org/releases/uninative/4.2/x86_64-nativesdk-libc-4.2.tar.xz;sha256sum=6a86d71eeafba4fefec600c9bf8cf4a01324d1eb52788b6e398d3f23c10d19fb (will check PREMIRRORS first)
+Initialising tasks: 100% |#####################################################################################################################################################| Time: 0:00:01
+Sstate summary: Wanted 1397 Local 0 Mirrors 0 Missed 1397 Current 0 (0% match, 0% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 3595 tasks of which 0 didn't need to be rerun and all succeeded.
+
+2. After the Build is successful, the Target Image binaries are present under the 'build' directory.
