@@ -26,3 +26,19 @@ Preparing the Build Host Machine:
 4. If required, the Packages needed to Build the Project manuals:
 	=> sudo apt install git inkscape locales make python3-saneyaml python3-sphinx-rtd-theme sphinx texlive-latex-extra
 
+Accessing the Source Repository:
+================================
+1. Check for the Release Page to choose the Yocto Project version and codename for Poky required.
+	1) The link to the Poky Releases information is: https://wiki.yoctoproject.org/wiki/Releases
+	2) Remember to choose the codename corresponding to either the latest Stable Release or the Long Term Support Release.
+
+Cloning and Check-out Branch:
+=============================
+1. In the working directory, clone the complete Poky repository.
+	=> git clone git://git.yoctoproject.org/poky
+	---> Once the cloning is completed, the 'master' branch is checked-out by default.
+2. Based on the selected codename for Poky, switch to that branch of the cloned repository.
+	=> git checkout -t origin/kirkstone -b my-kirkstone
+	---> The branch 'my-kirkstone' is created to track the remote branch 'kirkstone' from 'origin'.
+3. The local branch must be kept in sync with the remote branch periodically.
+	=> git pull
