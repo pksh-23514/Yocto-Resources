@@ -49,7 +49,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
 bitbake  contrib        LICENSE               LICENSE.MIT     Makefile  meta       meta-selftest  meta-yocto-bsp     README.hardware.md  README.OE-Core.md  README.qemu.md
 build    documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-poky  meta-skeleton  oe-init-build-env  README.md           README.poky.md     scripts
 
-3. After the setup of the Build Environment, the Configuration files are created in the 'build/conf' directory. These Configurations are required for the Build process.
+3. After the setup of the Build Environment, the Configuration files are created in the 'build/conf' directory. These configurations are required for the Build process.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ls
 conf
 
