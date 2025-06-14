@@ -1,0 +1,18 @@
+Configurations:
+===============
+1. Configurations are used to define the global definition of the variables that govern the Build process.
+2. These Configuration files fall under several categories that define different aspects of the Build:
+	1) Machine Configuration options
+	2) Distro Configuration options
+	3) Compiler-tuning options
+	4) Common Configuration options
+	5) User Configuration options
+3. They provide the information about the what to Build and the components of the final Image to support a particular platform.
+4. The most common Configuration files are:
+	1) local.conf
+	2) bblayers.conf
+	3) distro.conf
+	4) machine.conf
+	5) layer.conf
+	6) auto.conf
+	7) site.conf
