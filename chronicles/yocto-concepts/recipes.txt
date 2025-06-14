@@ -1,0 +1,24 @@
+Recipes:
+========
+1. Recipes are a set of instructions for building a SW. It is written in the BitBake Syntax.
+2. They are read and processed by the BitBake during the Build process.
+3. These files have the suffix as '.bb' to distinguish themselves as a Recipe file.
+4. They represent the fundamental unit of execution for either to Build a particular SW or to Build the custom Linux Image.
+5. It provides the following information to the BitBake:
+	1) Location to download the unaltered source code.
+	2) Patches to be applied on the source code (if any).
+	3) Any special Configuration options to be applied.
+	4) Compilation process of the source code.
+	5) Installation or Packaging process.
+	6) License details.
+6. Based on these information provided, the BitBake generates a set of Tasks to be performed in a chronological order.
+7. The key variables used in the Recipe files are:
+	1) SUMMARY
+	2) DESCRIPTION
+	3) LICENSE
+	4) LIC_FILES_CHKSUM
+	5) SRC_URI
+	6) S
+8. The most common functions defined in the Recipe files are:
+	1) do_compile()
+	2) do_install()
