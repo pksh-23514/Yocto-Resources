@@ -1,0 +1,111 @@
+Image Simulation using the QEMU:
+================================
+
+1. Poky repository provides a script 'runqemu' which allows to start the QEMU for running the Yocto Image.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
+bitbake  contrib        LICENSE               LICENSE.MIT     Makefile  meta       meta-selftest  meta-yocto-bsp     README.hardware.md  README.OE-Core.md  README.qemu.md
+build    documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-poky  meta-skeleton  oe-init-build-env  README.md           README.poky.md     scripts
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ cd scripts
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/scripts$ ls
+runqemu
+
+2. Check out all the options available with the script.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/scripts$ runqemu --help
+
+Usage: you can run this script with any valid combination
+of the following environment variables (in any order):
+  KERNEL - the kernel image file to use
+  ROOTFS - the rootfs image file or nfsroot directory to use
+  MACHINE - the machine name (optional, autodetected from KERNEL filename if unspecified)
+  Simplified QEMU command-line options can be passed with:
+    nographic - disable video console
+    serial - enable a serial console on /dev/ttyS0
+    slirp - enable user networking, no root privileges is required
+    kvm - enable KVM when running x86/x86_64 (VT-capable CPU required)
+    kvm-vhost - enable KVM with vhost when running x86/x86_64 (VT-capable CPU required)
+    publicvnc - enable a VNC server open to all hosts
+    audio - enable audio
+    [*/]ovmf* - OVMF firmware file or base name for booting with UEFI
+  tcpserial=<port> - specify tcp serial port number
+  biosdir=<dir> - specify custom bios dir
+  biosfilename=<filename> - specify bios filename
+  qemuparams=<xyz> - specify custom parameters to QEMU
+  bootparams=<xyz> - specify custom kernel parameters during boot
+  help, -h, --help: print this text
+
+Examples:
+  runqemu
+  runqemu qemuarm
+  runqemu tmp/deploy/images/qemuarm
+  runqemu tmp/deploy/images/qemux86/<qemuboot.conf>
+  runqemu qemux86-64 core-image-sato ext4
+  runqemu qemux86-64 wic-image-minimal wic
+  runqemu path/to/bzImage-qemux86.bin path/to/nfsrootdir/ serial
+  runqemu qemux86 iso/hddimg/wic.vmdk/wic.qcow2/wic.vdi/ramfs/cpio.gz...
+  runqemu qemux86 qemuparams="-m 256"
+  runqemu qemux86 bootparams="psplash=false"
+  runqemu path/to/<image>-<machine>.wic
+  runqemu path/to/<image>-<machine>.wic.vmdk
+
+3. The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
+	=> runqemu [machine] [zimage] [filesystem] [options]
+	---> <machine> is the Target Machine Architecture i.e. qemuarm / qemumips / qemuppc / qemux86 / qemux86-64.
+	---> <zimage> is the Kernel Image i.e. zimage or bzImage. It is optional if the Environment is configured.
+	---> <filesystem> is the Root Filesystem i.e. ext4 / wic or a NFS (Network Filesystem) directory.
+	---> <options> is the other command line options available i.e nographic / serial / slirp etc.
+
+4. Based on the options provided, the 'runqemu' does a good job of figuring out what should be done.
+	1) QEMU looks for the most recently Built Image according to the Timestamp to look for an Image.
+	2) Minimally, the options that must provide are either a Machine name or a Virtual Machine Image (*wic.vmdk) or a Kernel Image (*.bin).
+		1) KERNEL 	- The Kernel Image file. => [/poky/build/tmp/deploy/images/qemux86-64/bzImage]
+		2) MACHINE 	- The Machine name is optional. It is autodetected from 'KERNEL' filename if unspecified. => [qemux86-64]
+		3) FSTYPE 	- The Root Filesystem. => [ext4]
+		4) ROOTFS 	- The Root Filesystem Image file or the NFS-Root directory => [/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.ext4]
+		5) CONFFILE 	- The Boot Configuration file => [/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.qemuboot.conf]
+
+5. To execute the 'core-image-minimal' of 'qemux86-64' Architecture on QEMU, the above options can be provided.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ runqemu qemux86-64 core-image-minimal
+runqemu - INFO - Running MACHINE=qemu-system-x86_64 bitbake -e...
+runqemu - INFO - Continuing with the following parameters:
+KERNEL: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/bzImage]
+MACHINE: [qemux86-64]
+FSTYPE: [ext4]
+ROOTFS: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.ext4]
+CONFFILE: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.qemuboot.conf]
+
+6. A video Console will appear on the Standard Output displaying the Boot log. The Boot process, if successful reaches the Login stage.
+[    0.000000] Linux version 5.15.32 (oe-user@oe-host) ...
+...
+Poky (Yocto Project Reference Distro) 4.0.16 qemux86-64 /dev/ttyx
+
+qemux86-64 login: root
+root@qemux86-64:~# echo "Hello Yocto!"
+Hello Yocto
+root@qemux86-64:~#
+
+7. With the other Architectures (other than 'qemux86-64'), it is possible that the QEMU video Console will show an error 'Guest has not initialized the dispaly (yet)'.
+
+8. To exit the QEMU Console, run the command 'poweroff' in the video Console or by pressing 'Ctrl+C' in the Console from which the QEMU is invoked i.e. the Host Machine Console.
+root@qemux86-64:~# poweroff
+
+9. The QEMU can be run without the video Console using the 'nographic' option. The Boot log is then displayed on the Host Machine Console itself.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ runqemu qemux86-64 core-image-minimal nographic
+runqemu - INFO - Running MACHINE=qemu-system-x86_64 bitbake -e...
+runqemu - INFO - Continuing with the following parameters:
+KERNEL: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/bzImage]
+MACHINE: [qemux86-64]
+FSTYPE: [ext4]
+ROOTFS: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.ext4]
+CONFFILE: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.qemuboot.conf]
+...
+[    0.000000] Linux version 5.15.32 (oe-user@oe-host) ... 
+...
+Poky (Yocto Project Reference Distro) 4.0.16 qemux86-64 /dev/ttyx
+
+qemux86-64 login: root
+root@qemux86-64:~# echo "Hello Yocto!"
+Hello Yocto
+root@qemux86-64:~#
+
+10. If the QEMU is executed in the 'nographic' mode, it cannot be quit by pressing 'Ctrl+C' in the Console. The only way then would be to run the command 'poweroff'.
+root@qemux86-64:~# poweroff
