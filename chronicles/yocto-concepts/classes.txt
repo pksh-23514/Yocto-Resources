@@ -1,0 +1,15 @@
+Classes:
+========
+1. Classes are used to Abstract common functionalities and share it among the multiple Recipe files. It is written in the BitBake Syntax.
+2. They implement the concept of logical Encapsulation and Inheritance in the Build system.
+3. For a Recipe to be able to use it, they inherit a Class and that is enough to enable the features of that particular Class.
+4. However, any variable that is pre-defined in the inherited Class can be overridden in the Recipe file.
+5. They are usually placed as the sub-directory 'classes' inside the 'meta*/' directory of the Build system.
+6. These files have the suffix as '.bbclass' to distinguish themselves as a Class file.
+7. The Syntax to inherit a Class in the Recipe file is:
+	=> inherit <class_name>
+	---> This inherits the 'class_name.bbclass' into the Recipe file.
+8. They are expected to be structured and placed under the 'classes' directory in the Build system for the BitBake to be aware of their location.
+9. The 'BBPATH' variable contains a colon-separated list used by BitBake to locate Class files. They are searched for  in the Build directory by the BitBake.
+10. It is not mandatory for all the Layers (meta*/) to have the 'classes' sub-directory. It may or may not have depending upon the Inheritance requirements among Recipes.
+11. The link to the most useful Classes in the Yocto Build is: https://docs.yoctoproject.org/ref-manual/classes.html#
