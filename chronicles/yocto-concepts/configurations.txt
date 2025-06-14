@@ -8,8 +8,9 @@ Configurations:
 	4) Common Configuration options
 	5) User Configuration options
 3. They provide the information about the what to Build and the components of the final Image to support a particular platform.
-4. These files have the suffix as '.conf' to distinguish themselves as a Configuration file.
-5. The most common Configuration files are:
+4. They are usually placed as the sub-directory 'conf' inside the 'meta*/' directory of the Build system.
+5. These files have the suffix as '.conf' to distinguish themselves as a Configuration file.
+6. The most common Configuration files are:
 	1) local.conf
 	2) bblayers.conf
 	3) distro.conf
@@ -17,3 +18,9 @@ Configurations:
 	5) layer.conf
 	6) auto.conf
 	7) site.conf
+7. They are expected to be structured and placed under the 'conf' directory in the Build system for the BitBake to be aware of their location.
+8. The 'BBPATH' variable contains a colon-separated list used by BitBake to locate Configuration files. They are searched for  in the Build directory by the BitBake.
+9. It is mandatory for all the Layers (meta*/) to have the 'conf' sub-directory.
+	1) It must have at least 'conf/layer.conf' file in order to be a valid Yocto Layer.
+	2) If a Layer is added without this file to the 'bblayers.conf' file, then the BitBake raises an error.
+	3) However, if a Layer is not meant to be a Yocto Layer or if it is a sub-directory inside a Yocto Layer; then it doesn't need this file.
