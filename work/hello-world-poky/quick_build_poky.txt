@@ -3,9 +3,9 @@ Quick Build using the BitBake:
 
 1. For verifying the Build on the Host Machine, run the 'bitbake' command with Target Image as 'core-image-minimal' for a quick Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake core-image-minimal
-Loading cache: 100% |                                                                                                                                                         | ETA:  --:--:--
+Loading cache: 100% |                                                                                                                                            | ETA:  --:--:--
 Loaded 0 entries from dependency cache.
-Parsing recipes: 100% |########################################################################################################################################################| Time: 0:00:17
+Parsing recipes: 100% |##########################################################################################################################################| Time: 0:00:17
 Parsing of 883 .bb files complete (0 cached, 883 parsed). 1644 targets, 45 skipped, 0 masked, 0 errors.
 NOTE: Resolving any missing task queue dependencies
 
@@ -23,10 +23,23 @@ meta
 meta-poky            
 meta-yocto-bsp       = "my-kirkstone:e19a76951b61ef7403dd64af844a3cfe16fda118"
 
-NOTE: Fetching uninative binary shim http://downloads.yoctoproject.org/releases/uninative/4.2/x86_64-nativesdk-libc-4.2.tar.xz;sha256sum=6a86d71eeafba4fefec600c9bf8cf4a01324d1eb52788b6e398d3f23c10d19fb (will check PREMIRRORS first)
-Initialising tasks: 100% |#####################################################################################################################################################| Time: 0:00:01
+NOTE: Fetching uninative binary shim http://downloads.yoctoproject.org/releases/uninative/4.2/x86_64-nativesdk-libc-4.2.tar.xz;sha256sum=6a86d71eb (will check PREMIRRORS first)
+Initialising tasks: 100% |#######################################################################################################################################| Time: 0:00:01
 Sstate summary: Wanted 1397 Local 0 Mirrors 0 Missed 1397 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 3595 tasks of which 0 didn't need to be rerun and all succeeded.
 
 2. After the Build is successful, the Target Image binaries are present under the 'build' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/deploy/images/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ ls
+qemux86-64
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ cd qemux86-64
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64$ ls
+bzImage										core-image-minimal-qemux86-64.ext4
+bzImage--5.15.184+git0+9c4fc176ec_9a9d15d3fc-r0-qemux86-64-<buildhash>.bin	core-image-minimal-qemux86-64.manifest
+bzImage-qemux86-64.bin								core-image-minimal-qemux86-64.qemuboot.conf
+core-image-minimal-qemux86-64-<buildhash>.qemuboot.conf				core-image-minimal-qemux86-64.tar.bz2
+core-image-minimal-qemux86-64-<buildhash>.rootfs.ext4				core-image-minimal-qemux86-64.testdata.json
+core-image-minimal-qemux86-64-<buildhash>.rootfs.manifest			modules--5.15.184+git0+9c4fc176ec_9a9d15d3fc-r0-qemux86-64-<buildhash>.tgz
+core-image-minimal-qemux86-64-<buildhash>.rootfs.tar.bz2			modules-qemux86-64.tgz
+core-image-minimal-qemux86-64-<buildhash>.testdata.json
