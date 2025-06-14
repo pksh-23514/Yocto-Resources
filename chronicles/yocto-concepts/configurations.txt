@@ -8,7 +8,8 @@ Configurations:
 	4) Common Configuration options
 	5) User Configuration options
 3. They provide the information about the what to Build and the components of the final Image to support a particular platform.
-4. The most common Configuration files are:
+4. These files have the suffix as '.conf' to distinguish themselves as a Configuration file.
+5. The most common Configuration files are:
 	1) local.conf
 	2) bblayers.conf
 	3) distro.conf
