@@ -56,4 +56,4 @@ The Yocto Project Layer Model:
 2. It simultaneously supports collaboration and customization.
 3. The Layers are repositories that contain related sets of instructions to tell the Build system about what to execute.
 4. A Layer contains changes to the previous instructions or settings at any given time. This is a very powerful override capability provided by the Yocto Project.
-5. The use of Layers logically separate the infromation in your Build. Putting entire infromation in one directory limits and complicates future customization and reuse.
+5. The use of Layers logically separate the infromation in the Build. Putting the entire infromation in one directory limits and complicates future customization and reusability.
