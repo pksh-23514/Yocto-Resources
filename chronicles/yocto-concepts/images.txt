@@ -1,0 +1,19 @@
+Images:
+=======
+1. Images are produced by the Build system that contains the complete RootFS that runs on the specific Target HW or QEMU.
+2. They are an artifact of the BitBake Build process based on the collection of Recipes and Meta-data provided to the Build system.
+3. When the Build command is provided to the BitBake, it is actually providing the top-level Recipe that begins the Build process for the type of Image requested.
+4. The Output might be in the form:
+	1) Filesystem Image (.ext4)
+	2) Bootable Image (.wic)
+	3) Compressed RootFS (.tar.gz)
+5. It is Architecture-specific i.e. they are Built for a specific Architecture. The Target Architecture is mentioned by the Machine Configurations.
+6. The Image Recipe files are placed in the 'meta*/recipes*/images/' directory of the Build system.
+7. The most commonly used Target Images provided by the Poky are:
+	1) core-image-base
+	2) core-image-full-cmdline
+	3) core-image-minimal
+	4) core-image-minimal-dev
+	5) core-image-rt
+	6) core-image-sato
+	7) core-image-weston
