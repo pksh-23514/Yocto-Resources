@@ -65,3 +65,11 @@ Yocto Layer Format:
 2. The 'BBLAYERS' variable in the 'build/conf/bblayers.conf' file lists the Layers that are used by the BitBake during the Build.
 3. This file is created (if not present already) by the OpenEmbedded Build system from the 'bblayers.conf.sample' file while setting the Environment.
 4. Conforming to a known structure allows the BitBake to make assumptions during the Build process on where to find the types of Meta-data.
+
+Source Repositories to Layers:
+******************************
+1. The OpenEmbedded Project provides the Layer Index that contains the Layers at the link: https://layers.openembedded.org/layerindex/branch/master/layers/
+2. These Layers may or may not be compatible with the Yocto Project Environment.
+3. The Yocto Project provides the Layer Index that contains the Layers at the link: https://www.yoctoproject.org/development/yocto-project-compatible-layers/
+4. These Layers are tested and fully compatible with the Yocto Project. They are standardized and designated by the Yocto Project (with a special logo).
+5. The OpenEmbedded Project provides more Layers than the Yocto Project, however they are less universally validated.
