@@ -13,4 +13,40 @@ Layers:
 6. They are hierarchical in nature that provides the ability to add new Meta-data or override the previous set of Meta-data.
 7. There is no restriction on the number of Layers to be included in the Build system. They can be added whenever the Build system requires any customization.
 8. In cases of multiple Architectures Build system, they are used to isolate the information as per the Architecture requirements.
-9. The Layer directories have the prefix as 'meta' by convention to distinguish themselves as the Yocto Meta-Layers.
+9. The Layer directories have the prefix as 'meta-' by convention to distinguish themselves as the Yocto Meta-Layers.
+
+Types of Layers:
+****************
+1. Core Layers:
+	1) They are essential to the Build system and include the base Recipes and Classes.
+	2) The 'meta' Layer (OpenEmbedded-Core) can be considered as a Core Layer. It provides the basic functionalities like BitBake, base Classes, base Recipes etc.
+	3) They are maintained by the Yocto Project or the OpenEmbedded Project.
+
+2. Board Support Package (BSP) Layers:
+	1) They are used to provide support for the specific HW platforms.
+	2) It contains the Machine Configurations, Kernel and Bootloader Recipes, Device Trees, Firmware etc.
+	3) The 'meta-raspberrypi', 'meta-ti' and 'meta-nxp' can be considered as the BSP Layers.
+	4) They are maintained by the HW Vendors like TI, NXP, Intel etc.
+
+3. Distro Layers:
+	1) They are used to define a full Linux Distribution by providing it's Policies, Branding and Configurations.
+	2) It contains the Distro definitions, Package groups and system-wide Configurations.
+	3) The 'meta-poky', 'meta-debian' and 'meta-oe' can be considered as the Distro Layers.
+
+4. SW or Functional Layers:
+	1) They are used to provide support for the additional SW Packages.
+	2) They are typically focused on a domain or functionality such as Multimedia, Networking, Security etc.
+	3) The 'meta-python', 'meta-networking', 'meta-security' and 'meta-virtualization' can be considered as the Functional Layers.
+
+5. Tool or SDK Layers:
+	1) They are used to provide support for enhancing the development tools or SDK support.
+	2) The 'meta-devtools' and 'meta-sdk' can be considered as the Tool Layers. They include tooling like extensible SDK etc.
+
+6. User-Interface or Graphical Layers:
+	1) They are used to provide support for adding the graphical Environments or User-Interfaces to the custom Linux Image.
+	2) The 'meta-gnome', 'meta-browser' and 'meta-qt5' can be considered as the Graphical Layers.
+
+7. Custom or Development Layers:
+	1) They are used by the Users to perform Project-specific development.
+	2) It contains the custom configurations, overridden Recipes and custom SW Applications.
+	3) The 'meta-mylayer' and 'meta-mycompany' can be considered as the Custom Layers.
