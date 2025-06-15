@@ -1,0 +1,30 @@
+Packages:
+=========
+1. Packages are the Recipe's packaged Compiled Output produced by the BitBake.
+2. They are the binaries that get installed on the Target Image (or RootFS).
+3. It is a binary file in the format of '.ipk', '.deb' or '.rpm' which is Compiled from the Recipe's source code.
+4. The format of the binaries is defined by the Package manager selected by the Build system using the 'PACKAGE_CLASSES' variable.
+	1) .ipk => The Package manager is 'opkg'. This is used as default for Poky.
+	2) .deb => The Package manager is 'dpkg' or 'apt'.
+	3) .rpm => The Package manager is 'dnf', 'smart' or 'rpm'.
+5. A single Recipe can generate multiple Packages which are then split based on the 'PACKAGES' variable.
+6. The default value of the 'PACKAGE' variable is:
+	=> PACKAGES = "${PN}-src ${PN}-dbg ${PN}-staticdev ${PN}-dev ${PN}-doc ${PN}-locale ${PACKAGE_BEFORE_PN} ${PN}"
+	---> where the 'PN' variable refers to the primary Package name which is the Recipe name.
+7. The Package splitting of the Recipe can produce:
+	1) ${PN}-src => Contains the source code.
+	2) ${PN}-dbg => Contains the binaries with Debug-Symbols.
+	3) ${PN}-staticdev => Contains the Static libraries (*.a) for linking statically rather than dynamically.
+	4) ${PN}-dev => Contains the development files i.e. the Header files, the Symlinks to Shared libraries (.so) etc required for Compilation.
+	5) ${PN}-doc => Contains the documentation files.
+	6) ${PN}-locale => Contains the locale and internationalization files used for supporting multiple languages.
+	7) ${PACKAGE_BEFORE_PN} => Enables insertion of Packages before the main Package in the list.
+	8) ${PN} => The primary (main) Package.
+8. If the 'PACKAGES' variable is not defined by the Recipe, the BitBake will use the default value automatically.
+9. Any additional logical Package can be defined in the Recipe file. The prefix '${PN}-' is maintained to distinguish it as a Package.
+	=> PACKAGES = "${PN}-tools ${PN}-extras ${PN}"
+	=> FILES_${PN} = "${bindir}/main-app"
+	=> FILES_${PN}-tools = "${bindir}/tools/*"
+	=> FILES_${PN}-extras = "${datadir}/extras"
+	=> DESCRIPTION_${PN}-tools = "Extra tools"
+	=> RDEPENDS_${PN}-tools = "${PN}"
