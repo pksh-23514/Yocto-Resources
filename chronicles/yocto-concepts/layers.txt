@@ -50,3 +50,18 @@ Types of Layers:
 	1) They are used by the Users to perform Project-specific development.
 	2) It contains the custom configurations, overridden Recipes and custom SW Applications.
 	3) The 'meta-mylayer' and 'meta-mycompany' can be considered as the Custom Layers.
+
+Yocto Layer Format:
+*******************
+1. By convention, the Layers are organized in a specific format.
+	meta-layer/
+	├── conf
+	│   └── layer.conf
+	├── COPYING.MIT
+	├── README
+	└── recipes-example
+	    └── example
+		└── example_0.1.bb
+2. The 'BBLAYERS' variable in the 'build/conf/bblayers.conf' file lists the Layers that are used by the BitBake during the Build.
+3. This file is created (if not present already) by the OpenEmbedded Build system from the 'bblayers.conf.sample' file while setting the Environment.
+4. Conforming to a known structure allows the BitBake to make assumptions during the Build process on where to find the types of Meta-data.
