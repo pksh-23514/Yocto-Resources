@@ -25,10 +25,10 @@ OpenEmbedded Build Workflow:
 			-----------------------------------------
 					   |
 					   V
-			--------------------------------------------------------------------	   -----------------
-User			| Source							   |	   |     Package   |
-Configuration	---->	| Fetching	 ----------------				   | ----> |	  Feeds	   |
-			|    |		 | Output       |				   |	   -----------------
+			--------------------------------------------------------------------	   -------------------
+User			| Source	 ----------------				   |	   |     Package     |
+Configuration	---->	| Fetching	 |		|				   | ----> |	  Feeds      |
+			|    |		 | Output       |				   |	   -------------------
 Meta-Layers		|    V		 | Analysis     |	-----------		   |		|	|
 (.bb + Patches)	---->	|  Patch	 | for Package  |	| .deb or |		   |		V	V
 			| Application	 | splitting    | ----> | .rpm or | ----> QA Tests |  -------------- --------------
