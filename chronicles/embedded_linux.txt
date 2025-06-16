@@ -27,12 +27,12 @@ Kernel:
 
 RootFS:
 *******
-1. It consits of the essential File systems and directories (/bin, /sbin, /lib, /etc, /dev, /proc, /sys, /usr).
+1. It consits of the essential virtual Filesystems (/proc, /sys) and directories (/bin, /sbin, /lib, /etc, /dev, /usr).
 2. The programs and libraries are available once the Kernel is up in the Memory.
 3. The RootFS can be made Read-only for security purposes.
 
-Terminologies:
-==============
+Basic Terminologies of the Embedded Linux:
+==========================================
 
 Host Machine:
 *************
