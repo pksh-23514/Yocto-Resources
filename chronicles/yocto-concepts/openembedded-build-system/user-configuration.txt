@@ -31,3 +31,18 @@ User Configuration:
 8. Depending on the location from where the 'oe-init-build-env' script is sourced, some different sub-scripts are called to setup the Build directory.
 9. The 'oe-setup-builddir' script setup the Build directory and seeds the directory with the Configuration files appropriate for the Yocto Project development Environment.
 10. The '$TEMPLATECONF' Environment variable is used by the 'oe-setup-builddir' script to find the location of the sample Configuration files and copy to the Build directory.
+
+local.conf Configuration:
+*************************
+1. The 'local.conf' file provides the definition of many basic variables that define the Build Environment.
+2. The sample Configuration file of 'local.conf' is present in the 'meta-poky/conf' directory under the name of 'local.conf.sample'.
+3. The variables provided are:
+	1) Target Machine selection controlled by the 'MACHINE' variable.
+	2) Download directory controller by the 'DL_DIR' variable.
+	3) Shared-State directory controlled by the 'SSTATE_DIR' variable.
+	4) Build Output controlled by the 'TMPDIR' variable.
+	5) Distribution Policy controlled by the 'DISTRO' variable.
+	6) Package format controlled by the 'PACKAGE_CLASSES' variable.
+	7) SDK Target Architecture controlled by the 'SDKMACHINE' variable.
+	8) Extra-Image Packages controlled by the 'EXTRA_IMAGE_FEATURES' variable.
+4. The Configurations set in the 'local.conf' can also be provided by the 'site.conf' and the 'auto.conf' Configuration files.
