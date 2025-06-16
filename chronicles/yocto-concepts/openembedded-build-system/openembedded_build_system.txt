@@ -41,7 +41,7 @@ Configuration	---->	| Autoconf	 ----------------				   |   Linux Images   Applic
 
 The brief summary of the above workflow is:
 	1) The developers specify the Architecture, Policies, Patches and Configuration details.
-	2) The Build system fetches and download the source code from the specified location. 
+	2) The Build system fetches and download the source code from the specified location.
 	3) The Build system supports the standard formats such as Tarball or Git repository system.
 	4) Once the source code is downloaded, the Build system extracts them to a local work area.
 	5) In the local work area, the Patches are applied on the source code and the steps to Configure and Compile the SW are executed.
