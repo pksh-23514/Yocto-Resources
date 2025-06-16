@@ -55,3 +55,23 @@ bblayers.conf Configuration:
 4. Any custom Layer created or cloned in the Build system must be added to the file to be included in the Build process.
 5. The 'BBLAYERS' variable in this file contains the directory path of all the Layers to be used in the Build process.
 6. The BitBake parses each 'conf/layer.conf' file of the Layers present in the 'BBLAYERS' variable in a top-down approach of their occurence in the variable.
+
+site.conf Configuration:
+************************
+1. The 'site.conf' Configuration file is used to set the Environment variables and Build options that are applicable to a particular or multiple Build Environment(s).
+2. The sample Configuration file of 'site.conf' is present in the 'meta-poky/conf' directory under the name of 'site.conf.sample'.
+3. It is not created while sourcing the 'oe-init-build-env' Build Environment script. It has to be created manually.
+4. It allows customizing and overriding the default settings globally without modifying the core Yocto system files.
+5. It is very useful to configure the Environment for multiple Build directories.
+	1) The shared settings across all the Builds can be centralized by putting them in this file.
+	2) A good example can be the Package format that is used across the Build directories (build-x86, build-arm etc.)
+		=> # Add the common Configuration options to site.conf.
+		=> TMPDIR = "${TOPDIR}/tmp"
+		=> DL_DIR ?= "/home/user/yocto/downloads"
+		=> SSTATE_DIR ?= "/home/user/yocto/sstate-cache"
+		=> PACKAGE_CLASSES ?= "package_ipk"
+	3) Link the 'site.conf' into each of the Build directories:
+		=> ln -s ~/yocto/configs/site.conf ~/yocto/build-x86/conf/site.conf
+		=> ln -s ~/yocto/configs/site.conf ~/yocto/build-arm/conf/site.conf
+	4) The above linking step can be even put into the Build Environment script for automatic creation of the 'site.conf' file while sourcing.
+6. This file can be used to set or override the variables like directory paths, website features, proxy settings or custom Build options applicable to all the Machine Builds.
