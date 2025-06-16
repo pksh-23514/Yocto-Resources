@@ -1,0 +1,13 @@
+OpenEmbedded Build System:
+==========================
+
+OpenEmbedded Build Concepts:
+****************************
+1. The OpenEmbedded Build system have several functional areas to accomplish the Image and SDK generation.
+	1) User Configuration
+	2) Meta-data Layers
+	3) Source files
+	4) Build system (BitBake)
+	5) Package Feeds
+	6) Images
+	7) Application Development SDK
