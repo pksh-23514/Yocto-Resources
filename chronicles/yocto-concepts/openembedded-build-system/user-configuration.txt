@@ -46,3 +46,12 @@ local.conf Configuration:
 	7) SDK Target Architecture controlled by the 'SDKMACHINE' variable.
 	8) Extra-Image Packages controlled by the 'EXTRA_IMAGE_FEATURES' variable.
 4. The Configurations set in the 'local.conf' can also be provided by the 'site.conf' and the 'auto.conf' Configuration files.
+
+bblayers.conf Configuration:
+****************************
+1. The 'bblayers.conf' file provides the infromation to the BitBake about the Layers to be used in the Build process.
+2. The sample Configuration file of 'bblayers.conf' is present in the 'meta-poky/conf' directory under the name of 'bblayers.conf.sample'.
+3. By default, the Layers listed in this file include the Layers minimally needed by the Build system.
+4. Any custom Layer created or cloned in the Build system must be added to the file to be included in the Build process.
+5. The 'BBLAYERS' variable in this file contains the directory path of all the Layers to be used in the Build process.
+6. The BitBake parses each 'conf/layer.conf' file of the Layers present in the 'BBLAYERS' variable in a top-down approach of their occurence in the variable.
