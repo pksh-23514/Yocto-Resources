@@ -1,0 +1,33 @@
+User Configuration:
+===================
+1. The User Configuration provides the Build properties and helps to define the Build.
+2. The expanded view of the 'User Configuration' in the 'OpenEmbedded Build Workflow' is as follows:
+
+      Source Directory
+---------------------------
+|	poky		  |		User Configuration
+| bitbake		  |		   |	    ^
+| build	------------------|------	   |	    |
+| documentation		  |	|	   |	    |
+| meta			  |	V	   V	    |
+| meta-poky		  |  ----------------------------
+| meta-selftest		  |  | 	conf			| -----> bitbake <target>
+| meta-skeleton		  |  | 	bblayers.conf		|		|
+| meta-yocto-bsp	  |  | 	local.conf		|		|
+| scripts		  |  | 	site.conf		|		|
+|	oe-setup-builddir |  | 	auto.conf		|		V
+|	...		  |  ----------------------------	-----------------
+|			  |		^			| BitBake Build |
+|			  |		|			-----------------
+|			  |	 --------------------
+| oe-init-build-env <-----|----> | oe-init-build-env|
+---------------------------	 --------------------
+
+3. The sourcing of the 'oe-init-build-env' Build Environment script creates the Build directory 'build/' (if not present already).
+4. This 'build' directory is used by the BitBake for all the works related to the Build process.
+5. The 'meta-poky' directory contains a 'conf' directory that has the sample Configuration files used by the 'oe-init-build-env' script.
+6. These sample files are used as a basis for the actual Configuration files created (if not present already) during the time of 'oe-init-build-env' sourcing.
+7. The Configuration files are stored in the 'build/conf' directory. They are used by the BitBake in the Build process.
+8. Depending on the location from where the 'oe-init-build-env' script is sourced, some different sub-scripts are called to setup the Build directory.
+9. The 'oe-setup-builddir' script setup the Build directory and seeds the directory with the Configuration files appropriate for the Yocto Project development Environment.
+10. The '$TEMPLATECONF' Environment variable is used by the 'oe-setup-builddir' script to find the location of the sample Configuration files and copy to the Build directory.
