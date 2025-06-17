@@ -3,7 +3,7 @@ Meta-Layers:
 1. The Layers provide the Meta-data for the SW, Machine BSP and Distro Policy.
 2. The expanded view of the 'Meta-Layers, Machine BSP Configuration and Policy Configuration' in the 'OpenEmbedded Build Workflow' is as follows:
 
-		Layers
+			Layers
 --------------------------------------------------------
 | Distro Layer		     BSP Layer		       |
 |-------------------------- ---------------------------|
@@ -21,25 +21,25 @@ Meta-Layers:
 ||   <recipe>		  | |       machconfig	      ||
 ||      <recipe>.bb	  | |    formfactor*.bbappend ||
 ||      <recipe>.bbappend | | recipes-core	      ||
-||   files		  | |    <recipe>	      ||
-||   <recipe>		  | |       files	      ||
-||      <distro>	  | |       <recipe>.bbappend ||
-||         defconfig	  | | recipes-graphics	      ||
-|-------------------------- |    <recipe>	      ||
-| Software Layer	    |       <machine>	      ||
-|-------------------------- |           *.conf	      ||
-|| COPYING.MIT		  | |    <recipe>.bbappend    ||
-|| README		  | | recipes-kernel	      ||
-|| classes		  | |    linux		      ||
-||   <class>.bbclass	  | |       files	      ||
-|| conf		  	  | |          <machine>.cfg  ||
-||   layer.conf	  	  | |          <machine>.scc  ||
-|| recipes-*		  | |       <recipe>.bbappend ||
-||    <recipe>		  | ---------------------------|
-||        <recipe>.bb	  |			       |
-||        patches	  |			       |
-||            *.patch	  |			       |
-||    <recipe>		  |			       |
+||   files		  | |    <recipe>	      ||   Meta-data
+||   <recipe>		  | |       files	      ||   Machine BSP Configuration
+||      <distro>	  | |       <recipe>.bbappend ||   Policy Configuration
+||         defconfig	  | | recipes-graphics	      ||			-------------------
+|-------------------------- |    <recipe>	      ||----------------------->| Build Directory |
+| Software Layer	    |       <machine>	      ||			| conf		  |
+|-------------------------- |           *.conf	      ||			|   bblayers.conf |
+|| COPYING.MIT		  | |    <recipe>.bbappend    ||			-------------------
+|| README		  | | recipes-kernel	      ||				|
+|| classes		  | |    linux		      ||				|
+||   <class>.bbclass	  | |       files	      ||				V
+|| conf		  	  | |          <machine>.cfg  ||			------------------
+||   layer.conf	  	  | |          <machine>.scc  ||			| bitbake target |
+|| recipes-*		  | |       <recipe>.bbappend ||			------------------
+||    <recipe>		  | ---------------------------|				|
+||        <recipe>.bb	  |			       |				V
+||        patches	  |			       |			-------------------
+||            *.patch	  |			       |			|  BitBake Build  |
+||    <recipe>		  |			       |			-------------------
 ||      <recipe>.bb	  |			       |
 ||      <recipe>.bbappend |			       |
 ||      files		  |			       |
