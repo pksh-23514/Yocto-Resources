@@ -18,3 +18,18 @@ BitBake:
 	7) It Caches the Build to avoid any redundant Builds and speed up the Build process.
 7. It automates the complete Build process for the custom Linux Distributions.
 8. The link to the BitBake documentation is: https://docs.yoctoproject.org/bitbake/2.12/index.html
+
+bitbake Directory in Poky:
+**************************
+1. The 'bitbake' directory includes a copy of BitBake in Poky for the ease of use. It usually matches the current Stable Release of the BitBake from the BitBake project.
+2. When the Build Environment script is sourced, the directory path for 'poky/scripts' and 'poky/bitbake/bin' are included in the 'PATH' Shell Environment variable.
+	=> source oe-init-build-env
+	=> echo $PATH
+	   /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/scripts:/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/bitbake/bin:...
+3. After the Environment is setup, then the 'bitbake' command is available. Otherwise, it will throw an error as 'bitbake: command not found'.
+4. The commands (binaries) used in the 'bitbake' directory are:
+	1) bitbake
+	2) bitbake-layers
+	3) bitbake-selftest
+	4) bitbake-getvar
+	5) toaster
