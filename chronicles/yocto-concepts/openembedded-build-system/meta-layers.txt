@@ -53,3 +53,12 @@ Meta-Layers:
 	3) SW Layers containing the custom Recipes, Patches and Configuration files.
 4. All the Layers have a similar format with a few unique components to distinguish themselves.
 5. BitBake uses the 'bblayers.conf' file to find out the Layers to be used in the Build.
+
+Distro Layer:
+*************
+1. The Distro (Distribution) Layer provides the Policy Configurations for the Linux Distribution.
+2. The best practice is to isolate these Configurations into their own Layer.
+3. It contains the following:
+	1) Classes - The Class files (.bbclass) hold the common functionality that can be shared among the Recipes in the Distribution.
+	2) Configuration - The Configuration files (.conf) provide the Configuration for the Layer (layer.conf) or the Distro (distro/distro.conf) and any Include files.
+	3) Recipes - The Recipe and the Append files are used to add Distribution-specific Configuration, initialization scripts, custom Image Recipes etc.
