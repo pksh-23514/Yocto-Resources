@@ -1,0 +1,14 @@
+Source Materials:
+=================
+1. In order for the Build system to create an Image or any Target, it must be able to access the source files.
+2. The BitBake uses the 'SRC_URI' variable to point to the source files regardless of their location.
+3. Each Recipe must have the 'SRC_URI' variable that should point to the source code required for it's Build.
+4. The 'DL_DIR' variable is used to point to the area that is a Cache to hold the previously downloaded source.
+5. The Build system can be instructed to create Tarballs from the Git repositories and store them in the 'DL_DIR' directory. This is not the default behavior.
+6. The above process can be achieved by using the 'BB_GENERATE_MIRROR_TARBALLS' variable.
+7. A good method for using the download directory is to have the directory path outside of the 'build' directory.
+	1) So, in case if there is a need to delete the Build directory, the downloaded source is left untouched.
+	2) The judicious use of the download directory can save the Build system from the trip across the Internet for downloading the source code.
+8. The expanded view of the 'Upstream Project Releases, Local Projects and SCMs' in the 'OpenEmbedded Build Workflow' is as follows:
+
+
