@@ -75,3 +75,12 @@ site.conf Configuration:
 		=> ln -s ~/yocto/configs/site.conf ~/yocto/build-arm/conf/site.conf
 	4) The above linking step can be even put into the Build Environment script for automatic creation of the 'site.conf' file while sourcing.
 6. This file can be used to set or override the variables like directory paths, website features, proxy settings or custom Build options applicable to all the Machine Builds.
+
+auto.conf Configuration:
+************************
+1. The 'auto.conf' Configuration file is usually created and written by an autobuilder (like Jenkins). It is an optional Configuration file and Layer-specific.
+2. It is not created while sourcing the 'oe-init-build-env' Build Environment script.
+3. It is very useful in automating the Build or setting up CI/CD pipelines.
+4. It allows adding and overriding the default Configuration values present in the 'local.conf' or 'bblayers.conf' files.
+5. It is not meant to be edited manually, especially in the automated Build Environment.
+6. It can also be used to enforce certain Build settings when a particular Layer is included in the Build process.
