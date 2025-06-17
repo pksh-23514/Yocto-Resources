@@ -19,9 +19,9 @@ User Configuration:
 |	...		  |  ----------------------------	-----------------
 |			  |		^			| BitBake Build |
 |			  |		|			-----------------
-|			  |	 --------------------
-| oe-init-build-env <-----|----> | oe-init-build-env|
----------------------------	 --------------------
+|			  |	 ---------------------
+| oe-init-build-env <-----|----> | oe-init-build-env |
+---------------------------	 ---------------------
 
 3. The sourcing of the 'oe-init-build-env' Build Environment script creates the Build directory 'build/' (if not present already).
 4. This 'build' directory is used by the BitBake for all the works related to the Build process.
@@ -84,3 +84,27 @@ auto.conf Configuration:
 4. It allows adding and overriding the default Configuration values present in the 'local.conf' or 'bblayers.conf' files.
 5. It is not meant to be edited manually, especially in the automated Build Environment.
 6. It can also be used to enforce certain Build settings when a particular Layer is included in the Build process.
+
+Parsing Configurations in Build:
+********************************
+1. When the Build is launched by running the 'bitbake target' command, the BitBake sorts out the Configurations to ultimately define the Build Environment.
+2. Apart from the above Configuration files, each Layer can provide their own settings in the Configuration file, usually named as 'default.conf'.
+3. This 'default.conf' file contains the variables and settings that can be applied to the Build whenever this Layer is included in the Build.
+4. To include the 'default.conf' file in the Build, it has to be present in that Layer's 'layer.conf' file with the file path provided to the 'require' command.
+5. It is important to understand that the OpenEmbedded Build system reads the Configuration files in a particular order.
+6. The Build system applies the normal assignment rules on the Configuration variables.
+7. Therefore, parsing order of the Configuration files affect the variable assignments of the same variable present in multiple Configuration files.
+8. To verify the order in which BitBake reads the Configuration files, injecting the same test variables in various Configuration files is the most simple way.
+	1) Add the same variable with a unique definition in each of the Configuration file.
+		=> build/conf/local.conf: MY_VAR += "local"
+		=> build/conf/bblayers.conf: MY_VAR += "bblayers"
+		=> build/conf/site.conf: MY_VAR += "site"
+		=> build/conf/auto.conf: MY_VAR += "auto"
+		=> meta-layer/conf/default.conf: MY_VAR += "meta-layer"
+	2) The 'default.conf' file must be included in the Layer's 'layer.conf' file.
+		---> meta-layer/conf/layer.conf: require conf/default.conf
+	3) The order in which the variable is initialized will give the order in which the Configuration files are parsed.
+		=> bitbake -e | grep MY_VAR
+		=> MY_VAR = " bblayers meta-layer site auto local"
+9. Based on the above 'MY_VAR' value, the following order can be concluded:
+	bblayers.conf ---> default.conf ---> site.conf ---> auto.conf ---> local.conf
