@@ -60,5 +60,13 @@ Distro Layer:
 2. The best practice is to isolate these Configurations into their own Layer.
 3. It contains the following:
 	1) Classes - The Class files (.bbclass) hold the common functionality that can be shared among the Recipes in the Distribution.
-	2) Configuration - The Configuration files (.conf) provide the Configuration for the Layer (layer.conf) or the Distro (distro/distro.conf) and any Include files.
+	2) Configuration - The Configuration files (.conf) provide the Configuration for the Layer (layer.conf), the Distro (distro/distro.conf) and any Include files.
 	3) Recipes - The Recipe and the Append files are used to add Distribution-specific Configuration, initialization scripts, custom Image Recipes etc.
+
+BSP Layer:
+**********
+1. The BSP (Board Support Package) Layer provides the Machine Configurations that target a specific HW.
+2. This Layer contains all the required information specific to the Machine for which the Image or the SDK is being Built.
+3. It contains the following:
+	1) Configuration - The Configuration files (.conf) provide the Configuration for the Layer (layer.conf) and the Machine (machine/machine.conf).
+	2) Recipes - The Recipe and the Append files are specific to the functionality like 'recipes-bsp', 'recipes-kernel', 'recipes-graphics', 'recipes-core' etc.
