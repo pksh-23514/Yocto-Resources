@@ -11,4 +11,24 @@ Source Materials:
 	2) The judicious use of the download directory can save the Build system from the trip across the Internet for downloading the source code.
 8. The expanded view of the 'Upstream Project Releases, Local Projects and SCMs' in the 'OpenEmbedded Build Workflow' is as follows:
 
+     Upstream Project Releases		Local Projects		  SCMs
+----------------------------------- ----------------------- ----------------
+|  busybox			  | |  Local Source Tree  | |  meta-qt5	   |
+|  busybox-1.35.0.tar.bz2	  | |  <directory>	  | |    Git	   |
+|				  | |      <file>	  | |		   |
+|  <recipe>			  | |      <directory>	  | |  opkg	   |
+|  Tarball / ZIP / Archive Files  | |          <file>	  | |  Subversion  |
+----------------------------------- ----------------------- ----------------
+		|				|		   |
+Source		|				|		   |
+Materials	V				V		   V
+-----------------------------------------------------------------------------
+|  Mirrors			    Pre-Mirrors (Local shared Directories)  |
+|  Remotely stored Archive Files    Locally stored Archive Files	    |
+-----------------------------------------------------------------------------
+					|
+			BitBake		V
+			---------------------------------
+			| Source Fetching and Unpacking |
+			---------------------------------
 
