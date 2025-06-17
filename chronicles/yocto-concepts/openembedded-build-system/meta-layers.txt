@@ -1,0 +1,48 @@
+Meta-Layers:
+============
+1. The Layers provide the Meta-data for the SW, Machine BSP and Distro Policy.
+2. The expanded view of the 'Meta-Layers, Machine BSP Configuration and Policy Configuration' in the 'OpenEmbedded Build Workflow' is as follows:
+
+		Layers
+--------------------------------------------------------
+| Distro Layer		     BSP Layer		       |
+|-------------------------- ---------------------------|
+|| COPYING.MIT		  | | COPYING.MIT	      ||
+|| README		  | | README		      ||
+|| classes		  | | conf		      ||
+||   <class>.bbclass	  | |   machine		      ||
+|| conf		  	  | |     <machine>.conf      ||
+||   layer.conf	  	  | |     include	      ||
+||   distro		  | |        *.inc	      ||
+||      <distro>.conf	  | |   layer.conf	      ||
+||   include		  | | recipes-bsp	      ||
+||      *.inc		  | |    formfactor	      ||
+|| Recipes-*		  | |       <machine>	      ||
+||   <recipe>		  | |       machconfig	      ||
+||      <recipe>.bb	  | |    formfactor*.bbappend ||
+||      <recipe>.bbappend | | recipes-core	      ||
+||   files		  | |    <recipe>	      ||
+||   <recipe>		  | |       files	      ||
+||      <distro>	  | |       <recipe>.bbappend ||
+||         defconfig	  | | recipes-graphics	      ||
+|-------------------------- |    <recipe>	      ||
+| Software Layer	    |       <machine>	      ||
+|-------------------------- |           *.conf	      ||
+|| COPYING.MIT		  | |    <recipe>.bbappend    ||
+|| README		  | | recipes-kernel	      ||
+|| classes		  | |    linux		      ||
+||   <class>.bbclass	  | |       files	      ||
+|| conf		  	  | |          <machine>.cfg  ||
+||   layer.conf	  	  | |          <machine>.scc  ||
+|| recipes-*		  | |       <recipe>.bbappend ||
+||    <recipe>		  | ---------------------------|
+||        <recipe>.bb	  |			       |
+||        patches	  |			       |
+||            *.patch	  |			       |
+||    <recipe>		  |			       |
+||      <recipe>.bb	  |			       |
+||      <recipe>.bbappend |			       |
+||      files		  |			       |
+||         *.patch	  |			       |
+|--------------------------			       |
+--------------------------------------------------------
