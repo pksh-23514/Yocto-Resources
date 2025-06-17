@@ -46,3 +46,10 @@ Meta-Layers:
 ||         *.patch	  |			       |
 |--------------------------			       |
 --------------------------------------------------------
+
+3. There are 3 types of the Layers that are provided as Input to the Build directory:
+	1) Distro (Distribution) Layers provide the top-level or general Policies for the Images or SDKs Built for a particular Distribution.
+	2) BSP (Board Support Package) Layers provide the Machine-specific Configurations. This type of information is specific to a particular Architecture.
+	3) SW Layers containing the custom Recipes, Patches and Configuration files.
+4. All the Layers have a similar format with a few unique components to distinguish themselves.
+5. BitBake uses the 'bblayers.conf' file to find out the Layers to be used in the Build.
