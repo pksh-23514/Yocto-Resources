@@ -32,3 +32,24 @@ Materials	V				V		   V
 			| Source Fetching and Unpacking |
 			---------------------------------
 
+Upstream Project Releases:
+**************************
+1. The Upstream Project Releases can exist anywhere in the form of an Archived file like Tarball or ZIP or any other Archive file.
+2. These files correspond to an individual Recipe only like specific Release for 'busybox', 'Qt', 'Dbus' Recipes.
+3. An Archive file can contain any Released product which can be Built using a Recipe.
+
+Local Projects:
+***************
+1. The Local Projects are custom bits of SW that is provided by the developer.
+2. They are available at the location local to the Build i.e. a local directory containing a development source tree.
+3. The conventional method to include the Local Projects is by the use of the 'externalsrc' Class.
+4. It supports the Build of SW from source code which is external to the OpenEmbedded Build system.
+5. The standard OpenEmbedded Build system process of fetch, unpack and applying Patches will not be used in the Build from external source.
+6. Either in the 'local.conf' file or through the Recipe's Append file, to point to the local directory on the Disk to pull in the development source tree.
+
+Source Control Managers:
+************************
+1. The Source Control Managers (SCMs) like Git or Subversion are employed by the BitBake Fetchers to get the source files for the Build system.
+2. The repositories are cloned and checked out (if required).
+3. The 'do_fetch' Task scheduled by the BitBake uses the 'SRC_URI' variable and the argument's prefix to determine the correct Fetcher module.
+4. The 'SRCREV' variable is used to determine the specific revision while fetching the repository to be included in the Build.
