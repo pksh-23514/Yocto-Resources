@@ -53,3 +53,14 @@ Source Control Managers:
 2. The repositories are cloned and checked out (if required).
 3. The 'do_fetch' Task scheduled by the BitBake uses the 'SRC_URI' variable and the argument's prefix to determine the correct Fetcher module.
 4. The 'SRCREV' variable is used to determine the specific revision while fetching the repository to be included in the Build.
+
+Source Mirrors:
+***************
+1. There are 2 kinds of Mirrors pointed by separate variables in the OpenEmbedded Build system:
+	1) Pre-Mirrors => PREMIRRORS
+	2) Regular Mirrors => MIRRORS
+2. The pre-Mirrors are checked by the BitBake before looking Upstream for any source files.
+3. They are appropriate when there is a shared directory in the Build which is not a directory defined by the 'DL_DIR' variable.
+4. The shared directory is always local to an Organization.
+5. The Mirrors (or regular Mirrors) point to any site across the Internet which can be used as an alternative location for the source code.
+6. They are very useful if the primary site containing the source files is not functioning, so the files can be fetched without any error in the Build.
