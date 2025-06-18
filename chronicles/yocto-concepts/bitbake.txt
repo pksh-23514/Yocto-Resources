@@ -108,3 +108,14 @@ bitbake Command Usage:
 	do_patch
 	...
 	do_unpack
+7. The 'bitbake' command can be used to list all the Recipes along with their versions available in the Build system.
+	1) Syntax:
+		bitbake -s
+	2) It is very helpful to check if a particular Recipe is available in the Build system.
+	=> bitbake -s | grep <recipename>
+8. The 'bitbake' command can be used to effectively find a variable's value in a Recipe or global Environments.
+	1) Syntax:
+		bitbake -e [recipename] | grep ^<variable>=
+		---> [recipename] is required only if the variable needs to be searched only for a particular Recipe Environment.
+		---> Otherwise it will be searched in the global Environment.
+		---> The variables are shown in the format: <variable>="expanded_value"
