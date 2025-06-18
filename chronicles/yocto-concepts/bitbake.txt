@@ -43,6 +43,7 @@ bitbake Command Usage:
 2. It is known as a Meta-data Interpreter which reads the Yocto Project Meta-data and runs the Tasks defined by the Meta-data.
 3. Syntax:
 	bitbake [options] [recipename/target recipe:do_task ...]
+	---> Where the [recipename/target] refers to the Target Recipes for which the specified Task (default is 'build') is executed.
 4. The 'options' are as follows:
 	1) --version => Show the Program's version and exit.
 	2) -h, --help => Show this help Message and exit.
@@ -68,3 +69,42 @@ bitbake Command Usage:
 	22) --status-only => Checks the status of the remote BitBake Server.
 	23) --runall=RUNALL => Runs the specified Task for any Recipe in the Task-graph of the specified Target even if it wouldn't otherwise have to be run.
 	24) --runonly=RUNONLY => Runs only the specified Task within the Task-graph of the specified Targets and any Task dependencies that those Tasks may have.
+5. The common options for the 'CMD' are as follows:
+	1) build (default CMD)
+	2) clean
+	3) cleanall
+	4) fetch
+	5) unpack
+	6) patch
+	7) configure
+	8) compile
+	9) install
+	10) package
+	11) cleansstate
+	12) menuconfig
+	13) listtasks
+	14) rootfs
+6. The 'bitbake' command can be used to list all the Tasks defined for a particular Recipe.
+	1) Syntax:
+		bitbake -c listtasks [recipename/target]
+	2) If the above command is executed for 'busybox' Recipe, the Output will be following:
+	=> bitbake -c listtasks busybox
+	=> ...
+	NOTE: Executing Tasks
+	do_build
+	do_checkuri
+	do_clean
+	do_cleanall
+	do_cleansstate
+	do_compile
+	do_configure
+	...
+	do_fetch
+	...
+	do_install
+	...
+	do_package
+	...
+	do_patch
+	...
+	do_unpack
