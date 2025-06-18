@@ -119,3 +119,5 @@ bitbake Command Usage:
 		---> [recipename] is required only if the variable needs to be searched only for a particular Recipe Environment.
 		---> Otherwise it will be searched in the global Environment.
 		---> The variables are shown in the format: <variable>="expanded_value"
+9. The Build failures are usually caused by the errors in the Meta-data and not from the 'bitbake' itself.
+10. It is conventionally executed from the Build directory path i.e. 'build' if no variable is passed to 'oe-init-build-env' script.
