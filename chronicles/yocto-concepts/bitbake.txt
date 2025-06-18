@@ -33,3 +33,38 @@ bitbake Directory in Poky:
 	3) bitbake-selftest
 	4) bitbake-getvar
 	5) toaster
+
+The BitBake Commands:
+=====================
+
+bitbake Command Usage:
+**********************
+1. The 'bitbake' command is the primary command of the OpenEmbedded Build system to Build the Packages and Images for the Embedded Linux Distributions.
+2. It is known as a Meta-data Interpreter which reads the Yocto Project Meta-data and runs the Tasks defined by the Meta-data.
+3. Syntax:
+	bitbake [options] [recipename/target recipe:do_task ...]
+4. The 'options' are as follows:
+	1) --version => Show the Program's version and exit.
+	2) -h, --help => Show this help Message and exit.
+	3) -b BUILDFILE, --buildfile=BUILDFILE => Execute the Tasks from a specific Recipe (.bb) directly. It does not handle any dependencies from the other Recipes.
+	4) -k, --continue => Continue the Build as much as possible after an error. However, the Target that failed and anything depending on it cannot be Built.
+	5) -c CMD, --cmd=CMD => Specify the Task to execute. The exact 'CMD' options available depend on the Meta-data.
+	6) -D, --debug => Increase the Debug level. If '-DD' is used, both bb.debug(1, ...) and bb.debug(2, ...) Messages are printed. It only affects the Output to 'stdout'.
+	7) -r PREFILE, --read=PREFILE => Reads the specified file before 'bitbake.conf'.
+	8) -R POSTFILE, --postread=POSTFILE => Reads the specified file after bitbake.conf.
+	9) -v, --verbose => Enable tracing of the Shell Tasks (with 'set -x'). It also prints bb.note(...) Messages to 'stdout' along with writing them to ${T}/log.do_<task>).
+	10) -q, --quiet => Outputs less log Message data to the terminal. It can be specified more than once.
+	11) -p, --parse-only => Parses the BB Recipes and exit.
+	12) -s, --show-versions => Shows the current and the preferred versions of all the Recipes.
+	13) -e, --environment => Shows the global or per-Recipe Environment complete details along with the information about where the variables were set/changed.
+	14) --server-only => Run the BitBake without a UI i.e. only starting a Server (Cooker) process.
+	15) -B BIND, --bind=BIND => The name/Address for the BitBake 'xmlrpc' Server to bind to.
+	16) --no-setscene => Does not run any SetScene Tasks. Sstate will be ignored and everything needed is Built.
+	17) --skip-setscene => Skips the SetScene Tasks if they would be executed. Tasks previously restored from Sstate will be kept, unlike in '--no-setscene'.
+	18) --setscene-only => Only runs the SetScene Tasks and doesn't run any real Tasks.
+	19) --remote-server=REMOTE_SERVER => Connect to the specified Server.
+	20) -m, --kill-server => Terminate any running BitBake Server.
+	21) --observe-only => Connects to a Server as an observing-only Client.
+	22) --status-only => Checks the status of the remote BitBake Server.
+	23) --runall=RUNALL => Runs the specified Task for any Recipe in the Task-graph of the specified Target even if it wouldn't otherwise have to be run.
+	24) --runonly=RUNONLY => Runs only the specified Task within the Task-graph of the specified Targets and any Task dependencies that those Tasks may have.
