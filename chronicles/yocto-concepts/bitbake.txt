@@ -45,26 +45,26 @@ bitbake Command Usage:
 	bitbake [options] [recipename/target recipe:do_task ...]
 	---> Where the [recipename/target] refers to the Target Recipes for which the specified Task (default is 'build') is executed.
 4. The 'options' are as follows:
-	1) --version => Show the Program's version and exit.
-	2) -h, --help => Show this help Message and exit.
-	3) -b BUILDFILE, --buildfile=BUILDFILE => Execute the Tasks from a specific Recipe (.bb) directly. It does not handle any dependencies from the other Recipes.
-	4) -k, --continue => Continue the Build as much as possible after an error. However, the Target that failed and anything depending on it cannot be Built.
-	5) -c CMD, --cmd=CMD => Specify the Task to execute. The exact 'CMD' options available depend on the Meta-data.
-	6) -D, --debug => Increase the Debug level. If '-DD' is used, both bb.debug(1, ...) and bb.debug(2, ...) Messages are printed. It only affects the Output to 'stdout'.
+	1) --version => Shows the Program's version and exit.
+	2) -h, --help => Shows this help Message and exit.
+	3) -b BUILDFILE, --buildfile=BUILDFILE => Executes the Tasks from a specific Recipe (.bb) directly. It does not handle any dependencies from the other Recipes.
+	4) -k, --continue => Continues the Build as much as possible after an error. However, the Target that failed and anything depending on it cannot be Built.
+	5) -c CMD, --cmd=CMD => Specifies the Task to execute. The exact 'CMD' options available depend on the Meta-data.
+	6) -D, --debug => Increases the Debug level. If '-DD' is used, both bb.debug(1, ...) and bb.debug(2, ...) Messages are printed. It only affects the Output to 'stdout'.
 	7) -r PREFILE, --read=PREFILE => Reads the specified file before 'bitbake.conf'.
 	8) -R POSTFILE, --postread=POSTFILE => Reads the specified file after bitbake.conf.
-	9) -v, --verbose => Enable tracing of the Shell Tasks (with 'set -x'). It also prints bb.note(...) Messages to 'stdout' along with writing them to ${T}/log.do_<task>).
+	9) -v, --verbose => Enables tracing of the Shell Tasks (with 'set -x'). It also prints bb.note(...) Messages to 'stdout' along with writing them to ${T}/log.do_<task>).
 	10) -q, --quiet => Outputs less log Message data to the terminal. It can be specified more than once.
 	11) -p, --parse-only => Parses the BB Recipes and exit.
 	12) -s, --show-versions => Shows the current and the preferred versions of all the Recipes.
 	13) -e, --environment => Shows the global or per-Recipe Environment complete details along with the information about where the variables were set/changed.
-	14) --server-only => Run the BitBake without a UI i.e. only starting a Server (Cooker) process.
+	14) --server-only => Runs the BitBake without a UI i.e. only starting a Server (Cooker) process.
 	15) -B BIND, --bind=BIND => The name/Address for the BitBake 'xmlrpc' Server to bind to.
 	16) --no-setscene => Does not run any SetScene Tasks. Sstate will be ignored and everything needed is Built.
 	17) --skip-setscene => Skips the SetScene Tasks if they would be executed. Tasks previously restored from Sstate will be kept, unlike in '--no-setscene'.
 	18) --setscene-only => Only runs the SetScene Tasks and doesn't run any real Tasks.
-	19) --remote-server=REMOTE_SERVER => Connect to the specified Server.
-	20) -m, --kill-server => Terminate any running BitBake Server.
+	19) --remote-server=REMOTE_SERVER => Connects to the specified Server.
+	20) -m, --kill-server => Terminates any running BitBake Server.
 	21) --observe-only => Connects to a Server as an observing-only Client.
 	22) --status-only => Checks the status of the remote BitBake Server.
 	23) --runall=RUNALL => Runs the specified Task for any Recipe in the Task-graph of the specified Target even if it wouldn't otherwise have to be run.
@@ -121,3 +121,25 @@ bitbake Command Usage:
 		---> The variables are shown in the format: <variable>="expanded_value"
 9. The Build failures are usually caused by the errors in the Meta-data and not from the 'bitbake' itself.
 10. It is conventionally executed from the Build directory path i.e. 'build' if no variable is passed to 'oe-init-build-env' script.
+
+bitbake-layers Command Usage:
+*****************************
+1. The 'bitbake-layers' command is used to manage and inspect the Layers in the BitBake Build Environment.
+2. Syntax:
+	bitbake-layers [options] <subcommand>
+3. The 'options' are as follows:
+	1) -d, --debug => Enables the Debug Output.
+	2) -q, --quiet => Prints only the errors.
+	3) -h, --help => Shows this help Message and exit.
+4. The 'subcommand' are as follows:
+	1) add-layer <layer_path> => Adds one or more Layers to the 'bblayers.conf'.
+	2) remove-layer <layer_path> => Removes one or more Layers from the 'bblayers.conf'.
+	3) show-layers => Lists all the Layers added to the Build.
+	4) show-overlayed => Shows the Recipes that are overridden in multiple Layers.
+	5) show-recipes => Lists all the available Recipes including their versions and the Layers they are provided by.
+	6) show-appends	=> Shows the Append files and the Recipes they apply to.
+	7) create-layer => Creates a new Layer with basic structures.
+	8) layerindex-fetch <layer_name> => Queries the official OpenEmbedded Layer index, clones the Layer along with it's dependent Layers and adds them to 'bblayers.conf'.
+	9) layerindex-show-depends <layer_name> => Shows the dependencies of a Layer from the official OpenEmbedded Layer index.
+5. The '--help' option can be used to get the help Message for each of the 'subcommand'.
+	=> bitbake-layers <subcommand> --help
