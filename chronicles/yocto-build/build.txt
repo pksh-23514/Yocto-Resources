@@ -1,0 +1,9 @@
+The Build Directory:
+====================
+1. The Build directory refers to the area used by the OpenEmbedded Project Build system for all the Build related activities.
+2. It is created when the Build Environment script is sourced.
+3. The BitBake initializes the 'TOPDIR' variable with the directory path for the Build directory.
+	=> bitbake -e | grep ^TOPDIR=
+	   TOPDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build"
+4. The 'build' directory contains a Temporary directory that is used to store all the Build Output and intermediate files other than the Shared-State Cache.
+5. This Temporary directory cannot be under NFS (Network Filesystem) directory. Therefore by default, the Build directory cannot be under NFS.
