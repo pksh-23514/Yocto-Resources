@@ -1,6 +1,6 @@
 meta-poky:
 ==========
-1. The 'meta-poky' contains all the required Meta-data to define the Poky reference Distribution. It is provided by the Yocto Project in Poky.
+1. The 'meta-poky' is a Layer that contains all the required Meta-data to define the Poky reference Distribution. It is provided by the Yocto Project in Poky.
 2. It contains the following Configurations:
 	1) Distro Configuration => The preferred versions of Distribution and Packages, the 'init' manager details and other Build behaviors for the particular Poky Distribution.
 	2) Default Configuration templates => The sample files for the essential Build Configurations like 'bblayers.conf' or 'local.conf' etc.
