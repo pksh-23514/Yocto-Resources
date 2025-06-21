@@ -1,0 +1,11 @@
+meta-poky:
+==========
+1. The 'meta-poky' contains all the required Meta-data to define the Poky reference Distribution. It is provided by the Yocto Project in Poky.
+2. It contains the following Configurations:
+	1) Distro Configuration => The preferred versions of Distribution and Packages, the 'init' manager details and other Build behaviors for the particular Poky Distribution.
+	2) Default Configuration templates => The sample files for the essential Build Configurations like 'bblayers.conf' or 'local.conf' etc.
+	3) Classes => The Classes to set the Build Configurations and add Sanity checks to Poky.
+3. In the Poky reference Distribution, the 'DISTRO' variable is set to include the Poky Distribution in the Yocto Build.
+	=> DISTRO ?= "poky"
+4. It contains the settings focused on the Distro Policies and includes Recipes that ties together other Layers in the Poky Build system.
+5. It depends on the 'meta' Layer in the Poky.
