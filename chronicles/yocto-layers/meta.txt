@@ -1,0 +1,28 @@
+meta:
+=====
+1. The 'meta' is a core Layer that provides the essential Recipes, Classes, and Configurations needed to build a basic Embedded Linux Distribution.
+2. It is shared between the OpenEmbedded Project and the Yocto Project and therefore, present in Poky.
+3. It contains the OpenEmbedded-Core Meta-data that provides the following:
+	1) Essential Recipes for the base Packages.
+	2) Defines the key BitBake Classes.
+	3) Contains the Core Configurations like Target Machine Configurations, Toolchain settings etc.
+	4) Implements the Build infrastructure logic common for a lot of other Layers.
+4. The essential Recipes included are:
+	1) recipes-bsp => Anything with links to a specific HW or HW configuration information.
+	2) recipes-connectivity => The libraries and Applications related to the communication with other Devices.
+	3) recipes-core => Everything that is essentially needed to Build a basic working Linux Image including the commonly used dependencies.
+	4) recipes-devtools => The tools primarily used by the Build system. However, they can also be used on Targets.
+	5) recipes-extended => The Applications which are not essential, provide rich features that can extend the system/tool functionalities beyond the minimal.
+	5) recipes-gnome => Everything related to the GTK+ Application framework.
+	6) recipes-graphics => The graphics related system libraries.
+	7) recipes-kernel => The Kernel and generic Applications or libraries with strong Kernel dependencies.
+	8) recipes-multimedia => The Multimedia processing SW and the support utilties.
+	9) recipes-rt => The Packages and the Image Recipes for using and testing the Real-Time Linux support, particularly via the 'PREEMPT_RT' Kernel.
+	10) recipes-sato => The Sato reference UI/UX Recipes along with it's associated Applications and Configurations.
+	11) recipes-support => The Recipes used by other Packages or system components. They are neither the core OS elements nor included in the Images directly.
+5. It contains the Classes used globally as well as by the Recipes in the directories:
+	1) classes-global
+	2) classes-recipe
+	3) classes
+6. It contains several Distro, Machine and other required Configurations in the 'conf' directory.
+7. It contains several Python helper modules used in the Recipes or Classes and a default Layer template in the 'lib' directory.
