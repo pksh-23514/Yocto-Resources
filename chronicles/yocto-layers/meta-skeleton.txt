@@ -1,0 +1,11 @@
+meta-skeleton:
+==============
+1. The 'meta-skeleton' is a demo Layer that contains the template Recipes and Configuration files for the actual BSP and Kernel development.
+2. It is a sandbox for learning the process to define custom Recipes and Machine Configuration.
+3. It also provides the minimal working examples like Services, Kernel Recipes, Bare-Metal Applications etc.
+4. It is expected by the developer to copy and modify these sample files to create the custom Layers for the Build system.
+5. They are not intended to be used verbatim i.e. they shouldn't be used directly without proper customization as:
+	1) They are minimal and incomplete without proper versioning.
+	2) They provide no real functionality.
+	3) They are only used as a learning tool.
+6. It depends on the 'meta' Layer in the Poky.
