@@ -1,9 +1,26 @@
 The Build Directory:
 ====================
 1. The Build directory refers to the area used by the OpenEmbedded Project Build system for all the Build related activities.
-2. It is created when the Build Environment script is sourced.
+2. It is created when the Build Environment script is sourced. If there is no name provided while sourcing the script, the Build directory defaults to 'build'.
 3. The BitBake initializes the 'TOPDIR' variable with the directory path for the Build directory.
 	=> bitbake -e | grep ^TOPDIR=
 	   TOPDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build"
 4. The 'build' directory contains a Temporary directory that is used to store all the Build Output and intermediate files other than the Shared-State Cache.
 5. This Temporary directory cannot be under NFS (Network Filesystem) directory. Therefore by default, the Build directory cannot be under NFS.
+
+The Build Directory Structure:
+==============================
+
+build/buildhistory:
+*******************
+1. The Build system creates the 'buildhistory' directory to organize the Build information into 'images', 'packages' and 'sdk' directories.
+2. It is not enabled by default. This directory is created only when it is enabled in the Build system.
+	=> vi build/conf/local.conf
+	=> INHERIT += "buildhistory"
+	=> BUILDHISTORY_COMMIT = "1"
+3. The 'meta/classes/buildhistory.bbclass' Class file is used to maintain the Build Output quality.
+
+build/cache:
+************
+1. The Build system creates the 'cache' directory to contain several internal files used by the Build system.
+2. It contains a 'sanity_info' text file to keep track of the important Build information variable values like 'SANITY_VERSION', 'TMPDIR', 'SSTATE_DIR' and 'NATIVELSBSTRING'.
