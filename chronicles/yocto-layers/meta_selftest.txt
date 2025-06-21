@@ -1,0 +1,6 @@
+meta-selftest:
+==============
+1. The 'meta-selftest' is a test Layer that contains additional Classes, Recipes and Configurations files used by the 'scripts/oe-selftest' script in Poky.
+2. It is used to verify the behavior of the Build system.
+3. It is probably a mistake to include it in the Yocto Build unless there is a specific requirement to run the self-tests.
+4. It depends on the 'meta' Layer in the Poky.
