@@ -38,7 +38,7 @@ local.conf Configuration:
 2. The sample Configuration file of 'local.conf' is present in the 'meta-poky/conf' directory under the name of 'local.conf.sample'.
 3. The variables provided are:
 	1) Target Machine selection controlled by the 'MACHINE' variable.
-	2) Download directory controller by the 'DL_DIR' variable.
+	2) Download directory controlled by the 'DL_DIR' variable.
 	3) Shared-State directory controlled by the 'SSTATE_DIR' variable.
 	4) Build Output controlled by the 'TMPDIR' variable.
 	5) Distribution Policy controlled by the 'DISTRO' variable.

@@ -7,3 +7,40 @@ build/conf:
 	2) bblayers.conf
 	3) site.conf
 	4) auto.conf
+
+build/conf/local.conf:
+**********************
+1. The 'local.conf' Configuration file contains all the local User Configurations for the Build Environment.
+2. It provides the definition of many basic variables that define the Build Environment.
+3. The variables provided are:
+	1) MACHINE => It controls the Machine for which the Target Image is being Built.
+		---> The default value for the Target Machine is selected as 'qemux86-64' if no other Machine is selected.
+		---> MACHINE ??= "qemux86"
+	2) DL_DIR => It controls the directory path where the Build system downloads the different source code Tarballs fetched from the various Projects.
+		---> The default path for the downloads directory is under the Build (TOPDIR) directory.
+		---> DL_DIR ?= "${TOPDIR}/downloads"
+	3) TMPDIR => It controls the directory path where the Build system places the Build Output i.e. the bulk of Build work is executed and the temporary files is placed.
+		---> The default path for the temporary directory is under the Build (TOPDIR) directory.
+		---> TMPDIR = "${TOPDIR}/tmp"
+	4) SSTATE_DIR => It controls the directory path where the Build system places the Shared-State files which are like Cache to accelerate the Build based on previous Build.
+		---> Even if the TMPDIR is wiped out leaving this directory intact, the Build would regenerate from these files if no changes were made to the Configuration.
+		---> If there is any change to the Configuration, only the Shared-State files where the State is valid would be used (done using checksums).
+		---> The default path for the Shared-State Cache is under the Build (TOPDIR) directory.
+		---> SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
+	5) DISTRO => It controls the Distribution or Policy settings that are to be used for the Build. Initially, it can be a default value but later they are custom Distros.
+		---> The default Policy Configuration for the Yocto Project is Poky.
+		---> DISTRO ?= "poky"
+	6) PACKAGE_CLASSES => It controls the type of Package formats to be enabled in the Build system. Even multiple Package formats can be enabled at once.
+		---> The order in which the Package formats are listed matters. The first item listed in the variable (if available) is used by the BitBake.
+		---> PACKAGE_CLASSES ?= "package_rpm package_deb package_ipk"
+		---> The 'package_rpm' is the default format for Poky.
+		---> PACKAGE_CLASSES ?= "package_rpm"
+	7) SDKMACHINE => It controls the Target Architecture to build the SDK items for. The SDK Packages can be Built for Architectures other than the Machine running the Build.
+		---> The supported Architecture values for Poky are 'i686', 'x86_64' and 'aarch64'.
+		---> SDKMACHINE ?= "i686"
+	8) EXTRA_IMAGE_FEATURES => It controls the additional Packages to be added to the generated Image. Some of these options are added to certain Image types automatically.
+		---> There are other features that can be used which are listed in the Class files: 'meta/classes*/'.
+		---> EXTRA_IMAGE_FEATURES ?= "allow-empty-password empty-root-password allow-root-login"
+4. Any variable that is defined in this file overrides the definition of that variable set elsewhere within the Environment unless that variable is hard-coded within a file.
+5. The sample Configuration file of 'local.conf' is present in the 'meta-poky/conf' directory under the name of 'local.conf.sample'.
+6. If this Configuration file is not present when the Build Environment script is sourced, the Build system creates it from the sample Configuration file.
