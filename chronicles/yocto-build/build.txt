@@ -30,3 +30,9 @@ build/conf:
 1. The Build system creates the 'conf' directory to contain the local Configurations for the specific Build Environment.
 2. It is essential for localizing the Build Configurations so that the custom settings can be separated from the Yocto Meta-Layers.
 3. It contains all the Configuration (.conf) files that are used by the BitBake in the Build process.
+
+build/downloads:
+****************
+1. The Build system creates the 'downloads' directory to download the different source code Tarballs fetched from the various Projects.
+2. The 'DL_DIR' variable controls the directory path.
+3. There can be one common location for the directory so that it can be reused for multiple Builds.

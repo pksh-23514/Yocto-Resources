@@ -1,0 +1,10 @@
+build/downloads:
+================
+1. In the Build Environment, the 'downloads' directory is used to store source code and other assets that are fetched during the Build process.
+2. The directory caches all kinds of the source files:
+	1) Tarballs or Archives (.tar.gz, .zip etc)
+	2) Git repository clones or their shallow Mirrors
+	3) Patches
+	4) Other remote files defined in the Recipes
+3. Once the sources are downloaded in a fresh Online Build, they can be used during the subsequent Builds. This avoids the re-downloading of the files.
+4. It also facilitates the Offline Builds since the sources are already present in the directory.
