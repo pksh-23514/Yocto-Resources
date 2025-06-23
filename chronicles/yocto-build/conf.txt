@@ -44,3 +44,6 @@ build/conf/local.conf:
 4. Any variable that is defined in this file overrides the definition of that variable set elsewhere within the Environment unless that variable is hard-coded within a file.
 5. The sample Configuration file of 'local.conf' is present in the 'meta-poky/conf' directory under the name of 'local.conf.sample'.
 6. If this Configuration file is not present when the Build Environment script is sourced, the Build system creates it from the sample Configuration file.
+7. The changes made to this Configuration file is a convinient method to customize the Build but they are temporary changes.
+8. Any changes will be lost if we remove and recreate the Build directory by sourcing the Build Environment script again. There is no tracking of the changes made to it.
+9. The changes made to this Configuration file are specific to a particular Build directory only. It won't be passed on to another Build directory.
