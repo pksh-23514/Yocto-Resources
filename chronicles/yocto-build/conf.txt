@@ -47,3 +47,21 @@ build/conf/local.conf:
 7. The changes made to this Configuration file is a convinient method to customize the Build but they are temporary changes.
 8. Any changes will be lost if we remove and recreate the Build directory by sourcing the Build Environment script again. There is no tracking of the changes made to it.
 9. The changes made to this Configuration file are specific to a particular Build directory only. It won't be passed on to another Build directory.
+
+build/conf/bblayers.conf:
+*************************
+1. The 'bblayers.conf' file provides the infromation to the BitBake about the Layers to be used in the Build process.
+2. The BitBake uses the 'BBPATH' variable to locate the Class and Configuration files. The default value is the Build {TOPDIR} directory.
+	=> BBPATH = "${TOPDIR}"
+3. The 'BBLAYERS' variable in this file contains the directory path of all the Layers to be used in the Build process.
+4. By default, the Layers listed in this file include the Layers minimally needed by the Build system.
+	=> BBLAYERS ?= " \
+	     /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta \
+	     /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-poky \
+	     /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-yocto-bsp \
+	     "
+5. Any custom Layer created or cloned in the Build system must be added to the file to be included in the Build process.
+6. The BitBake parses each 'conf/layer.conf' file of the Layers present in the 'BBLAYERS' variable in a top-down approach of their occurence in the variable.
+7. The sample Configuration file of 'bblayers.conf' is present in the 'meta-poky/conf' directory under the name of 'bblayers.conf.sample'.
+8. If this Configuration file is not present when the Build Environment script is sourced, the Build system creates it from the sample Configuration file.
+9. While sourcing, the Absolute path of the Layers are substituted to all the '##OEROOT##' placeholder text using the 'sed' Linux command.
