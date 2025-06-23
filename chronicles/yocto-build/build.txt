@@ -24,3 +24,9 @@ build/cache:
 ************
 1. The Build system creates the 'cache' directory to contain several internal files used by the Build system.
 2. It contains a 'sanity_info' text file to keep track of the important Build information variable values like 'SANITY_VERSION', 'TMPDIR', 'SSTATE_DIR' and 'NATIVELSBSTRING'.
+
+build/conf:
+***********
+1. The Build system creates the 'conf' directory to contain the local Configurations for the specific Build Environment.
+2. It is essential for localizing the Build Configurations so that the custom settings can be separated from the Yocto Meta-Layers.
+3. It contains all the Configuration (.conf) files that are used by the BitBake in the Build process.

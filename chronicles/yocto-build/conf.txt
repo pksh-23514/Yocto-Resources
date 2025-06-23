@@ -1,0 +1,9 @@
+build/conf:
+===========
+1. The Configuration files are stored in the 'build/conf' directory. They are used by the BitBake in the Build process.
+2. The sample Configuration files stored in the 'meta-poky' directory are used as a template to create the actual Configuration files by the developer.
+3. The most important Configuration files are as follows:
+	1) local.conf
+	2) bblayers.conf
+	3) site.conf
+	4) auto.conf
