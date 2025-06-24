@@ -25,3 +25,27 @@ Cached Output Details:
 4. The Output of the 'do_package' and 'do_package_write_*' Tasks.
 5. The Output of the 'do_populate_sdk', 'do_rootfs' and 'do_image' Tasks. However, they can be Cached only if properly configured although some are less portable.
 6. The Output of the 'do_fetch' and 'do_patch' Tasks are either not Cached or partially Cached.
+7. Each Build Task that can be reused safely is eligible to be Cached.
+
+Organizing the Cached Outputs:
+******************************
+1. Each Cached Output is stored as '.tar*' Archive file. It contains the files needed to restore the results of a specific Task.
+2. Each Archive file is uniquely identified and organized in a specific way.
+3. Internally the file names are often very complex. However, the naming convention of the Archive files is generally as follows:
+	=> <...>:<hash>:<task>.tar.*
+	---> 'hash' is based on the Task Inputs (Recipe name, version, Meta-data, Environment, Configurations etc.)
+	---> 'task' is the Task name (do_compile, do_install, do_configure etc.)
+	---> An example name can be as: b9f235bc8b292c5d30dcf418da5128ed:do_compile.tgz
+4. This ensures that if anything changes on the Inputs that affects the Output, the hash changes and a new Sstate Object is generated.
+5. To avoid putting all the Cache files into a single directory, the Build splits them into sub-directories by the starting 2-character hash prefixes.
+	=> b9/
+	   ├── f2/
+	   │   └── b9f235bc8b292c5d30dcf418da5128ed:do_compile.tgz
+6. This structure allows efficient file access and scalability for large Projects.
+
+Cleaning or Managing Shared-State Cache:
+****************************************
+1. The Sstate Object for a particular Recipe can be removed by the following command:
+	=> bitbake -c cleansstate <recipe>
+2. The complete 'sstate-cache' directory can be removed manually by the following command:
+	=> rm -rf sstate-cache/*
