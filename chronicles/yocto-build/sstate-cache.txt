@@ -49,3 +49,16 @@ Cleaning or Managing Shared-State Cache:
 	=> bitbake -c cleansstate <recipe>
 2. The complete 'sstate-cache' directory can be removed manually by the following command:
 	=> rm -rf sstate-cache/*
+
+Signature Information:
+**********************
+1. The '.siginfo' file stores the signature hash and Meta-data about how the hash was computed.
+2. It contains the information used by the BitBake to compare the current Task signature with the previously Cached signature.
+3. It helps to determine whether a Cached Task Output in 'sstate-cache' directory is valid and reusable.
+
+Cached Outputs Restoration:
+***************************
+1. When the subsequent Build is executed after a successful Build, the Sstate Cached files are used by the BitBake.
+2. The BitBake computes the expected hash for each Task.
+3. The computed hash is looked in the 'sstate-cache' directory path.
+4. If the hash is found, it extracts the Tarball and restores the Task Output instead of Compiling and processing it again.
