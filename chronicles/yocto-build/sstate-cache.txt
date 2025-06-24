@@ -1,0 +1,11 @@
+build/sstate-cache:
+===================
+1. In the Build Environment, the 'sstate-cache' directory is used to store the Shared-State Cache that are a critical part of the Yocto’s Build performance.
+2. The Shared-State Cache is a system that Caches the results of the Build Tasks so that they can be reused in the future Builds.
+3. Each Task in the Yocto Project (like do_fetch, do_unpack, do_compile, do_install etc.) have Inputs (like Meta-data, Configurations etc.) to the BitBake.
+4. If the Inputs haven't changed since the last Build, the Outputs of these Inputs should remain the same as well. This logic is used by the Shared-State Cache.
+5. The Shared-State Cache stores the Outputs of the Build Tasks as 'Sstate Object files' so that they can be restored directly instead of recomputing.
+6. Instead of again Compiling or processing every task, the Build checks this directory for a previously completed version of the Task with matching Inputs exists or not.
+7. These Cached Outputs are stored as 'tar.gz' or '.tar.zst' file.
+8. It dramatically reduces the Build time by avoiding the Build of the unchanged Tasks. It also prevents the repeated downloads and processing of the same sources again.
+9. It supports the reproducibility (Build consistency across Environments) and the Build Distribution across Machines/Users.
