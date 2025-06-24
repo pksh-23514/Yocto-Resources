@@ -1,10 +1,25 @@
 build/downloads:
 ================
 1. In the Build Environment, the 'downloads' directory is used to store source code and other assets that are fetched during the Build process.
-2. The directory caches all kinds of the source files:
+2. The directory Caches all kinds of the source files:
 	1) Tarballs or Archives (.tar.gz, .zip etc)
 	2) Git repository clones or their shallow Mirrors
 	3) Patches
 	4) Other remote files defined in the Recipes
-3. Once the sources are downloaded in a fresh Online Build, they can be used during the subsequent Builds. This avoids the re-downloading of the files.
+3. Once the sources are downloaded in a fresh Online Build, they can be used during the subsequent Builds. This avoids the re-downloading of the files making the Build faster.
 4. It also facilitates the Offline Builds since the sources are already present in the directory.
+5. There are 2 kinds of checksums used to track the download status:
+	1) .lock file
+	2) .done file
+6. The '.lock' is used to prevent multiple processes from downloading the same file simultaneously. They are temporary lock files created by BitBake during downloads.
+	1) If there are parallel Builds or multiple BitBake tasks that fetch the same file, it ensures that only one download happens and other processes are kept in wait.
+	2) Once the download is complete, it is deleted.
+	3) After a Build has failed or interrupted, it is usually safe to deleted these files manually before performing the Build again.
+7. The '.done' is used to mark a download as successful. These files are a flag or an indication that the download of a source file is successfully completed.
+	1) The BitBake checks this file before attempting to download the file again.
+	2) It is useful to prevent redundant downloads during subsequent Builds.
+	3) If the source file is present but this is missing, the BitBake may try to re-download the source file to ensure integrity depending on checksum validation.
+8. It is safe to delete this directory without any consequence to the Build system.
+	1) However, the next Build will take additional bandwidth to re-download the source files and it will take more time to complete the Build as well.
+	2) For CI or automated Builds, it is better to share these Cache to speed up the Build.
+	3) Even in case of multiple Build Environments, it is a good method to have a common directory for all the Builds to be able to access the sources.
