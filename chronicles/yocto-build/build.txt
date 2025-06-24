@@ -36,3 +36,9 @@ build/downloads:
 1. The Build system creates the 'downloads' directory to download the different source code Tarballs fetched from the various Projects.
 2. The 'DL_DIR' variable controls the directory path.
 3. There can be one common location for the directory so that it can be reused for multiple Builds.
+
+build/sstate-cache:
+*******************
+1. The Build system creates the 'sstate-cache' directory to contain the Shared-State Cache files that are used to accelerate the Build process.
+2. The 'SSTATE_DIR' variable controls the directory path.
+3. There can be one common location for the directory so that it can be reused for multiple Builds.
