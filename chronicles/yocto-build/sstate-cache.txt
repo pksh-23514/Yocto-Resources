@@ -2,10 +2,26 @@ build/sstate-cache:
 ===================
 1. In the Build Environment, the 'sstate-cache' directory is used to store the Shared-State Cache that are a critical part of the Yocto’s Build performance.
 2. The Shared-State Cache is a system that Caches the results of the Build Tasks so that they can be reused in the future Builds.
-3. Each Task in the Yocto Project (like do_fetch, do_unpack, do_compile, do_install etc.) have Inputs (like Meta-data, Configurations etc.) to the BitBake.
+3. Each Task in the Yocto Project (like do_compile, do_install etc.) have Inputs (like Meta-data, Configurations etc.) to the BitBake.
 4. If the Inputs haven't changed since the last Build, the Outputs of these Inputs should remain the same as well. This logic is used by the Shared-State Cache.
 5. The Shared-State Cache stores the Outputs of the Build Tasks as 'Sstate Object files' so that they can be restored directly instead of recomputing.
 6. Instead of again Compiling or processing every task, the Build checks this directory for a previously completed version of the Task with matching Inputs exists or not.
 7. These Cached Outputs are stored as 'tar.gz' or '.tar.zst' file.
 8. It dramatically reduces the Build time by avoiding the Build of the unchanged Tasks. It also prevents the repeated downloads and processing of the same sources again.
 9. It supports the reproducibility (Build consistency across Environments) and the Build Distribution across Machines/Users.
+
+Shared-State Cache Workflow:
+****************************
+1. Hash generation => For each Task, the BitBake generates a hash based on all the Inputs that affect the Task Output.
+2. Cache check => Before executing a Task, the BitBake checks if a matching Sstate Object exists using the hash value for the Task.
+3. Restore or Run => If the hash is found, the Task is restored from the Cache. Otherwise, the Task is executed and it's Output is stored in the 'sstate-cache' directory for use.
+4. Storage format => Each Cached Output is stored in the 'sstate-cache' directory as '.tar*' Archive file for usage in the future Builds.
+
+Cached Output Details:
+**********************
+1. The Output of the 'do_compile' Tasks.
+2. The Output of the 'do_configure' Tasks.
+3. The Output of the 'do_install' and 'do_populate_sysroot' Tasks.
+4. The Output of the 'do_package' and 'do_package_write_*' Tasks.
+5. The Output of the 'do_populate_sdk', 'do_rootfs' and 'do_image' Tasks. However, they can be Cached only if properly configured although some are less portable.
+6. The Output of the 'do_fetch' and 'do_patch' Tasks are either not Cached or partially Cached.
