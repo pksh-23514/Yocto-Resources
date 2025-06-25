@@ -47,7 +47,7 @@ Target System:
 
 Cross-Compiler:
 ***************
-1. It is a Compiler that runs on the Host system and generates the executable code for the Target system having a different architecture.
+1. It is a Compiler that runs on the Host system and generates the executable code for the Target system having a different Architecture.
 2. Since there is a constraint on the Embedded systems resources, all the Cross-Compilation is performed on the Host Machine.
 3. The example of a Cross-Compiler for a Target Architecture is:
 	=> ARM (32-bit) with hard-float (ARM Cortex-A7 with Vector Floating Point) ---> arm-linux-gnueabihf-gcc
@@ -56,7 +56,7 @@ Cross-Compiler:
 
 Cross-Assembler:
 ****************
-1. It is an Assembler that runs on the Host system and generates the machine code for the Target system having a different architecture.
+1. It is an Assembler that runs on the Host system and generates the machine code for the Target system having a different Architecture.
 2. They are very useful in scenarios where precise timing and instruction flow (like the Bootloader or Start-up code) is required.
 3. The example of a Cross-Assembler for a Target Architecture is:
 	=> ARM (32-bit) with hard-float (ARM Cortex-A7 with Vector Floating Point) ---> arm-linux-gnueabihf-as

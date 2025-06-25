@@ -63,7 +63,7 @@ Image Simulation using the QEMU:
 ================================
 1. For testing the Built Yocto Image on the Host, QEMU is used to execute the Image on an Emulator mimicking the Target HW.
 2. QEMU (Quick Emulator) is a free and Open-Source SW package that performs the Hardware virtualization.
-3. It allows test and development without the need of a real Hardware. Currently, it supports the following Target architectures:
+3. It allows test and development without the need of a real Hardware. Currently, it supports the following Target Architectures:
 	1) ARM / AArch64 (32-bit and 64-bit ARM Architecture)
 	2) MIPS / MIPS64 (Including little-Endian and big-Endian variants)
 	3) RISC-V (rv32 and rv64 Architecture)
