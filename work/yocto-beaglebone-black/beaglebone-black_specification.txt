@@ -1,0 +1,61 @@
+BeagleBone Black Features:
+==========================
+
+Processor (SoC):
+****************
+1. AM335x 1GHz ARM Cortex-A8 (TI Sitara)
+2. Integrated PowerVR SGX530 GPU
+3. NEON Floating-point Accelerator
+4. 3D Graphics Accelerator
+5. 2x 32-bit 200MHz Programmable Real-Time Units (PRUs)
+
+Memory:
+*******
+1. 512MB DDR3L 800MHz RAM
+2. 4GB 8-bit eMMC on-Board Flash
+3. microSD slot for storage expansion
+
+Connectivity:
+*************
+1. USB 2.0 Client => miniUSB for Power and Data
+2. USB 2.0 Host => USB-A for Peripherals
+3. Ethernet => 10/100 Mbps RJ45
+4. Serial => UART Ports via Headers (connection through a TTL to USB cable)
+
+User Input / Output:
+********************
+1. Reset Button
+2. Boot Button
+3. Power Button
+
+Audio / Video Interface:
+************************
+1. HDMI => microHDMI upto 1280x1024
+2. LCD Interface
+3. Stereo Audio over HDMI Interface
+
+Expansion Headers:
+******************
+1. 2x 46-pin headers (P8 and P9)
+	1) Power => 5V, 3.3V, VDD_ADC (1.8V)
+	2) 3.3V I/O on all Signals
+	3) Multi-Channel Audio Serial Port (McASP0), SPI1, I2C, GPIO (69 max), LCD, GPMC, MMC1, MMC2
+	4) ADC (7 Channels, 12-bit) Analog Inputs (1.8V max)
+	5) 4 Timers, 4 Serial Ports, CAN0
+	6) 3 Enhanced PWM (eHRPWM), XDMA Interrupts, 4 Expansion Board ID (EEPROM + Cape Support)
+
+Power:
+******
+1. Input via miniUSB or 5V Barrel-Jack
+2. Power consumption => typically under 2.5W
+
+Debug Support:
+**************
+1. Optional Onboard 20-pin CTI JTAG Serial Header
+
+Operating Systems Supported:
+****************************
+1. Debian (Official Image)
+2. Light Ubuntu (Community-supported)
+3. Android (Community-supported)
+4. Other Linux Distributions (Yocto Built Distribution)
