@@ -1,0 +1,23 @@
+build/tmp:
+==========
+1. In the Build Environment, the 'tmp' directory is used as the main working and Output directory by the BitBake.
+2. This is the location to store all the Build artifacts, the intermediate files and the final Image binaries during the Build process.
+3. It is important for incremental Builds by speeding up the Build process. If a part of the Project changes, the Build system only Builds the specific changes in the Recipes.
+4. The Build process ensures the integrity of the source by separation of the original Inputs (Recipes) and the generated Output files by keeping them in this directory.
+5. This makes the version control simpler without the need of messy '.gitignore' files.
+6. Most of the Disk space usage in a Yocto Build comes from this directory.
+
+tmp/buildstats:
+***************
+
+tmp/cache:
+**********
+
+tmp/deploy:
+***********
+
+tmp/work:
+*********
+
+tmp/work-shared:
+****************
