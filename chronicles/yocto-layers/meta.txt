@@ -8,21 +8,26 @@ meta:
 	3) Contains the Core Configurations like Target Machine Configurations, Toolchain settings etc.
 	4) Implements the Build infrastructure logic common for a lot of other Layers.
 4. The essential Recipes included are:
-	1) recipes-bsp => Anything with links to a specific HW or HW configuration information.
+	1) recipes-bsp => Anything with links to a specific HW or HW configuration information such as 'GRUB' or 'u-boot'.
 	2) recipes-connectivity => The libraries and Applications related to the communication with other Devices.
 	3) recipes-core => Everything that is essentially needed to Build a basic working Linux Image including the commonly used dependencies.
 	4) recipes-devtools => The tools primarily used by the Build system. However, they can also be used on Targets.
 	5) recipes-extended => The Applications which are not essential, provide rich features that can extend the system/tool functionalities beyond the minimal.
-	5) recipes-gnome => Everything related to the GTK+ Application framework.
-	6) recipes-graphics => The graphics related system libraries.
-	7) recipes-kernel => The Kernel and generic Applications or libraries with strong Kernel dependencies.
-	8) recipes-multimedia => The Multimedia processing SW and the support utilties.
-	9) recipes-rt => The Packages and the Image Recipes for using and testing the Real-Time Linux support, particularly via the 'PREEMPT_RT' Kernel.
-	10) recipes-sato => The Sato reference UI/UX Recipes along with it's associated Applications and Configurations.
-	11) recipes-support => The Recipes used by other Packages or system components. They are neither the core OS elements nor included in the Images directly.
+	6) recipes-gnome => Everything related to the GTK+ Application framework.
+	7) recipes-graphics => The graphics related system libraries.
+	8) recipes-kernel => The Kernel and generic Applications or libraries with strong Kernel dependencies.
+	9) recipes-multimedia => The Multimedia processing SW and the support utilties.
+	10) recipes-rt => The Packages and the Image Recipes for using and testing the Real-Time Linux support, particularly via the 'PREEMPT_RT' Kernel.
+	11) recipes-sato => The Sato reference UI/UX Recipes along with it's associated Applications and Configurations.
+	12) recipes-support => The Recipes used by other Packages or system components. They are neither the core OS elements nor included in the Images directly.
 5. It contains the Classes used globally as well as by the Recipes in the directories:
 	1) classes-global
 	2) classes-recipe
 	3) classes
 6. It contains several Distro, Machine and other required Configurations in the 'conf' directory.
 7. It contains several Python helper modules used in the Recipes or Classes and a default Layer template in the 'lib' directory.
+8. It contains several text files and common License files that are used by the Build system in the 'files' directory.
+9. It contains several site files i.e. the pre-defined results of 'configure' checks that can be used to speed up the Build in the 'site' directory.
+	1) This helps to avoid running the expensive tests like checking for specific functions, headers or system Builds that can slow down the Build.
+	2) This contains a list of cached results for various Architectures that is passed to the 'autoconf'.
+	3) This avoids the inconsistencies or incorrect auto-detection on Cross-Compiled Targets as certain 'autoconf' tests cannot be run on a live system (Cross-Compilation).
