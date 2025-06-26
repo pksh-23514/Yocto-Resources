@@ -1,0 +1,45 @@
+BeagleBone Black Yocto Image Build:
+===================================
+1. The BeagleBone Black is one of the reference Boards supported by the Yocto Project.
+	=> MACHINE ?= "beaglebone-yocto"
+
+2. Run the Build Environment setup script on the Host Machine.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ source oe-init-build-env build_BBB
+
+3. Open the 'local.conf' file to update the 'MACHINE' variable for the BeagleBone Black Image Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB$ vi conf/local.conf
+=> MACHINE ?= "beaglebone-yocto"
+=> #MACHINE ?= "qemux86-64"
+
+4. Execute the 'bitbake' command to Build an Image with the new Configuration.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB$ bitbake core-image-minimal
+Loading cache: 100% |                                                                                                                                            | ETA:  --:--:--
+Loaded 0 entries from dependency cache.
+Parsing recipes: 100% |##########################################################################################################################################| Time: 0:00:17
+Parsing of 883 .bb files complete (0 cached, 883 parsed). 1644 targets, 45 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-20.04"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "beaglebone-yocto"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.12"
+TUNE_FEATURES        = "arm vfp cortexa8 neon callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       = "my-kirkstone:e19a76951b61ef7403dd64af844a3cfe16fda118"
+
+Initialising tasks: 100% |#######################################################################################################################################| Time: 0:00:01
+Sstate summary: Wanted 951 Local 9 Mirrors 0 Missed 942 Current 495 (0% match, 34% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary:
+
+5. After the Build is successful, the Target Image binaries are present under the 'build' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB$ cd tmp/deploy/images/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ ls
+
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ cd
