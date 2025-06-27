@@ -45,7 +45,7 @@ core-image-minimal-qemuarm-<buildhash>.rootfs.manifest		modules--5.15.184+git0+9
 core-image-minimal-qemuarm-<buildhash>.rootfs.tar.bz2		modules-qemuarm.tgz
 core-image-minimal-qemuarm-<buildhash>.testdata.json		zImage
 core-image-minimal-qemuarm.ext4					zImage--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-qemuarm-<buildhash>.bin
-core-image-minimal-qemuarm.manifest				zImage.-qemuarm.bin
+core-image-minimal-qemuarm.manifest				zImage-qemuarm.bin
 core-image-minimal-qemuarm.qemuboot.conf
 
 4. To execute the 'core-image-minimal' of 'qemuarm' Architecture on QEMU, the above options can be provided.
