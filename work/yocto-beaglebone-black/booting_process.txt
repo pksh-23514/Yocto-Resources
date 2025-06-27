@@ -28,7 +28,7 @@ Booting Process of the BeagleBone Black:
 
 Boot Process Terminologies:
 ***************************
-
+1. The below table describes the acceptable terminologies used generally in the Boot sequence:
 --------------------------------------------------------
 | Boot   |                |                |  Actual   |
 | Stage  | Terminology #1 | Terminology #2 |  Program  |
