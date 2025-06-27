@@ -68,7 +68,7 @@ Preparing SD card for Booting:
 ==============================
 1. Connect the SD card to the Host using a card reader.
 2. Unmount the partitions (if any) by executing the following command on the correct Device (/dev/sdx).
-	=> umount /dev/sdx
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ umount /dev/sdx
 3. The SD card has to formatted for the previous partitions using the "fdisk" utility on Linux.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo fdisk /dev/sdx
 
@@ -139,3 +139,19 @@ Partition number (1,2, default 2): 1
 Hex code (type L to list all codes): c
 
 Changed type of partition 'Linux' to 'W95 FAT32 (LBA)'.
+
+7. There is no change for the signature of the second partition as it is already having 'Linux' signature. So, the write command can be issued to actually partition the SD card.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo fdisk /dev/sdx
+
+Welcome to fdisk (util-linux 2.34)
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+8. For Mounting these 2 partitions, the label for each partition must be set using the following commands.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo mkfs.vfat -n "BOOT" /dev/sdx1
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo mkfs.ext4 -L "ROOTFS" /dev/sdx2
