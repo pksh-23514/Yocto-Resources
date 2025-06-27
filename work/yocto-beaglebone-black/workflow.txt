@@ -63,3 +63,20 @@ core-image-minimal-beaglebone-yocto-<buildhash>.testdata.json					u-boot-initial
 core-image-minimal-beaglebone-yocto.jffs2							zImage
 core-image-minimal-beaglebone-yocto.manifest							zImage--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-beaglebone-yocto-<buildhash>.bin
 core-image-minimal-beaglebone-yocto.qemuboot.conf						zImage-beaglebone-yocto.bin
+
+Preparing SD card for Booting:
+==============================
+1. Connect the SD card to the Host using a Card reader.
+2. Unmount the partitions (if any) by executing the following command on the correct Device (/dev/sdx).
+	=> umount /dev/sdx
+3. The SD card has to formatted for the previous partitions using the "fdisk" utility on Linux.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo fdisk /dev/sdx
+
+Welcome to fdisk (util-linux 2.34)
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Command (m for help): d
+Partition number (1, default 1): 1
+
+Partition 1 has been deleted.
