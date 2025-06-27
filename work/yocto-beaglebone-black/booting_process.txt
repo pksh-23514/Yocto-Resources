@@ -21,6 +21,30 @@ Booting Process of the BeagleBone Black:
 	2) It sets up the Kernel Boot arguments and u-Boot Environment through the u-Boot Environment variables stored.
 	3) It provides a powerful CLI and a good number of commands to interact with the HW and even perform basic Debugging on the Peripherals.
 	4) The file size of the 'u-boot.img' is typically greater than 1 MB. Hence, the execution cannot be completed by the internal SRAM.
-8. The final stage is the Linux Kernel Boot process. After the Kernel is loaded by the u-Boot Bootloader, the complete control is passed to the Kernel.
+8. The final stage is the Linux Kernel Boot process. After the Kernel is loaded by the u-Boot Bootloader, the complete execution control is passed to the Kernel.
 	1) The Kernel initializes the HW Drivers and mounts the RootFS from the storage.
 	2) It starts the firt process like 'init' or 'systemd'.
+9. The RootFS contains all the essential binaries, system libraries, Configuration files and User files.
+
+Boot Process Terminologies:
+***************************
+
+--------------------------------------------------------
+| Boot   |                |                |  Actual   |
+| Stage  | Terminology #1 | Terminology #2 |  Program  |
+| Number |                |                |  Name     |
+--------------------------------------------------------
+| First  |  Primary       |  -             | ROM code  |
+|        |  Program       |                |           |
+|        |  Loader        |                |           |
+|        |                |                |           |
+| Second |  Secondary     |  1st Stage     | MLO       |
+|        |  Program       |  Bootloader    |           |
+|        |  Loader (SPL)  |                |           |
+|        |                |                |           |
+| Third  |  -             |  2nd Stage     | u-Boot    |
+|        |                |  Bootloader    |           |
+|        |                |                |           |
+| Fourth |  -             |  -             | Kernel    |
+|        |                |                |           |
+--------------------------------------------------------
