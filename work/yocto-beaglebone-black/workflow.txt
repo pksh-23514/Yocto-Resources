@@ -36,10 +36,30 @@ meta-yocto-bsp       = "my-kirkstone:e19a76951b61ef7403dd64af844a3cfe16fda118"
 Initialising tasks: 100% |#######################################################################################################################################| Time: 0:00:01
 Sstate summary: Wanted 951 Local 9 Mirrors 0 Missed 942 Current 495 (0% match, 34% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary:
+NOTE: Tasks Summary: Attempted 3760 tasks of which 1644 didn't need to be rerun and all succeeded.
 
 5. After the Build is successful, the Target Image binaries are present under the 'build' directory.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB$ cd tmp/deploy/images/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ ls
-
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ cd
+beaglebone-yocto
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ cd beaglebone-yocto
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/beaglebone-yocto$ ls
+am335x-bone--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-beaglebone-yocto-<buildhash>.dtb		core-image-minimal-beaglebone-yocto.tar.bz2
+am335x-bone-beaglebone-yocto.dtb								core-image-minimal-beaglebone-yocto.testdata.json
+am335x-boneblack--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-beaglebone-yocto-<buildhash>.dtb	core-image-minimal-beaglebone-yocto.wic
+am335x-boneblack-beaglebone-yocto.dtb								core-image-minimal-beaglebone-yocto.wic.bmap
+am335x-boneblack.dtb										core-image-minimal.env
+am335x-bone.dtb											MLO
+am335x-bonegreen--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-beaglebone-yocto-<buildhash>.dtb	MLO-beaglebone-yocto
+am335x-bonegreen-beaglebone-yocto.dtb								MLO-beaglebone-yocto-2022.01-r0
+am335x-bonegreen.dtb										modules--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-beaglebone-yocto-<buildhash>.tgz
+core-image-minimal-beaglebone-yocto-<buildhash>.qemuboot.conf					modules-beaglebone-yocto.tgz
+core-image-minimal-beaglebone-yocto-<buildhash>.rootfs.jffs2					u-boot-beaglebone-yocto-2022.01-r0.img
+core-image-minimal-beaglebone-yocto-<buildhash>.rootfs.manifest					u-boot-beaglebone-yocto.img
+core-image-minimal-beaglebone-yocto-<buildhash>.rootfs.tar.bz2					u-boot.img
+core-image-minimal-beaglebone-yocto-<buildhash>.rootfs.wic					u-boot-initial-env
+core-image-minimal-beaglebone-yocto-<buildhash>.rootfs.wic.bmap					u-boot-initial-env-beaglebone-yocto
+core-image-minimal-beaglebone-yocto-<buildhash>.testdata.json					u-boot-initial-env-beaglebone-yocto-2022.01-r0
+core-image-minimal-beaglebone-yocto.jffs2							zImage
+core-image-minimal-beaglebone-yocto.manifest							zImage--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-beaglebone-yocto-<buildhash>.bin
+core-image-minimal-beaglebone-yocto.qemuboot.conf						zImage-beaglebone-yocto.bin
