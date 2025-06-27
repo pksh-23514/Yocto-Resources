@@ -67,8 +67,10 @@ core-image-minimal-beaglebone-yocto.qemuboot.conf						zImage-beaglebone-yocto.b
 Preparing SD card for Booting:
 ==============================
 1. Connect the SD card to the Host using a card reader.
+
 2. Unmount the partitions (if any) by executing the following command on the correct Device (/dev/sdx).
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ umount /dev/sdx
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo umount /dev/sdx
+
 3. The SD card has to formatted for the previous partitions using the "fdisk" utility on Linux.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo fdisk /dev/sdx
 
@@ -155,3 +157,25 @@ Syncing disks.
 8. For Mounting these 2 partitions, the label for each partition must be set using the following commands.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo mkfs.vfat -n "BOOT" /dev/sdx1
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo mkfs.ext4 -L "ROOTFS" /dev/sdx2
+
+Copying the Boot Images and Root FS to SD card:
+===============================================
+1. Remove and re-insert the SD card. The 2 partitions created are Mounted separately as 'BOOT' and 'ROOTFS' at the path '/media/$USER'.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ ls /media/$USER
+BOOT  ROOTFS
+
+2. If the Mounting doesn't happen automatically, it has to be done manually by executing the following command on the correct Device (/dev/sdx).
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo mount /dev/sdx1 /media/$USER/BOOT
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo mount /dev/sdx2 /media/$USER/ROOTFS
+
+3. After the Mounting is successful, the Boot files, the Kernel Image and the Device Tree has to be copied to the SD card 'BOOT' partition.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo cp MLO /media/$USER/BOOT
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo cp u-boot.img /media/$USER/BOOT
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo cp zImage /media/$USER/BOOT
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo cp am335x-boneblack.dtb /media/$USER/BOOT
+
+4. The RootFS has to be uncompressed and then placed at the SD card 'ROOTFS' partition.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo tar -xf core-image-minimal-beaglebone-yocto.tar.bz2 /media/$USER/ROOTFS
+
+5. It is a good practice to execute the 'sync' command after copying the files on the SD card.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sync
