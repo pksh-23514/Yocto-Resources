@@ -1,0 +1,27 @@
+Preparing SD card for Booting:
+==============================
+1. Connect the SD card to the Host using a card reader.
+2. The other way to create the partitions on the SD card is using the GParted application.
+3. Launch the GParted application and authenticate using the PC password.
+4. Select the correct Device (/dev/sdx) by checking the Device details from "/dev".
+5. The SD card initially could already have a particular file system formatting such as FAT32.
+6. Right click on the Device and 'Delete' all the partitions so that the complete storage is available for allocation.
+7. After deleting the existing partitions, the Device partiton displays as "unallocated".
+8. Right click again and select 'New' to create a new partition on the SD card. Select the following options and click 'Add':
+	1) Create as: Primary Partition
+	2) File system: fat32
+	3) New size (MiB): 32
+	4) Label: BOOT
+9. Right click again and select 'New' to create a new partition on the SD card. Select the following options and click 'Add':
+	1) Create as: Primary Partition
+	2) File system: ext4
+	3) New size (MiB): Whatever the remaining size is left
+	4) Label: ROOTFS
+10. Click on the 'Apply All Operations' (green arrow) option and select 'Apply' on the dialogue box.
+11. The operation will take some time to delete and add the partitions.
+12. There are some flags to be managed for the BOOT partition to make it bootable. Right click on the partition and select the following options from 'Manage Flags':
+	1) boot
+	2) lba
+13. After this selection, the partition will have these flags displayed along with the other details.
+14. Close the GParted application.
+15. Now, 2 partitions are visible to be mounted. If these are not visible, remove and re-insert the SD card.
