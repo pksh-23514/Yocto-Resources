@@ -179,3 +179,9 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BB
 
 5. It is a good practice to execute the 'sync' command after copying the files on the SD card.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sync
+
+6. The SD card partitions can now be Unmounted before removing the SD card.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo umount /dev/sdx1
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo umount /dev/sdx2
+
+7. The SD card is ready to be inserted on the BeagleBone Black.
