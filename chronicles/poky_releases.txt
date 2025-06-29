@@ -1,0 +1,5 @@
+Poky Releases:
+==============
+1. Poky being the reference Distro of the Yocto Project is released along with each of the Yocto Project Releases.
+2. The Releases are known by their Major.Minor.Patch number.
+3. They are also named Releases i.e. each Poky Release has a codename.

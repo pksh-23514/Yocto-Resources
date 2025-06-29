@@ -1,0 +1,8 @@
+The Yocto Project Releases:
+===========================
+1. The Yocto Project Releases are known by their Major.Minor.Patch number.
+	=> Yocto 4.0.27
+2. The Major Release number implies the compatibility changes with the previous Releases.
+3. The Minor Release number implies the significant changes up to but not including the compatibility changes.
+4. The Minor revision number or the Patch number are for minor issues such as simple bug fixes, security updates etc.
+5. The Yocto Project and the Poky Releases are released at the same time.
