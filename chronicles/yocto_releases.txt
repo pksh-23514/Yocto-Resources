@@ -13,5 +13,10 @@ Release Frequency:
 2. There are 2 possible lifecycles a Release may follow:
 	1) Initial Release ---> Stable ---> Community ---> EOL
 	2) Initial Release ---> LTS ---> Community ---> EOL
-3. The Long Term Support Releases happen every 2 years. They are maintained for 4 years after the initial Release.
-4. The Minor Releases do not have a fixed schedule. They happen as and when required, typically when there are enough bug fixes or enhancements to the Major Release accumulated.
+3. The Long Term Support Releases happen every 2 years and are announced in advance. They are maintained for 4 years after the initial Release.
+4. The Stable Releases are maintained for 7 months.
+5. The Community Support for a branch happens after the last Stable Release identified by the Stable or LTS maintainers.
+	1) A call for the Community Support maintainer is sent to the mailing list followed by a 6 week waiting period.
+	2) The branches only have Community Support status if there is an active Community member willing to step into the maintainer role for that series.
+6. If there is no new Community Support maintainer available even after the waiting period, that branch status becomes EOL (End of Life).
+7. The Minor Releases do not have a fixed schedule. They happen as and when required, typically when there are enough bug fixes or enhancements to the Major Release accumulated.
