@@ -185,3 +185,31 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BB
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo umount /dev/sdx2
 
 7. The SD card is ready to be inserted on the BeagleBone Black.
+
+SD card Booting:
+================
+1. The USB (/dev/ttyUSBx) where the Serial connection is established can be verified and opened.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo minicom -D /dev/ttyUSBx
+
+2. Make sure to follow the process to Boot from the SD card instead of the eMMC (which is checked before) while powering up the Board.
+
+3. The Boot logs are displayed on the Minicom window. After the Boot is successful, it reaches the Login stage.
+...
+## Flattened Device Tree blob at 88000000
+   Booting using the fdt blob at 0x88000000
+   Loading Kernel Image ... OK
+   Loading Device Tree to 8fff5000, end 8ffff207 ... OK
+Starting kernel ...
+...
+Poky (Yocto Project Reference Distro) 4.0.16 beaglebone-yocto /dev/ttyx
+
+beaglebone-yocto login: root
+root@beaglebone-yocto:~# echo "Hello Yocto!"
+Hello Yocto
+root@beaglebone-yocto:~#
+
+4. To stop at the u-Boot, the Enter key must be pressed before the timeout happens during the Boot process.
+...
+Hit any key to stop autoboot: 0
+=> help
+...
