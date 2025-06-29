@@ -6,3 +6,12 @@ The Yocto Project Releases:
 3. The Minor Release number implies the significant changes up to but not including the compatibility changes.
 4. The Minor revision number or the Patch number are for minor issues such as simple bug fixes, security updates etc.
 5. The Yocto Project and the Poky Releases are released at the same time.
+
+Release Frequency:
+******************
+1. The Major Releases happen every 6 months typically in April and October months of the year.
+2. There are 2 possible lifecycles a Release may follow:
+	1) Initial Release ---> Stable ---> Community ---> EOL
+	2) Initial Release ---> LTS ---> Community ---> EOL
+3. The Long Term Support Releases happen every 2 years. They are maintained for 4 years after the initial Release.
+4. The Minor Releases do not have a fixed schedule. They happen as and when required, typically when there are enough bug fixes or enhancements to the Major Release accumulated.
