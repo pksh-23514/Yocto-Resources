@@ -3,3 +3,14 @@ Poky Releases:
 1. Poky being the reference Distro of the Yocto Project is released along with each of the Yocto Project Releases.
 2. The Releases are known by their Major.Minor.Patch number.
 3. They are also named Releases i.e. each Poky Release has a codename.
+
+Use of Poky Codenames:
+**********************
+1. Although there is a convention for the Poky Release number, they are provided codenames like 'Dunfell', 'Kirkstone', 'Scarthgap' etc.
+2. They are assigned to each Release for versioning clarity and Release tracking i.e. each Release have their own branch in the Git repository.
+3. The codename corresponding to a specific Release includes:
+	1) A specific version of the BitBake
+	2) A snapshot of the OpenEmbedded-Core Meta-data
+	3) A specific branches of the associated Layers ('meta-yocto-bsp', 'meta-poky' etc).
+4. It also ensures that the branches of the Meta-data with the same codename are compatible with each other and can be used for Building the Linux Images.
+5. Therefore, there cannot be any mixing of the branches of different codenames as they won't be compatible to each other.
