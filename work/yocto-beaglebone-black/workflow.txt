@@ -185,13 +185,3 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BB
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo umount /dev/sdx2
 
 7. The SD card is ready to be inserted on the BeagleBone Black.
-
-BeagleBone Black Serial Setup:
-==============================
-1. The Board can be powered up by connecting a USB cable Type-B from the Host to the USB mini-port on the Target.
-2. The UART connection has to be established between the Host and the Target by connecting a USB to TTL Serial cable (Prolific PL2303).
-3. This Serial connection is a cross-connection with the Tx pin of the cable going to the Rx pin on the Target and vice-versa.
-4. The Serial pins (J1) on the BeagleBone Black are connected to the cable in the following manner:
-	1) J1 (pin-1) => GND
-	2) J1 (pin-4) => RX
-	3) J1 (pin-5) => TX

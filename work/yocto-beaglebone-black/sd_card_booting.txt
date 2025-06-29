@@ -1,0 +1,8 @@
+BeagleBone Black Serial Setup:
+==============================
+1. The UART connection has to be established between the Host and the Target by connecting a USB to TTL Serial cable (Prolific PL2303).
+2. This Serial connection is a cross-connection with the Tx pin of the cable going to the Rx pin on the Target and vice-versa.
+3. The Serial pins (J1) on the BeagleBone Black are connected to the cable in the following manner:
+	1) J1 (pin-1) => GND
+	2) J1 (pin-4) => RX
+	3) J1 (pin-5) => TX
