@@ -1,0 +1,16 @@
+meta-ti:
+========
+1. The 'meta-ti' is a Board Support Package (BSP) Layer provided by the Texas Instruments (TI) for their HW.
+2. It contains the Meta-data, Configurations and Recipes specifically to support the TI SoC Devices within the Yocto Project Build system.
+3. It provides the support for the following TI HW:
+	1) Beagle Boards
+	2) AM335x, AM437x, AM57xx, AM62xx, AM65xx etc.
+	3) J7200, J721e, J721s2, J742s2, J784s4 etc.
+4. It supplies the Device Tree and Board specific Configurations for the TI HW.
+5. It provides the Recipes for:
+	1) The Kernel versions supported on the TI SoC.
+	2) The u-Boot Bootloader for the TI SoC.
+6. It provides the Firmware needed by the TI SoC and the Drivers support for various Peripherals on the Board.
+7. It provides the Multimedia and GPU support depending on the TI HW.
+8. It enables the Image Build that can run on the TI Evaluation Modules (EVMs) as well as the custom HW based on these TI SoCs.
+9. It provides the TI-specific tools and utilities.
