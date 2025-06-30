@@ -14,3 +14,8 @@ meta-ti:
 7. It provides the Multimedia and GPU support depending on the TI HW.
 8. It enables the Image Build that can run on the TI Evaluation Modules (EVMs) as well as the custom HW based on these TI SoCs.
 9. It provides the TI-specific tools and utilities.
+10. It contains the following Layers:
+	1) meta-beagle
+	2) meta-ti-bsp
+	3) meta-ti-extras
+11. It depends on the 'meta' and 'meta-arm' Layers.
