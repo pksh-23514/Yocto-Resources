@@ -1,6 +1,6 @@
 meta-ti:
 ========
-1. The 'meta-ti' is a Board Support Package (BSP) Layer provided by the Texas Instruments (TI) for their HW.
+1. The 'meta-ti' is an official Board Support Package (BSP) Layer provided by the Texas Instruments (TI) for their HW.
 2. It contains the Meta-data, Configurations and Recipes specifically to support the TI SoC Devices within the Yocto Project Build system.
 3. It provides the support for the following TI HW:
 	1) Beagle Boards
@@ -14,7 +14,7 @@ meta-ti:
 7. It provides the Multimedia and GPU support depending on the TI HW.
 8. It enables the Image Build that can run on the TI Evaluation Modules (EVMs) as well as the custom HW based on these TI SoCs.
 9. It provides the TI-specific tools and utilities.
-10. It contains the following Layers:
+10. It contains the following Layers as sub-directories:
 	1) meta-beagle
 	2) meta-ti-bsp
 	3) meta-ti-extras
