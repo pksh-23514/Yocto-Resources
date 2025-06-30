@@ -20,3 +20,14 @@ Release Frequency:
 	2) The branches only have Community Support status if there is an active Community member willing to step into the maintainer role for that series.
 6. If there is no new Community Support maintainer available even after the waiting period, that branch status becomes EOL (End of Life).
 7. The Minor Releases do not have a fixed schedule. They happen as and when required, typically when there are enough bug fixes or enhancements to the Major Release accumulated.
+
+Layers and Branches:
+********************
+1. The different types of Layers are developed simultaneously by several different Communities for the different flavors of the Yocto Project.
+2. Therefore, these Layers are split into separate branches in the Git.
+3. Since the Layers of the same branch name are compatible to each other, there cannot be any mixing of the branches among the different Layers in a Build system.
+4. If there are any Layers with different branch names, it leads to conflicts in the Build process.
+5. Each Layer has the 'LAYERSERIES_COMPAT' variable defined in the 'conf/layer.conf' file to declare the branch name compatible with it.
+6. The choice of Layer must be evaluated based on the compromise between:
+	1) The latest Stable branch
+	2) The latest branch supported by all the Layers
