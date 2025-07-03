@@ -1,0 +1,37 @@
+meta-raspberrypi:
+=================
+1. The 'meta-raspberrypi' is an official Board Support Package (BSP) Layer provided by the Raspberry Pi Foundation.
+2. It contains the Meta-data, Configurations and Recipes specifically to support the Raspberry Pi Devices within the Yocto Project Build system.
+3. It provides the support for the following Raspberry Pi HW:
+	1) Raspberry Pi-Zero
+	2) Raspberry Pi-Zero Wireless
+	3) Raspberry Pi-2
+	4) Raspberry Pi-3
+	5) Raspberry Pi-4
+	6) Raspberry Pi-CM3 (Compute Module 3)
+	7) Raspberry Pi-CM4 (Compute Module 4)
+4. It supplies the Device Tree and Board specific Configurations for the Raspberry Pi HW.
+5. It provides the Recipes for:
+	1) The Kernel versions supported on the Raspberry Pi HW.
+	2) The u-Boot Bootloader for the Raspberry Pi HW.
+6. It provides the Firmware needed by the Raspberry Pi SoC and the Drivers support for various Peripherals on the Board.
+7. It provides the Multimedia and GPU support depending on the Raspberry Pi HW.
+8. It enables the Image Build that can run on the Raspberry Pi Boards.
+9. It contains the following Recipes and Configurations as sub-directories:
+	1) classes
+	2) conf
+	3) docs
+	4) dynamic-layers
+	5) files
+	6) img
+	7) lib
+	8) recipes-bsp
+	9) recipes-connectivity
+	10) recipes-core
+	11) recipes-devtools
+	12) recipes-graphics
+	13) recipes-kernel
+	14) recipes-multimedia
+	15) recipes-sato
+	16) wic
+10. It depends on the 'meta' and 'meta-oe' Layers.
