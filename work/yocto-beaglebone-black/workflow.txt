@@ -1,5 +1,6 @@
 BeagleBone Black Yocto Image Build:
 ===================================
+
 1. The BeagleBone Black is one of the reference Boards supported by the Yocto Project.
 	=> MACHINE ?= "beaglebone-yocto"
 
