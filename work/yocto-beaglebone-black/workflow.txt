@@ -67,6 +67,7 @@ core-image-minimal-beaglebone-yocto.qemuboot.conf						zImage-beaglebone-yocto.b
 
 Preparing SD card for Booting:
 ==============================
+
 1. Connect the SD card to the Host using a card reader.
 
 2. Unmount the partitions (if any) by executing the following command on the correct Device (/dev/sdx).
@@ -161,6 +162,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BB
 
 Copying the Boot Images and Root FS to SD card:
 ===============================================
+
 1. Remove and re-insert the SD card. The 2 partitions created are Mounted separately as 'BOOT' and 'ROOTFS' at the path '/media/$USER'.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ ls /media/$USER
 BOOT  ROOTFS
@@ -189,6 +191,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BB
 
 SD card Booting:
 ================
+
 1. The USB (/dev/ttyUSBx) where the Serial connection is established can be verified and opened.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build_BBB/tmp/deploy/images$ sudo minicom -D /dev/ttyUSBx
 
