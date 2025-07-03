@@ -13,3 +13,16 @@ meta-ti-bsp:
 7. It provides various security features and GPU support to the TI HW.
 8. It enables the Image Build that can run on the TI Evaluation Modules (EVMs) as well as the custom HW based on these TI SoCs.
 9. It provides the TI-specific tools and utilities.
+10. It contains the following Recipes and Configurations as sub-directories:
+	1) classes
+	2) conf
+	3) licenses
+	4) recipes-bsp
+	5) recipes-core
+	6) recipes-devtools
+	7) recipes-graphics
+	8) recipes-kernel
+	9) recipes-security
+	10) recipes-ti
+	11) wic
+11. It depends on the 'meta' and 'meta-arm' Layers.
