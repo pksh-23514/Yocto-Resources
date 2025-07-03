@@ -1,0 +1,53 @@
+Raspberry Pi-3 Features:
+========================
+
+Processor (SoC):
+****************
+1. Broadcom BCM2837
+2. 4x 1.2GHz ARM Cortex-A53
+3. 64-bit CPU
+
+GPU:
+****
+1. Broadcom VideoCore IV
+2. Supports OpenGL ES 2.0
+3. Capable of 1080p at 30fps H.264 Video De-coding
+4. Limited performance for 1080p at 60fps or 4K playback
+
+Memory:
+*******
+1. 1GB LPDDR2 SDRAM
+2. microSD slot for storage expansion
+
+Connectivity:
+*************
+1. Ethernet => 10/100 Mbps
+2. Wi-Fi => 802.11n (2.4GHz only)
+3. Bluetooth => 4.1 Classic and Bluetooth Low Energy (BLE)
+4. 4x USB 2.0 Ports
+
+Audio / Video Interface:
+************************
+1. HDMI => Full size upto 1920x1080 at 60fps
+2. 1x 3.5mm Audio / composite Video Jack
+3. 1x Camera Serial Interface (CSI)
+4. 1× Display Serial Interface (DSI)
+
+GPIO Headers:
+*************
+1. 1x 40-pin headers
+	1) 26 usable GPIO pins
+	2) Power => 5V, 3.3V, GND
+	3) 3.3V Logic for Digital HIGH
+	3) Special functions via Multiplexing like UART, I2C, SPI, PWM, PCM (Audio)
+
+Power:
+******
+1. Input via microUSB power Port (5V / 2.5A recommended)
+
+Operating Systems Supported:
+****************************
+1. Raspberry Pi OS or formerly Raspbian (Official Image)
+2. Ubuntu Server
+3. DietPi
+4. Other Linux Distributions (Yocto Built Distribution)
