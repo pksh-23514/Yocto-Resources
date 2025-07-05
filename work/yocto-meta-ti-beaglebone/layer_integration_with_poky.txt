@@ -1,0 +1,13 @@
+meta-ti Integration with Poky:
+==============================
+
+1. In the cloned repository directory, the 'meta-ti' and the other dependency Layers can be cloned.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
+bitbake  documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-poky      meta-skeleton   oe-init-build-env   README.md          README.poky.md  scripts
+contrib  LICENSE        LICENSE.MIT           Makefile        meta      meta-selftest  meta-yocto-bsp  README.hardware.md  README.OE-Core.md  README.qemu.md
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ git clone git://git.yoctoproject.org/meta-ti
+Cloning into 'meta-ti'...
+remote: Enumerating objects: 54368, done.
+remote: Total 54368 (delta 0), reused 0 (delta 0), pack-reused 54368
+Receiving objects: 100% (54368/54368), 11.59 MiB | 29.82 MiB/s, done.
+Resolving deltas: 100% (38167/38167), done.

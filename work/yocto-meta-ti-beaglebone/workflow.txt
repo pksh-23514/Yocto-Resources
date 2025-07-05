@@ -1,0 +1,10 @@
+Official TI BSP Layer Integration with Poky:
+============================================
+
+1. The 'meta-ti' Layer provides more advance features than the 'meta-yocto-bsp' Layer for the BeagleBone Boards.
+2. It also provides the support for a broad range of Peripherals for the TI HW and TI-specific tools.
+3. The Link to clone the 'meta-ti' Layer is: git://git.yoctoproject.org/meta-ti
+4. It can be cloned into the same path as the Poky repository or anywhere convinient.
+5. It is dependent on the 'meta' and the 'meta-arm' Layers. The dependencies shall be fulfilled before using it in the Build system.
+6. The Link to clone the 'meta-arm' Layer is: git://git.yoctoproject.org/meta-arm
+7. Once all the dependencies are fulfilled for the Layers, the Build process can be started.
