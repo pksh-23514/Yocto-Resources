@@ -4,7 +4,7 @@ BeagleBone Black Yocto Image Build:
 1. The BeagleBone Black is one of the reference Boards supported by the Yocto Project.
 	=> MACHINE ?= "beaglebone-yocto"
 
-2. Run the Build Environment setup script on the Host Machine.
+2. Run the Build Environment setup script on the Host Machine. The important point is to ensure that the branch name i.e. Poky codename must be 'my-kirkstone' for the Layers.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ source oe-init-build-env build_BBB
 
 3. Open the 'local.conf' file to update the 'MACHINE' variable for the BeagleBone Black Image Build.
