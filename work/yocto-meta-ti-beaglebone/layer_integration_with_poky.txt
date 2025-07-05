@@ -1,7 +1,7 @@
 meta-ti Integration with Poky:
 ==============================
 
-1. In the cloned repository directory, the 'meta-ti' and the other dependency Layers can be cloned.
+1. In the cloned Poky repository directory, the 'meta-ti' and the other dependency Layers can be cloned.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
 bitbake  documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-poky      meta-skeleton   oe-init-build-env   README.md          README.poky.md  scripts
 contrib  LICENSE        LICENSE.MIT           Makefile        meta      meta-selftest  meta-yocto-bsp  README.hardware.md  README.OE-Core.md  README.qemu.md
@@ -11,3 +11,39 @@ remote: Enumerating objects: 54368, done.
 remote: Total 54368 (delta 0), reused 0 (delta 0), pack-reused 54368
 Receiving objects: 100% (54368/54368), 11.59 MiB | 29.82 MiB/s, done.
 Resolving deltas: 100% (38167/38167), done.
+
+2. The 'meta-ti' repository cloned, the 'kirkstone' branch should be checked out for compatibility with the Poky codename repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ cd meta-ti
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti$ git branch 
+* master
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti$ git checkout kirkstone
+Branch 'kirkstone' set up to track remote branch 'kirkstone' from 'origin'.
+Switched to a new branch 'kirkstone'
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti$ git branch
+* kirkstone
+  master
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti$ ls
+COPYING.MIT  meta-ti-bsp  meta-ti-extras  README
+
+3. Run the Build Environment setup script on the Host Machine.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ source oe-init-build-env
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-full-cmdline
+    core-image-sato
+    core-image-weston
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86'
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
