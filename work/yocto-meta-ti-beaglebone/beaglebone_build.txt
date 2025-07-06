@@ -37,13 +37,14 @@ NOTE: Tasks Summary: Attempted 3776 tasks of which 3776 didn't need to be rerun 
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 2 seconds
 
+3. After the Build is successful, the Target Image binaries are present under the 'deploy-ti' sub-directory of the 'build' directory.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ls
 bitbake-cookerdaemon.log  buildhistory  cache  conf  deploy-ti  downloads  pn-buildlist  sstate-cache  task-depends.dot  tmp
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd deploy-ti/images/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images$ ls
 beaglebone
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd beaglebone/
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/beaglebone$ ls -1
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images$ cd beaglebone/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ ls -1
 am335x-bone--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
 am335x-bone-beaglebone.dtb
 am335x-boneblack--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
