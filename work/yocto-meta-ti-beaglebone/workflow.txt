@@ -14,3 +14,19 @@ BeagleBone Black Yocto Image Build:
 1. After the 'meta-ti' Layer is included in the Build Environment, the Build process can be initiated.
 2. The 'bitbake' command execution starts the Image Build.
 3. Once the Build is completed, the Image binaries are stored in the Build directory (under 'deploy_ti' sub-directory).
+4. The Image binaries include the MLO, u-Boot, Kernel Image, Device Tree (.dtb and .dtbo) files and the RootFS.
+
+Device Tree Blob Overlay:
+*************************
+1. The '.dtbo' file represents a Device Tree Blob Overlay which is a compiled version of a Device Tree Overlay ('.dts' file written as an Overlay).
+2. It modifies the base Device Tree Blob i.e. '.dtb' file at the Run-time.
+3. It allows the dynamic Configuration of HW that is especially useful for enabling the additional Peripherals (like GPIO, I2C, eMMC etc).
+4. It provides the flexibility in HW customization as they can be loaded dynamically without recompiling the entire Device Tree.
+5. The common '.dtbo' files for the BeagleBone Black Image are:
+	1) BB-ADC-00A0.dtbo
+	2) BB-BONE-eMMC1-01-00A0.dtbo
+	3) BB-SPIDEV0-00A0.dtbo
+	4) BB-SPIDEV1-00A0.dtbo
+	5) BB-UART1-00A0.dtbo
+	6) BB-UART2-00A0.dtbo
+6. As a part of the Yocto Build, they are placed along with the Image binaries at the directory path 'deploy_ti/images/beaglebone/'.
