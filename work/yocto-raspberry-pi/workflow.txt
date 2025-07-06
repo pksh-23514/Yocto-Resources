@@ -1,0 +1,10 @@
+Official Raspberry Pi BSP Layer Integration with Poky:
+======================================================
+1. The 'meta-raspberrypi' is an official Board Support Package (BSP) Layer for the Raspberry Pi Boards.
+2. It provides the support for a broad range of Peripherals for the Raspberry Pi HW.
+3. The link to clone the 'meta-raspberrypi' is: git://git.yoctoproject.org/meta-raspberrypi
+4. It can be cloned into the same path as the Poky repository or anywhere convinient.
+5. It is dependent on the 'meta' and the 'meta-oe' Layers. The dependencies shall be fulfilled before using it in the Build system.
+6. The link to clone the 'meta-oe' Layer is: git://git.openembedded.org/meta-openembedded
+7. Once all the dependencies are fulfilled for the Layers, the Build process can be started.
+8. The most important point is to maintain the same branch names (i.e. Poky codenames) in all the Layers used for the Yocto Build to maintain compatibility.
