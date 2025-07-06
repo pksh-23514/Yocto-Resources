@@ -1,0 +1,122 @@
+BeagleBone Black Yocto Image Build:
+===================================
+
+1. The BeagleBone Black Board is one of the Boards supported by the 'meta-ti' Layer. In the 'local.conf' file, update the 'MACHINE' variable for the BeagleBone Black Image Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> MACHINE ?= "beaglebone"
+=> #MACHINE ?= "qemux86-64"
+
+2. Execute the 'bitbake' command to Build an Image with the new Configuration.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake core-image-minimal
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1774 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "beaglebone"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm armv7a vfp thumb neon callconvention-hard"
+TARGET_FPU           = "hard"
+meta                 
+meta-poky            
+meta-yocto-bsp       
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm             
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:02
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 1470 (0% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 3776 tasks of which 3776 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ls
+bitbake-cookerdaemon.log  buildhistory  cache  conf  deploy-ti  downloads  pn-buildlist  sstate-cache  task-depends.dot  tmp
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd deploy-ti/images/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images$ ls
+beaglebone
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd beaglebone/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/beaglebone$ ls -1
+am335x-bone--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-bone-beaglebone.dtb
+am335x-boneblack--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-boneblack-beaglebone.dtb
+am335x-boneblack.dtb
+am335x-boneblack-pps--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-boneblack-pps-beaglebone.dtb
+am335x-boneblack-pps.dtb
+am335x-boneblack-uboot--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-boneblack-uboot-beaglebone.dtb
+am335x-boneblack-uboot.dtb
+am335x-boneblack-uboot-univ--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-boneblack-uboot-univ-beaglebone.dtb
+am335x-boneblack-uboot-univ.dtb
+am335x-boneblack-wireless--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-boneblack-wireless-beaglebone.dtb
+am335x-boneblack-wireless.dtb
+am335x-boneblue--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-boneblue-beaglebone.dtb
+am335x-boneblue.dtb
+am335x-bone.dtb
+am335x-bonegreen--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-bonegreen-beaglebone.dtb
+am335x-bonegreen.dtb
+am335x-bonegreen-gateway--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-bonegreen-gateway-beaglebone.dtb
+am335x-bonegreen-gateway.dtb
+am335x-bonegreen-wireless--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-bonegreen-wireless-beaglebone.dtb
+am335x-bonegreen-wireless.dtb
+am335x-bonegreen-wireless-uboot-univ--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-bonegreen-wireless-uboot-univ-beaglebone.dtb
+am335x-bonegreen-wireless-uboot-univ.dtb
+am335x-pocketbeagle--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-pocketbeagle-beaglebone.dtb
+am335x-pocketbeagle.dtb
+am335x-sancloud-bbe--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-sancloud-bbe-beaglebone.dtb
+am335x-sancloud-bbe.dtb
+am335x-sancloud-bbe-extended-wifi--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-sancloud-bbe-extended-wifi-beaglebone.dtb
+am335x-sancloud-bbe-extended-wifi.dtb
+am335x-sancloud-bbe-lite--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.dtb
+am335x-sancloud-bbe-lite-beaglebone.dtb
+am335x-sancloud-bbe-lite.dtb
+core-image-minimal-beaglebone-20250630182836.rootfs.manifest
+core-image-minimal-beaglebone-20250630182836.rootfs.tar.xz
+core-image-minimal-beaglebone-20250630182836.rootfs.wic.bmap
+core-image-minimal-beaglebone-20250630182836.rootfs.wic.xz
+core-image-minimal-beaglebone-20250630182836.testdata.json
+core-image-minimal-beaglebone.manifest
+core-image-minimal-beaglebone.tar.xz
+core-image-minimal-beaglebone.testdata.json
+core-image-minimal-beaglebone.wic.bmap
+core-image-minimal-beaglebone.wic.xz
+core-image-minimal.env
+extlinux.conf
+extlinux.conf-beaglebone
+extlinux.conf-beaglebone-r0
+MLO
+MLO-beaglebone
+MLO-beaglebone-2023.04+gitAUTOINC+2bedcd265c-r0
+modules--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.tgz
+modules-beaglebone.tgz
+u-boot-beaglebone-2023.04+gitAUTOINC+2bedcd265c-r0.img
+u-boot-beaglebone.img
+u-boot.img
+u-boot-spl.bin
+u-boot-spl.bin-beaglebone
+u-boot-spl.bin-beaglebone-2023.04+gitAUTOINC+2bedcd265c-r0
+u-boot-ti-staging-initial-env
+u-boot-ti-staging-initial-env-beaglebone
+u-boot-ti-staging-initial-env-beaglebone-2023.04+gitAUTOINC+2bedcd265c-r0
+zImage
+zImage--6.1.80+git0+4ca9ea3076-r0-beaglebone-20250630182836.bin
+zImage-beaglebone.bin

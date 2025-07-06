@@ -110,3 +110,5 @@ meta-layer            /home/uic97426/Datadrive/Poky/poky/meta-layer  5
 meta-ti-bsp           /home/uic97426/Datadrive/Poky/poky/meta-ti/meta-ti-bsp  6
 meta-arm              /home/uic97426/Datadrive/Poky/poky/meta-arm/meta-arm  5
 meta-arm-toolchain    /home/uic97426/Datadrive/Poky/poky/meta-arm/meta-arm-toolchain  5
+
+7. The Layers are now successfully integrated with the Poky repository.
