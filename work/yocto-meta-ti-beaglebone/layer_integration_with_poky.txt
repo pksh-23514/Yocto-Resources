@@ -14,7 +14,7 @@ Resolving deltas: 100% (38167/38167), done.
 
 2. The 'meta-ti' repository cloned, the 'kirkstone' branch should be checked out for compatibility with the Poky codename repository.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ cd meta-ti
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti$ git branch 
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti$ git branch
 * master
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti$ git checkout kirkstone
 Branch 'kirkstone' set up to track remote branch 'kirkstone' from 'origin'.
@@ -47,3 +47,50 @@ Other commonly useful commands are:
  - 'bitbake-layers' handles common layer tasks
  - 'oe-pkgdata-util' handles common target package tasks
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
+
+3. The directory path to the 'meta-ti' Layer should be added in the 'layers.conf' file to include the Layer in the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
+=> BBLAYERS = "/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti/"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers show-layers
+NOTE: Starting bitbake server...
+ERROR: Unable to parse /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/bitbake/lib/bb/parse/__init__.py
+Traceback (most recent call last):
+  File "/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/bitbake/lib/bb/parse/__init__.py", line 136, in resolve_file(fn=.../meta-ti/conf/layer.conf'...;
+         if not os.path.isfile(fn):
+    >        raise IOError(errno.ENOENT, "file %s not found" % fn)
+
+FileNotFoundError: [Errno 2] file /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti/conf/layer.conf not found
+
+4. The reason being the 'meta-ti' Layer doesn't actually have the 'layer.conf' file. It contains the sub-directories that provide the 'layer.conf' file.
+
+5. The directory path to the 'meta-ti-bsp' Layer should be added in the 'layers.conf' file to include the Layer in the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
+=> BBLAYERS = "/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti/meta-ti-bsp"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers show-layers
+NOTE: Starting bitbake server...
+ERROR: Layer 'meta-ti-bsp' depends on layer 'meta-arm', but this layer is not enabled in your configuration
+
+6. The 'meta-ti-bsp' Layer has dependency on the 'meta-arm' Layer. This dependent Layer should be cloned and checked out before the Layers can be included in the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ..
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ git clone git://git.yoctoproject.org/meta-arm
+Cloning into 'meta-arm'...
+remote: Enumerating objects: 27353, done.
+remote: Counting objects: 100% (219/219), done.
+remote: Compressing objects: 100% (185/185), done.
+remote: Total 27353 (delta 68), reused 79 (delta 26), pack-reused 27134
+Receiving objects: 100% (27353/27353), 6.93 MiB | 34.61 MiB/s, done.
+Resolving deltas: 100% (17761/17761), done.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
+bitbake  contrib        LICENSE               LICENSE.MIT     Makefile  meta      meta-poky      meta-skeleton  meta-yocto-bsp     README.hardware.md  README.md    README.qemu.md
+build    documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-arm  meta-selftest  meta-ti        oe-init-build-env  README.poky.md      README.OE-Core.md  scripts
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ cd meta-arm/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ git branch
+* master
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-arm$ git checkout kirkstone
+Branch 'kirkstone' set up to track remote branch 'kirkstone' from 'origin'.
+Switched to a new branch 'kirkstone'
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-arm$ git branch
+* kirkstone
+  master
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-arm$ ls
+ci  COPYING.MIT  documentation  kas  meta-arm  meta-arm-autonomy  meta-arm-bsp  meta-arm-toolchain  meta-atp  meta-gem5  README.md  scripts
