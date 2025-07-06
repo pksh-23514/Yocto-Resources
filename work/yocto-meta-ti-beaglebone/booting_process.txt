@@ -1,0 +1,50 @@
+Booting Process of the BeagleBone Black:
+========================================
+1. The AM335x used in the BeagleBone Black has a very limited on-Chip RAM i.e. 128 kB of internal SRAM.
+2. This internal SRAM is used during the initial Boot process. However, it is too small to load and run the full u-Boot Bootloader.
+3. Therefore, there are multiple Bootloader stages involved for the BeagleBone Black.
+4. When the BeagleBone Black Board is powered ON, the system power is stabilized as signalled by the PMIC and then the Board comes out of Reset.
+5. The first stage is the execution of the ROM code stored in the ROM. It is responsible for:
+	1) It initializes the basic HW like Clocks and PLL setup, Watchdog setup etc.
+	2) It fetches for a valid Secondary Program Loader (SPL) from various sources in a pre-determined order:
+		=> If the Boot switch (S2) is not pressed: MMC1 (eMMC) ---> MMC0 (SD card) ---> UART0 ---> USB0
+		=> If the Boot switch (S2) is pressed: SPI0 ---> MMC0 (SD card) ---> USB0 ---> UART0
+	3) This execution is completely done by the internal SRAM.
+	4) It is hardcoded into the Board by TI and cannot be changed by the User.
+6. The second stage is the execution of the SPL. In case of BeagleBone Black, the SPL file is named as 'MLO' (MMC Card Loader).
+	1) If a valid Bootloader is found in the first stage, it is loaded on the internal SRAM.
+	2) Since, a fully featured u-Boot is too big for the internal SRAM, this is a tiny Bootloader based on the u-Boot's SPL framework.
+	3) It performs the initialization of the DRAM (DDR) and loads the full u-Boot Bootloader from the storage onto the DRAM.
+	4) The file size of the 'MLO' is typically less than 128 kB. Hence, the execution is completely done by the internal SRAM.
+7. The third stage is the execution of the u-Boot Bootloader (also called the full Bootloader). In case of BeagleBone Black, the u-Boot file is named as 'u-boot.img'.
+	1) The primary goal of the u-Boot Bootloader is to load the Linux Kernel and the Device Tree Blob on the DRAM.
+	2) It sets up the Kernel Boot arguments and u-Boot Environment through the u-Boot Environment variables stored.
+	3) It provides a powerful CLI and a good number of commands to interact with the HW and even perform basic Debugging on the Peripherals.
+	4) The file size of the 'u-boot.img' is typically greater than 1 MB. Hence, the execution cannot be completed by the internal SRAM.
+8. The final stage is the Linux Kernel Boot process. After the Kernel is loaded by the u-Boot Bootloader, the complete execution control is passed to the Kernel.
+	1) The Kernel initializes the HW Drivers and mounts the RootFS from the storage.
+	2) It starts the firt process like 'init' or 'systemd'.
+9. The RootFS contains all the essential binaries, system libraries, Configuration files and User files.
+
+Boot Process Terminologies:
+***************************
+1. The below table describes the acceptable terminologies used generally in the Boot sequence:
+--------------------------------------------------------
+| Boot   |                |                |  Actual   |
+| Stage  | Terminology #1 | Terminology #2 |  Program  |
+| Number |                |                |  Name     |
+--------------------------------------------------------
+| First  |  Primary       |  -             | ROM code  |
+|        |  Program       |                |           |
+|        |  Loader        |                |           |
+|        |                |                |           |
+| Second |  Secondary     |  1st Stage     | MLO       |
+|        |  Program       |  Bootloader    |           |
+|        |  Loader (SPL)  |                |           |
+|        |                |                |           |
+| Third  |  -             |  2nd Stage     | u-Boot    |
+|        |                |  Bootloader    |           |
+|        |                |                |           |
+| Fourth |  -             |  -             | Kernel    |
+|        |                |                |           |
+--------------------------------------------------------
