@@ -30,3 +30,11 @@ Device Tree Blob Overlay:
 	5) BB-UART1-00A0.dtbo
 	6) BB-UART2-00A0.dtbo
 6. As a part of the Yocto Build, they are placed along with the Image binaries at the directory path 'deploy_ti/images/beaglebone/'.
+
+.wic Image for BeagleBone Black:
+================================
+1. The '.wic' Image can be used to create complex Disk Images with multiple partitions for the Boot Images and the RootFS.
+2. It can be written on the SD card directly. Since, the partitions are already present, there is no additional requirement to create the partitions on the SD card.
+3. The '.wic.xz' file is generated and placed along with the Image binaries at the directory path 'deploy_ti/images/beaglebone/'.
+4. This '.wic.xz' file should be uncompressed before writing it on the SD card.
+5. The 'wic' command utility can be used for performing various operations on such uncompressed '.wic' files.

@@ -1,0 +1,26 @@
+Flashing the Boot Images and Root FS to SD card:
+================================================
+
+1. The '.wic.xz' file is generated in the Build process.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ ls -l core-image-minimal-beaglebone.wic.xz
+lrwxrwxrwx 2 prabhat_kiran prabhat_kiran 58 Jul  4 12:10 core-image-minimal-beaglebone.wic.xz -> core-image-minimal-beaglebone-20250630182836.rootfs.wic.xz
+
+2. Uncompress the 'core-image-minimal-beaglebone-20250630182836.rootfs.wic.xz' file through the 'Archive Manager' tool in GUI to get the '.wic' Image file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ ls *.wic
+core-image-minimal-beaglebone-20250630182836.rootfs.wic
+
+3. The partitions in the '.wic' Image can be listed using the 'wic' command utility in the Build Environment.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ wic ls core-image-minimal-beaglebone-20250630182836.rootfs.wic
+Num     Start        End         Size      Fstype
+ 1       1048576    135266303   134217728  fat16
+ 2     135266304    175468543    10202240  ext4
+
+4. The individual partitions can be listed (including the sub-directories) using the below command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ wic ls core-image-minimal-beaglebone-20250630182836.rootfs.wic:1/
+=> The Boot Images are listed in the 1st partition.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ wic ls core-image-minimal-beaglebone-20250630182836.rootfs.wic:2/
+=> The RootFS is listed in the 2nd partition.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ wic ls core-image-minimal-beaglebone-20250630182836.rootfs.wic:2/boot/
+=> The '/boot' directory files are listed from the RootFS partition.
+
+5. The '.wic' Image can be directly flashed on the SD card.
