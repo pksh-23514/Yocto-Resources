@@ -35,3 +35,4 @@ meta-raspberrypi:
 	15) recipes-sato
 	16) wic
 10. It depends on the 'meta' and 'meta-oe' Layers.
+11. It recommends the 'lts-u-boot-mixin' Layer to provide the current u-Boot for 'Scarthgap' by extending or backporting the appropriate Recipes from the OpenEmbedded-Core.
