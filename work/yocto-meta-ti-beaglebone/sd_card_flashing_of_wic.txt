@@ -24,3 +24,16 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/de
 => The '/boot' directory files are listed from the RootFS partition.
 
 5. The '.wic' Image can be directly flashed on the SD card.
+
+6. The 'dd' command can be used to write the '.wic' Image file on the SD card.
+=> sudo dd if=core-image-minimal-beaglebone-20250630182836.rootfs.wic of=/dev/sdx status=progress bs=4096
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ sudo dd if=core-image-minimal-beaglebone-20250630182836.rootfs.wic ...
+...
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ sync
+
+7. The SD card can be verified for the 2 partitions.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy-ti/images/beaglebone$ lsblk
+...
+sdx           8:0    0  29.8G  0 disk
+├─sdx1        8:1    0   128M  0 part
+├─sdx2        8:2    0    38M  0 part
