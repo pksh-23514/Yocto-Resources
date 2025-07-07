@@ -48,7 +48,7 @@ Other commonly useful commands are:
  - 'oe-pkgdata-util' handles common target package tasks
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
 
-4. The directory path to the 'meta-ti' Layer should be added in the 'layers.conf' file to include the Layer in the Build. However, this causes an error.
+4. The directory path to the 'meta-ti' Layer should be added in the 'bblayers.conf' file to include the Layer in the Build. However, this causes an error.
 	1) The reason being the 'meta-ti' Layer doesn't actually have the 'layer.conf' file to be parsed by the BitBake.
 	2) It contains the sub-directories that provide the 'layer.conf' file.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
@@ -63,7 +63,7 @@ Traceback (most recent call last):
 
 FileNotFoundError: [Errno 2] file /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti/conf/layer.conf not found
 
-5. The directory path to the 'meta-ti-bsp' Layer should be added in the 'layers.conf' file to include the Layer in the Build.
+5. The directory path to the 'meta-ti-bsp' Layer should be added in the 'bblayers.conf' file to include the Layer in the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
 => BBLAYERS = "/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti/meta-ti-bsp/"
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers show-layers
@@ -95,7 +95,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-arm
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-arm$ ls
 ci  COPYING.MIT  documentation  kas  meta-arm  meta-arm-autonomy  meta-arm-bsp  meta-arm-toolchain  meta-atp  meta-gem5  README.md  scripts
 
-7. The directory path to the 'meta-arm' Layer along with the dependencies should be added in the 'layers.conf' file to include the Layer in the Build.
+7. The directory path to the 'meta-arm' Layer along with the dependencies should be added in the 'bblayers.conf' file to include the Layer in the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
 => BBLAYERS = "/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-arm/meta-arm/"
 => BBLAYERS = "/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-arm/meta-arm-toolchain/"
