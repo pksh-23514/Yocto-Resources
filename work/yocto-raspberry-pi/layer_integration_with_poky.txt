@@ -1,0 +1,52 @@
+meta-raspberrypi Integration with Poky:
+=======================================
+
+1. Poky has no support for the Broadcom BCM2837 and therefore the 'meta-raspberrypi' Layer is to be downloaded separately.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
+bitbake  documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-poky      meta-skeleton   oe-init-build-env   README.md          README.poky.md  scripts
+contrib  LICENSE        LICENSE.MIT           Makefile        meta      meta-selftest  meta-yocto-bsp  README.hardware.md  README.OE-Core.md  README.qemu.md
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ git clone git://git.yoctoproject.org/meta-raspberrypi
+Cloning into 'meta-raspberrypi'...
+remote: Enumerating objects: 11606, done.
+remote: Counting objects: 100% (107/107), done.
+remote: Compressing objects: 100% (104/104), done.
+remote: Total 11606 (delta 51), reused 0 (delta 0), pack-reused 11499
+Receiving objects: 100% (11606/11606), 3.53 MiB | 30.16 MiB/s, done.
+Resolving deltas: 100% (6748/6748), done.
+
+2. The 'meta-raspberrypi' repository cloned, the 'kirkstone' branch should be checked out for compatibility with the Poky codename repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ cd meta-raspberrypi/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi$ git branch
+* master
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi$ git checkout kirkstone
+Branch 'kirkstone' set up to track remote branch 'kirkstone' from 'origin'.
+Switched to a new branch 'kirkstone'
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi$ git branch
+* kirkstone
+  master
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi$ ls
+classes  COPYING.MIT  dynamic-layers  img               lib        recipes-bsp           recipes-core      recipes-graphics  recipes-multimedia  wic
+conf     docs         files           kas-poky-rpi.yml  README.md  recipes-connectivity  recipes-devtools  recipes-kernel    recipes-sato
+
+3. Run the Build Environment setup script on the Host Machine.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ source oe-init-build-env
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-full-cmdline
+    core-image-sato
+    core-image-weston
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86'
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
