@@ -58,7 +58,44 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ b
 NOTE: Starting bitbake server...
 layer                 path                                      priority
 ==========================================================================
-meta                  /home/uic97426/Datadrive/yocto_rpi/poky/meta  5
-meta-poky             /home/uic97426/Datadrive/yocto_rpi/poky/meta-poky  5
-meta-yocto-bsp        /home/uic97426/Datadrive/yocto_rpi/poky/meta-yocto-bsp  5
-meta-raspberrypi      /home/uic97426/Datadrive/yocto_rpi/poky/meta-raspberrypi  9
+meta                  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta  5
+meta-poky             /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-poky  5
+meta-yocto-bsp        /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-yocto-bsp  5
+meta-raspberrypi      /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi  9
+
+5. The 'meta-raspberrypi' Layer has dependency on the 'meta-oe' Layer. This dependent Layer should be cloned and checked out before the Layers can be used in the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ git clone git://git.openembedded.org/meta-openembedded
+Cloning into 'meta-openembedded'...
+remote: Enumerating objects: 277724, done.
+remote: Total 277724 (delta 0), reused 0 (delta 0), pack-reused 277724
+Receiving objects: 100% (277724/277724), 68.29 MiB | 15.98 MiB/s, done.
+Resolving deltas: 100% (171146/171146), done.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ cd meta-openembedded/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-openembedded$ git branch
+* master
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-openembedded$ git checkout kirkstone
+Branch 'kirkstone' set up to track remote branch 'kirkstone' from 'origin'.
+Switched to a new branch 'kirkstone'
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-openembedded$ git branch
+* kirkstone
+  master
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-openembedded$ ls
+contrib  COPYING.MIT  meta-filesystems  meta-gnome  meta-initramfs  meta-multimedia  meta-networking  meta-oe  meta-perl  meta-python  meta-webserver  meta-xfce  README
+
+6. The directory path to the 'meta-openembedded' Layer containing the 'meta-oe' Layer should be added to the 'bblayers.conf' file to include the Layer in the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
+=> BBLAYERS = "/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-openembedded/meta-oe"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers show-layers
+NOTE: Starting bitbake server...
+layer                 path                                      priority
+==========================================================================
+meta                  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta  5
+meta-poky             /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-poky  5
+meta-yocto-bsp        /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-yocto-bsp  5
+meta-raspberrypi      /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi  9
+meta-oe               /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-openembedded/meta-oe  5
+
+7. The Layers are now successfully integrated with the Poky repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ ls
+bitbake  contrib        LICENSE               LICENSE.MIT     Makefile  meta               meta-poky         meta-selftest  meta-yocto-bsp     README.hardware.md  README.md
+build    documentation  LICENSE.GPL-2.0-only  MAINTAINERS.md  MEMORIAM  meta-openembedded  meta-raspberrypi  meta-skeleton  oe-init-build-env  README.OE-Core.md   scripts
