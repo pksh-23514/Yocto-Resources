@@ -8,3 +8,10 @@ Official Raspberry Pi BSP Layer Integration with Poky:
 6. The link to clone the 'meta-oe' Layer is: git://git.openembedded.org/meta-openembedded
 7. Once all the dependencies are fulfilled for the Layers, the Build process can be started.
 8. The most important point is to maintain the same branch names (i.e. Poky codenames) in all the Layers used for the Yocto Build to maintain compatibility.
+
+Selecting the Target Raspberry Pi Board:
+========================================
+1. The 'meta-raspberrypi' Layer provides a specific 'rpi-test-image' Image for the Raspberry Pi Board.
+2. It is present at the path 'meta-raspberrypi/recipes-core/images'.
+3. It is based on the 'core-image-base' Image at the path 'meta/recipes-core/images/' bundled with the 'packagegroup-rpi-test'.
+4. This is a Console-only Linux Image coupled with some Packages for the Raspberry Pi Board.
