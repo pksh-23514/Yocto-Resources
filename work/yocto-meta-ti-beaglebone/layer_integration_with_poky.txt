@@ -48,7 +48,7 @@ Other commonly useful commands are:
  - 'oe-pkgdata-util' handles common target package tasks
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
 
-3. The directory path to the 'meta-ti' Layer should be added in the 'layers.conf' file to include the Layer in the Build.
+4. The directory path to the 'meta-ti' Layer should be added in the 'layers.conf' file to include the Layer in the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
 => BBLAYERS = "/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti/"
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers show-layers
@@ -61,7 +61,8 @@ Traceback (most recent call last):
 
 FileNotFoundError: [Errno 2] file /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-ti/conf/layer.conf not found
 
-4. The reason being the 'meta-ti' Layer doesn't actually have the 'layer.conf' file. It contains the sub-directories that provide the 'layer.conf' file.
+	1) The reason being the 'meta-ti' Layer doesn't actually have the 'layer.conf' file to be parsed by the BitBake.
+	2) It contains the sub-directories that provide the 'layer.conf' file.
 
 5. The directory path to the 'meta-ti-bsp' Layer should be added in the 'layers.conf' file to include the Layer in the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
