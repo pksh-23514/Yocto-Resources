@@ -1,0 +1,20 @@
+Booting Process for Raspberry Pi:
+=================================
+1. When the Raspberry Pi Board is powered ON, the GPU is the first to execute the instructions and the ARM CPU is in Reset.
+2. The first stage is the execution of the ROM code.
+3. The SoC has a small Embedded on-Chip ROM containing the ROM code responisble for:
+	1) It initializes the basic HW.
+	2) It fetches for a SD card.
+	3) It loads the 'bootcode.bin' file from the BOOT partition of the SD card into the L2 Cache.
+4. The second stage is the execution of the 'bootcode.bin' by the GPU. It is responisble for:
+	1) It initializes the more complex HW like the SDRAM.
+	2) It loads the 'start.elf' file from the BOOT partition of the SD card into the SDRAM.
+5. The third stage is the execution of the 'start.elf' file which is a Closed-Source GPU Firmware binary. It is responisble for:
+	1) It starts the process by reading the 'config.txt' that contains the Configuration parameters for the GPU and Kernel.
+	2) It also reads the 'cmdline.txt' file (if exists) to pass the parameters to the Kernel command line.
+	3) It enables the ARM CPU and loads the Kernel Image into the RAM. The Kernel Image is executed by the CPU.
+	4) It loads the '.dtb' file for the HW on the RAM as well.
+6. The final stage is the Linux Kernel Boot process. The 'start.elf' passes the control to the Kernel.
+	1) The Kernel initializes the HW Drivers and mounts the RootFS from the storage.
+	2) It starts the first process like 'init' or 'systemd'.
+7. The RootFS contains all the essential binaries, system libraries, Configuration files and User files.
