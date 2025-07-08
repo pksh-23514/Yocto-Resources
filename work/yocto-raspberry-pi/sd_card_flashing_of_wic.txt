@@ -1,0 +1,37 @@
+Flashing the Boot Images and Root FS to SD card:
+================================================
+
+1. The 'wic.bz2' file is generated in the Build process.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy/images/raspberrypi4-64$ ls -l rpi-test-image-raspberrypi4-64.wic.bz2
+lrwxrwxrwx 2 prabhat_kiran prabhat_kiran 60 Jul  7 03:10 rpi-test-image-raspberrypi4-64.wic.bz2 -> rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic.bz2
+
+2. Uncompress the 'rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic.bz2' file through the 'Archive Manager' tool in GUI to get the '.wic' Image file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy/images/raspberrypi4-64$ ls *.wic
+rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic
+
+3. The partitions in the '.wic' Image can be listed using the 'wic' command utility in the Build Environment.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy/images/raspberrypi4-64$ wic ls rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic
+Num     Start        End         Size      Fstype
+ 1       4194304     76773375    72579072  fat16
+ 2      79691776    341415935   261724160  ext4
+
+4. The individual partitions can be listed (including the sub-directories) using the below command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy/images/raspberrypi4-64$ wic ls rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic:1/
+=> The Boot Images are listed in the 1st partition.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy/images/raspberrypi4-64$ wic ls rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic:2/
+=> The RootFS is listed in the 2nd partition.
+
+5. The '.wic' Image can be directly flashed on the SD card.
+
+6. The 'dd' command can be used to write the '.wic' Image file on the SD card.
+=> sudo dd if=rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic of=/dev/sdx status=progress bs=4096
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy/images/raspberrypi4-64$ sudo dd if=rpi-test-image-raspberrypi4-64-...
+...
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy/images/raspberrypi4-64$ sync
+
+7. The SD card can be verified for the 2 partitions.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/deploy/images/raspberrypi4-64$ lsblk
+...
+sdx           8:0    0  29.8G  0 disk
+├─sdx1        8:1    0    40M  0 part
+├─sdx2        8:2    0    84M  0 part
