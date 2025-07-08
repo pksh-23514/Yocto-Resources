@@ -23,7 +23,7 @@ Booting Process of the BeagleBone Black:
 	4) The file size of the 'u-boot.img' is typically greater than 1 MB. Hence, the execution cannot be completed by the internal SRAM.
 8. The final stage is the Linux Kernel Boot process. After the Kernel is loaded by the u-Boot Bootloader, the complete execution control is passed to the Kernel.
 	1) The Kernel initializes the HW Drivers and mounts the RootFS from the storage.
-	2) It starts the firt process like 'init' or 'systemd'.
+	2) It starts the first process like 'init' or 'systemd'.
 9. The RootFS contains all the essential binaries, system libraries, Configuration files and User files.
 
 Boot Process Terminologies:

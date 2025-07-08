@@ -47,7 +47,7 @@ Graphical Representation of the Poky:
 
 Difference between Poky and the Yocto Project:
 ==============================================
-1. The Yocto Project and Poky are closely related, but they serve different purposes within the embedded Linux development ecosystem.
+1. The Yocto Project and Poky are closely related, but they serve different purposes within the Embedded Linux development ecosystem.
 2. By the definition of both:
 	1) The Yocto Project is a collaborative Open-Source project that provides the tools, Meta-data and the processes for building custom Linux Distributions.
 	2) Poky is a reference Distribution provided by the Yocto Project. It serves as an example to Build a Linux Distribution.

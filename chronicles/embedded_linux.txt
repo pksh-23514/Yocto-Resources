@@ -18,7 +18,7 @@ Bootloader:
 ***********
 1. It initializes the HW, loads the Kernel into the Memory and passes the control to the Kernel.
 2. It provides a basic Shell, Environment variables and has the ability to load the Kernel and the Device Tree from the Flash Memory or Network.
-3. The most popular Bootloader is the U-Boot.
+3. The most popular Bootloader is the u-Boot.
 
 Kernel:
 *******
