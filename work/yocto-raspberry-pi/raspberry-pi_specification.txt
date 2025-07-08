@@ -51,3 +51,22 @@ Operating Systems Supported:
 2. Ubuntu Server
 3. DietPi
 4. Other Linux Distributions (Yocto Built Distribution)
+
+Raspberry Pi-4 Features:
+========================
+
+Processor (SoC):
+****************
+1. Broadcom BCM2711
+2. 4x 1.5GHz ARM Cortex-A72
+3. 64-bit CPU
+
+GPU:
+****
+1. Broadcom VideoCore VI
+2. Supports OpenGL ES 3.0
+
+Memory:
+*******
+1. 4GB LPDDR4 SDRAM
+2. microSD slot for storage expansion
