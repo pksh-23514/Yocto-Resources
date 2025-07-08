@@ -80,3 +80,25 @@ Adding Support for SSH Connection:
 6. The Board can be powered up and the Booting process shall begin.
 7. Connect the Ethernet cable between the Host and the Raspberry Pi-4 Board.
 8. The simplest way to verify the SSH connection is to execute the 'ping' test between the Host and the Raspberry Pi-4 Board.
+
+Adding Extra Free Space to Root FS:
+===================================
+1. The 'IMAGE_ROOTFS_EXTRA_SPACE' variable is used to add extra space to the RootFS of the Image. The variable specifies the value in kB.
+2. By default for the 'rpi-test-image' Image, the 'IMAGE_ROOTFS_EXTRA_SPACE' variable is set to 0.
+	=> bitbake -e rpi-test-image | grep ^IMAGE_ROOTFS_EXTRA_SPACE=
+	=> IMAGE_ROOTFS_EXTRA_SPACE="0"
+3. Therefore, there is not much free space available on the RootFS of the Image Built for usage.
+4. This can be verified by executing the below command on the Raspberry Pi-4 Board:
+	=> df -h
+	=> Filesystem      Size   Used  Available  Use%   Mounted on
+	=> /dev/root      81.2M  62.8M      14.0M   82%   /
+5. The size of the RootFS of the Image and the size of the SD card has no relation. And most of the space in the SD card is empty after flashing the '.wic' Image.
+6. To utilize a larger space on the SD card and have sufficient free space on the RootFS of the Image, the Image must be customized.
+7. The 'local.conf' file can be updated to increase the free space of the RootFS by 4GB as follows:
+	=> IMAGE_ROOTFS_EXTRA_SPACE = "4194304"
+8. The 'bitbake' command can be executed to Build the Image with the updated variable value.
+9. After the Image is Built successfully, it can be flashed on the SD card and the SD card can be inserted into the Raspberry Pi-4 Board.
+10. The Board can be powered up and the Booting process shall begin. After the Login stage, verify the space available by executing the below command:
+	=> df -h
+	=> Filesystem      Size   Used  Available  Use%   Mounted on
+	=> /dev/root       3.8G  74.0M       3.5G    2%   /
