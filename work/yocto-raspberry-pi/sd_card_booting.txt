@@ -1,0 +1,16 @@
+SD card Booting:
+================
+
+1. The USB (/dev/ttyUSBx) where the Serial connection is established can be verified and opened.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ sudo minicom -D /dev/ttyUSBx
+
+2. The Boot logs are displayed on the Minicom window. After the Boot is successful, it reaches the Login stage.
+...
+[     0.000000] Booting Linux on physical CPU 0x0
+...
+Poky (Yocto Project Reference Distro) 4.0.16 raspberrypi4-64 /dev/ttyx
+
+raspberrypi4-64 login: root
+root@raspberrypi4-64:~# echo "Hello Yocto!"
+Hello Yocto
+root@raspberrypi4-64:~#
