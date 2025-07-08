@@ -46,3 +46,61 @@ raspberrypi4-64
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ cd raspberrypi4-64/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/raspberrypi4-64$ ls -1
 ...
+
+4. The '.wic' Image can be flashed on the SD card and the SD card can be inserted on the Board.
+
+5. The USB (/dev/ttyUSBx) where the Serial connection is established can be verified and opened.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ sudo minicom -D /dev/ttyUSBx
+
+6. After the Board is powered up, the Boot logs are displayed on the Minicom window.
+...
+[     0.000000] Booting Linux on physical CPU 0x0
+...
+Starting Dropbear SSH server: Generating 2048 bit rsa key, this may take a while...
+Public key portion is:
+ssh-rsa AAAB3...
+Fingerprint: sha1!! e6:ef:a7...
+dropbear.
+Starting syslogd/klogd: done
+
+Poky (Yocto Project Reference Distro) 4.0.16 raspberrypi4-64 /dev/ttyx
+
+raspberrypi4-64 login: root
+root@raspberrypi4-64:~#
+
+7. To verify the SSH connection to the Host is working, connect the Ethernet cable between the Host and the Target. Then 'ping' the Host from the Target and vice-versa.
+root@raspberrypi4-64:~# ifconfig
+eth0      Link encap:Ethernet   HWaddr 52:54:00:12:34:02
+          inet addr:192.168.7.2   Bcast:192.168.7.255  Mask:255.255.255.0
+          ...
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1 Mask:255.0.0.0
+          ...
+
+root@raspberrypi4-64:~# ping XXX.XXX.XXX.XXX -c4
+PING XXX.XXX.XXX.XXX (XXX.XXX.XXX.XXX): 56 data bytes
+64 bytes from XXX.XXX.XXX.XXX: seq=0 ttl=64 time=11.323 ms
+64 bytes from XXX.XXX.XXX.XXX: seq=0 ttl=64 time=6.504 ms
+64 bytes from XXX.XXX.XXX.XXX: seq=0 ttl=64 time=3.295 ms
+64 bytes from XXX.XXX.XXX.XXX: seq=0 ttl=64 time=4.341 ms
+
+--- XXX.XXX.XXX.XXX ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 3.295/6.487/11.323 ms
+root@raspberrypi4-64:~#
+
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ifconfig
+eno1: flags=4163<UP,BRADCAST,RUNNING,MULTICAST> mtu 1500
+        inet addr:XXX.XXX.XXX.XXX  netmask:XXX.XXX.XXX.XXX  broadcast:XXX.XXX.XXX.XXX
+        ...
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ping 192.168.7.2 -c4
+PING 192.168.7.2 (192.168.7.2): 56(84) data bytes
+64 bytes from 192.168.7.2: seq=0 ttl=64 time=1.02 ms
+64 bytes from 192.168.7.2: seq=0 ttl=64 time=0.758 ms
+64 bytes from 192.168.7.2: seq=0 ttl=64 time=1.43 ms
+64 bytes from 192.168.7.2: seq=0 ttl=64 time=0.783 ms
+
+--- 192.168.7.2 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss, time 3029 ms
+rtt min/avg/max/mdev = 0.758/0.996/1.429/0.269 ms
