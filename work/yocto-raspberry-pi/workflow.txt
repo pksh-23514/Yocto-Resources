@@ -11,6 +11,13 @@ Official Raspberry Pi BSP Layer Integration with Poky:
 
 Selecting the Target Raspberry Pi Board:
 ========================================
+1. The 'meta-raspberrypi' Layer provides the support for a variety of the Raspberry Pi Boards.
+2. The Raspberry Pi-4 Board needs to be selected as the Target Machine for the Build.
+3. There can be 2 variants of the Board i.e. 32-bit and 64-bit.
+4. The 'raspberrypi4-64.conf' file contains the configuration for the Raspberry Pi-4 Board with 64-bit Target Machine.
+
+Selecting the Target Image for the Raspberry Pi Board:
+======================================================
 1. The 'meta-raspberrypi' Layer provides a specific 'rpi-test-image' Image for the Raspberry Pi Board.
 2. It is present at the path 'meta-raspberrypi/recipes-core/images'.
 3. It is based on the 'core-image-base' Image at the path 'meta/recipes-core/images/' bundled with the 'packagegroup-rpi-test'.
