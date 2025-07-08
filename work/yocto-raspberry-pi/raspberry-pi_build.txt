@@ -1,0 +1,103 @@
+Raspberry Pi-4 Yocto Image Build:
+=================================
+
+1. The 'meta-raspberrypi' Layer supports a variety of Raspberry Pi Boards as Target for Image Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky$ cd meta-raspberrypi/conf/machine
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi/conf/machine$ ls
+include                  raspberrypi0-2w.conf  raspberrypi0-wifi.conf  raspberrypi3-64.conf  raspberrypi4-64.conf  raspberrypi5.conf       raspberrypi-cm3.conf  raspberrypi.conf
+raspberrypi0-2w-64.conf  raspberrypi0.conf     raspberrypi2.conf       raspberrypi3.conf     raspberrypi4.conf     raspberrypi-armv8.conf  raspberrypi-cm.conf
+
+2. The 'meta-raspberrypi' Layer supports a test Image for the Raspberry Pi Boards. This can be used as the Target Image for the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi$ ls recipes-*/images/
+rpi-test-image.bb
+
+3. In the 'local.conf' file, update the 'MACHINE' variable for the Raspberry Pi-4 Image Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> MACHINE ?= "raspberrypi4-64"
+=> #MACHINE ?= "qemux86-64"
+
+4. In the 'local.conf' file, the variable to enable the UART must be added.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> ENABLE_UART = "1"
+
+5. Execute the 'bitbake' command to Build an Image with the new Configuration.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake rpi-test-image
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 2817 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-20.04"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "raspberrypi4-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.28"
+TUNE_FEATURES        = "aarch64 armv8a crc cortexa72"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "kirkstone:78c9cb3eaf071932567835742608404d5ce23cc4"
+meta-raspberrypi     = "kirkstone:9e12ad97b4c95772c6f403b9318f2bec2ab09e53"
+meta-oe              = "kirkstone:058249f9a836e3aa866436aa6e37d6d48ff768fd"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:02
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 1714 (0% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 4235 tasks of which 4235 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+6. After the Build is successful, the Target Image binaries are present under the 'build' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/deploy/images/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ ls -1
+bcm2711-rpi-400-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtb
+bcm2711-rpi-400.dtb
+bcm2711-rpi-400-raspberrypi4-64.dtb
+bcm2711-rpi-4-b-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtb
+bcm2711-rpi-4-b.dtb
+bcm2711-rpi-4-b-raspberrypi4-64.dtb
+bcm2711-rpi-cm4-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtb
+bcm2711-rpi-cm4.dtb
+bcm2711-rpi-cm4-raspberrypi4-64.dtb
+bootfiles
+i2c-gpio-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtbo
+i2c-gpio.dtbo
+i2c-gpio-raspberrypi4-64.dtbo
+i2c-rtc-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtbo
+i2c-rtc.dtbo
+i2c-rtc-raspberrypi4-64.dtbo
+Image
+Image-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.bin
+Image-raspberrypi4-64.bin
+miniuart-bt-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtbo
+miniuart-bt.dtbo
+miniuart-bt-raspberrypi4-64.dtbo
+modules-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.tgz
+modules-raspberrypi4-64.tgz
+overlay_map-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtb
+overlay_map.dtb
+overlay_map-raspberrypi4-64.dtb
+rpi-test-image.env
+rpi-test-image-raspberrypi4-64-20250706184617.rootfs.ext3
+rpi-test-image-raspberrypi4-64-20250706184617.rootfs.manifest
+rpi-test-image-raspberrypi4-64-20250706184617.rootfs.tar.bz2
+rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic.bmap
+rpi-test-image-raspberrypi4-64-20250706184617.rootfs.wic.bz2
+rpi-test-image-raspberrypi4-64-20250706184617.testdata.json
+rpi-test-image-raspberrypi4-64.ext3
+rpi-test-image-raspberrypi4-64.manifest
+rpi-test-image-raspberrypi4-64.tar.bz2
+rpi-test-image-raspberrypi4-64.testdata.json
+rpi-test-image-raspberrypi4-64.wic.bmap
+rpi-test-image-raspberrypi4-64.wic.bz2
+w1-gpio-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtbo
+w1-gpio.dtbo
+w1-gpio-pullup-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtbo
+w1-gpio-pullup.dtbo
+w1-gpio-pullup-raspberrypi4-64.dtbo
+w1-gpio-raspberrypi4-64.dtbo
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ ls bootfiles/
+bootcode.bin  config.txt    fixup4.dat    fixup4x.dat   fixup.dat     fixup_x.dat                   start4cd.elf  start4.elf   start_cd.elf  start.elf
+cmdline.txt   fixup4cd.dat  fixup4db.dat  fixup_cd.dat  fixup_db.dat  rpi-bootfiles-20220830.stamp  start4db.elf  start4x.elf  start_db.elf  start_x.elf
