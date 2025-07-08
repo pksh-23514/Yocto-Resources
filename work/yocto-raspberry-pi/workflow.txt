@@ -28,3 +28,11 @@ Raspberry Pi Yocto Image Build:
 1. After the 'meta-raspberrypi' Layer is included in the Build Environment, the Build process can be initiated.
 2. The 'bitbake' command execution starts the Image Build.
 3. Once the Build is completed, the Image binaries are stored in the Build directory (under 'tmp/deploy' sub-directory).
+
+.wic Image for Raspberry Pi:
+============================
+1. The '.wic' Image can be used to create complex Disk Images with multiple partitions for the Boot Images and the RootFS.
+2. It can be written on the SD card directly. Since, the partitions are already present, there is no additional requirement to create the partitions on the SD card.
+3. The 'wic.bz2' file is generated and placed along with the Image binaries at the directory path 'deploy/images/raspberrypi4-64'.
+4. The 'wic.bz2' file should be uncompressed before writing it on the SD card.
+5. The 'wic' command utility can be used for performing various operations on such uncompressed '.wic' files.
