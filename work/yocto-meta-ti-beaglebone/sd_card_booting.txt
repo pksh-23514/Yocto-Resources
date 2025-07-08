@@ -14,7 +14,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ s
    Loading Device Tree to 8fff5000, end 8ffff207 ... OK
 Starting kernel ...
 ...
-Poky (Yocto Project Reference Distro) 4.0.16 beaglebone-yocto /dev/ttyx
+Poky (Yocto Project Reference Distro) 4.0.16 beaglebone /dev/ttyx
 
 beaglebone login: root
 root@beaglebone:~# echo "Hello Yocto!"
