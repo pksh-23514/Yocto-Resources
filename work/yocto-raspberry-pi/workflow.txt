@@ -36,3 +36,14 @@ Raspberry Pi Yocto Image Build:
 3. The 'wic.bz2' file is generated and placed along with the Image binaries at the directory path 'deploy/images/raspberrypi4-64'.
 4. The 'wic.bz2' file should be uncompressed before writing it on the SD card.
 5. The 'wic' command utility can be used for performing various operations on such uncompressed '.wic' files.
+
+Preparing SD card for Booting:
+==============================
+1. Connect the SD card to the Host using a card reader.
+2. The other way to create the partitions on the SD card is using the GParted application.
+3. Launch the GParted application and authenticate using the PC password.
+4. Select the correct Device (/dev/sdx) by checking the Device details from "/dev".
+5. The SD card initially could already have a particular file system formatting such as FAT32.
+6. Right click on the Device and 'Delete' all the partitions so that the complete storage is available for allocation.
+7. After deleting the existing partitions, the Device partiton displays as "unallocated". The GParted application can be closed.
+8. The 'lsblk' command can be executed to verify if the SD card partitions have been deleted or not.
