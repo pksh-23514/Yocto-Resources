@@ -22,3 +22,9 @@ Selecting the Target Image for the Raspberry Pi Board:
 2. It is present at the path 'meta-raspberrypi/recipes-core/images'.
 3. It is based on the 'core-image-base' Image at the path 'meta/recipes-core/images/' bundled with the 'packagegroup-rpi-test'.
 4. This is a Console-only Linux Image coupled with some Packages for the Raspberry Pi Board.
+
+Raspberry Pi Yocto Image Build:
+===============================
+1. After the 'meta-raspberrypi' Layer is included in the Build Environment, the Build process can be initiated.
+2. The 'bitbake' command execution starts the Image Build.
+3. Once the Build is completed, the Image binaries are stored in the Build directory (under 'tmp/deploy' sub-directory).
