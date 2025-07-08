@@ -15,7 +15,7 @@ NOTE: Resolving any missing task queue dependencies
 Build Configuration:
 BB_VERSION           = "2.0.0"
 BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
+NATIVELSBSTRING      = "ubuntu-20.04"
 TARGET_SYS           = "arm-poky-linux-gnueabi"
 MACHINE              = "beaglebone"
 DISTRO               = "poky"
