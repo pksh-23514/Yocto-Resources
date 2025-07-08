@@ -51,7 +51,10 @@ NOTE: Writing buildhistory took: 2 seconds
 
 6. After the Build is successful, the Target Image binaries are present under the 'build' directory.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/deploy/images/
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ ls -1
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ ls
+raspberrypi4-64
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ cd raspberrypi4-64/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/raspberrypi4-64$ ls -1
 bcm2711-rpi-400-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-20250706184617.dtb
 bcm2711-rpi-400.dtb
 bcm2711-rpi-400-raspberrypi4-64.dtb
@@ -98,6 +101,6 @@ w1-gpio-pullup-1-5.15.92+git0+509f4b9d68_14b35093ca-r0-raspberrypi4-64-202507061
 w1-gpio-pullup.dtbo
 w1-gpio-pullup-raspberrypi4-64.dtbo
 w1-gpio-raspberrypi4-64.dtbo
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ ls bootfiles/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/raspberrypi4-64$ ls bootfiles/
 bootcode.bin  config.txt    fixup4.dat    fixup4x.dat   fixup.dat     fixup_x.dat                   start4cd.elf  start4.elf   start_cd.elf  start.elf
 cmdline.txt   fixup4cd.dat  fixup4db.dat  fixup_cd.dat  fixup_db.dat  rpi-bootfiles-20220830.stamp  start4db.elf  start4x.elf  start_db.elf  start_x.elf
