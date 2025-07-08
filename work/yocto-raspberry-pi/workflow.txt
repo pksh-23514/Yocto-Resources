@@ -52,7 +52,7 @@ Raspberry Pi Serial Setup:
 ==========================
 1. The UART connection has to be established between the Host and the Target by connecting a USB to TTL Serial cable (Prolific PL2303).
 2. This Serial connection is a cross-connection with the Tx pin of the cable going to the Rx pin on the Target and vice-versa.
-3. 3. The Serial pins (J8) on the Raspberry Pi are connected to the cable in the following manner:
+3. The Serial pins (J8) on the Raspberry Pi are connected to the cable in the following manner:
 	1) J8 (pin-6)  => GND
 	2) J8 (pin-8)  => RX
 	3) J8 (pin-10) => TX
@@ -60,7 +60,7 @@ Raspberry Pi Serial Setup:
 SD card Booting Process:
 ========================
 1. After the flashing on the SD card is successful, it can be inserted into the Raspberry Pi-4 Board.
-2. 2. After the UART connection is established successfully, the Minicom can should be configured on the Host Machine.
+2. After the UART connection is established successfully, the Minicom can should be configured on the Host Machine.
 	=> sudo minicom -s
 	=> The 'Serial port setup' is done with the below configurations and saved:
 		1) Hardware Flow Control : No
@@ -68,3 +68,11 @@ SD card Booting Process:
 3. The USB (/dev/ttyUSBx) where the Serial connection is established can be verified and opened.
 	=> sudo minicom -D /dev/ttyUSBx
 4. The Board can be powered up by connecting a 5V power adapter to the Target.
+
+Adding Support for SSH Connection:
+==================================
+1. The Dropbear is a small SSH 2 Server and Client functionality designed for the Embedded systems.
+2. It is very useful in cases where lower Memory and CPU footprint constraints are present.
+3. To include Dropbear in the Build, the Image Recipe can be updated as follows:
+	=> IMAGE_FEATURES:append = " ssh-server-dropbear"
+4. The 'bitbake' command can be executed to Build the Image with the updated Recipe.

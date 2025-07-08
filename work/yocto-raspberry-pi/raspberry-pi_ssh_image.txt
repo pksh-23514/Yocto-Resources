@@ -1,0 +1,48 @@
+Raspberry Pi-4 Yocto Image Build with SSH Connection:
+=====================================================
+
+1. In the test Image Recipe file of the Raspberry Pi Board, there is no SSH connectivity enabled by default. The Recipe file can be updated to include this feature.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi$ cd recipes-core/images/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi/recipes-core/images$ ls
+rpi-test-image.bb
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-raspberrypi/recipes-core/images$ vi rpi-test-image.bb
+=> IMAGE_FEATURES:append = " ssh-server-dropbear"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e rpi-test-image | grep ^IMAGE_FEATURES=
+IMAGE_FEATURES="debug-tweaks splash ssh-server-dropbear"
+
+2. Execute the 'bitbake' command to Build an Image with the new Configuration.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake rpi-test-image
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 2817 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-20.04"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "raspberrypi4-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.28"
+TUNE_FEATURES        = "aarch64 armv8a crc cortexa72"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "kirkstone:78c9cb3eaf071932567835742608404d5ce23cc4"
+meta-raspberrypi     = "kirkstone:9e12ad97b4c95772c6f403b9318f2bec2ab09e53"
+meta-oe              = "kirkstone:058249f9a836e3aa866436aa6e37d6d48ff768fd"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:02
+Sstate summary: Wanted 20 Local 0 Mirrors 0 Missed 20 Current 1712 (0% match, 98% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 4270 tasks of which 4224 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+3. After the Build is successful, the Target Image binaries are present under the 'build' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/deploy/images/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ ls
+raspberrypi4-64
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ cd raspberrypi4-64/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/raspberrypi4-64$ ls -1
+...
