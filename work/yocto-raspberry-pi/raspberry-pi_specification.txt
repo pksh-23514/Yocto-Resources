@@ -39,7 +39,7 @@ GPIO Headers:
 	1) 26 usable GPIO pins
 	2) Power => 5V, 3.3V, GND
 	3) 3.3V Logic for Digital HIGH
-	3) Special functions via Multiplexing like UART, I2C, SPI, PWM, PCM (Audio)
+	4) Special functions via Multiplexing like UART, I2C, SPI, PWM, PCM (Audio)
 
 Power:
 ******
@@ -65,8 +65,46 @@ GPU:
 ****
 1. Broadcom VideoCore VI
 2. Supports OpenGL ES 3.0
+3. Capable of 4K at 60fps H.265 Video De-coding
+4. Capable of 1080p at 60fps H.264 Video De-coding
+5. Capable of 1080p at 30fps H.264 Video Encoding
 
 Memory:
 *******
 1. 4GB LPDDR4 SDRAM
 2. microSD slot for storage expansion
+
+Connectivity:
+*************
+1. Ethernet => 1000 Mbps
+2. Wi-Fi => 802.11ac (dual-Band 2.4GHz and 5.0GHz)
+3. Bluetooth => 5.0
+4. 2x USB 2.0 Ports
+5. 2x USB 3.0 Ports
+
+Audio / Video Interface:
+************************
+1. HDMI => 2x microHDMI upto 4K at 60fps (supports HDMI CEC and HDR)
+2. 1x 3.5mm Audio / composite Video Jack
+3. 1x Camera Serial Interface (CSI)
+4. 1× Display Serial Interface (DSI)
+
+GPIO Headers:
+*************
+1. 1x 40-pin headers
+	1) 26 usable GPIO pins
+	2) Power => 5V, 3.3V, GND
+	3) 3.3V Logic for Digital HIGH
+	4) Special functions via Multiplexing like UART, I2C, SPI, PWM, Digital I/O
+
+Power:
+******
+1. Input via USB-C power Port (5V / 3A recommended)
+2. Power over Ethernet (PoE) supported with PoE HAT
+
+Operating Systems Supported:
+****************************
+1. Raspberry Pi OS or formerly Raspbian (Official Image)
+2. Ubuntu Server
+3. RetroPie
+4. Other Linux Distributions (Yocto Built Distribution)
