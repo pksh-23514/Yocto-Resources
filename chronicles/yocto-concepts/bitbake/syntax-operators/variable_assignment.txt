@@ -13,3 +13,13 @@ Variable Assignment:
 6. However, using the single quotes assignment style allows the use of double quotes in the value.
 	=> VARIABLE = 'There is a " in the value'
 7. The preferred style of assignment is using the double quotes.
+
+Verify the Variable Value:
+==========================
+1. The BitBake provides a way to verify the value of the variables assigned either in the Configuration files or the Recipes.
+2. The command to display the variable values after the Configuration (*.conf) files are parsed by the BitBake is:
+	=> bitbake -e | grep VARIABLE_NAME=\"
+3. The variables that are exported to the Environment are preceded by the String 'export' in the files.
+4. The command to display the variable values after the particular Recipes are parsed by the BitBake is:
+	=> bitbake -e recipe_name | grep VARIABLE_NAME=\"
+5. The above command checks if the variable actually makes it into the specific Recipe.
