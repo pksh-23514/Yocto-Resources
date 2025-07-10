@@ -9,6 +9,29 @@ Official Raspberry Pi BSP Layer Integration with Poky:
 7. Once all the dependencies are fulfilled for the Layers, the Build process can be started.
 8. The most important point is to maintain the same branch names (i.e. Poky codenames) in all the Layers used for the Yocto Build to maintain compatibility.
 
+Dynamic Layers:
+***************
+1. In the 'meta-raspberrypi' Layer, there are certain Layers that are conditionally included or added based on certain Configuration parameters during the Build process.
+2. These Layers are called as Dynamic Layers. They are used to provide:
+	1) Flexibility => It allows the 'meta-raspberrypi' Layer to support multiple Raspberry Pi models and features without duplicating the Recipes.
+	2) Optimization => It avoids the unnecessary components that are not relevant to the Target Raspberry Pi model to be included in the Build.
+	3) Maintainability => It is easier to update and manage the support for multiple Devices in the 'meta-raspberrypi' Layer.
+3. They are not included by default. They are dynamically included based on the Machine, Distro or Configuration parameters.
+4. The 'BBFILES_DYNAMIC' variable is used to register these Layers in the 'conf/layer.conf' file.
+	=> BBFILES_DYNAMIC += " \
+	       openembedded-layer:${LAYERDIR}/dynamic-layers/openembedded-layer/*/*/*.bb \
+	       openembedded-layer:${LAYERDIR}/dynamic-layers/openembedded-layer/*/*/*.bbappend \
+	   "
+5. The variable informs the BitBake to dynamically add the Recipes from the sub-directories under the Dynamic Layers if relevant to the Target HW.
+6. The directory structure for the Dynamic Layer is:
+	=> meta-raspberrypi/
+	   ├── dynamic-layers/
+	   │   ├── sub-meta-layer/
+	   │   │   └── recipes/
+		       ├── files/
+                       ├── *.bb or *.bbappend
+7. These sub-directories Layers are often mirror sub-directory Layers of the 'meta-openembedded' Layer like 'meta-python', 'meta-networking' etc.
+
 Selecting the Target Raspberry Pi Board:
 ========================================
 1. The 'meta-raspberrypi' Layer provides the support for a variety of the Raspberry Pi Boards.
