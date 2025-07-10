@@ -23,3 +23,6 @@ Verify the Variable Value:
 4. The command to display the variable values after the particular Recipes are parsed by the BitBake is:
 	=> bitbake -e recipe_name | grep VARIABLE_NAME=\"
 5. The above command checks if the variable actually makes it into the specific Recipe.
+6. The 'grep' command can be modified to search the value for the variable starting with the name as follows:
+	=> bitbake -e | grep ^VARIABLE_NAME=
+	=> bitbake -e recipe_name | grep ^VARIABLE_NAME=
