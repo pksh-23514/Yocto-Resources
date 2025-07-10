@@ -1,0 +1,15 @@
+Variable Assignment:
+====================
+1. The variables are assigned in the following manner:
+	=> VARIABLE = "value"
+2. The value assignment occurs as soon as the statement is parsed by the BitBake.
+3. This type of variable assignment is known as Hard assignment.
+4. If any leading or trailing spaces are a part of the assignment, the spaces are retained while parsing.
+	=> VARIABLE = "value "
+	=> VARIABLE = " value"
+	=> VARIABLE = ""	// Empty String
+	=> VARIABLE = " "	// Blank Space
+5. The single quotes can be used in place of the double quotes for the assignment of the variables. Both the styles work identically in the variable assignment.
+6. However, using the single quotes assignment style allows the use of double quotes in the value.
+	=> VARIABLE = 'There is a " in the value'
+7. The preferred style of assignment is using the double quotes.
