@@ -8,7 +8,7 @@ meta:
 	3) Contains the Core Configurations like Target Machine Configurations, Toolchain settings etc.
 	4) Implements the Build infrastructure logic common for a lot of other Layers.
 4. The essential Recipes included are:
-	1) recipes-bsp => Anything with links to a specific HW or HW configuration information such as 'GRUB' or 'u-boot'.
+	1) recipes-bsp => Anything with links to a specific HW or HW Configuration information such as 'GRUB' or 'u-boot'.
 	2) recipes-connectivity => The libraries and Applications related to the communication with other Devices.
 	3) recipes-core => Everything that is essentially needed to Build a basic working Linux Image including the commonly used dependencies.
 	4) recipes-devtools => The tools primarily used by the Build system. However, they can also be used on Targets.

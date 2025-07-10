@@ -11,7 +11,7 @@ BeagleBone Black SD Card Booting Process:
 =========================================
 1. After the UART connection is established successfully, the Minicom can should be configured on the Host Machine.
 	=> sudo minicom -s
-	=> The 'Serial port setup' is done with the below configurations and saved:
+	=> The 'Serial port setup' is done with the below Configurations and saved:
 		1) Hardware Flow Control : No
 		2) Software Flow Control : No
 2. The USB (/dev/ttyUSBx) where the Serial connection is established can be verified and opened.

@@ -52,7 +52,7 @@ Difference between Poky and the Yocto Project:
 	1) The Yocto Project is a collaborative Open-Source project that provides the tools, Meta-data and the processes for building custom Linux Distributions.
 	2) Poky is a reference Distribution provided by the Yocto Project. It serves as an example to Build a Linux Distribution.
 3. By the scope of both:
-	1) The Yocto Project supports a larger ecosystem of HW platform through the various tools, configurations, Layers and documentation. It is HW-agnostic.
+	1) The Yocto Project supports a larger ecosystem of HW platform through the various tools, Configurations, Layers and documentation. It is HW-agnostic.
 	2) Poky is a specific implementation within the Yocto Project. It supports only a few selected HW platforms by default but can be extended through BSP Layers.
 4. Therefore, Poky is a sub-set of the Yocto Project.
 5. Analogy => Given that the Yocto Project is like the Cannonical, then Poky is like the Ubuntu.

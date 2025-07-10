@@ -48,7 +48,7 @@ Types of Layers:
 
 7. Custom or Development Layers:
 	1) They are used by the Users to perform Project-specific development.
-	2) It contains the custom configurations, overridden Recipes and custom SW Applications.
+	2) It contains the custom Configurations, overridden Recipes and custom SW Applications.
 	3) The 'meta-mylayer' and 'meta-mycompany' can be considered as the Custom Layers.
 
 Yocto Layer Format:
