@@ -43,3 +43,15 @@ Line Joining:
 6. This line joining happens before the BitBake parses the statements into it's internal data model.
 7. Inside the Python functions, the standard Python syntax is used. The BitBake doesn't join the lines with '\' there unless the Python itself requires it.
 8. Always remember to leave a space ' ' before the '\' when splitting the Strings to ensure proper token separation.
+
+Default Value Assignment:
+=========================
+1. The '?=' operator is used to assign a default value for the variable.
+2. This type of assignment allows to define a variable value to be used if it remains undefined when the statement is parsed by the BitBake.
+3. However, the default value is replaced by the value of the variable if that variable is defined.
+4. This type of variable assignment is known as Soft assignment.
+5. The variables are assigned in the following manner:
+	=> VARIABLE ?= "value"
+6. The following example from Poky is defined in this manner:
+	=> MACHINE ?= "qemuarm"
+7. In the above case, if the 'MACHINE' variable is not set anywhere else, then by default the Build system uses 'qemuarm' as the Target Machine.
