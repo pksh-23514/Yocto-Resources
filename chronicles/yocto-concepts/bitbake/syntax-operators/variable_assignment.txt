@@ -2,7 +2,7 @@ Variable Assignment:
 ====================
 1. The variables are assigned in the following manner:
 	=> VARIABLE = "value"
-2. The value assignment occurs as soon as the statement is parsed by the BitBake.
+2. The value assignment occurs as soon as the statement is parsed by the BitBake i.e. the assignment is immediate.
 3. This type of variable assignment is known as Hard assignment.
 4. If any leading or trailing spaces are a part of the assignment, the spaces are retained while parsing.
 	=> VARIABLE = "value "
@@ -55,3 +55,5 @@ Default Value Assignment:
 6. The following example from Poky is defined in this manner:
 	=> MACHINE ?= "qemuarm"
 7. In the above case, if the 'MACHINE' variable is not set anywhere else, then by default the Build system uses 'qemuarm' as the Target Machine.
+8. The value assignment occurs as soon as the statement is parsed by the BitBake i.e. the assignment is immediate.
+9. If there are multiple '?=' type of assignments to a single variable, the first of all the '?=' assignments is used as the value for the variable.
