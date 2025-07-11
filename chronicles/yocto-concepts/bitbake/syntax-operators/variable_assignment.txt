@@ -26,3 +26,20 @@ Verify the Variable Value:
 6. The 'grep' command can be modified to search the value for the variable starting with the name as follows:
 	=> bitbake -e | grep ^VARIABLE_NAME=
 	=> bitbake -e recipe_name | grep ^VARIABLE_NAME=
+
+Line Joining:
+=============
+1. The BitBake joins the line ending with a backslash '\' with the following line before parsing the statements. It indicates that the current line continues on the next line.
+2. This behavior is applied only outside of the functions, as a part of the BitBake parser's pre-processing.
+3. It is mostly used to split the variable assignment over multiple lines. This can be illustrated by the below variable assignment:
+	=> SRC_URI = " \
+	       file://patch1.patch \
+	       file://patch2.patch \
+	       file://patch3.patch \
+	   "
+4. In the above case, the BitBake joins all the lines ending in '\' into a single logical line before parsing the variable.
+	=> SRC_URI = " file://patch1.patch file://patch2.patch file://patch3.patch "
+5. While joining the lines, both the backslash '\' and newline '\n' are removed from the assignment.
+6. This line joining happens before the BitBake parses the statements into it's internal data model.
+7. Inside the Python functions, the standard Python syntax is used. The BitBake doesn't join the lines with '\' there unless the Python itself requires it.
+8. Always remember to leave a space ' ' before the '\' when splitting the Strings to ensure proper token separation.
