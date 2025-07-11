@@ -1,0 +1,19 @@
+Variable Expansion:
+===================
+1. The variables can reference to the contents of the other variables using the variable expansion Syntax.
+	=> VARIABLE_ONE = "value_1"
+	=> VARIABLE_TWO = "${VARIABLE_ONE} value_2"
+	---> VARIABLE_TWO = "value_1 value_2"
+2. The '=' operator doesn't immediately expand the variable references on the right-hand side.
+3. The expansion on the right-hand side is deferred until the variable which is assigned with the reference variable is actually used.
+4. The result of that variable is then dependent on the current value of the referenced variable.
+	=> VAL1 = "DOUBLE"
+	=> VAL2 = 'SINGLE'
+	=> VAL3 = "${VAL1} ${VAL2}"
+	=> VAL1 = "1"
+	=> bitbake -e | grep ^VAL3=
+	---> VAL3="1 SINGLE"
+5. If the variable is assigned with a reference variable that is not defined anywhere, the String is kept as it is.
+	=> VAL3 = "${VAL4}"
+	=> bitbake -e | grep ^VAL3=
+	---> VAL3="\${VAL4}"
