@@ -59,7 +59,7 @@ Default Value Assignment:
 	=> VARIABLE ?= "value"
 6. The following example from Poky is defined in this manner:
 	=> MACHINE ?= "qemuarm"
-7. In the above case, if the 'MACHINE' variable is not set anywhere else, then by default the Build system uses 'qemuarm' as the Target Machine.
+7. In the above case, if the 'MACHINE' variable is not set before or after the statement, then by default the Build system uses 'qemuarm' as the Target Machine.
 8. The value assignment occurs as soon as the statement is parsed by the BitBake i.e. the assignment is immediate.
 9. If there are multiple '?=' type of assignments to a single variable, the first of all the '?=' assignments is used as the value for the variable.
 	=> VAL3 ?= "1"
@@ -69,7 +69,20 @@ Default Value Assignment:
 
 Weak Default Value Assignment:
 ==============================
-1.
+1. The '??=' operator is used to assign a weaker default value for the variable.
+2. This type of assignment allows to defina a variable value to be used if there is no value assigned to the variable via any other type of other assignments.
+3. However, the weaker default value is replaced by the value of the variable if that variable is defined.
+4. The variables are assigned in the following manner:
+        => VARIABLE ??= "value"
+5. The following example from Poky is defined in this manner:
+        => MACHINE ??= "qemux86"
+6. In the above case, if the 'MACHINE' variable is not set anywhere else, then the Build system as a final resort uses 'qemux86' as the Target Machine.
+7. The value assignment occurs at the end of the parsing process by the BitBake i.e. the assignment is not immediate.
+8. If there are multiple '??=' type of assignments to a single variable, the last of all the '??=' assignments is used as the value for the variable.
+	=> VAL3 ??= "1"
+	=> VAL3 ??= "2"
+	=> bitbake -e | grep ^VAL3=
+	---> VAL3="2"
 
 Priority Order of Different Assignment:
 =======================================
