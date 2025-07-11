@@ -58,7 +58,9 @@ Default Value Assignment:
 5. The variables are assigned in the following manner:
 	=> VARIABLE ?= "value"
 6. The following example from Poky is defined in this manner:
+	=> #MACHINE = "qemux86"
 	=> MACHINE ?= "qemuarm"
+	=> #MACHINE = "qemuarm64"
 7. In the above case, if the 'MACHINE' variable is not set before or after the statement, then by default the Build system uses 'qemuarm' as the Target Machine.
 8. The value assignment occurs as soon as the statement is parsed by the BitBake i.e. the assignment is immediate.
 9. If there are multiple '?=' type of assignments to a single variable, the first of all the '?=' assignments is used as the value for the variable.
@@ -75,7 +77,9 @@ Weak Default Value Assignment:
 4. The variables are assigned in the following manner:
         => VARIABLE ??= "value"
 5. The following example from Poky is defined in this manner:
-        => MACHINE ??= "qemux86"
+	=> #MACHINE = "qemuarm"
+	=> MACHINE ??= "qemux86"
+	=> #MACHINE ?= "qemuarm64"
 6. In the above case, if the 'MACHINE' variable is not set anywhere else, then the Build system as a final resort uses 'qemux86' as the Target Machine.
 7. The value assignment occurs at the end of the parsing process by the BitBake i.e. the assignment is not immediate.
 8. If there are multiple '??=' type of assignments to a single variable, the last of all the '??=' assignments is used as the value for the variable.
@@ -86,4 +90,11 @@ Weak Default Value Assignment:
 
 Priority Order of Different Assignment:
 =======================================
-1.
+1. The order is as follows:
+	=> Hard assignment > Soft assignment > Weaker assignment
+2. This can be illustrated by the below example:
+	=> VAL3 ??= "1"
+	=> VAL3 ?= "2"
+	=> VAL3 = "3"
+	=> bitbake -e | grep ^VAL3=
+	---> VAL3="3"
