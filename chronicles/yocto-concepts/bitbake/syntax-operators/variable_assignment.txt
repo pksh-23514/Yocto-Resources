@@ -13,6 +13,11 @@ Variable Assignment:
 6. However, using the single quotes assignment style allows the use of double quotes in the value.
 	=> VARIABLE = 'There is a " in the value'
 7. The preferred style of assignment is using the double quotes.
+8. If there are multiple '=' type of assignments to a single variable, the last of all the '=' assignments is used as the value for the variable.
+	=> VAL3 = "1"
+	=> VAL3 = "2"
+	=> bitbake -e | grep ^VAL3=
+	---> VAL3="2"
 
 Verify the Variable Value:
 ==========================
@@ -41,7 +46,7 @@ Line Joining:
 	=> SRC_URI = " file://patch1.patch file://patch2.patch file://patch3.patch "
 5. While joining the lines, both the backslash '\' and newline '\n' are removed from the assignment.
 6. This line joining happens before the BitBake parses the statements into it's internal data model.
-7. Inside the Python functions, the standard Python syntax is used. The BitBake doesn't join the lines with '\' there unless the Python itself requires it.
+7. Inside the Python functions, the standard Python Syntax is used. The BitBake doesn't join the lines with '\' there unless the Python itself requires it.
 8. Always remember to leave a space ' ' before the '\' when splitting the Strings to ensure proper token separation.
 
 Default Value Assignment:
@@ -57,3 +62,11 @@ Default Value Assignment:
 7. In the above case, if the 'MACHINE' variable is not set anywhere else, then by default the Build system uses 'qemuarm' as the Target Machine.
 8. The value assignment occurs as soon as the statement is parsed by the BitBake i.e. the assignment is immediate.
 9. If there are multiple '?=' type of assignments to a single variable, the first of all the '?=' assignments is used as the value for the variable.
+
+Weak Default Value Assignment:
+==============================
+1.
+
+Priority Order of Different Assignment:
+=======================================
+1.
