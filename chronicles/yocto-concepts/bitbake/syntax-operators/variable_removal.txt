@@ -1,0 +1,24 @@
+Removing Values using Override Style Syntax:
+============================================
+1. The Override Syntax can be used for removing the values from a variable.
+	=> VARIABLE:remove = "value"
+2. It removes all the occurences of the 'value' from the variable. However, the surrounding spaces and spacing are preserved in the operation.
+3. There is no requirement to add a leading or trailing space to the value being removed.
+4. Whenever this Syntax is used, the BitBake expects one or more String.
+	=> VAL1 = "123 456 789 123456 123 456"
+	=> VAL1:remove = "123"
+	=> bitbake -e | grep ^VAL1=
+	---> VAL1=" 456 789 123456  456"
+5. The operation takes into effect during the variable expansion only i.e. it is not applied immediately.
+	=> VAL2 = " abc def ghi abcdef abc def def"
+	=> VAL2:remove = "\
+	       def \
+	       abc \
+	       ghi \
+	       "
+	=> TEMPVAL := "${VAL2}"
+	=> VAL2 += "abcdef ghi"
+	=> bitbake -e | grep ^TEMPVAL=
+	---> TEMPVAL="    abcdef   "
+	=> bitbake -e | grep ^VAL2=
+	---> VAL2="    abcdef    abcdef "
