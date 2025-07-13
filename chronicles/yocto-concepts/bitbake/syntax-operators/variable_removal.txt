@@ -22,3 +22,12 @@ Removing Values using Override Style Syntax:
 	---> TEMPVAL="    abcdef   "
 	=> bitbake -e | grep ^VAL2=
 	---> VAL2="    abcdef    abcdef "
+
+Override Operation Priority Order:
+==================================
+1. The Override operations are applied in the following order:
+	=> :append > :prepend > :remove
+2. Therefore, any ':append' or ':prepend' operations will take into effect before any ':remove' operation takes into effect.
+3. The Override operation application order may not match with the variable parse history in the BitBake Environment (i.e. the Output of bitbake -e).
+4. It is possible that the ':remove' operation may appear before the ':append' or ':prepend' operations in the BitBake Environment.
+5. However, the result of the variable is as per the application order as the ':remove' operation is handled at the end.
