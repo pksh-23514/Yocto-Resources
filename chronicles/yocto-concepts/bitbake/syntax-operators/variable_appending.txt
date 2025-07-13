@@ -40,14 +40,14 @@ Override Style Operation Advantages:
 ************************************
 1. The major advantage of the Override Syntax as compared to the other two operators is that it provides guaranteed operation on the variable.
 	1) In the 'local.conf' file, add the following statement:
-	=> IMAGE_INSTALL += "usbutils"
-	=> bitbake -e core-image-minimal | grep ^IMAGE_INSTALL=
-	---> IMAGE_INSTALL="packagegroup-core-boot "
-	---> The above result is not desirable as the 'usbutils' value has been appended to the 'IMAGE_INSTALL' variable.
+		=> IMAGE_INSTALL += "usbutils"
+		=> bitbake -e core-image-minimal | grep ^IMAGE_INSTALL=
+		---> IMAGE_INSTALL="packagegroup-core-boot "
+		---> The above result is not desirable as the 'usbutils' value has been appended to the 'IMAGE_INSTALL' variable.
 	2) In the 'local.conf' file, add the following statement:
-	=> IMAGE_INSTALL:append = "usbutils"
-	=> bitbake -e core-image-minimal | grep ^IMAGE_INSTALL=
-	---> IMAGE_INSTALL="packagegroup-core-boot usbutils"
+		=> IMAGE_INSTALL:append = "usbutils"
+		=> bitbake -e core-image-minimal | grep ^IMAGE_INSTALL=
+		---> IMAGE_INSTALL="packagegroup-core-boot usbutils"
 	3) This behavior is observed because of the order of passing of the 'local.conf' file is different in both the scenarios.
 	4) The 'IMAGE_INSTALL' variable doesn't have any value when it encountered the '+=' operator, which is then replaced by the value using Hard assignment.
 	5) However, the 'IMAGE_INSTALL' variable does have the value before encountering the ':append' operation. Hence, the desirable value is achieved.
