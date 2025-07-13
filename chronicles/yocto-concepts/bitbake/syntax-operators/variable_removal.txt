@@ -31,3 +31,22 @@ Override Operation Priority Order:
 3. The Override operation application order may not match with the variable parse history in the BitBake Environment (i.e. the Output of bitbake -e).
 4. It is possible that the ':remove' operation may appear before the ':append' or ':prepend' operations in the BitBake Environment.
 5. However, the result of the variable is as per the application order as the ':remove' operation is handled at the end.
+6. The application order implies that it is not possible to append a previously removed value.
+	=> VAL1 = "123 456 789 123456 123 456"
+	=> VAL1:remove = "123 456"
+	=> VAL1:append = " 123 123 456"
+	=> VAL1:prepend = "123 123 456 456 "
+	=> bitbake -e | grep ^VAL1=
+	---> VAL1="      789 123456     "
+	---> The values '123 456' are removed from the variable and cannot be either appended or prepended in the variable again.
+7. The workaround for the conditional removal of the values from the variable is the usage of the intermediate variables.
+	=> VAL1 = "123 456 789 123456 123 456"
+	=> REMOVE = "123 456"
+	=> VAL1:remove = "${REMOVE}"
+	=> VAL1:append = " 123 123 456"
+	=> VAL1:prepend = "123 123 456 456 "
+	=> REMOVE = "123"
+	=> bitbake -e | grep ^VAL1=
+	---> VAL1="  456 456  456 789 123456  456   456"
+	---> The conditional change in the values of the intermediate variable can be used to control the values being removed from the variable.
+8. This process is very helpful for conditional logic, dynamic Inheritance or Layer-based Configurations.
