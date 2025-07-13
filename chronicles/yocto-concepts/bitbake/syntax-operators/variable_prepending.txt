@@ -35,3 +35,21 @@ Prepending Values using Override Style Syntax:
 	=> VAL9 =+ "World"
 	=> bitbake -e | grep ^VAL9=
 	---> VAL9="Hello World !"
+
+Override Style Operation Advantages:
+************************************
+1. The major advantage of the Override Syntax as compared to the other two operators is that it provides guaranteed operation on the variable.
+	1) In the 'local.conf' file, add the following statement:
+		=> IMAGE_INSTALL =+ "usbutils"
+		=> bitbake -e core-image-minimal | grep ^IMAGE_INSTALL=
+		---> IMAGE_INSTALL="packagegroup-core-boot "
+		---> The above result is not desirable as the 'usbutils' value has not been prepended to the 'IMAGE_INSTALL' variable.
+	2) In the 'local.conf' file, add the following statement:
+		=> IMAGE_INSTALL:prepend = "usbutils "
+		=> bitbake -e core-image-minimal | grep ^IMAGE_INSTALL=
+		---> IMAGE_INSTALL="usbutils packagegroup-core-boot "
+	3) This behavior is observed because of the order of passing of the 'local.conf' file is different in both the scenarios.
+	4) The 'IMAGE_INSTALL' variable doesn't have any value when it encountered the '=+' operator, which is then replaced by the value using Hard assignment.
+	5) However, the 'IMAGE_INSTALL' variable does have the value before encountering the ':prepend' operation. Hence, the desirable value is achieved.
+	6) If the 'core-image-minimal.bb' file is updated after the 'IMAGE_INSTALL' variable is defined, then the value is same in both the scenarios.
+2. The second advantage of the Override Syntax is that it can be combined with the other conditional Syntax (or Overrides).
