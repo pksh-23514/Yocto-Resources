@@ -19,3 +19,19 @@ Prepending Values without Space:
 	=> VAL8 =. "Hello"
 	=> bitbake -e | grep ^VAL8=
 	---> VAL8="HelloWorld"
+
+Prepending Values using Override Style Syntax:
+==============================================
+1. The Override Syntax can be used for prepending the values to a variable.
+	=> VARIABLE:prepend = "value"
+2. It does not insert any space between the current value of the variable and the prepended value. Therefore, the space controlling shall be done while using this Syntax.
+	=> VAL9 ="!"
+	=> VAL9:prepend = "Hello"
+	=> bitbake -e | grep ^VAL9=
+	---> VAL9="Hello!"
+3. The operation takes into effect during the variable expansion only i.e. it is not applied immediately.
+	=> VAL9 ="!"
+	=> VAL9:prepend = "Hello "
+	=> VAL9 =+ "World"
+	=> bitbake -e | grep ^VAL9=
+	---> VAL9="Hello World !"
