@@ -1,0 +1,21 @@
+Prepending Values with Space:
+=============================
+1. The '=+' operator is used for prepending the values to a variable.
+	=> VARIABLE =+ "value"
+2. The operation takes into effect immediately during the parsing by the BitBake.
+3. It inserts a space between the current value of the variable and the prepended value.
+	=> VAL8 = "World"
+	=> VAL8 =+ "Hello"
+	=> bitbake -e | grep ^VAL8=
+	---> VAL8="Hello World"
+
+Prepending Values without Space:
+================================
+1. The "=." operator is used for prepending the values to a variable.
+	=> VARIABLE =. "value"
+2. The operation takes into effect immediately during the parsing by the BitBake.
+3. It does not insert any space between the current value of the variable and the prepended value.
+	=> VAL8 = "World"
+	=> VAL8 =. "Hello"
+	=> bitbake -e | grep ^VAL8=
+	---> VAL8="HelloWorld"
