@@ -19,3 +19,19 @@ Appending Values without Space:
 	=> VAL8 .= "World"
 	=> bitbake -e | grep ^VAL8=
 	---> VAL8="HelloWorld"
+
+Appending Values using Override Style Syntax:
+=============================================
+1. The Override Syntax can be used for appending the values to a variable.
+	=> VARIABLE:append = "value"
+2. It does not insert any space between the current value of the variable and the appended value. Therefore, the space controlling shall be done while using this Syntax.
+	=> VAL9 = "Hello"
+	=> VAL9:append = "!"
+	=> bitbake -e | grep ^VAL9=
+	---> VAL9="Hello!"
+3. The operation takes into effect during the variable expansion only i.e. it is not applied immediately.
+	=> VAL9 = "Hello"
+	=> VAL9:append = " !"
+	=> VAL9 += "World"
+	=> bitbake -e | grep ^VAL9=
+	---> VAL9="Hello World !"
