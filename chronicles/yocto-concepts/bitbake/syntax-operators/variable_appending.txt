@@ -43,12 +43,12 @@ Override Style Operation Advantages:
 		=> IMAGE_INSTALL += "usbutils"
 		=> bitbake -e core-image-minimal | grep ^IMAGE_INSTALL=
 		---> IMAGE_INSTALL="packagegroup-core-boot "
-		---> The above result is not desirable as the 'usbutils' value has been appended to the 'IMAGE_INSTALL' variable.
+		---> The above result is not desirable as the 'usbutils' value has not been appended to the 'IMAGE_INSTALL' variable.
 	2) In the 'local.conf' file, add the following statement:
 		=> IMAGE_INSTALL:append = "usbutils"
 		=> bitbake -e core-image-minimal | grep ^IMAGE_INSTALL=
 		---> IMAGE_INSTALL="packagegroup-core-boot usbutils"
-	3) This behavior is observed because of the order of passing of the 'local.conf' file is different in both the scenarios.
+	3) This behavior is observed because the order of execution for the '+=' and ':append' operations is different. The Override Syntax is order-independent.
 	4) The 'IMAGE_INSTALL' variable doesn't have any value when it encountered the '+=' operator, which is then replaced by the value using Hard assignment.
 	5) However, the 'IMAGE_INSTALL' variable does have the value before encountering the ':append' operation. Hence, the desirable value is achieved.
 	6) If the 'core-image-minimal.bb' file is updated after the 'IMAGE_INSTALL' variable is defined, then the value is same in both the scenarios.
