@@ -46,3 +46,20 @@ Steps to Create Layer Manually:
 	2) The support for Distro and the Distro Policies can be added as a Configuration file in 'conf/distro/' directory path.
 	3) The new Recipes can be placed under the 'recipes-*' sub-directories within the Layer.
 5. The final step is to test the Layer for the compatibility with the Yocto Project.
+
+Steps to Create Layer using BitBake Tool:
+=========================================
+1. The 'bitbake-layers create-layer' command can be used to create a general Layer.
+	=> bitbake-layers create-layer <path-to-the-Layer>/layer-name
+2. The default mode of the script creates a Layer at the directory path provided with the following:
+	1) A Layer with priority 6.
+	2) A 'conf' sub-directory with a default 'layer.conf' file.
+	3) A 'recipes-example' sub-directory that contains a subsequent sub-directory 'example' that further contains a sample 'example.bb' Recipe file.
+	4) A COPYING.MIT that is the License statement for the Layer.
+	5) A README file describing the contents of the new Layer.
+3. The next step is to modify the Layer Configuration file as per the Layer requirements.
+4. The next step is to add the Meta-data to the Layer based on the type of the Layer.
+	1) The support for Machine can be added as Configuration file in 'conf/machine/' directory path.
+	2) The support for Distro and the Distro Policies can be added as a Configuration file in 'conf/distro/' directory path.
+	3) The new Recipes can be placed under the 'recipes-*' sub-directories within the Layer.
+5. The final step is to test the Layer for the compatibility with the Yocto Project.
