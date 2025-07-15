@@ -24,3 +24,10 @@ Reasons to Create Layers:
 	3) Implement the Patches for the Recipes.
 	4) Updating the Meta-data in the cloned/Upstream Recipes or Layers can lead to complications while pulling the code for future updates.
 3. The custom Layers are very useful in case of porting the Meta-data from one Distro to another or even changing the version of the same Distro.
+
+Layers Priority:
+================
+1. Each Layer has a priority used by the BitBake to decide which of the Layer should take precedence if there are Recipes with the same name in the multiple Layers.
+2. The default value for the Layer priority is 6 when created using the 'bitbake-layers create-layer' command.
+3. The 'BBFILE_PRIORITY' variable in the 'layer.conf' file is used for setting the particular Layer priority.
+4. A higher numeric value represents a higher priority.
