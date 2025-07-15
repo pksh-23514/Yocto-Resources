@@ -1,5 +1,5 @@
-Layer Components:
-=================
+Layers and Layer Components:
+============================
 1. Layers are the modular components used to organize and manage the Meta-data used to build the custom Linux Image.
 2. They are a collection of related Recipes / Meta-data used to customize the Build system without modifying the files directly.
 3. It is very useful to keep the different parts of the Build system logically separated according to the functionality.
@@ -14,3 +14,13 @@ Layer Components:
 7. There is no restriction on the number of Layers to be included in the Build system. They can be added whenever the Build system requires any customization.
 8. In cases of multiple Architectures Build system, they are used to isolate the information as per the Architecture requirements.
 9. The Layer directories have the prefix as 'meta-' by convention to distinguish themselves as the Yocto Meta-Layers.
+
+Reasons to Create Layers:
+=========================
+1. There are a number of customizations that can be done on the 'local.conf' file to reflect in the Built Image.
+2. However, it is not possible to:
+	1) Store the Recipes for specific application SW.
+	2) Create the custom Distro or Images.
+	3) Implement the Patches for the Recipes.
+	4) Updating the Meta-data in the cloned/Upstream Recipes or Layers can lead to complications while pulling the code for future updates.
+3. The custom Layers are very useful in case of porting the Meta-data from one Distro to another or even changing the version of the same Distro.
