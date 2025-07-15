@@ -6,3 +6,20 @@ Steps to Enable Layer Manually:
 	       <absolute-path-to-the-Layer>/layer-name \
 	       "
 2. The BitBake parses each of the 'conf/layer.conf' file from the 'BBLAYERS' variable in a top-down approach.
+
+Steps to Enable Layer using BitBake Tool:
+=========================================
+1. The 'bitbake-layers add-layer' command can be used to enable a particular Layer. It adds the Layer to the 'conf/bblayers.conf' file to include the Layer in the Build system.
+	=> bitbake-layers add-layer <path-to-the-Layer>/layer-name
+2. The BitBake parses each of the 'conf/layer.conf' file from the 'BBLAYERS' variable in a top-down approach.
+
+Verification of Layer Addition:
+===============================
+1. The 'bitbake-layers show-layers' command can be used to list all the Layers added to the Build system.
+	=> bitbake-layers show-layers
+	=> NOTE: Starting bitbake server...
+	=> layer                 path                                      priority
+	   ==========================================================================
+	   meta                  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta  5
+	   meta-poky             /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-poky  5
+	   meta-yocto-bsp        /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-yocto-bsp  5
