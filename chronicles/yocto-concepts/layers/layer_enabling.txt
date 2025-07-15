@@ -1,0 +1,8 @@
+Steps to Enable Layer Manually:
+===============================
+1. In the Build directory, the Layer directory path should be updated to the 'conf/bblayers.conf' file to include the Layer in the Build system.
+	=> BBLAYERS ?= "\
+	       ...
+	       <absolute-path-to-the-Layer>/layer-name \
+	       "
+2. The BitBake parses each of the 'conf/layer.conf' file from the 'BBLAYERS' variable in a top-down approach.
