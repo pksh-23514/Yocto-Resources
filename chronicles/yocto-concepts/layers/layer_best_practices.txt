@@ -1,0 +1,36 @@
+Best Practices while Creating Layers:
+=====================================
+1. The Layer created could follow some best practices to make it easier to maintain and not impact the Builds for the other Machines.
+2. Avoid Overlaying the entire Recipes from the other Layers.
+	1) The entire Recipe should not be copied from the other Layers into the custom Layer.
+	2) Instead, the parts of the Recipe that need to be modified should be updated using an Append file (.bbappend).
+3. Avoiding the duplication of the Include files (.inc).
+	1) If each Recipe introduces the same Include file (.inc), it could lead to inconsistencies and maintainence issues.
+	2) Instead, the parts of the Include file (.inc) that need to be modified should be updated using an Append file (.bbappend).
+4. Using the 'require' statement with proper paths.
+	1) To maintain the clarity about where the Include file (.inc) is picked up, the loose declarations with 'require' should be avoided.
+		=> require file-name.inc
+	2) Instead, the path relative to the intended Layer directory containing the Include (.inc) file must be used with the 'require' statement.
+		=> require recipes-core/package-name/file-name.inc
+5. Structure the Layers properly.
+	1) The Append files (.bbappend) should use the Overrides properly and the Machine-specific files should be present within the custom Layer.
+	2) This ensures that a Build is not using the wrong Metadata and negatively impacting a Build for a different Machine.
+	3) The variables should be modified to support the different Machines.
+		=> DEPENDS:arm64 = "libgcc"
+		---> This tells the Build system  that 'libgcc' should only be included in the Build when the Target machine is 'arm64'.
+		=> DEPENDS:append:aarch64 = " libgcc"
+		=> DEPENDS:prepend:aarch64 = "libgcc "
+		---> For appending or prepending the variables for a particular Machine, the above operations can be performed.
+	4) Organize the Machine-specific files in Machine-specific locations.
+		1) The Meta-data files that are included in the Build process, these files should be Machine-specific.
+		2) If there is a particular base Recipe that contains the 'SRC_URI' variable which is being used for the Build, all the Machine Builds will refer to it.
+		3) Then, it can be possible that the Machine-specific file in the 'meta-layer-name/recipes-core/base-files/base-files/' path is used for all the Machine Builds.
+		4) This happens as the 'FILESPATH' variable points to this location first as the 'meta-layer-name' is included in the Build. It will result in the wrong Build.
+		5) Therefore, if the Layer is used for multiple Machines, the specific Machine files must be placed in separate sub-directories.
+		6) The 'machine-name' sub-directory can be created in the 'meta-layer-name/recipes-core/base-files/base-files/' path.
+		7) This ensures that the correct Machine file is picked from the 'machine-name' directory and it makes the file search quicker in the Build.
+	5) Placing the files referenced from the 'SRC_URI' variable in Machine-specific sub-directories within the Layer to map the correct files for the Machine Builds.
+6. Follow the Layer naming conventions.
+	1) The custom Layer must be stored in the Git as 'meta-layer-name'.
+7. Group all the Layers locally.
+	1) Clone the custom Layer alongside with the other Layers, preferably under a 'sources' directory.
