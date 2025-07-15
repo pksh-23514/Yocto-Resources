@@ -4,3 +4,45 @@ Source Repositories to Layers:
 2. These Layers may or may not be compatible with the Yocto Project Environment.
 3. The Yocto Project provides the Layer Index that contains the Layers at the link: https://www.yoctoproject.org/development/yocto-project-compatible-layers/
 4. These Layers are tested and fully compatible with the Yocto Project.
+
+Steps to Create Layer Manually:
+===============================
+1. The first step is to check the existing OpenEmbedded Layers. It is possible to get an existing Layer that is identical or close to the required Layer.
+2. The next step is to create the directory for the Layer.
+	1) While creating the Layer, the directory must be placed in an area that is not associated with the Poky cloned repository directory.
+3. The next step is to create the Layer Configuration file. A typical Configuration file contains the following variables:
+	=> BBPATH:
+		1) It adds the current Layer’s directory to the BitBake’s search path.
+		2) The BitBake locates the Class files (.bbclass), the Configuration files (.conf) and the files that are included with 'include' and 'require' statements.
+		3) The BitBake uses the first file (.bbclass or .conf) that matches the name found in 'BBPATH' variable.
+		4) It is recommended to use unique file names (.bbclass or .conf) in the custom Layers.
+		---> BBPATH .= ":${LAYERDIR}"
+	=> BBFILES:
+		1) It defines the location for all the Recipes in the current Layer.
+		---> BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+				 ${LAYERDIR}/recipes-*/*/*.bbappend"
+	=> BBFILE_COLLECTIONS:
+		1) It establishes the current Layer through a unique identifier that is used throughout the OpenEmbedded Build system to refer to this Layer.
+		---> BBFILE_COLLECTIONS += "layer-name"
+	=> BBFILE_PATTERN:
+		1) It expands immediately during the parsing to provide the directory of the current Layer.
+		---> BBFILE_PATTERN_layer-name = "^${LAYERDIR}/"
+	=> BBFILE_PRIORITY:
+		1) It establishes priority for the current Layer to use for the Recipes in the Layer when the Build system finds the Recipes of the same name in different Layers.
+		---> BBFILE_PRIORITY_layer-name = "6"
+	=> LAYERVERSION:
+		1) It establishes a version number for the current Layer.
+		2) This version number is used to specify the exact version of the Layer as a dependency when using the 'LAYERDEPENDS' variable.
+		---> LAYERVERSION_layer-name = "1"
+	=> LAYERDEPENDS:
+		1) It lists all the Layers on which the current Layer depends (if any).
+		---> LAYERDEPENDS_layer-name = "core"	//'core' refers to the 'meta' Layer of the OpenEmbedded Project.
+	=> LAYERSERIES_COMPAT:
+		1) It lists the Yocto Project Releases for which the version of the current Layer is compatible.
+		2) This is a good way to indicate if the current Layer is latest or not.
+		---> LAYERSERIES_COMPAT_layer-name = "kirkstone"
+4. The next step is to add the Meta-data to the Layer based on the type of the Layer.
+	1) The support for Machine can be added as Configuration file in 'conf/machine/' directory path.
+	2) The support for Distro and the Distro Policies can be added as a Configuration file in 'conf/distro/' directory path.
+	3) The new Recipes can be placed under the 'recipes-*' sub-directories within the Layer.
+5. The final step is to test the Layer for the compatibility with the Yocto Project.
