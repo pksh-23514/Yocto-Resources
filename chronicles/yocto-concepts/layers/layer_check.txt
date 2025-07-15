@@ -1,0 +1,8 @@
+yocto-check-layer Script:
+=========================
+1. The 'yocto-check-layer' script provides the way to assess how compatible the Layer is with the Yocto Project.
+	=> yocto-check-layer <absolute-path-to-the-Layer>/layer-name
+2. The 'PASS' result indicates that the Layer is compatible with the Yocto Project.
+3. The script divides the tests into the three areas i.e. COMMON, BSP and DISTRO.
+	1) Given a Distro Layer, it must pass the COMMON and DISTRO set of tests.
+	2) Given a BSP Layer, it must pass the COMMON and BSP set of tests.
