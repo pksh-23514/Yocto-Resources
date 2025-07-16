@@ -76,6 +76,6 @@ SW Layer:
 1. The SW Layer provides the Meta-data for additional SW Packages used during the Build.
 2. It doesn't include any information specific to the Distribution or the Machine.
 3. It contains the following:
-	1) 1) Classes - The Class files (.bbclass) hold the common functionality that can be shared among the Recipes.
+	1) Classes - The Class files (.bbclass) hold the common functionality that can be shared among the Recipes.
 	2) Configuration - The Configuration files (.conf) provide the Configuration for the Layer (layer.conf) and any other custom Configuration file required in the Build.
 	3) Recipes - The Recipe and the Append files are specific to the SW requirements.
