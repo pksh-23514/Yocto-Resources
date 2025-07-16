@@ -10,3 +10,39 @@ BitBake Tool:
 	6) SDK generation
 	7) Stamp files
 	8) SetScene Tasks and Shared-State
+
+Source Fetching:
+****************
+1. In this stage of the Build, the Recipes are fetched and unpacked.
+2. The expanded view of the 'Source fetching' in the 'OpenEmbedded Build Workflow' is as follows:
+
+     Upstream Project Releases		Local Projects		  SCMs
+----------------------------------- ----------------------- ----------------
+|  busybox			  | |  Local Source Tree  | |  meta-qt5	   |
+|  busybox-1.35.0.tar.bz2	  | |  <directory>	  | |    Git	   |
+|				  | |      <file>	  | |		   |
+|  <recipe>			  | |      <directory>	  | |  opkg	   |
+|  Tarball / ZIP / Archive Files  | |          <file>	  | |  Subversion  |
+----------------------------------- ----------------------- ----------------
+		|				|		   |
+Source		|				|		   |
+Materials	V				V		   V
+
+---------------------------------------------------------------------------------------------------------------------------
+|															  |
+| BitBake									Build Directory				  |
+|		Source Fetching							----------------------------------------- |
+| 		-------------							| tmp <---------------------------------|-|--- TMPDIR
+| 		|	    |							|   work				| |
+| 		| do_fetch  |							|     ${PACKAGE_ARCH}-poky-${TARGET_OS} | |
+|		|	    |-------------------------------------------------->|       ${PN}				| |
+|		| do_unpack |							|         ${PV}	<-----------------------|-|--- WORKDIR
+|		|	    |							|           sources-unpack <------------|-|--- UNPACKDIR
+|		-------------							|           ${BP} <---------------------|-|--- S
+|										|     ${MACHINE}-poky-${TARGET_OS}	| |
+|										|       ${PN}				| |
+|										|         ${PV}	<-----------------------|-|--- WORKDIR
+|										|           sources-unpack <------------|-|--- UNPACKDIR
+|										|           ${BP} <---------------------|-|--- S
+|										----------------------------------------- |
+---------------------------------------------------------------------------------------------------------------------------
