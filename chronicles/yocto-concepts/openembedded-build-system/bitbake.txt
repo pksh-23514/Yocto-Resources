@@ -39,7 +39,7 @@ Materials	|				|		   |
 |		| do_unpack |							|         ${PV}	<-----------------------|-|--- WORKDIR
 |		|	    |							|           sources-unpack <------------|-|--- UNPACKDIR
 |		-------------							|           ${BP} <---------------------|-|--- S
-|										|     ${MACHINE}-poky-${TARGET_OS}	| |
+|										|     ${MACHINE_ARCH}-poky-${TARGET_OS}	| |
 |										|       ${PN}				| |
 |										|         ${PV}	<-----------------------|-|--- WORKDIR
 |										|           sources-unpack <------------|-|--- UNPACKDIR
@@ -60,5 +60,6 @@ Materials	|				|		   |
 	8) S => It is defined as the directory containing the source code after unpacking and patching. The default value is 'BP'.
 	9) BP => It is defined as the base Recipe name and version without any special Recipe name suffix. The default value is '${BPN}-${PV}'.
 	10) BPN => It is defined as the name of the Recipe being used to Build the Package. It is a version of the 'PN' variable without the common prefixes or suffixes.
+	11) MACHINE_ARCH => If the Recipe's Output Package is Built for a specific Target Machine rather than the Architecture, it is set as the 'PACKAGE_ARCH' variable value.
 6. For the local files present in the 'SRC_URI' variable, the Build system takes a checksum of the file for the Recipe and inserts into the signature of the 'do_fetch' Task.
 7. If the local file is modified, the 'do_fetch' Task and all the other dependent Tasks are executed again.
