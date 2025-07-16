@@ -42,7 +42,7 @@ Package Feeds:
 		---> If the Build is using RPM Packaging and Tarball creation, the variable used is 'DEPLOY_DIR_RPM'.
 		---> If the Build is using IPK Packaging and Tarball creation, the variable used is 'DEPLOY_DIR_IPK'.
 		---> If the Build is using DEB Packaging and Tarball creation, the variable used is 'DEPLOY_DIR_DEB'.
-	3) PACKAGE_ARCH => It defines the Architecture-specific sub-directory (like the Package can be available for the 'i586' or 'qemux86' Architectures).
+	3) PACKAGE_ARCH => It defines the Architecture of the resulting Package or Packages. (like the Package can be available for the 'i586' or 'qemux86' Architectures).
 11. The BitBake uses the 'do_package_write_*' Tasks to generate the Packages and place them in the Package holding area.
 	1) The 'do_package_write_rpm' Task is used for the RPM Packages.
 	2) The 'do_package_write_ipk' Task is used for the IPK Packages.
