@@ -45,7 +45,7 @@ The brief summary of the above workflow is:
 	3) The Build system supports the standard formats such as Tarball or Git repository system.
 	4) Once the source code is downloaded, the Build system extracts them to a local work area.
 	5) In the local work area, the Patches are applied on the source code and the steps to Configure and Compile the SW are executed.
-	6) After the Compilation is successful, the Build system installs the SW into a temporary staging area where the selected Package format is used to roll-up the SW.
+	6) After the Compilation is successful, the Build system installs the SW into a temporary Staging area where the selected Package format is used to roll-up the SW.
 	7) A variety of QA and Sanity checks are run throughout the Build system.
 	8) After the binaries are created, the Build system generates the binary Package Feeds that is used to create the final Root file Image.
 	9) The Build system generates the Linux Image and a customized Extensible SDK (eSDK) for Application development in parallel.
