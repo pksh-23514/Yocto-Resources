@@ -28,3 +28,12 @@ Package Feeds:
 					----------------------------------
 					 Image Generation  SDK Generation
 					----------------------------------
+
+3. They are an intermediary step in the Build process.
+4. The OpenEmbedded Build system provides the Classes to generate different Package types.
+5. The Classes to be enabled is specified by the 'PACKAGE_CLASSES' variable.
+6. The Build process performs the validation of the Packages with the generated Output QA checks before placing them in this area.
+7. The 'insane' Class is used to generate the QA checks performed om the Packages. The Distribution Policy usually dictates whether this Class should be included or not.
+8. A range of checks are performed to verify the Build's Output for common problems that are encountered during Run-time.
+9. The directory that the Build system uses to store the Packages is determined by the combination of the variables and the Package manager being used.
+10. The following variables define the path where the Packages are kept:
