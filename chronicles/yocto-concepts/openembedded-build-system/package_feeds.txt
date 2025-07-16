@@ -3,22 +3,28 @@ Package Feeds:
 1. When the OpenEmbedded Build system generates an Image or SDK, it gets all the Packages from a Package Feeds area located in the Build directory.
 2. The expanded view of the 'Package Feeds' in the 'OpenEmbedded Build Workflow' is as follows:
 
- BitBake
--------------------------------
-|                   --------- |
-| --------------    |       | |
-| | .rpm       |    |       | |
-| | Generation |    |       | |
-| ----------------->|       | |
-|                   |       | |
-| --------------    |       | |
-| | .deb       |    | QA    | |
-| | Generation |    | Tests | |
-| ----------------->|       | |
-|                   |       | |
-| --------------    |       | |
-| | .ipk       |    |       | |
-| | Generation |    |       | |
-| ----------------->|       | |
-|                   --------- |
--------------------------------
+ BitBake				Package Feeds
+-------------------------------		----------------------------------
+|                   --------- |		| Build Directory		 |
+| --------------    |       | |		| ------------------------------ |
+| | .rpm       |    |       | |		| | poky                       | |
+| | Generation |    |       | |		| |   build                    | |
+| ----------------->|       | |		| |     tmp                    | |
+|                   |       | |		| |       deploy <-------------| |--- DEPLOY_DIR
+| --------------    |       | |		| |         <package-type> <---| |--- DEPLOY_DIR_*
+| | .deb       |    | QA    | |-------->| |           <package-arch> <-| |--- PACKAGE_ARCH
+| | Generation |    | Tests | |		| |             *.<type>       | |
+| ----------------->|       | |	  ----->| |             *.<type>       | |
+|                   |       | |	  |	| |                 :          | |
+| --------------    |       | |	  |	| |                 :          | |
+| | .ipk       |    |       | |	  |	| |           <package-arch> <-| |--- PACKAGE_ARCH
+| | Generation |    |       | |	  |	| |             *.<type>       | |
+| ----------------->|       | |	  |	| |             *.<type>       | |
+|                   --------- |	  |	| |                 :          | |
+-------------------------------	  |	| ------------------------------ |
+				  |	----------------------------------
+				  |		|		|
+	do_package_write_* --------		V		V
+					----------------------------------
+					 Image Generation  SDK Generation
+					----------------------------------
