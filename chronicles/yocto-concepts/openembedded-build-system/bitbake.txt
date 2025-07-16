@@ -26,8 +26,8 @@ Source Fetching:
 ----------------------------------- ----------------------- ----------------
 		|				|		   |
 Source		|				|		   |
-Materials	V				V		   V
-
+Materials	|				|		   |
+		V				V		   V
 ---------------------------------------------------------------------------------------------------------------------------
 |															  |
 | BitBake									Build Directory				  |
@@ -46,3 +46,19 @@ Materials	V				V		   V
 |										|           ${BP} <---------------------|-|--- S
 |										----------------------------------------- |
 ---------------------------------------------------------------------------------------------------------------------------
+
+3. The 'do_fetch' and 'do_unpack' Tasks are involved in this stage of the Build.
+4. Each Recipe has an area in the Build directory where the unpacked source code resides.
+5. The Build directory hierarchy has the following variables:
+	1) TMPDIR => It is defined as 'build/tmp' inside the Build directory.
+	2) PACKAGE_ARCH => It defines the Architecture of the resulting Package or Packages. The variable value varies based on the eventual destination of the Package.
+	3) TARGET_OS => It is the OS of the Target system. A typical value can be 'linux' (like qemux86-poky-linux).
+	4) PN => In context to the Inputs, the variable represents the name of the Recipe used to Build the Package.
+	5) WORKDIR => It is defined as the directory used to Build the Recipe. It is specific to the Recipe being Built and the system for which the Recipe is getting Built.
+	6) PV => It is defined as the version of the Recipe being used to Build the Package.
+	7) UNPACKDIR => It is defined as the directory containing the unpacked source files for a Recipe. The default value is 'sources-unpack' and it is an internal variable.
+	8) S => It is defined as the directory containing the source code after unpacking and patching. The default value is 'BP'.
+	9) BP => It is defined as the base Recipe name and version without any special Recipe name suffix. The default value is '${BPN}-${PV}'.
+	10) BPN => It is defined as the name of the Recipe being used to Build the Package. It is a version of the 'PN' variable without the common prefixes or suffixes.
+6. For the local files present in the 'SRC_URI' variable, the Build system takes a checksum of the file for the Recipe and inserts into the signature of the 'do_fetch' Task.
+7. If the local file is modified, the 'do_fetch' Task and all the other dependent Tasks are executed again.
