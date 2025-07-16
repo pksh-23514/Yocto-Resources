@@ -37,3 +37,13 @@ Package Feeds:
 8. A range of checks are performed to verify the Build's Output for common problems that are encountered during Run-time.
 9. The directory that the Build system uses to store the Packages is determined by the combination of the variables and the Package manager being used.
 10. The following variables define the path where the Packages are kept:
+	1) DEPLOY_DIR => It is defined as 'tmp/deploy' inside the Build directory.
+	2) DEPLOY_DIR_* => It is the Package type sub-directory defined based on the Package manager used. It is expanded as follows:
+		---> If the Build is using RPM Packaging and Tarball creation, the variable is DEPLOY_DIR_RPM.
+		---> If the Build is using IPK Packaging and Tarball creation, the variable is DEPLOY_DIR_IPK.
+		---> If the Build is using DEB Packaging and Tarball creation, the variable is DEPLOY_DIR_DEB.
+	3) PACKAGE_ARCH => It defines the Architecture-specific sub-directory (like the Package can be available for the 'i586' or 'qemux86' Architectures).
+11. The BitBake uses the 'do_package_write_*' Tasks to generate the Packages and place them in the Package holding area.
+	1) The 'do_package_write_rpm' Task is used for the RPM Packages.
+	2) The 'do_package_write_ipk' Task is used for the IPK Packages.
+	3) The 'do_package_write_deb' Task is used for the DEB Packages.
