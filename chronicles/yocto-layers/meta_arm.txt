@@ -1,0 +1,20 @@
+meta-arm:
+=========
+1. The 'meta-arm' is an official Board Support Package (BSP) and Toolchain Layer provided by the ARM to support their platforms.
+2. It contains the Meta-data, Configurations and Recipes specifically to support a wide range of Arm-based platforms, tools and features.
+3. It provides the support for the following:
+	1) ARM CPU families including Neoverse, Cortex-A, Cortex-R and Cortex-M.
+	2) ARM fixed virtual platforms (FVP).
+	3) ARM reference HW Boards like Corstone‑1000, FVP Base virtual platform and Juno development Board.
+	4) ARM SystemReady infrastructure requirements (IR) on FVP Base.
+	5) ARM Toolchain and Firmware integration like ARM Trusted Firmware (ATF), u-Boot, ARM GCC, ARM binary Toolchain, SCP Firmware and UEFI.
+	6) ARM SW like OP-TEE (Trusted Execution Environment).
+4. It contains the following Layers as sub-directories:
+	1) meta-arm-bsp
+	2) meta-arm-systemready
+	3) meta-arm-toolchain
+	4) meta-arm
+5. The 'meta-arm' sub-directory contains the general Recipes for the ARM Architecture such as Firmware, FVPs and ARM-specific integration.
+6. The 'meta-arm-bsp' sub-directory contains the Board Support Package (BSP) for ARM reference platforms such as FVP Base, Corstone-1000 and Juno.
+7. The 'meta-arm-toolchain' sub-directory contains the Recipes to Build ARM binary Toolchains (ARM GCC).
+8. It depends on the 'meta', 'meta-python' and 'meta-arm-toolchain' Layers.
