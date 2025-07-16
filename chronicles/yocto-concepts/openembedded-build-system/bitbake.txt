@@ -1,0 +1,12 @@
+BitBake Tool:
+=============
+1. The OpenEmbedded Build system uses the BitBake to produce the Images and SDKs.
+2. It consists of several functional areas throughout the Build process.
+	1) Source fetching
+	2) Patching
+	3) Configuration, Compilation and Staging
+	4) Package splitting
+	5) Image generation
+	6) SDK generation
+	7) Stamp files
+	8) SetScene Tasks and Shared-State
