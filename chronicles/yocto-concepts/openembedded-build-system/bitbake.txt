@@ -99,3 +99,12 @@ Materials	|				|		   |
 |		|   <patch>"	|    | *.diff      |				|           ${BP} <---------------------|-|--- S
 |		-----------------    ---------------				----------------------------------------- |
 ---------------------------------------------------------------------------------------------------------------------------
+
+3. The 'do_patch' Task utilizes the 'SRC_URI' and 'FILESPATH' variables to locate the applicable Patch files.
+4. The default processing for the Patches assume the files have either '.patch' or '.diff' types or even their compressed versions (diff.gz, patch.bz2 etc) as well.
+5. The 'FILESPATH' variable defines the default set of directories that the Build system uses to search for the Patch files.
+6. The BitBake automatically finds and applies the Patches for each Recipe in the order the Patch files are located.
+7. It uses the '-p1' option to apply the Patches i.e. one directory level in the path is stripped off.
+8. If there are multiple directory levels to be stripped off, the number of levels using the 'striplevel' option should be specified in the 'SRC_URI' entry for the Patch.
+9. If the Patch needs to be applied in a specific sub-directory that is not specified in the Patch file, the 'patchdir' option must be used in the 'SRC_URI' entry.
+10. Once the Patches are found, they are applied to the Recipe's source files that are located in the directory pointed by the 'S' variable.
