@@ -63,3 +63,39 @@ Materials	|				|		   |
 	11) MACHINE_ARCH => If the Recipe's Output Package is Built for a specific Target Machine rather than the Architecture, it is set as the 'PACKAGE_ARCH' variable value.
 6. For the local files present in the 'SRC_URI' variable, the Build system takes a checksum of the file for the Recipe and inserts into the signature of the 'do_fetch' Task.
 7. If the local file is modified, the 'do_fetch' Task and all the other dependent Tasks are executed again.
+
+Patching:
+*********
+1. After the source is fetched and unpacked, the Patches are applied to the source files by the BitBake (if any).
+2. The expanded view of the 'Patching' in the 'OpenEmbedded Build Workflow' is as follows:
+
+     Upstream Project Releases		Local Projects		  SCMs
+----------------------------------- ----------------------- ----------------
+|  busybox			  | |  Local Source Tree  | |  meta-qt5	   |
+|  busybox-1.35.0.tar.bz2	  | |  <directory>	  | |    Git	   |
+|				  | |      <file>	  | |		   |
+|  <recipe>			  | |      <directory>	  | |  opkg	   |
+|  Tarball / ZIP / Archive Files  | |          <file>	  | |  Subversion  |
+----------------------------------- ----------------------- ----------------
+		|				|		   |
+Source		|				|		   |
+Materials	|				|		   |
+		V				V		   V
+---------------------------------------------------------------------------------------------------------------------------
+|															  |
+| BitBake									Build Directory				  |
+|		Patch Application						----------------------------------------- |
+| 		------------							| tmp <---------------------------------|-|--- TMPDIR
+| 		|	   |							|   work				| |
+| 		| do_patch |							|     ${PACKAGE_ARCH}-poky-${TARGET_OS} | |
+|		|	   |--------------------------------------------------->|       ${PN}				| |
+|		------------							|         ${PV}	<-----------------------|-|--- WORKDIR
+|		     |								|           sources-unpack <------------|-|--- UNPACKDIR
+|		     V								|           ${BP} <---------------------|-|--- S
+|		-----------------    ---------------				|     ${MACHINE_ARCH}-poky-${TARGET_OS}	| |
+|		| Recipes	|    | Patch Files |				|       ${PN}				| |
+|		|		|--->|		   |--------------------------->|         ${PV}	<-----------------------|-|--- WORKDIR
+|		| SRC_URI = " \	|    | *.patch	   |				|           sources-unpack <------------|-|--- UNPACKDIR
+|		|   <patch>"	|    | *.diff      |				|           ${BP} <---------------------|-|--- S
+|		-----------------    ---------------				----------------------------------------- |
+---------------------------------------------------------------------------------------------------------------------------
