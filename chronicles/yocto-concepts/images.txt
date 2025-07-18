@@ -1,6 +1,6 @@
 Images:
 =======
-1. Images are produced by the Build system that contains the complete RootFS that runs on the specific Target HW or QEMU.
+1. Images are the binary Output that runs on the specific Target HW or QEMU. They are produced by the Build system that contains the Boot files and the complete RootFS.
 2. They are an artifact of the BitBake Build process based on the collection of Recipes and Meta-data provided to the Build system.
 3. When the Build command is provided to the BitBake, it is actually providing the top-level Recipe that begins the Build process for the type of Image requested.
 4. The Output might be in the form:
