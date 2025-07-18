@@ -9,11 +9,26 @@ Customizing Images using local.conf:
 	2) The changes made in the 'local.conf' file would affect all the Image Builds which is not suitable.
 5. It is mostly used for testing purposes only as the changes are temporary and local.
 
-Customizing Image using IMAGE_FEATURES and EXTRA_IMAGE_FEATURES:
-================================================================
+Customizing Images using IMAGE_FEATURES and EXTRA_IMAGE_FEATURES:
+=================================================================
 1. The use of the 'IMAGE_FEATURES' and 'EXTRA_IMAGE_FEATURES' variables can be used to customize the Image.
 2. The 'meta/classes/image.bbclass' file lists the available values in 'IMAGE_FEATURES' variable. The variable mostly maps to the Package groups or the Configurations.
 3. The Build system uses the 'IMAGE_FEATURES' variable to automatically add the Packages or Configurations to the 'IMAGE_INSTALL' variable.
 4. The 'EXTRA_IMAGE_FEATURES' variable is added to the 'IMAGE_FEATURES' variable within the 'meta/conf/bitbake.conf' file.
 5. The use of a separate 'EXTRA_IMAGE_FEATURES' variable avoids the overwriting of the features in the Image Recipe.
 6. The best practice is to use the 'IMAGE_FEATURES' variable in a Recipe file and the 'EXTRA_IMAGE_FEATURES' variable in the 'build/conf/local.conf' file.
+
+Customizing Images using Custom Image Recipes:
+==============================================
+1. The custom Image Recipe file can either be written from scratch or using the base Recipe of an existing Image and appending the additional Packages.
+
+Writing Custom Image Recipes from Scratch:
+******************************************
+1) The 'inherit' statement can be used to include the 'meta/classes/core-image.bbclass' file. This Class file contains the basic functions required for all the Images.
+	=> inherit core-image
+	---> The 'meta/classes/core-image.bbclass' file internally inherits the 'image.bbclass' file.
+2) The Packages to be included in the Image are specified using the 'IMAGE_INSTALL' variable.
+	=> IMAGE_INSTALL = "package-name ..."
+3) The Package names used must be the OpenEmbedded Package names and not the Debian Package names.
+	=> IMAGE_INSTALL = "glibc-dev" (instead of 'libc6-dev')
+4) It is a best practice to include a summary, License and any other necessary descriptions for the custom Image Recipe.
