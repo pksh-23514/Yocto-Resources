@@ -55,3 +55,26 @@ Writing Custom Image Recipes by Extending the Base Recipe of Existing Image:
 	   strace-ptest
 	   strace-src
 	---> There are multiple Package names as one Recipe can create multiple Packages. These exact Package names can be installed using the 'IMAGE_INSTALL' variable.
+
+Customizing Images using Custom Package Groups:
+===============================================
+1. For the complex custom Image Builds, the best way to customize the Images is to create custom Package group Recipe files.
+2. The 'meta/classes/packagegroup.bbclass' file is always included in the Package group Recipe file.
+3. The appropriate default values and complementary Packages for each specified Package are added in the Recipe file using the 'inherit' statement.
+	=> vi packagegroup-custom.bb
+	=> inherit packagegroup
+	---> This statement should be present certainly before the 'PACKAGES' variable.
+4. The 'PACKAGES' variable in the Recipe file lists the Package group Packages to be produced as Output.
+5. For each Package specified in the 'PACKAGES' variable, the dependencies and the recommended Packages can be specified using the 'RDEPENDS' and 'RRECOMMENDS' entries.
+	=> PACKAGES = " \
+	       ${PN}-package-suffix-name
+		   ..."
+	=> RDEPENDS:${PN}-package-suffix-name = " \
+	        package-name
+			..."
+	=> RRECOMMENDS:${PN}-package-suffix-name = " \
+	        package-name
+			..."
+	---> The 'packagegroup-custom-package-suffix-name' is created with their dependencies and their recommended Package dependencies as listed.
+6. The Package group Recipe must be listed in the 'IMAGE_INSTALL' variable to be used in the Build.
+	=> IMAGE_INSTALL += "packagegroup-custom"
