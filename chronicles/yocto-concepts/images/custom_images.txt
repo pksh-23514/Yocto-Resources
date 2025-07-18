@@ -10,3 +10,15 @@ Images:
 5. It is Architecture-specific i.e. they are Built for a specific Architecture. The Target Architecture is mentioned by the Machine Configurations.
 6. The Image Recipe files are placed in the 'meta*/recipes*/images/' directory of the Build system.
 7. All the Image Recipes inherits the 'meta/classes/image.bbclass' file.
+8. There is no single Image that can fit all the use cases in the Embedded systems. Therefore, the customization of the Image Recipe files is often necessary.
+
+Custom Image Recipe:
+---------------------
+1. There is always a necessity to customize the Image Recipe to meet the specific requirements.
+	1) To support the specific HW.
+	2) To include the relevant SW.
+	3) To optimize the Image performance.
+	4) To integrate the User Applications.
+2. There are 2 ways to create the customized Image:
+	1) Creating the Image Recipe from scratch.
+	2) Extending an existing Image Recipe.
