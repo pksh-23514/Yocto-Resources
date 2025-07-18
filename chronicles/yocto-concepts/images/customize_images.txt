@@ -24,11 +24,11 @@ Customizing Images using Custom Image Recipes:
 
 Writing Custom Image Recipes from Scratch:
 ******************************************
-1) The 'inherit' statement can be used to include the 'meta/classes/core-image.bbclass' file. This Class file contains the basic functions required for all the Images.
+1. The 'inherit' statement can be used to include the 'meta/classes/core-image.bbclass' file. This Class file contains the basic functions required for all the Images.
 	=> inherit core-image
 	---> The 'meta/classes/core-image.bbclass' file internally inherits the 'image.bbclass' file.
-2) The Packages to be included in the Image are specified using the 'IMAGE_INSTALL' variable.
+2. The Packages to be included in the Image are specified using the 'IMAGE_INSTALL' variable.
 	=> IMAGE_INSTALL = "package-name ..."
-3) The Package names used must be the OpenEmbedded Package names and not the Debian Package names.
+3. The Package names used must be the OpenEmbedded Package names and not the Debian Package names.
 	=> IMAGE_INSTALL = "glibc-dev" (instead of 'libc6-dev')
-4) It is a best practice to include a summary, License and any other necessary descriptions for the custom Image Recipe.
+4. It is a best practice to include a summary, License and any other necessary descriptions for the custom Image Recipe.
