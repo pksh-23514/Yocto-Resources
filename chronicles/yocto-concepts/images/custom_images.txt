@@ -1,0 +1,12 @@
+Images:
+=======
+1. Images are the binary Output that runs on the specific Target HW or QEMU. They are produced by the Build system that contains the Boot files and the complete RootFS.
+2. They are an artifact of the BitBake Build process based on the collection of Recipes and Meta-data provided to the Build system.
+3. When the Build command is provided to the BitBake, it is actually providing the top-level Recipe that begins the Build process for the type of Image requested.
+4. The Output might be in the form:
+	1) Filesystem Image (.ext4)
+	2) Bootable Image (.wic)
+	3) Compressed RootFS (.tar.gz)
+5. It is Architecture-specific i.e. they are Built for a specific Architecture. The Target Architecture is mentioned by the Machine Configurations.
+6. The Image Recipe files are placed in the 'meta*/recipes*/images/' directory of the Build system.
+7. All the Image Recipes inherits the 'meta/classes/image.bbclass' file.
