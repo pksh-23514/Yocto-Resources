@@ -8,3 +8,12 @@ Customizing Images using local.conf:
 	1) It is a local change and not as flexible as creating the custom Image Recipe.
 	2) The changes made in the 'local.conf' file would affect all the Image Builds which is not suitable.
 5. It is mostly used for testing purposes only as the changes are temporary and local.
+
+Customizing Image using IMAGE_FEATURES and EXTRA_IMAGE_FEATURES:
+================================================================
+1. The use of the 'IMAGE_FEATURES' and 'EXTRA_IMAGE_FEATURES' variables can be used to customize the Image.
+2. The 'meta/classes/image.bbclass' file lists the available values in 'IMAGE_FEATURES' variable. The variable mostly maps to the Package groups or the Configurations.
+3. The Build system uses the 'IMAGE_FEATURES' variable to automatically add the Packages or Configurations to the 'IMAGE_INSTALL' variable.
+4. The 'EXTRA_IMAGE_FEATURES' variable is added to the 'IMAGE_FEATURES' variable within the 'meta/conf/bitbake.conf' file.
+5. The use of a separate 'EXTRA_IMAGE_FEATURES' variable avoids the overwriting of the features in the Image Recipe.
+6. The best practice is to use the 'IMAGE_FEATURES' variable in a Recipe file and the 'EXTRA_IMAGE_FEATURES' variable in the 'build/conf/local.conf' file.
