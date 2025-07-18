@@ -1,0 +1,10 @@
+Customizing Images using local.conf:
+====================================
+1. The easiest way to customize the Image is to update the 'build/conf/local.conf' file.
+2. The Package can be added using the 'IMAGE_INSTALL' variable with the ':append' operation.
+	=> IMAGE_INSTALL:append = " package-name"
+3. The ':append' operation is guaranteed. Therefore, it is preferred to use it over the '+=' operator to avoid ordering issues.
+4. The limitations of using this method are:
+	1) It is a local change and not as flexible as creating the custom Image Recipe.
+	2) The changes made in the 'local.conf' file would affect all the Image Builds which is not suitable.
+5. It is mostly used for testing purposes only as the changes are temporary and local.
