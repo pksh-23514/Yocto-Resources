@@ -19,7 +19,7 @@ Preparing SD card for Booting:
 	4) Label: ROOTFS
 10. Click on the 'Apply All Operations' (green arrow) option and select 'Apply' on the dialogue box.
 11. The operation will take some time to delete and add the partitions.
-12. There are some flags to be managed for the BOOT partition to make it bootable. Right click on the partition and select the following options from 'Manage Flags':
+12. There are some flags to be managed for the BOOT partition to make it Bootable. Right click on the partition and select the following options from 'Manage Flags':
 	1) boot
 	2) lba
 13. After this selection, the partition will have these flags displayed along with the other details.

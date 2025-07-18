@@ -20,6 +20,6 @@ BeagleBone Black SD Card Booting Process:
 4. The Board can be powered up by connecting a USB cable Type-B from the Host to the USB mini-port on the Target.
 5. The Board Boots up by using the pre-existing Images from the eMMC. But this is not desirable as the Image is flashed on the SD card.
 6. Therefore, before powering up the Board, the Boot button (S2) is to be pressed and held for changing the Boot sequence.
-7. After 2-5 seconds, the Boot button can be released. This causes the Board to boot from the SD card instead of the eMMC.
+7. After 2-5 seconds, the Boot button can be released. This causes the Board to Boot from the SD card instead of the eMMC.
 8. The Board is now booted-up successfully from the SD card if it reaches the Login stage.
 9. This is a tedious process to Boot the Board by pressing the Boot button everytime.
