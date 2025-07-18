@@ -9,6 +9,8 @@ Images:
 	3) Compressed RootFS (.tar.gz)
 5. It is Architecture-specific i.e. they are Built for a specific Architecture. The Target Architecture is mentioned by the Machine Configurations.
 6. The Image Recipe files are placed in the 'meta*/recipes*/images/' directory of the Build system.
+	=> ls meta*/recipes*/images/*.bb
+	---> The above command will list all the Image Recipe files present in the Layers.
 7. The most commonly used Target Images provided by the Poky are:
 	1) core-image-base
 	2) core-image-full-cmdline
