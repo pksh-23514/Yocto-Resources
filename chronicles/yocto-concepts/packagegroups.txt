@@ -1,0 +1,25 @@
+Package Groups:
+===============
+1. Package groups are a way to organize and manage a collection of SW Packages that should be installed together in an Image.
+2. They are useful for the functional grouping of the Packages i.e. the Packages bundled for a specific functionality like Booting, Multimedia etc.
+3. It is essentially a Recipe with the following properties:
+	1) It doesn't Build the actual SW itself. It has to be listed in the 'IMAGE_INSTALL' variable to be used in the Build.
+	2) It specifies a list of other Packages or Package groups that should be included together.
+	3) It is used to simplify the Image Configuration and customization.
+4. They are placed in the Layer at the directory path:
+	=> meta-layer/
+	   └── recipes-*
+	       └── packagegroups
+5. They can be searched in the Layers by running the following command:
+	=> find recipes-*/ -name "packagegroups"
+6. A Package group Recipe file have the prefix as 'packagegroup-' by convention to distinguish themselves. The file extension is same as for the Recipe file (.bb).
+	1) packagegroup-core-boot.bb - The minimal set of Packages required to Boot the system.
+	2) packagegroup-rpi-test.bb - The Raspberry Pi Test Package group.
+7. Each Package group Recipe file is recommended to include the 'meta/classes/packagegroup.bbclass' file.
+	1) It enables the file to be treated as a Package group.
+	2) It avoids the unnecessary QA errors or warnings.
+	3) It provides the default behavior and a standard structure expected for the Package group Recipes.
+	4) It can be included in the Package group Recipe file preferably at the top itself:
+		=> inherit packagegroup
+8. The Package group is included in the Build by appending it to the 'IMAGE_INSTALL' variable in the Image Recipe file.
+	=> IMAGE_INSTALL:append = " packagegroup-name"
