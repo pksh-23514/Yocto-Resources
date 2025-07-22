@@ -328,3 +328,31 @@ PING 192.168.7.2 (192.168.7.2) 56(84) bytes of data.
 --- 192.168.7.2 ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3003ms
 rtt min/avg/max/mdev = 0.900/2.303/4.995/1.663 ms
+
+5. To exit the QEMU Console, run the below command.
+root@qemuarm:~# poweroff
+
+Broadcast message from root@qemuarm (ttyAMA0) (Mon Jul 21 08:19:34 2025):
+
+The system is going down for system halt NOW!
+INIT: Switching to runlevel: 0
+INIT: Sending processes configured via /etc/inittab the TERM signal
+Stopping Dropbear SSH server: stopped /usr/sbin/dropbear (pid 332)
+dropbear.
+Stopping syslogd/klogd: stopped syslogd (pid 340)
+stopped klogd (pid 343)
+done
+Unmounting remote filesystems...
+Deconfiguring network interfaces... ifdown: interface lo not configured
+done.
+Sending all processes the TERM signal...
+Sending all processes the KILL signal...
+Deactivating swap...
+Unmounting local filesystems...
+[  375.735490] EXT4-fs (vda): re-mounted. Opts: (null). Quota mode: disabled.
+[  375.954866] reboot: Power down
+runqemu - INFO - Cleaning up
+runqemu - INFO - Host uptime: 257996.61
+
+Set 'tap0' nonpersistent
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
