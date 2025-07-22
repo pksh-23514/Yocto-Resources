@@ -58,3 +58,41 @@ NOTE: Writing buildhistory took: 2 seconds
 Summary: 1 task failed:
   /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs
 Summary: There was 1 ERROR message, returning a non-zero exit code.
+
+4. The 'inittab' Package needs to configure itself at Run-time. Since, the RootFS is Read-only type, this error is coming up.
+
+5. This Run-time Package Configurations error can be resolved by adding the following statements in the 'conf/local.conf' file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> # To prevent issue due to Read-Only RootFS
+=> SERIAL_CONSOLES_CHECK:forcevariable = ""
+=> SERIAL_CONSOLES="115200;ttyAMA0"
+
+6. Execute the 'bitbake' command to Build an Image with the new Configuration.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake core-image-minimal
+Loading cache: 100% |                                                                                                                                            | ETA:  --:--:--
+Loaded 0 entries from dependency cache.
+Parsing recipes: 100% |##########################################################################################################################################| Time: 0:00:17
+Parsing of 883 .bb files complete (0 cached, 883 parsed). 1644 targets, 45 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-20.04"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.12"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp       = "my-kirkstone:e19a76951b61ef7403dd64af844a3cfe16fda118"
+
+Initialising tasks: 100% |#######################################################################################################################################| Time: 0:00:02
+Sstate summary: Wanted 17 Local 7 Mirrors 0 Missed 10 Current 1400 (41% match, 99% complete)
+Removing 8 stale sstate objects for arch qemuarm: 100% |#########################################################################################################| Time: 0:00:00
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 3632 tasks of which 3615 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
