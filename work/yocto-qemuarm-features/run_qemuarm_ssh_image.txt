@@ -279,3 +279,52 @@ Poky (Yocto Project Reference Distro) 4.0.27 qemuarm /dev/ttyAMA0
 
 qemuarm login: root
 root@qemuarm:~#
+
+2. Verify the Dropbear is running by executing the 'ps' command.
+root@qemuarm:~# ifconfig
+eth0      Link encap:Ethernet  HWaddr 52:54:00:12:34:02
+          inet addr:192.168.7.2  Bcast:192.168.7.255  Mask:255.255.255.0
+          inet6 addr: fe80::5054:ff:fe12:3402/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:35 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:9 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:6434 (6.2 KiB)  TX bytes:726 (726.0 B)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+root@qemuarm:~# ps | grep dropbear
+  332 root      2288 S    /usr/sbin/dropbear -r /etc/dropbear/dropbear_rsa_host_key -p 22 -B
+  359 root      2488 S    grep dropbear
+
+3. Verify the Dropbear is functional by executing the 'ping' test to the Host Machine.
+root@qemuarm:~# ping XXX.XXX.XXX.XXX -c4
+PING XXX.XXX.XXX.XXX (XXX.XXX.XXX.XXX): 56 data bytes
+64 bytes from XXX.XXX.XXX.XXX: seq=0 ttl=64 time=23.524 ms
+64 bytes from XXX.XXX.XXX.XXX: seq=1 ttl=64 time=15.393 ms
+64 bytes from XXX.XXX.XXX.XXX: seq=2 ttl=64 time=1.397 ms
+64 bytes from XXX.XXX.XXX.XXX: seq=3 ttl=64 time=3.796 ms
+
+--- XXX.XXX.XXX.XXX ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 1.397/11.027/23.524 ms
+root@qemuarm:~#
+
+4. On the Host Machine, the 'ping' test can be performed to the Target Machine IP '192.168.7.2'.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ping 192.168.7.2 -c4
+PING 192.168.7.2 (192.168.7.2) 56(84) bytes of data.
+64 bytes from 192.168.7.2: icmp_seq=1 ttl=64 time=5.00 ms
+64 bytes from 192.168.7.2: icmp_seq=2 ttl=64 time=0.900 ms
+64 bytes from 192.168.7.2: icmp_seq=3 ttl=64 time=0.943 ms
+64 bytes from 192.168.7.2: icmp_seq=4 ttl=64 time=2.38 ms
+
+--- 192.168.7.2 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3003ms
+rtt min/avg/max/mdev = 0.900/2.303/4.995/1.663 ms
