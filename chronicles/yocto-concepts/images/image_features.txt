@@ -50,3 +50,31 @@ Image features Available for All Images:
 	2) This leaves the Image for population at runtime by 'systemd'.
 17. staticdev-pkgs:
 	1) It installs the Static development Packages i.e. the Static Libraries (*.a files), for all the Packages installed in a given Image.
+
+Image features Available with core-image Class:
+***********************************************
+1. hwcodecs:
+	1) It installs the HW acceleration codecs.
+2) nfs-server:
+	1) It installs an NFS Server.
+3. perf:
+	1) It installs the profiling tools such as 'perf', 'systemtap' and 'LTTng'.
+4. ssh-server-dropbear:
+	1) It installs the Dropbear minimal SSH Server. It also recommends the 'openssh-sftp-server' Package that is by default pulled in the Image.
+5. ssh-server-openssh:
+	1) It installs the OpenSSH SSH Server.
+	2) If both the OpenSSH SSH Server and the Dropbear minimal SSH Server are present in the 'IMAGE_FEATURES' variable, then OpenSSH will take precedence.
+6. tools-debug:
+	1) It installs the Debugging tools such as 'strace' and 'gdb'.
+7. tools-sdk:
+	1) It installs a full SDK that runs on the Device.
+8. tools-testapps:
+	1) It installs the Device testing tools.
+9. weston:
+	1) It installs the 'weston' i.e. the reference Wayland Environment.
+10. x11:
+	1) It installs the X Server.
+11. x11-base:
+	1) It installs the X Server with a minimal Environment.
+12. x11-sato:
+	1) It installs the OpenedHand Sato Environment.
