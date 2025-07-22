@@ -5,3 +5,48 @@ Image Features:
 3. They are typically used in the Image Recipe file.
 4. Using these variables, there are several different pre-defined Packages that can be added to the Image.
 5. The best practice is to use the 'IMAGE_FEATURES' variable in a Image Recipe file and the 'EXTRA_IMAGE_FEATURES' variable in the 'build/conf/local.conf' file.
+
+Image features Available for All Images:
+****************************************
+1. allow-empty-password:
+	1) It allows the Dropbear or the OpenSSH to accept the Logins from User accounts having an empty password String.
+2. allow-root-login:
+	1) It allows the Dropbear or the OpenSSH to accept the Root Logins.
+3. dbg-pkgs:
+	1) It installs the Debug Symbol Packages for all the Packages installed in a given Image.
+4. dev-pkgs:
+	1) It installs the development Packages (Headers and extra library links) for all the Packages installed in a given Image.
+5. doc-pkgs:
+	1) It installs the documentation Packages for all the Packages installed in a given Image.
+6. empty-root-password:
+	1) It can be used if there is a need to allow the Root Login with an empty password.
+	2) If this feature is not present in the 'IMAGE_FEATURES' variable, a non-empty password is forced in the '/etc/passwd' and '/etc/shadow' files, if they exist.
+7. lic-pkgs:
+	1) It installs the License Packages for all the the Packages installed in a given Image.
+8. overlayfs-etc:
+	1) It Configures the '/etc' directory to be in the Overlay Filesystem (OverlayFS):
+		---> a lower read-only Mount.
+		---> an upper writable Mount.
+	2) This allows to store the Device specific information on the '/etc' directory elsewhere, especially if the RootFS is Read-only.
+9. package-management:
+	1) It installs the Package management tools and preserves the Package manager database.
+10. post-install-logging:
+	1) It enables the logging post-install script that runs to the '/var/log/postinstall.log' file on the first Boot of the Image on the Target system.
+11. ptest-pkgs:
+	1) It installs 'ptest' Packages for all the 'ptest' enabled Recipes.
+12. read-only-rootfs:
+	1) It creates an Image where the RootFS is Read-only.
+13. read-only-rootfs-delayed-postinsts:
+	1) It can be specified in conjunction with the 'read-only-rootfs' feature.
+	2) It specifies that post-install scripts are still permitted.
+14. serial-autologin-root:
+	1) It can be specified in conjunction with the 'empty-root-password' feature that will automatically Login as Root on the Serial Console.
+	2) This is a security hole and should be used carefully.
+15. splash:
+	1) It enables showing a 'splash' screen during the Booting process.
+	2) By default, this screen is provided by the 'psplash', which can be customized by using the 'SPLASH' variable within the Image Recipe.
+16. stateless-rootfs:
+	1) It specifies that the Image should be created as stateless i.e. when using 'systemd', the 'systemctl-native' will not run on the Image.
+	2) This leaves the Image for population at runtime by 'systemd'.
+17. staticdev-pkgs:
+	1) It installs the Static development Packages i.e. the Static Libraries (*.a files), for all the Packages installed in a given Image.
