@@ -1,5 +1,5 @@
-Quick Build for Other Architecture using the Same Build Directory:
-==================================================================
+Quick Build for ARM Architecture using the Same Build Directory:
+================================================================
 
 1. For building the Image for ARM Architecture instead of the Intel (x86) Architecture, the changes shall be made to the 'local.conf' file in the 'build/conf' directory.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
