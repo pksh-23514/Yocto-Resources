@@ -16,3 +16,45 @@ tmpfs on /run type tmpfs (rw,nosuid,nodev,mode=755)
 tmpfs on /var/volatile type tmpfs (rw,relatime)
 devpts on /dev/pts type devpts (rw,relatime,gid=5,mode=620,ptmxmode=000)
 root@qemuarm:~#
+
+2. To create a Read-only RootFS, the Image Recipe file has to be updated with the 'read-only-rootfs' feature.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta/recipes-core/images/core-image-minimal.bb
+=> IMAGE_FEATURES:append = " ssh-server-dropbear read-only-rootfs"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e core-image-minimal | grep ^IMAGE_FEATURES=
+IMAGE_FEATURES="debug-tweaks read-only-rootfs ssh-server-dropbear"
+
+3. Execute the 'bitbake' command to Build an Image with the new feature. However, there are can be an error due to Run-time Package Configurations.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake core-image-minimal
+Loading cache: 100% |                                                                                                                                            | ETA:  --:--:--
+Loaded 0 entries from dependency cache.
+Parsing recipes: 100% |##########################################################################################################################################| Time: 0:00:17
+Parsing of 883 .bb files complete (0 cached, 883 parsed). 1644 targets, 45 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "ubuntu-20.04"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.12"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp       = "my-kirkstone:e19a76951b61ef7403dd64af844a3cfe16fda118"
+
+Initialising tasks: 100% |#######################################################################################################################################| Time: 0:00:02
+Sstate summary: Wanted 9 Local 7 Mirrors 0 Missed 2 Current 1408 (77% match, 99% complete)
+NOTE: Executing Tasks
+ERROR: core-image-minimal-1.0-r0 do_rootfs: The following packages could not be configured offline and rootfs is read-only: ['100-sysvinit-inittab']
+ERROR: Logfile of failure stored in: /home/prabhat_kiran/.../Poky/poky/build/tmp/work/qemuarm-poky-linux-gnueabi/core-image-minimal/1.0-r0/temp/log.do_rootfs.260246
+ERROR: Task (/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 3623 tasks of which 3622 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs
+Summary: There was 1 ERROR message, returning a non-zero exit code.
