@@ -43,11 +43,11 @@ Writing Custom Image Recipes by Extending the Base Recipe of Existing Image:
 	=> IMAGE_INSTALL:append = " package-name ..."
 5. It is necessary to ensure the Package getting added to the Recipe is actually available in the Layers.
 6. It can be done using the 'bitbake -s' command or 'oe-pkgdata-util list-pkgs' command.
-	=> uic97426@ozd2945u:~/Datadrive/Poky/poky/build$ bitbake -s | grep strace
+	=> prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -s | grep strace
 	   strace                                               :5.16-r0
 	   strace-native                                        :5.16-r0
 	---> It confirms the 'strace' Recipe exists but the exact name to include this Package is not confirmed.
-	=> uic97426@ozd2945u:~/Datadrive/Poky/poky/build$ oe-pkgdata-util list-pkgs | grep strace
+	=> prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ oe-pkgdata-util list-pkgs | grep strace
 	   strace
 	   strace-dbg
 	   strace-dev
