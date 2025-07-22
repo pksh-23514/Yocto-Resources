@@ -1,0 +1,18 @@
+Yocto Image Build for ARM Architecture with Read-Only RootFS:
+=============================================================
+
+1. By default, the RootFS for the Image is a Read-Write type.
+root@qemuarm:~# vi file.txt
+=> Hello
+root@qemuarm:~# cat file.txt
+Hello
+root@qemuarm:~# mount
+/dev/root on / type ext4 (rw,relatime)
+devtmpfs on /dev type devtmpfs (rw,relatime,size=120132k,nr_inodes=30033,mode=755)
+proc on /proc type proc (rw,relatime)
+sysfs on /sys type sysfs (rw,relatime)
+debugfs on /sys/kernel/debug type debugfs (rw,relatime)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,mode=755)
+tmpfs on /var/volatile type tmpfs (rw,relatime)
+devpts on /dev/pts type devpts (rw,relatime,gid=5,mode=620,ptmxmode=000)
+root@qemuarm:~#
