@@ -96,3 +96,50 @@ NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 3632 tasks of which 3615 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
+
+7. After the Build is successful, the Target Image can be run on QEMU by executing the below command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ runqemu qemuarm core-image-minimal nographic
+runqemu - INFO - Running MACHINE=qemuarm bitbake -e ...
+runqemu - INFO - Continuing with the following parameters:
+KERNEL: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/zImage]
+MACHINE: [qemuarm]
+FSTYPE: [ext4]
+ROOTFS: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.ext4]
+CONFFILE: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.qemuboot.conf]
+
+runqemu - INFO - Setting up tap interface under sudo
+runqemu - INFO - Network configuration: ip=192.168.7.2::192.168.7.1:255.255.255.0::eth0:off:8.8.8.8
+runqemu - INFO - Running ...
+
+runqemu - INFO - Host uptime: 257617.65
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 5.15.184-yocto-standard (oe-user@oe-host) (arm-poky-linux-gnueabi-gcc (GCC) 11.5.0, GNU ld (GNU Binutils) 2.38.20220708) ...
+...
+INIT: Entering runlevel: 5
+Configuring network interfaces... ip: RTNETLINK answers: File exists
+Starting Dropbear SSH server: Generating 2048 bit rsa key, this may take a while...
+Public key portion is:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCcDXqHXAgm5AyKQA1nTwClxHQzPBmgtq2Xp0ZYMmgbJOzE1EJj/YKrGaf9UZapm9doMies1x6jcqXRYuQtbVGZ4rGSQ6+gv/... root@qemuarm
+Fingerprint: sha1!! 8e:f4:88:78:f1:29:44:9a:c2:e7:10:37:97:91:a0:cf:11:3e:58:6e
+dropbear.
+Starting syslogd/klogd: done
+
+Poky (Yocto Project Reference Distro) 4.0.27 qemuarm /dev/ttyAMA0
+
+qemuarm login: root
+root@qemuarm:~#
+
+8. With the current updates in the Image, the RootFS is now a Read-only type.
+root@qemuarm:~# touch file.txt
+touch: file.txt: Read-only file system
+root@qemuarm:~# mount
+/dev/root on / type ext4 (ro,relatime)
+devtmpfs on /dev type devtmpfs (rw,relatime,size=120132k,nr_inodes=30033,mode=755)
+proc on /proc type proc (rw,relatime)
+sysfs on /sys type sysfs (rw,relatime)
+debugfs on /sys/kernel/debug type debugfs (rw,relatime)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,mode=755)
+tmpfs on /var/volatile type tmpfs (rw,relatime)
+devpts on /dev/pts type devpts (rw,relatime,gid=5,mode=620,ptmxmode=000)
+tmpfs on /var/lib type tmpfs (rw,relatime)
