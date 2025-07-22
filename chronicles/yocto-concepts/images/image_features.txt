@@ -47,7 +47,7 @@ Image features Available for All Images:
 	2) By default, this screen is provided by the 'psplash', which can be customized by using the 'SPLASH' variable within the Image Recipe.
 16. stateless-rootfs:
 	1) It specifies that the Image should be created as stateless i.e. when using 'systemd', the 'systemctl-native' will not run on the Image.
-	2) This leaves the Image for population at runtime by 'systemd'.
+	2) This leaves the Image for population at Run-time by 'systemd'.
 17. staticdev-pkgs:
 	1) It installs the Static development Packages i.e. the Static Libraries (*.a files), for all the Packages installed in a given Image.
 
