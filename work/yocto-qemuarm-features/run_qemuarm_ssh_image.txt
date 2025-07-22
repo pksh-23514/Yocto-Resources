@@ -5,11 +5,11 @@ Running the Yocto Image for ARM Architecture on QEMU:
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ runqemu qemuarm core-image-minimal nographic
 runqemu - INFO - Running MACHINE=qemuarm bitbake -e ...
 runqemu - INFO - Continuing with the following parameters:
-KERNEL: [/home/uic97426/Datadrive/Poky/poky/build/tmp/deploy/images/qemuarm/zImage]
+KERNEL: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/zImage]
 MACHINE: [qemuarm]
 FSTYPE: [ext4]
-ROOTFS: [/home/uic97426/Datadrive/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.ext4]
-CONFFILE: [/home/uic97426/Datadrive/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.qemuboot.conf]
+ROOTFS: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.ext4]
+CONFFILE: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.qemuboot.conf]
 
 runqemu - INFO - Setting up tap interface under sudo
 runqemu - INFO - Network configuration: ip=192.168.7.2::192.168.7.1:255.255.255.0::eth0:off:8.8.8.8
