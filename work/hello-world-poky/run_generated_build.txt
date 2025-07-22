@@ -67,11 +67,11 @@ Examples:
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ runqemu qemux86-64 core-image-minimal
 runqemu - INFO - Running MACHINE=qemu-system-x86_64 bitbake -e...
 runqemu - INFO - Continuing with the following parameters:
-KERNEL: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/bzImage]
+KERNEL: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/bzImage]
 MACHINE: [qemux86-64]
 FSTYPE: [ext4]
-ROOTFS: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.ext4]
-CONFFILE: [/home/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.qemuboot.conf]
+ROOTFS: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.ext4]
+CONFFILE: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.qemuboot.conf]
 
 6. A video Console will appear on the Standard Output displaying the Boot log. The Boot process, if successful reaches the Login stage.
 [    0.000000] Linux version 5.15.32 (oe-user@oe-host) ...
