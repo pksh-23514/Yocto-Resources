@@ -1,0 +1,15 @@
+Recipes:
+========
+1. Recipes are a text file containing a set of instructions for building a SW.
+2. It is written in the BitBake Syntax. They are read and processed by the BitBake during the Build process.
+3. These files have the suffix as '.bb' to distinguish themselves as a Recipe file.
+4. They represent the fundamental unit of execution for either to Build a particular SW or to Build the custom Linux Image.
+5. Each SW component Built by the OpenEmbedded Build system requires a Recipe file to define the component. A single Recipe contains information about a single piece of SW.
+6. It provides the following information to the BitBake:
+	1) Location to download the unaltered source code.
+	2) Patches to be applied on the source code (if any).
+	3) Any special Configuration options to be applied.
+	4) Compilation process of the source code.
+	5) Installation or Packaging process.
+	6) License details.
+7. Based on these information provided, the BitBake generates a set of Tasks to be performed in a chronological order.
