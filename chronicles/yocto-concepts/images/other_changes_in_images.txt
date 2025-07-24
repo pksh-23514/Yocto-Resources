@@ -25,3 +25,17 @@ IMAGE_FSTYPES:
 5. If an Image recipe uses the 'inherit image' statement and the 'IMAGE_FSTYPES' variable is also set inside the Recipe, the variable must be set prior to the statement.
 6. This variable cannot be updated using ':append' or ':prepend' operations.
 7. The Build system processes this variable in a way that the '+=' operator must be used to add one or more options to the 'IMAGE_FSTYPES' variable.
+
+IMAGE_NAME:
+===========
+1. The 'IMAGE_NAME' variable specifies the name for the Output Image binaries (minus the extension for the file).
+2. The default value for the variable is:
+	=> IMAGE_NAME ?= "${IMAGE_LINK_NAME}${IMAGE_VERSION_SUFFIX}"
+	=> IMAGE_LINK_NAME ?= "${IMAGE_BASENAME}${IMAGE_MACHINE_SUFFIX}"
+	=> IMAGE_MACHINE_SUFFIX ??= "-${MACHINE}"
+	=> IMAGE_VERSION_SUFFIX ?= "-${DATETIME}"
+3. A custom Image name can be provided by assigning the value to this variable.
+	=> IMAGE_NAME = "custom_image"
+	---> After the Build is successful with the custom Image name, the Output binaries are as follows:
+	---> custom_image.rootfs.ext4
+	---> custom_image.rootfs.tar.bz2
