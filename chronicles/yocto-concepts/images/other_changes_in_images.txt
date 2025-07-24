@@ -7,3 +7,21 @@ IMAGE_LINGUAS:
 	---> This includes all the locale Packages i.e. '*-locale-pt-br' and '*-locale-de-de' as well as '*-locale-pt' and '*-locale-de'.
 3. The locales available in the Image can be verified by executing the following command on the Target HW:
 	=> locale -a
+
+IMAGE_FSTYPES:
+==============
+1. The 'IMAGE_FSTYPES' variable specifies the format used during the Build for generating the RootFS.
+2. If more than one format is specified in the variable, the Build would generate one Image per format specified.
+	=> IMAGE_FSTYPES = "ext3 tar.bz2"
+	---> The Build system generates the RootFS in each of the above formats listed in the variable:
+	---> core-image-minimal-qemuarm-<buildhash>.rootfs.ext4
+	---> core-image-minimal-qemuarm-<buildhash>.rootfs.tar.bz2
+3. The complete list of supported Image formats are listed in the 'IMAGE_TYPES' variable.
+	=> bitbake -e core-image-minimal | grep ^IMAGE_TYPES=
+	   IMAGE_TYPES="     jffs2 jffs2.sum     cramfs     ext2 ext2.gz ext2.bz2 ext2.lzma     ext3 ext3.gz     ext4 ext4.gz     btrfs
+		squashfs squashfs-xz squashfs-lzo squashfs-lz4 squashfs-zst     ubi ubifs multiubi     tar tar.gz tar.bz2 tar.xz tar.lz4 tar.zst
+		cpio cpio.gz cpio.xz cpio.lzma cpio.lz4 cpio.zst     wic wic.gz wic.bz2 wic.lzma wic.zst     container     f2fs     erofs erofs-lz4 erofs-lz4hc "
+4. The Image format instructions are handled by the 'meta/classes/image_types*.bbclass' files.
+5. If an Image recipe uses the 'inherit image' statement and the 'IMAGE_FSTYPES' variable is also set inside the Recipe, the variable must be set prior to the statement.
+6. This variable cannot be updated using ':append' or ':prepend' operations.
+7. The Build system processes this variable in a way that the '+=' operator must be used to add one or more options to the 'IMAGE_FSTYPES' variable.
