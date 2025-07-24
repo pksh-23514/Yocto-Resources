@@ -1,0 +1,12 @@
+Image Types:
+============
+1. If there is a particular layout to be used for the HW Board, then a specific Image type can be generated for the Target HW Board.
+2. This custom Image type shall be designed as per the Boot flow of the Target HW.
+3. This can be implemented by creating a custom Class file for the custom HW.
+	---> The 'meta-raspberrypi/classes/sdcard_image-rpi.bbclass' file is used for the Raspberry Pi Boards.
+4. The 'image_types.bbclass' file is mandatory to be inherited in the custom Class file.
+5. The custom Class file must implement a 'IMAGE_CMD:type' function for the corresponding Image type.
+	=> IMAGE_CMD:rpi-sdimg ()
+6. After the custom Class file is created, the corresponding Image 'type' can be used in the 'IMAGE_FSTYPES' variable for generating the Image.
+	=> # In the 'zeus' Branch for the 'meta-raspberrypi' Layer
+	=> IMAGE_FSTYPES ?= "tar.bz2 ext3 rpi-sdimg"
