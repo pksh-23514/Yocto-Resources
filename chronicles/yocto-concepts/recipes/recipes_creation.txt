@@ -47,3 +47,20 @@ Creating Base Recipes using devtool add:
 ****************************************
 1. The 'devtool add' command uses the same logic as the 'recipetool create'.
 2. It also sets up the Environment that makes the process of changing the Recipe file or patching the source code.
+
+Creating Base Recipes using Similar Existing Recipe:
+****************************************************
+1. It is often useful to locate a similar Recipe file already existing which can be modified to meet the requirements.
+2. The Yocto Project and the OpenEmbedded Project communities maintain many Recipes that cover a wide variety of functionalities.
+3. The existing Recipes can be used to structure the custom Recipes for a particular usage.
+	1) If the functionality of a Recipe file is clear, it can be directly picked up and modified according to the requirements.
+	2) However, the risk involved with the above method could be unfamiliarity with the parts that need to be written from scratch in the Recipe file.
+4. The existing Recipes space can be used as a skeleton to create the custom Recipes with completely new information.
+	1) A general skeleton for the Recipe file is as follows:
+		=> DESCRIPTION = ""
+		=> HOMEPAGE = ""
+		=> LICENSE = ""
+		=> SECTION = ""
+		=> DEPENDS = ""
+		=> LIC_FILES_CHKSUM = ""
+		=> SRC_URI = ""
