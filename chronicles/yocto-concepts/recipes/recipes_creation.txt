@@ -2,8 +2,8 @@ Locate or Automatically Create the Base Recipes:
 ================================================
 1. The Recipes can be written from scratch by manually creating the '.bb' files.
 2. However, there are three other ways to quickly get started with the Recipes:
-	1) The 'recipetool create' command
-	2) The 'devtool add' command
+	1) The 'recipetool create' command.
+	2) The 'devtool add' command.
 	3) The existing Recipes that are similar in functionality can be located and modified.
 
 Creating Base Recipes using recipetool create:
