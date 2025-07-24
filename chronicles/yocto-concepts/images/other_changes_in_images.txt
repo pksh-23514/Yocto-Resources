@@ -39,3 +39,14 @@ IMAGE_NAME:
 	---> After the Build is successful with the custom Image name, the Output binaries are as follows:
 	---> custom_image.rootfs.ext4
 	---> custom_image.rootfs.tar.bz2
+
+IMAGE_MANIFEST:
+===============
+1. The 'IMAGE_MANIFEST' variable specifies the 'manifest' file for the Image.
+2. This file lists all the installed Packages on the Image.
+3. The 'rootfs-postcommands' Class file defines the 'manifest' file. The default value for the variable is:
+	=> IMAGE_MANIFEST ="${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.manifest"
+	---> It is present at the 'tmp/deploy/images/qemuarm/' directory path for the Image based on ARM Architecture.
+	---> core-image-minimal-qemuarm-<buildhash>.rootfs.manifest
+4. The file contains the Package information as follows:
+	=> packagename		packagearch		version
