@@ -64,3 +64,18 @@ Creating Base Recipes using Similar Existing Recipe:
 		=> DEPENDS = ""
 		=> LIC_FILES_CHKSUM = ""
 		=> SRC_URI = ""
+
+Storing and Naming the Recipes:
+===============================
+1. Once the Base Recipe file is created, it should be placed in the Layer and named appropriately.
+2. It is very important to ensure that the Build system is able to locate the Recipes for them to get processed.
+3. The BitBake finds the Recipes using the 'BBFILES' variable in the 'conf/layer.conf' file of the corresponding Layer.
+	=> BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+	               ${LAYERDIR}/recipes-*/*/*.bbappend"
+4. Consequently, the Recipe file must be placed at a path which can be located by the Build system.
+5. The Recipe file name format is defined as follows:
+	=> <recipe-name>_<version>.bb
+	1) The 'recipe-name' is the name of the SW or the Package being Built.
+	2) The 'version' is the version of the SW or the Package being Built.
+6. The 'recipe-name' must contain Lowercase characters and the reserved suffixes (-native, -cross, -initial, or -dev) should not be used casually.
+	---> In the 'poky/meta/recipes-core/dropbear/', the Recipe file for the SSH Dropbear is 'dropbear_2025.88.bb'.
