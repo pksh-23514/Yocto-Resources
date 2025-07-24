@@ -1,0 +1,50 @@
+Process to Create Recipes:
+==========================
+
+1)		Establish the Recipe
+			|
+			V
+2)		Fetch the Source Files
+			|
+			V
+3)		Unpack the Source Files
+			|
+			V
+4)		Patch the Source Files
+			|
+			V
+5)	      Add the License Information
+			|
+			V
+6)	    Add the Required Configurations
+			|
+			V
+7)		    Compilation
+			|
+			V
+8)		 Auttools or CMake
+			|			No
+		     Yes|------------------------
+			|			|
+			|			V
+			|<--------------Create the do_install
+			|		      Function
+			V
+9)		Need Supporting Services
+			|			Yes
+		      No|------------------------
+			|			|
+			|			V
+			|Yes		Service Initialization Script or
+			|<--------------Service File itself Installed ?
+			|			|
+			V			|No
+10)		   Packaging			|
+			|			V
+			|<--------------Provide Custom Installation
+			|
+			V
+11)	   Provide Post-Installation Scripts
+			|
+			V
+12)	     Perform Run-Time Testing
