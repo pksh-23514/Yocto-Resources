@@ -1,0 +1,16 @@
+Building the Recipes:
+=====================
+1. The Recipe file can be Built by the BitBake using the below command:
+	=> bitbake recipe-name
+2. During the Build process, the Build system creates a temporary work directory for each Recipe to store:
+	1) The extracted source files.
+	2) The log files.
+	3) The intermediate compiled binaries.
+	4) The Packaging files.
+3. The path to the per-Recipes temporary work directory depends on the context in which it is being Built. It is pointed by the 'WORKDIR' variable.
+4. The command to determine the temporary work directory path is:
+	=> bitbake -e recipe-name | grep ^WORKDIR=
+5. If the Build directory is used to Build an Image based on ARM Architecture, the 'WORKDIR' for the Dropbear Recipe is:
+	=> bitbake -e dropbear | grep ^WORKDIR=
+	   WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/dropbear/2020.81-r0"
+6. After the Build is completed, these work directories can be examined to determine the state of the Recipe Build.
