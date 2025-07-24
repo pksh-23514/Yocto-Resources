@@ -13,3 +13,11 @@ Recipes:
 	5) Installation or Packaging process.
 	6) License details.
 7. Based on these information provided, the BitBake generates a set of Tasks to be performed in a chronological order.
+
+Recipes File Format:
+====================
+1. The Recipe file name format is defined as follows:
+	=> <recipe-name>_<version>.bb
+	1) The 'recipe-name' is the name of the SW or the Package being Built.
+	2) The 'version' is the version of the SW or the Package being Built.
+	---> In the 'poky/meta/recipes-core/dropbear/', the Recipe file for the SSH Dropbear is 'dropbear_2025.88.bb'.
