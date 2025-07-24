@@ -1,0 +1,49 @@
+Locate or Automatically Create the Base Recipes:
+================================================
+1. The Recipes can be written from scratch by manually creating the '.bb' files.
+2. However, there are three other ways to quickly get started with the Recipes:
+	1) The 'recipetool create' command
+	2) The 'devtool add' command
+	3) The existing Recipes that are similar in functionality can be located and modified.
+
+Creating Base Recipes using recipetool create:
+**********************************************
+1. The 'recipetool create' command automates the process to create a Recipe file with a given set of source code files.
+2. If the source files can be pointed to or extracted, the command can automatically construct a Recipe and Configure all the pre-Build information in the Recipe file.
+3. After the Build Environment script is sourced, the 'recipetool' can be executed in the Build directory.
+	=> source oe-init-build-env
+	=> recipetool -h
+	   NOTE: Starting bitbake server...
+	   usage: recipetool [-d] [-q] [--color COLOR] [-h] <subcommand> ...
+
+	   OpenEmbedded recipe tool
+
+	   options:
+	     -d, --debug     Enable debug output
+	     -q, --quiet     Print only errors
+	     --color COLOR   Colorize output (where COLOR is auto, always, never)
+	     -h, --help      show this help message and exit
+
+	   subcommands:
+	     create          Create a new recipe
+	     newappend       Create a bbappend for the specified target in the specified layer
+	     setvar          Set a variable within a recipe
+	     appendfile      Create/update a bbappend to replace a target file
+	     appendsrcfiles  Create/update a bbappend to add or replace source files
+	     appendsrcfile   Create/update a bbappend to add or replace a source file
+	   Use recipetool <subcommand> --help to get help on a specific command
+
+4. The 'recipetool create -o OUTFILE' command can be used in multiple ways to create the Base Recipe and locate it correctly in the Layer containing the source files.
+	=> recipetool create -o OUTFILE source
+	---> The above Syntax is used to generate a Recipe based on the source. Once generated, the Recipe file resides in the existing source code Layer.
+	=> recipetool create -o OUTFILE -x EXTERNALSRC source
+	---> The above Syntax is used to generate a Recipe using the code extracted from the source.
+	---> The extracted code is placed in it's own Layer defined by the 'EXTERNALSRC' variable. The Recipe file points to this directory.
+	=> recipetool create -d -o OUTFILE source
+	---> The above Syntax is used to generate a Recipe based on the source. Once generated, the Recipe file resides in the existing source code Layer.
+	---> The '-d' option directs the 'recipetool' to generate the Debug information.
+
+Creating Base Recipes using devtool add:
+****************************************
+1. The 'devtool add' command uses the same logic as the 'recipetool create'.
+2. It also sets up the Environment that makes the process of changing the Recipe file or patching the source code.
