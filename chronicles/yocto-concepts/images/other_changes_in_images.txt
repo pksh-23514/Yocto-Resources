@@ -1,0 +1,9 @@
+IMAGE_LINGUAS:
+==============
+1. The 'IMAGE_LINGUAS' variable specifies the locales to be installed on the Image during the RootFS generation process.
+2. It ensures that any locale Packages that correspond to the Packages already selected for installation into the Image are installed.
+	=> IMAGE_LINGUAS = "pt-br de-de"
+	---> The Build system ensures any Brazilian Portuguese and German locale files that correspond to the Packages in the Image are installed.
+	---> This includes all the locale Packages i.e. '*-locale-pt-br' and '*-locale-de-de' as well as '*-locale-pt' and '*-locale-de'.
+3. The locales available in the Image can be verified by executing the following command on the Target HW:
+	=> locale -a
