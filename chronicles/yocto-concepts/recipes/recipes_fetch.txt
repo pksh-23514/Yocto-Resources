@@ -19,7 +19,7 @@ Fetching the Source Code using Recipes:
 	=> PV = "0.8.18.1.11+git"
 	=> SRC_URI = "git://github.com/stevenhoneyman/l3afpad.git;branch=master;protocol=https"
 	=> SRCREV = "3cdccdc9505643e50f8208171d9eee5de11a42ff"
-9. If the 'SRC_URI' variable includes a URL pointing to individual files from a remote Server other than a SCM, the checksums must be specified.
+9. If the 'SRC_URI' variable includes a URL pointing to individual files from a remote Server other than a SCM, the 'SRC_URI[checksum]' must be specified.
 	1) The BitBake verifies the files against the defined checksums in the Recipe file to ensure that the files have not been tampered or modified.
 	2) The 'SRC_URI[sha256sum]' is the most commonly used checksum.
 10. There are multiple checksums supported with the 'SRC_URI' variable:
@@ -28,3 +28,18 @@ Fetching the Source Code using Recipes:
 	3) SRC_URI[sha256sum]
 	4) SRC_URI[sha384sum]
 	5) SRC_URI[sha512sum]
+11. If the 'SRC_URI' variable points to more than a single URL (excluding the SCMs), the checksum should be provided for each of the URLs.
+	---> In the 'meta/recipes-devtools/git/', the combined lines for the 'git.inc' and the 'git_2.24.1.bb' files are defined as:
+	=> SRC_URI = "${KERNELORG_MIRROR}/software/scm/git/git-${PV}.tar.gz;name=tarball \
+		      ${KERNELORG_MIRROR}/software/scm/git/git-manpages-${PV}.tar.gz;name=manpages"
+
+	=> SRC_URI[tarball.sha256sum] = "ad5334956301c86841eb1e5b1bb20884a6bad89a10a6762c958220c7cf64da02"
+	=> SRC_URI[manpages.sha256sum] = "9a7ae3a093bea39770eb96ca3e5b40bff7af0b9f6123f089d7821d0e5b8e1230"
+12. The proper value for the 'sha256sum' checksum might be available together with the other checksums on the download page for the Upstream sources.
+	1) The Upstream Projects often provides multiple checksums to verify the integrity of the source code.
+	2) However, these checksums shall be manually verified before specifying them in the Recipe file.
+	3) To generate the 'sha256sum' checksum for a file, the following command can be used:
+		=> sha256sum file-name.extension
+13. If no 'SRC_URI[checksum]' is specified or the checksums are incorrect for the Recipes being Built, the Build system produces error for each of the checksums.
+14. The good part is the error Message produced by the Build system contains the checksum String corresponding to the fetched sources.
+	1) The correct checksums can then be taken from the error Message and defined in the Recipe file for the Build process to continue.
