@@ -1,0 +1,30 @@
+Fetching the Source Code using Recipes:
+=======================================
+1. The first thing that the Recipes must provides is the way to fetch the source files.
+2. It is controlled by the 'SRC_URI' variable that points to the location of the source files.
+3. The BitBake performs the 'do_fetch' Task to fetch the source files.
+4. The 'do_fetch' Task uses the prefix of each entry of the 'SRC_URI' variable to determine the 'fetcher' to be used to get the source files.
+5. The OpenEmbedded Build system uses the 'FILESOVERRIDES' variable for scanning the directory locations for local files in the 'SRC_URI' variable.
+6. The 'SRC_URI' variable in the Recipe file must define each unique location for the corresponding source files.
+7. It is a good practice to not hard-code the version numbers in a URL used in the 'SRC_URI' variable.
+	1) The better way is to use the 'PV' variable in the 'SRC_URI' variable.
+	2) The 'PV' variable causes the fetch Task to use the version number specified in the Recipe file name.
+	3) Therefore, upgrading the Recipes to the future version would be as simple as renaming the Recipe file name to match the version.
+	---> In the 'meta/recipes-devtools/strace/strace_5.5.bb' file, the source points to a single Tarball using the 'PV' variable.
+	=> SRC_URI = "https://strace.io/files/${PV}/strace-${PV}.tar.xz"
+8. The source can be specified from the Source Control Managers (SCMs) as well. For the Git repository, the following should be specified:
+	1) The 'SRCREV' variable for the source file.
+	2) The 'PV' variable for the source file must include a '+' sign in the definition.
+	---> In the 'meta/recipes-sato/l3afpad/l3afpad_git.bb', the source is pointed to by the following definitions:
+	=> PV = "0.8.18.1.11+git"
+	=> SRC_URI = "git://github.com/stevenhoneyman/l3afpad.git;branch=master;protocol=https"
+	=> SRCREV = "3cdccdc9505643e50f8208171d9eee5de11a42ff"
+9. If the 'SRC_URI' variable includes a URL pointing to individual files from a remote Server other than a SCM, the checksums must be specified.
+	1) The BitBake verifies the files against the defined checksums in the Recipe file to ensure that the files have not been tampered or modified.
+	2) The 'SRC_URI[sha256sum]' is the most commonly used checksum.
+10. There are multiple checksums supported with the 'SRC_URI' variable:
+	1) SRC_URI[md5sum]
+	2) SRC_URI[sha1sum]
+	3) SRC_URI[sha256sum]
+	4) SRC_URI[sha384sum]
+	5) SRC_URI[sha512sum]
