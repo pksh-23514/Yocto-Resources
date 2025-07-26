@@ -46,7 +46,7 @@ Fetching the Source Code using Recipes:
 15. If the 'SRC_URI' variable contains the files present locally on the Host Machine, the 'file://' URL is used for the Build system to fetch the files.
 	1) If the Absolute paths for the local files is provided, the entire directory is unpacked.
 	2) Instead, if the Relative paths are provided, the value of the 'FILESPATH' variable is used to search the directories in a certain order.
-	3) The order is: the ${BP} variable ---> the ${BPN} variable ---> the 'files/' directory.
+	3) The order is: the 'BP' variable ---> the 'BPN' variable ---> the 'files/' directory.
 	4) These directories are assumed to be the sub-directories of the directory containing the Recipe file or the Append file.
 	---> The local files can be specified in the 'SRC_URI' variable as follows:
 		=> SRC_URI = "file://relative/path/file-name.extension"
