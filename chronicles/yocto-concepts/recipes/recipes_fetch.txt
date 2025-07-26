@@ -51,3 +51,10 @@ Fetching the Source Code using Recipes:
 	---> The local files can be specified in the 'SRC_URI' variable as follows:
 		=> SRC_URI = "file://relative/path/file-name.extension"
 		=> SRC_URI = "file:///absolute/path/file-name.extension"
+
+Limiting Numbers of Parallel Connections:
+*****************************************
+1. If there is Firewall restrictions or if the Server has limited number of parallel connections, the number of parallel fetch Tasks should be limited.
+2. This can be done by using the below statement in the 'conf/local.conf' file:
+	=> do_fetch[number_threads] = "n"
+	---> The value 'n' is the number of allowed parallel connections.
