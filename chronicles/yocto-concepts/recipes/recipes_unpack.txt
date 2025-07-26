@@ -1,0 +1,17 @@
+Unpacking the Source Code using Recipes:
+========================================
+1. During the Build, the 'do_unpack' Task executes the unpacking of the sources.
+2. The 'S' variable points to the directory path where the source code is unpacked.
+3. If the sources are fetched from an Upstream source Archived Tarball:
+	1) The Tarball's internal structure matches the directory convention i.e. it is unpacked into a directory named:
+	---> ${BPN}-${PV}
+	2) There is no need to define the 'S' variable manually.
+4. If the sources are fetched from an Upstream source that doesn't use the convention:
+	1) The sources are unpacked into a directory with a different name than '${BPN}-${PV}'.
+	2) The 'S' variable needs to be defined manually.
+5. If the sources are fetched from the SCMs:
+	1) There is no Archives and no conventional top-level directory.
+	2) The 'S' variable needs to be defined manually.
+6. The structure of the source must match the directory pointed by the 'S' variable for successful unpacking by the BitBake.
+7. If the files mentioned in 'SRC_URI' variable have names end in a typical Archive extensions like '.tar', '.tar.gz', '.tar.bz2', '.zip' etc.
+	1) They are automatically extracted during the 'do_unpack' Task.
