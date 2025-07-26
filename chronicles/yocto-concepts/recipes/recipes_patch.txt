@@ -1,0 +1,19 @@
+Patching the Source Code using Recipes:
+=======================================
+1. Sometimes, it is required to patch the source code after it has been fetched.
+2. The 'do_patch' Task automatically applies all the Patch files to the sources. It uses the 'SRC_URI' variable after the sources are fetched to apply the Patches.
+3. The files mentioned in the 'SRC_URI' variable are treated as a Patch file that have their names ending in:
+	1) .patch
+	2) .diff
+	3) The compressed versions of '.patch' or '.diff' like 'diff.gz', 'patch.bz2' etc.
+4. The Build system should be able to apply the Patches with '-p1' option i.e. one directory level in the path is stripped off.
+5. If the Patch file is available locally, the 'SRC_URI' variable must reference them with the 'file://' URL in the Recipes.
+	1) The Patch files must be placed in a directory next to the Recipe file named with the Base name of the Recipe i.e. the 'BP' or the 'BPN' variable.
+	2) Otherwise, the directory must be named as 'files'.
+6. If there are multiple directory levels to be stripped off, the number of levels using the 'striplevel' option should be specified in the 'SRC_URI' entry for the Patch.
+	=> SRC_URI += "file://mypatch1.patch;striplevel=1"
+	---> It indicates the number of directory levels to be stripped off i.e. '1' from the file paths inside the Patch.
+7. If the Patch needs to be applied in a specific sub-directory that is not specified in the Patch file, the 'patchdir' option must be used in the 'SRC_URI' entry.
+	=> SRC_URI += "file://mypatch1.patch;patchdir=subdir/path"
+	---> It indicates that the 'mypatch1.patch' is to be applied inside the 'subdir/path' directory of the source tree.
+8. Once the Patches are found, they are applied to the Recipe's source files that are located in the directory pointed by the 'S' variable.
