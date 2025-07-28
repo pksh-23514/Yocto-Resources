@@ -8,6 +8,8 @@ Configuring the Build using Recipes:
 	1) Autotools
 	2) CMake
 	3) Manually customize the 'do_configure' Task
+6. The most important point is to determine if there is a requirement to include the Configuration step in the Recipes being Built.
+7. If there is no need to Configure the Build, the Configurations and the related issues can be ignored.
 
 Autotools:
 **********
@@ -31,3 +33,12 @@ CMake:
 	=> do_install:append() {
 		install -d ${D}${datadir}/cmake/Modules
 		install -m 0644 custom_toolchain_file.cmake ${D}${datadir}/cmake/Modules/
+	   }
+
+Customize the do_configure Task:
+********************************
+1. If the source files do not have a 'configure.ac' or 'CMakeLists.txt' file, then the SW must be Built using some custom method other than Autotools or CMake.
+2. In such cases, the 'do_configure' Task must be written manually in the Recipes if there is a need to Configure the Build.
+3. There can be certain modifications to be included in the 'do_configure' Task like:
+	1) The Makefiles or some Configuration files can be updated for specifying necessary Build options.
+	2) The custom Configure scripts can be executed with the necessary Build options.
