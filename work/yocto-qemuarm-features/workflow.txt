@@ -18,3 +18,25 @@ Image Build using the Correct Poky Branch:
 7. The final step to Build the Image is by selecting the Target Image and passing it to the BitBake.
 	=> bitbake core-image-minimal
 8. After the Build is successful, the Target Image binaries are present under the 'build' directory.
+
+Customize the Yocto Image for SSH Connection:
+=============================================
+1. Initially, there is no SSH connectivity on the Image enabled by default.
+2. The Image Recipe file should be updated to include the Dropbear as a feature in the Image.
+	=> IMAGE_FEATURES:append = " ssh-server-dropbear"
+3. The Image features should be verified before starting the Build process.
+4. Execute the 'bitbake' command to Build an Image with the new feature.
+5. After the Build is successful, the Target Image binaries are present under the 'build' directory.
+
+Running the Yocto Image on QEMU:
+================================
+1. For testing the Built Yocto Image on the Host, QEMU is used to execute the Image on an Emulator mimicking the Target HW.
+2. Poky repository provides a script 'runqemu' which allows to start the QEMU for running the Yocto Image.
+3. The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
+	=> runqemu qemuarm core-image-minimal nographic
+4. After the Boot is successful, the Dropbear SSH Server starting is visible in the logs.
+5. Once the Root Login stage is done, it should be verified whether the Dropbear is running or not.
+	=> ps | grep dropbear
+6. Execute the 'ping' test between the Host Machine and the Target.
+7. The QEMU can be closed by powering OFF the virtual HW.
+	=> poweroff
