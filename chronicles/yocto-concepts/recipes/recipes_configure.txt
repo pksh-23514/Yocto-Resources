@@ -11,7 +11,7 @@ Configuring the Build using Recipes:
 
 Autotools:
 **********
-1. If the source files have a 'configure.ac' file, then the SW must be Built using Autotools. In such cases, the Configurations must be modified directly.
+1. If the source files have a 'configure.ac' file, then the SW must be Built using Autotools. In such cases, only the Configurations must be modified.
 2. While using Autotools, the Recipes must inherit the 'autotools' Class. It does not need to define the 'do_configure' Task as it is taken care by the 'autotools_do_configure'.
 	=> inherit autotools
 3. If the Recipes do not support the usage of Out-of-Tree Builds, it should inherit the 'autotools-brokensep' Class.
@@ -19,3 +19,15 @@ Autotools:
 5. However, the additional specific options can be passed in the Recipes using the variables:
 	1) EXTRA_OECONF
 	2) PACKAGECONFIG_CONFARGS
+
+CMake:
+******
+1. If the source files have a 'CMakeLists.txt' file, then the SW must be Built using CMake. In such cases, only the Configurations must be modified.
+2. While using CMake, the Recipes must inherit the 'cmake' Class. It does not need to define the 'do_configure' Task as it is taken care by the 'cmake_do_configure'.
+	=> inherit cmake
+3. The Recipes should not update the 'do_configure' Task unless required.
+4. However, the additional specific options can be passed in the Recipes using the 'EXTRA_OECMAKE' variable.
+5. If the custom CMake Toolchain files supplied by the SW being Built are to be installed by the Recipes, it can be done in the 'do_install' Task.
+	=> do_install:append() {
+		install -d ${D}${datadir}/cmake/Modules
+		install -m 0644 custom_toolchain_file.cmake ${D}${datadir}/cmake/Modules/
