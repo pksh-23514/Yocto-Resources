@@ -28,8 +28,8 @@ Customize the Yocto Image for SSH Connection:
 4. Execute the 'bitbake' command to Build an Image with the new feature.
 5. After the Build is successful, the Target Image binaries are present under the 'build' directory.
 
-Running the Yocto Image on QEMU:
-================================
+Running the SSH Enabled Yocto Image on QEMU:
+============================================
 1. For testing the Built Yocto Image on the Host, QEMU is used to execute the Image on an Emulator mimicking the Target HW.
 2. Poky repository provides a script 'runqemu' which allows to start the QEMU for running the Yocto Image.
 3. The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
@@ -39,4 +39,30 @@ Running the Yocto Image on QEMU:
 	=> ps | grep dropbear
 6. Execute the 'ping' test between the Host Machine and the Target.
 7. The QEMU can be closed by powering OFF the virtual HW.
+	=> poweroff
+
+Customize the Yocto Image for Read-Only RootFS:
+===============================================
+1. Initially, the RootFS for the Image is Read-Write type.
+2. The Image Recipe file should be updated to include the 'read-only-rootfs' feature in the Image.
+	=> IMAGE_FEATURES:append = " ssh-server-dropbear read-only-rootfs"
+3. The Image features should be verified before starting the Build process.
+4. Execute the 'bitbake' command to Build an Image with the new feature.
+5. The Build shall fail with the error. The 'inittab' Package Configuration failed as the RootFS is Read-only type.
+6. This error can be resolved by adding the following statements in the 'conf/local.conf' file.
+	=> SERIAL_CONSOLES_CHECK:forcevariable = ""
+	=> SERIAL_CONSOLES="115200;ttyAMA0
+7. Execute the 'bitbake' command to Build an Image with these modifications.
+8. After the Build is successful, the Target Image binaries are present under the 'build' directory.
+
+Running the Read-Only RootFS Enabled Yocto Image on QEMU:
+=========================================================
+1. For testing the Built Yocto Image on the Host, QEMU is used to execute the Image on an Emulator mimicking the Target HW.
+2. The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
+	=> runqemu qemuarm core-image-minimal nographic
+3. After the Root Login stage is done, it should be verified whether the RootFS is Read-only or not.
+	=> mount
+4. Execute the file creation test on the RootFS in the '/home' directory.
+	=> touch file.txt
+5. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
