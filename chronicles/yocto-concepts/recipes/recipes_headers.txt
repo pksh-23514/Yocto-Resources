@@ -1,0 +1,9 @@
+Adding Headers for Devices Interface using Recipes:
+===================================================
+1. If the Recipes Build a SW that is required to communicate with Devices or an API is needed into a custom Kernel, the appropriate Header files should be provided.
+2. The 'meta/recipes-kernel/linux-libc-headers/linux-libc-headers.inc' file is used to Build the 'libc' (like the 'glibc' or the 'musl').
+	1) This Include file contains the set of standardized Kernel Headers for the C-library's usage.
+	2) All the Applications in the Embedded Linux system rely on a consistent and reliable version of the 'libc'.
+	3) Under no circumstances, this file should be modified or customized.
+3. The correct way to interface the Devices or the custom Kernel is to use a separate Headers Package that provides the additional Header files for interfaces.
+4. This Package then becomes a dependency for the SW that performs the interfaces.
