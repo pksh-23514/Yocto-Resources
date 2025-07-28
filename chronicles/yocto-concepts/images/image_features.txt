@@ -49,7 +49,7 @@ Image features Available for All Images:
 	1) It specifies that the Image should be created as stateless i.e. when using 'systemd', the 'systemctl-native' will not run on the Image.
 	2) This leaves the Image for population at Run-time by 'systemd'.
 17. staticdev-pkgs:
-	1) It installs the Static development Packages i.e. the Static Libraries (*.a files), for all the Packages installed in a given Image.
+	1) It installs the Static development Packages i.e. the Static libraries (*.a files), for all the Packages installed in a given Image.
 
 Image features Available with core-image Class:
 ***********************************************
