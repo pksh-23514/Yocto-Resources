@@ -1,0 +1,10 @@
+Configuring the Build using Recipes:
+====================================
+1. Most SW provides some means of setting the Build-time Configuration options before the Compilation.
+2. This step to Configure the options influence the behavior and features of the SW being Built.
+3. These settings can be achieved by running a script with options or modifying a Build Configuration file.
+4. A major part of the Build-time Configuration is about checking for the Build-time dependencies and possibly enabling certain optional functionalities as a result.
+5. The following methods of Configuration are used:
+	1) Autotools
+	2) CMake
+	3) Manually customize the 'do_configure' Task
