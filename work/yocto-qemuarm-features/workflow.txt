@@ -13,6 +13,8 @@ Image Build using the Correct Poky Branch:
 	---> The argument 'build_dir' is optional. It is used to provide the Absolute/Relative directory path to setup the Build directory. The default is './build'
 4. It adds the BitBake utility to the 'PATH' variable of the Host Machine.
 5. It moves the control to the Build directory with the 'conf' directory containing the necessary Configuration files.
-6. The final step to Build the Image is by selecting the Target Image and passing it to the BitBake.
+6. In the 'conf' directory, the Target Machine is selected by default as 'qemuarm'.
+	=> MACHINE ?= "qemuarm"
+7. The final step to Build the Image is by selecting the Target Image and passing it to the BitBake.
 	=> bitbake core-image-minimal
-7. In the 'conf' directory, the Target Machine is selected by default as 'qemuarm'.
+8. After the Build is successful, the Target Image binaries are present under the 'build' directory.
