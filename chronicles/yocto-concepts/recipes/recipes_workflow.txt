@@ -22,7 +22,7 @@ Process to Create Recipes:
 7)		    Compilation
 			|
 			V
-8)		 Auttools or CMake
+8)		Autotools or CMake
 			|			No
 		     Yes|------------------------
 			|			|
