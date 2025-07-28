@@ -10,6 +10,10 @@ Configuring the Build using Recipes:
 	3) Manually customize the 'do_configure' Task
 6. The most important point is to determine if there is a requirement to include the Configuration step in the Recipes being Built.
 7. If there is no need to Configure the Build, the Configurations and the related issues can be ignored.
+8. Once the Configurations are done, it is a good practice to inspect the 'log.do_configure' log file to verify:
+	1) If all the desired options have been enabled in the Build.
+	2) To catch any further missing dependencies in the Build.
+	3) To identify if there are any unwanted options that have been automatically enabled in the Build.
 
 Autotools:
 **********
