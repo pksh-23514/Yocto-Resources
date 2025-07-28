@@ -66,3 +66,15 @@ Running the Read-Only RootFS Enabled Yocto Image on QEMU:
 	=> touch file.txt
 5. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
+
+debug-tweaks Image Feature:
+===========================
+1. The 'debug-tweaks' Image feature is now removed from the Yocto Project.
+2. The results achieved by using the 'debug-tweaks' feature in the Image is too vague i.e. an Image on which the Root User can Login without a password.
+3. To achieve the same result as the 'debug-tweaks' feature and add more clarity, a combination of features should be manually added to the 'IMAGE_FEATURES' variable.
+	1) allow-empty-password
+	2) allow-root-login
+	3) empty-root-password
+	4) post-install-logging
+4. These features can be added to the 'conf/local.conf' file as follows:
+	=> IMAGE_FEATURES += "allow-empty-password allow-root-login empty-root-password post-install-logging"
