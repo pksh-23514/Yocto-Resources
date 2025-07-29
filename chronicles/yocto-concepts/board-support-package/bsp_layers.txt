@@ -12,7 +12,7 @@ BSP Layers:
 	3) Recipes for the Kernel and the Bootloader
 	4) Device Tree and Firmware
 	5) Additional HW Drivers
-2. These Layers support the Linux Image Build for a specific HW platform or board.
+2. These Layers support the Linux Image Build for a specific HW platform or Board.
 3. These Layers use the following convention:
 	=> meta-bsp-root-name
 	---> The 'bsp-root-name' is the Machine or the platform name prepended with the 'meta-' prefix.
