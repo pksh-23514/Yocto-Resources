@@ -1,0 +1,18 @@
+Host Machine Preparation for BSP Layers:
+========================================
+1. Clone the complete Poky repository on the Host Machine working directory and check-out the correct branch.
+	=> git clone git://git.yoctoproject.org/poky
+	---> Once the cloning is completed, the 'master' branch is checked-out by default.
+	=> cd poky
+	=> git checkout -t origin/kirkstone -b my-kirkstone
+	---> The branch 'my-kirkstone' is created to track the remote branch 'kirkstone' from 'origin'.
+2. Select the BSP required for the Target HW. The Yocto Project supports many BSPs maintained in their individual repositories.
+	---> If the Target HW Board is Raspberry Pi, the 'meta-raspberrypi' BSP Layer is selected.
+3. Clone the BSP Layer in the source directory containing the other Layers as well.
+	=> git clone git://git.yoctoproject.org/meta-raspberrypi
+	=> cd meta-raspberrypi
+	---> The 'meta-raspberrypi' repository cloned, the 'kirkstone' branch should be checked-out for compatibility with the Poky repository.
+	=> git checkout -t origin/kirkstone -b my-kirkstone
+4. Initialize the Build Environment by running the Environment setup script.
+	=> source oe-init-build-env
+	---> After the 'oe-init-build-env' script execution, the Build Environment is setup under the './build' directory as no argument was passed to the script.
