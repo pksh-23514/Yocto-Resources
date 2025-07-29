@@ -31,3 +31,56 @@ BSP Layers:
 	3) Generic Intel 32-bit Architecture
 	4) Generic Intel 64-bit Architecture
 9. The BSP Layer can be dependent on additional Layers to be functional. These dependencies need to be specified in the documentation for the Layer.
+
+Directory Structure for BSP Layer:
+**********************************
+1. The BSP Layer directory 'meta-bsp-root-name' is the Root directory of that Layer.
+2. This directory is added to the 'BBLAYERS' variable in the 'conf/bblayers.conf' file in the Build directory.
+	1) The order in which the Layers are mentioned in the 'BBLAYERS' variable and the 'BBFILE_PRIORITY' variable for the Layer affect the Build.
+	2) The Build system picks up the Layers specified in the 'BBLAYERS' variable in a top-down approach.
+	3) If multiple Layers (having the same priority) define a particular Configuration, the Build system uses the last Layer searched through the variable.
+	4) The Layer with higher priority i.e. a larger value for 'BBFILE_PRIORITY' variable takes precedence over the Layer with lower priority i.e. a smaller value.
+3. After the Layer is added, ther Build system is able to recognize the Layer and integrate it into the Build.
+4. The typical directory structure is:
+	=> meta-my-board/
+	   ├── conf/
+	   │   ├── bitbake.conf
+	   │   ├── layer.conf
+	   │   ├── machine/
+	   │   │   ├── my-board.conf
+	   │   ├── recipes-bsp/
+	   │   ├── recipes-kernel/
+	   │   ├── recipes-linux/
+	   │   ├── recipes-bootloader/
+	   ├── meta-layer/
+	   │   ├── recipes-core/
+	   │   │   ├── images/
+	   │   │   │   ├── my-board-image.bb
+	   │   ├── recipes-bsp/
+	   │   │   ├── uboot/
+	   │   │   │   ├── uboot-my-board/
+	   │   │   │   │   ├── uboot-my-board_%.bb
+	   │   │   │   │   └── defconfig
+	   │   ├── recipes-kernel/
+	   │   │   ├── linux/
+	   │   │   │   ├── kernel-my-board/
+	   │   │   │   │   ├── kernel-my-board_%.bb
+	   │   │   │  │   └── defconfig
+	   │   ├── recipes-bootloader/
+	   │   │   ├── uboot/
+	   │   │   │   ├── uboot-my-board/
+	   │   │   │   │   ├── uboot-my-board_%.bb
+	   │   │   │   │   └── defconfig
+	   ├── meta-my-board/
+	   │   ├── classes/
+	   │   │   ├── my-board.bbclass
+	   │   ├── files/
+	   │   │   ├── uboot/
+	   │   │   ├── kernel/
+	   │   │   └── other-resources/
+	   │   ├── patches/
+	   │   │   ├── kernel-patches/
+	   │   │   ├── bootloader-patches/
+	   │   │   └── other-patches/
+	   │   ├── README.md
+	   └── scripts/
