@@ -84,3 +84,15 @@ Directory Structure for BSP Layer:
 	   │   │   └── other-patches/
 	   │   ├── README.md
 	   └── scripts/
+
+Container Layers:
+*****************
+1. There are certain Layers that function as a top Layer to hold the other BSP sub-Layers. These type of top Layers are called as Container Layers.
+2. It typically refers to a single Git check-out that contains multiple sub-Layers which can be included independently in the 'conf/bblayers.conf' file.
+3. If the individual sub-Layer has to be included in the Build, the names of the actual sub-Layer inside the Container Layer must be listed in the 'BBLAYERS' variable.
+4. The top Layer might not be an actual Layer itself. However, the sub-Layers are actual Layers themselves.
+	1) In such cases, the top Layer would never be explicitly included in the 'conf/bblayers.conf' file. Only the sub-Layers can be included in the 'conf/bblayers.conf' file.
+	2) The OpenEmbedded Build Project provides a Container Layer i.e. the 'meta-openembedded' Layer (which is not an actual Layer) that contains many 'meta-*' sub-Layers.
+5. The top Layer as well as the sub-Layers can be actual Layers individually.
+	1) In such cases, both the top Layer and the sub-Layers can be explicitly included in the 'conf/bblayers.conf' file.
+	2) The OpenEmbedded Build Project provides a Container Layer i.e. the 'meta-security' Layer (which is an actual Layer) that contains many 'meta-*' sub-Layers.
