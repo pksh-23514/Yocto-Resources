@@ -3,3 +3,31 @@ Board Support Package (BSP):
 1. The Board Support Package (BSP) is a collection of information that defines how a particular HW, set of HW Devices or HW platforms can be supported.
 2. It includes details about the HW features present on the Device and the Kernel Configurations along with any additional HW Drivers required.
 3. It also lists any additional SW components required along with the generic Linux SW stack for platform features.
+
+BSP Layers:
+===========
+1. In the Yocto Project, a BSP Layer is a collection of:
+	1) Meta-data
+	2) Configuration files
+	3) Recipes for the Kernel and the Bootloader
+	4) Device Tree and Firmware
+	5) Additional HW Drivers
+2. These Layers support the Linux Image Build for a specific HW platform or board.
+3. These Layers use the following convention:
+	=> meta-bsp-root-name
+	---> The 'bsp-root-name' is the Machine or the platform name prepended with the 'meta-' prefix.
+4. It is not a strict requirement but a good practice to follow the naming convention.
+	1) This practice is well established in the Yocto Project.
+	2) A lot of scripts and tools in the development Environment assume this convention.
+5. The link to the Layers in the Yocto Project Git repositories is: https://git.yoctoproject.org/
+	1) There is a list of repositories under the title 'Yocto Metadata Layers'.
+	2) The Layers that are no longer supported as a part of the Yocto Project appear under 'Yocto Metadata Layer Archive'.
+6. Each repository is a BSP Layer supported by the Yocto Project like 'meta-raspberrypi', 'meta-intel', 'meta-arago' etc.
+7. These Layers can be cloned using the URLs that appear under 'Clone' provided by opening the respective repository link.
+	=> git clone git://git.yoctoproject.org/meta-raspberrypi
+8. In Poky repository, the 'meta-yocto-bsp' Layer is a BSP Layer. It maintains several reference BSPs for:
+	1) ARM based BeagleBone Boards
+	2) Generic ARM 64-bit Architecture
+	3) Generic Intel 32-bit Architecture
+	4) Generic Intel 64-bit Architecture
+9. The BSP Layer can be dependent on additional Layers to be functional. These dependencies need to be specified in the documentation for the Layer.
