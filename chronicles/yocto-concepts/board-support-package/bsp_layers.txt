@@ -1,0 +1,5 @@
+Board Support Package (BSP):
+============================
+1. The Board Support Package (BSP) is a collection of information that defines how a particular HW, set of HW Devices or HW platforms can be supported.
+2. It includes details about the HW features present on the Device and the Kernel Configurations along with any additional HW Drivers required.
+3. It also lists any additional SW components required along with the generic Linux SW stack for platform features.
