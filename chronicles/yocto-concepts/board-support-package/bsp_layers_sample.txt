@@ -82,7 +82,7 @@ Layer Configuration File:
 
 HW Configuration Options:
 *************************
-1. The Machine Configuration files bind together all the information contained anywhere in the BSP Layer into a format that the Build system understands.
+1. The Machine Configuration files bind together all the HW Configuration information contained anywhere in the BSP Layer into a format that the Build system understands.
 2. Each BSP Layer must have at least one Machine Configuration file for the Target Machine.
 3. If the BSP Layer supports multiple Machines, then multiple Machine Configuration files must exist in the Layer.
 4. These file names must correspond to the values used to set the 'MACHINE' variable for the Build.
@@ -101,3 +101,17 @@ HW Configuration Options:
 9. To use this tuning file in the Build, it should be specified in the Machine Configuration file as follows:
 	=> vi meta-bsp-root-name/conf/machine/target-hw.conf
 	=> include conf/machine/include/file-name.inc
+
+BSP-specific Recipes:
+*********************
+1. There are miscellaneous Recipe files for the BSP Layer that provides the low-level HW support.
+2. These files are optional to the BSP Layer.
+3. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/recipes-bsp/*
+4. The HW specific directories are generally placed in this directory.
+	1) formfactor
+	2) u-boot
+	3) device-tree
+	4) drivers
+	5) firmware
+	6) utilities
