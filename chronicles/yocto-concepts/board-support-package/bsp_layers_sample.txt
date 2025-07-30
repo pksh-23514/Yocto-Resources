@@ -79,3 +79,25 @@ Layer Configuration File:
 	=> LAYERDEPENDS_bsp-root-name = "dependency-name"
 5. This file makes the BitBake aware of the Recipes and Configuration directories of the BSP Layer.
 6. This file must exist for the OpenEmbedded Build system to recognize the BSP as an actual Layer.
+
+HW Configuration Options:
+*************************
+1. The Machine Configuration files bind together all the information contained anywhere in the BSP Layer into a format that the Build system understands.
+2. Each BSP Layer must have at least one Machine Configuration file for the Target Machine.
+3. If the BSP Layer supports multiple Machines, then multiple Machine Configuration files must exist in the Layer.
+4. These file names must correspond to the values used to set the 'MACHINE' variable for the Build.
+5. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/conf/machine/*.conf
+6. These files define the following things:
+	1) The Kernel Packages used in the Build.
+	2) The HW Drivers included in the different types of Images.
+	3) The SW components required on the Target HW.
+	4) The Bootloader information for the Target HW.
+	5) The special Image format requirements (if any) for the Target HW.
+7. This file could also include a HW tuning file that is commonly used to define the Package Architecture and specify the optimization flags.
+8. The tuning files are generally placed in the 'meta-bsp-root-name/conf/machine/include/' directory.
+	1) Many 'tune-*' files are present in the 'poky/meta/conf/machine/include/' directory of Poky.
+	2) They are typically written as Include files (*.inc).
+9. To use this tuning file in the Build, it should be specified in the Machine Configuration file as follows:
+	=> vi meta-bsp-root-name/conf/machine/target-hw.conf
+	=> include conf/machine/include/file-name.inc
