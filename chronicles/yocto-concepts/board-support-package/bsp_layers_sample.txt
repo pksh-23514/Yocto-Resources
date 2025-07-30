@@ -11,7 +11,7 @@ Sample Filesystem Layout for BSP Layer:
 9. There is a checklist to be ticked in order for a BSP Layer to be considered as compliant with the Yocto Project.
 10. The sample structure for a standard BSP Layer (includes but not limited to):
 	1) License files
-	2) README file
+	2) README files
 	3) README.sources file
 	4) Pre-Built binaries
 	5) Layer Configuration file
@@ -30,3 +30,11 @@ License Files:
 	2) BSD License
 	3) GPLv* License
 4. These files are recommended for the BSP Layers but are optional to be added in the Layer.
+
+README Files:
+*************
+1. The README files are the files that provide the information about how to Boot the live Images included by default in the 'binary/' directory.
+2. It also provides the information needed for Building these Images.
+3. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/README
+3. The file contains the dependencies i.e. the Layers on which the BSP Layer depends and the name of the BSP Layer Git repository maintainers.
