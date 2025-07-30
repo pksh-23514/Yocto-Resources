@@ -38,3 +38,12 @@ README Files:
 3. It is available in the BSP Layer at the following location:
 	=> meta-bsp-root-name/README
 3. The file contains the dependencies i.e. the Layers on which the BSP Layer depends and the name of the BSP Layer Git repository maintainers.
+
+README.sources File:
+********************
+1. The README.sources file is the file that provides the information about where to locate the BSP source files to Build the Images (if required) included by default.
+2. The Images reside in the 'binary/' directory of the BSP Layer. They are the Images released along with the BSP Layer.
+3. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/README.sources
+4. This file also helps to find the Meta-data required to generate these Images shipped with the BSP Layer.
+5. If there is no 'binary/' directory present or the Images are missing in the directory, an existing 'README.sources' file is meaningless or the file won't exist in the Layer.
