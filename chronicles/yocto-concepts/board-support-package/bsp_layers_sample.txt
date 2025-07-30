@@ -47,3 +47,14 @@ README.sources File:
 	=> meta-bsp-root-name/README.sources
 4. This file also helps to find the Meta-data required to generate these Images shipped with the BSP Layer.
 5. If there is no 'binary/' directory present or the Images are missing in the directory, an existing 'README.sources' file is meaningless or the file won't exist in the Layer.
+
+Pre-Built Binaries:
+*******************
+1. These are the pre-Built Kernel binaries and the Root Filesystem released with the BSP Layer for the specific Target Machine.
+2. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/binary/bootable_images
+3. This is an optional directory in the Layer and the exact types of binaries present in the directory are highly HW dependent.
+4. It contains the graphical (Sato) Images or the minimal live Images when the BSP Tarball has been created and made available in the Yocto Project.
+5. It can be used to Boot the system quickly for minimal testing without the need to Build an Image using the Layer.
+6. The README file should be present in the BSP Layer and that explains how to use these Images with the Target HW.
+7. Additionally, the README.sources file should be present that explains how to locate the sources used to Build the Images and provide information on the Meta-data.
