@@ -19,3 +19,14 @@ Sample Filesystem Layout for BSP Layer:
 	7) BSP-specific Recipes
 	8) Display support files
 	9) Linux Kernel Configurations
+
+License Files:
+**************
+1. The License files are the files for satisfying the Licensing requirements of the BSP Layer.
+2. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/bsp-license
+3. The type or types of files present in the BSP Layer can vary depending on the Licensing requirement for the Layer.
+	1) MIT License
+	2) BSD License
+	3) GPLv* License
+4. These files are recommended for the BSP Layers but are optional to be added in the Layer.
