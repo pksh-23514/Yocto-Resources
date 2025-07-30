@@ -58,3 +58,24 @@ Pre-Built Binaries:
 5. It can be used to Boot the system quickly for minimal testing without the need to Build an Image using the Layer.
 6. The README file should be present in the BSP Layer and that explains how to use these Images with the Target HW.
 7. Additionally, the README.sources file should be present that explains how to locate the sources used to Build the Images and provide information on the Meta-data.
+
+Layer Configuration File:
+*************************
+1. The Configuration file is used as an identification by the BitBake that the given directory structure is a Yocto Project Layer.
+2. It identifies the contents of the BSP Layer and it contains information about how the Build system should use this Layer.
+3. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/conf/layer.conf
+4. This is a standard file used in all the Layers with certain modifications.
+	=> # We have a conf and classes directory, add to BBPATH
+	=> BBPATH .= ":${LAYERDIR}"
+
+	=> # We have a recipes directory containing .bb and .bbappend files, add to BBFILES
+	=> BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+	               ${LAYERDIR}/recipes-*/*/*.bbappend"
+
+	=> BBFILE_COLLECTIONS += "bsp-root-name"
+	=> BBFILE_PATTERN_bsp-root-name = "^${LAYERDIR}/"
+	=> BBFILE_PRIORITY_bsp-root-name = "6"
+	=> LAYERDEPENDS_bsp-root-name = "dependency-name"
+5. This file makes the BitBake aware of the Recipes and Configuration directories of the BSP Layer.
+6. This file must exist for the OpenEmbedded Build system to recognize the BSP as an actual Layer.
