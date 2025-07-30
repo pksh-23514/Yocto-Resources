@@ -1,0 +1,21 @@
+Sample Filesystem Layout for BSP Layer:
+=======================================
+1. The BSP Layer has a common directory structure for the end Users to get familiarized with the Yocto Project or the OpenEmbedded Project standards.
+2. However, this standard structure can also be used with the other Build systems as well.
+3. It is also intended that the standard structure will be easier to extract the information and convert it into other formats if required.
+4. For the OpenEmbedded Project, the standard Layer mechanism is directly accepted.
+5. The BSP Layer captures all the HW-specific details in one place using a standard format.
+6. This enables to include the Layer directly for using the HW platform regardless of the Build system.
+7. The BSP specification does not include a particular Build system or other tools. It is concerned with the HW-specific components only.
+8. At the end Distribution point, the BSP Layer can be combined with the Build system and other tools.
+9. There is a checklist to be ticked in order for a BSP Layer to be considered as compliant with the Yocto Project.
+10. The sample structure for a standard BSP Layer (includes but not limited to):
+	1) License files
+	2) README file
+	3) README.sources file
+	4) Pre-Built binaries
+	5) Layer Configuration file
+	6) HW Configuration options
+	7) BSP-specific Recipes
+	8) Display support files
+	9) Linux Kernel Configurations
