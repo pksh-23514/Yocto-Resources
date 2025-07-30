@@ -115,3 +115,10 @@ BSP-specific Recipes:
 	4) drivers
 	5) firmware
 	6) utilities
+
+Display or Graphics Support Files:
+**********************************
+1. The Recipe files for the BSP Layer provides for any special requirements of graphics support.
+2. These files are optional to the BSP Layer.
+3. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/recipes-graphics/*
