@@ -7,3 +7,18 @@ Adding Headers for Devices Interface using Recipes:
 	3) Under no circumstances, this file should be modified or customized.
 3. The correct way to interface the Devices or the custom Kernel is to use a separate Headers Package that provides the additional Header files for interfaces.
 4. This Package then becomes a dependency for the SW that performs the interfaces.
+
+Reasons for Not Customizing linux-libc-headers.inc File:
+********************************************************
+1. The Include files are critical to Build the 'libc'. Therefore, they must never be compromised with custom or Machine Header information.
+2. These are standard Headers and shared across the entire system. They are used to provide system-wide 'libc' compatibility.
+3. If there are certain modifications made to these files, it could lead to:
+	1) It could break the ABI (binary) compatibility and cause issues across the entire system.
+	2) It could introduce undefined behavior and Run-time errors that are hard to detect.
+	3) It can invalidate the assumptions made by the Toolchain.
+4. If the 'libc' is customized through modified Headers, it causes inconsistencies across all the other Applications that uses 'libc'.
+5. The Header files shall not contain:
+	1) The custom or Machine-specific Kernel Headers.
+	2) The Device-specific or private Header files.
+	3) The Device Driver level access.
+6. The Header files should never be copied and customized as well.
