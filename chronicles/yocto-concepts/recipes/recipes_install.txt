@@ -51,3 +51,13 @@ Modification of Installed Files:
 
 	=>	# Modify the hard-coded path '/usr/bin' to be replaced with '${bindir}' in the Installed file.
 	=>	sed -i "s|/usr/bin/|${bindir}/|g" ${D}${sysconfdir}/init-script/my-app
+
+Parallel Make Failures:
+***********************
+1. The 'oe_runmake install' can be run directly or indirectly by the 'autotools*' and the 'cmake' Classes.
+2. The 'oe_runmake' is a helper function provided in the 'meta/classes/base.bbclass' file that internally calls 'make' command.
+3. Therefore, the 'oe_runmake install' runs 'make install' in the 'do_install' Task. It typically runs in Parallel i.e. using multiple jobs with 'make -j' command.
+4. Sometimes, the Makefile can have missing dependencies between the 'do_install' jobs can result in race conditions.
+5. These race conditions manifest themselves as intermittent Build failures during the installations and they are tricky to reproduce consistently.
+6. The best workaround for these type of errors is to disable the Parallel Makefile installs by adding the statement in the Recipes:
+	=> PARALLEL_MAKEINST = ""
