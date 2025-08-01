@@ -1,0 +1,31 @@
+Installing the Built Files using Recipes:
+=========================================
+1. During the Build after the sources are Compiled and the Built binaries are generated, they need to copied to a directory structure as it should appear on the Target system.
+2. The 'do_install' Task is used to install the Built binaries along with their hierarchy to the locations that would mirror the directory structure on the Target Device.
+3. It copies the files from the 'S', 'B', 'WORKDIR' directories to the 'D' directory representing the Target directory structure.
+4. The method used to Build the SW affects the way it should be installed on the 'D' directory.
+5. It should be made sure to perform the corresponding steps for the SW to be installed correctly.
+
+Autotools or CMake:
+*******************
+1. If the Recipes are using Autotools or CMake, the OpenEmbedded Build system understands the process to install the SW.
+2. Therefore, there is no need to have a 'do_install' Task explicitly as a part of the Recipes.
+3. However, it must be ensured that the install job of the Build system is completed successfully.
+4. Alternatively, if there are additional files which are not being installed already by 'make install', the 'do_install:append' function can be used for such installations.
+5. The 'install' command inside the 'do_install:append' function is used to install the files.
+
+Other Makefile-based Projects:
+******************************
+1. If the Build system uses 'make install', there is a need to define the 'do_install' Task in the Recipes.
+2. The 'oe_runmake install' command inside the 'do_install' function is used to install the files.
+3. The method used to pass the destination directory path to 'oe_runmake' command depends on the Makefile's design being executed.
+4. The variables used to pass the destination path is:
+	1) DESTDIR=${D}
+	2) PREFIX=${D}
+	3) INSTALLROOT=${D}
+
+Manual Installation:
+********************
+1. If there is no install Target in the Makefile or it is a script Package or it is a binary-only Package, there is a need to define the 'do_install' Task in the Recipes.
+2. This function first use the 'install -d' to create the sub-directories under 'D' directory.
+3. Once the sub-directories are existing, the function can use 'install -m' to manually install the Built files into these sub-directories.
