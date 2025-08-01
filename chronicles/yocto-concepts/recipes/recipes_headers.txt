@@ -22,3 +22,35 @@ Reasons for Not Customizing linux-libc-headers.inc File:
 	2) The Device-specific or private Header files.
 	3) The Device Driver level access.
 6. The Header files should never be copied and customized as well.
+
+Headers for Custom Kernel:
+**************************
+1. There is no need to create some new copy of 'linux-libc-headers.inc' file for the custom Kernels as that Header file would then be specific to the Machine.
+2. If the Applications or the Drivers need to access the Devices directly, they should:
+	1) Either the Application or the Driver must provide the necessary Headers.
+	2) Or establish a dependency on a special Headers Package that is specific to the Application or the Driver.
+3. If the requirement is to modify the behavior of the 'libc' and subsequently all the other Applications on the system, then the changes must not be specific to the Machine.
+	1) The correct way is to use an Append file (.bbappend) to modify the 'linux-libc-headers.inc' file.
+4. While using custom Kernel Headers, they are provided from the 'STAGING_KERNEL_DIR' which is the directory containing Kernel Headers required for Out-of-Tree Modules Build.
+5. The Recipes would also require the following statement:
+	=> do_configure[depends] += "virtual/kernel:do_shared_workdir"
+
+Workflow:
+*********
+1. A separate Headers Package should be created.
+	1) A new Recipe file is written to install the custom Header file.
+		=> vi recipes-kernel/my-device-headers/my-device-headers.bb
+	2) The Header file can be pulled from a custom Kernel source.
+		---> include/uapi/linux/my-device.h
+	3) The Header file can have a dedicated source repository that is not the part of the Kernel. It can be pulled from there as well.
+	4) The Recipe file must install the Header file into a location such that there is no Namespace collision.
+		---> /usr/include/my-device
+2. The Application or the Driver must have a dependency on this Package.
+	=> vi my-custom-sw.bb
+	=> DEPENDS += "my-device-headers"
+3. The Application or the Driver includes the Header file from the right location during Compilation.
+	1) Using CMake:
+		=> include_directories(${STAGING_DIR_TARGET}/usr/include/my-device)
+	2) Using Makefile:
+		=> CFLAGS += -I${STAGING_DIR_TARGET}/usr/include/my-device
+4. If the Headers are tied to a Kernel Module, use a separate Kernel Module Recipe and export the Headers using 'do_install_append()' to install it into 'sysroot'.
