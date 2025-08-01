@@ -1,0 +1,33 @@
+Compiling the the Source Code using Recipes:
+============================================
+1. During the Build after the sources are fetched, unpacked, patched and configured, the Compilation stage is executed.
+2. The 'do_compile' Task is used to Compile the sources and once it is done successfully, then no further action is required.
+3. However, if this Task fails, the error needs to be diagnosed carefully using the log generated in the 'log.do_compile' file.
+
+Common Errors in do_compile:
+****************************
+1. Parallel Build failures:
+	1) These failures manifest themselves as intermittent errors and they are tricky to reproduce consistently.
+	2) The errors are reported when a file or directory that should be created by some other part of the Build process could not be found.
+	3) This type of failure can occur even if the file or directory does exist after the Build has failed, as that part of the Build process happened in the wrong order.
+	4) This error occurs typically when a Makefile does not define dependencies correctly between the Build jobs.
+	5) The best workaround for these type of errors is to disable the Parallel Builds:
+		=> PARALLEL_MAKE = ""
+2. Improper Host path usage:
+	1) This error applies only to those Recipes Building for the Target or the 'nativesdk' i.e. the developer tools in the generated SDK that runs on the Host Machine.
+	2) The failure occurs when the Compilation process uses any improper Headers, libraries or other files from the Host system when Cross-Compiling for the Target.
+	3) The 'log.do_compile' file must be reviewed to identify the paths being used in the Compilation process.
+	4) After reviewing the errors, the resolution can be either adding the Configuration options or applying a Patch or both.
+3. Missing the required Headers or libraries:
+	1) If the Build-time dependencies are not found either due to missing dependencies in the Recipes or the dependencies exist but the paths are incorrect.
+	2) If the dependencies are not listed in the 'DEPENDS' variable, the Compilation process would fail.
+	3) If the dependencies are listed in the 'DEPENDS' variable but the path used by the Build process to find the file is incorrect, it would not be detected.
+	4) In either of the above cases, the error notes that the files could not be found.
+	5) The resolution for the error is to add the necessary options to the Configure scripts or add the missing the Build-time dependencies to the 'DEPENDS' variable.
+	6) It can also be necessary to apply a Patch to the sources to ensure that the correct paths are being used in the Build.
+	7) If there is a need to specify the paths to find files staged into the 'sysroot' from the other Recipes, the OpenEmbedded Build system provides the following variable:
+		=> STAGING_INCDIR - This variable is used to specify the path of the '/usr/include' sub-directory of the 'sysroot' directory for the Target.
+		=> STAGING_BINDIR - This variable is used to specify the path of the '/use/bin' sub-directory of the 'sysroot' directory for the Target.
+		=> STAGING_DATADIR - This variable is used to specify the path of the '/usr/share' sub-directory of the 'sysroot' directory for the Target.
+		=> STAGING_LIBDIR - This variable is used to specify the path of the '/usr/lib' sub-directory of the 'sysroot' directory for the Target.
+		---> These paths are related to the current Recipes that is being Built for the Target.
