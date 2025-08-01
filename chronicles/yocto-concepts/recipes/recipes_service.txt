@@ -1,0 +1,9 @@
+Enabling System Services using Recipes:
+=======================================
+1. A Service is a process that usually starts on Boot and runs in the background.
+2. If a system Service is required to be installed on the Target, the Recipes must include the required definitions for the Service.
+3. It must be ensured that the Service 'init' script or the 'systemd' Service file is installed.
+4. If the Recipe file doesn't automatically installs these files, it must be manually installed in the Recipe file using:
+	1) The 'do_install:append' function if the Recipe file doesn't have the 'do_install' function.
+	2) The end of the 'do_install' function if the Recipe file have it. In such cases, there is no need to create a new 'do_install:append' function.
+5. While adding the installation for the Services manually, it must be ensured that the installation arranges the Output files mirroring the directory structure on the Target.
