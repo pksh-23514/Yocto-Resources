@@ -23,9 +23,15 @@ Other Makefile-based Projects:
 	1) DESTDIR=${D}
 	2) PREFIX=${D}
 	3) INSTALLROOT=${D}
+5. Since there is no Autotools or CMake available, the installation must be tracked for any issues.
+	1) If any issues is diagnosed, it should be fixed until everything is installed correctly.
+	2) The default location of 'D' directory i.e. '${WORKDIR}/image' must be reviewed to check if all the files are installed correctly.
 
 Manual Installation:
 ********************
 1. If there is no install Target in the Makefile or it is a script Package or it is a binary-only Package, there is a need to define the 'do_install' Task in the Recipes.
 2. This function first use the 'install -d' to create the sub-directories under 'D' directory.
 3. Once the sub-directories are existing, the function can use 'install -m' to manually install the Built files into these sub-directories.
+4. Since there is no Autotools or CMake available, the installation must be tracked for any issues.
+	1) If any issues is diagnosed, it should be fixed until everything is installed correctly.
+	2) The default location of 'D' directory i.e. '${WORKDIR}/image' must be reviewed to check if all the files are installed correctly.
