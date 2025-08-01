@@ -35,3 +35,19 @@ Manual Installation:
 4. Since there is no Autotools or CMake available, the installation must be tracked for any issues.
 	1) If any issues is diagnosed, it should be fixed until everything is installed correctly.
 	2) The default location of 'D' directory i.e. '${WORKDIR}/image' must be reviewed to check if all the files are installed correctly.
+
+Modification of Installed Files:
+********************************
+1. During the installations, there might be a requirement to modify some of the installed files to suit the Target layout.
+2. If these changes are performed in the 'do_install' Task, the modifications must be done on the destination file after copying rather than before copying.
+3. If the source files are modified before copying, there is a risk of:
+	1) The original sources getting tampered which breaks the reproducibility of the Build.
+	2) It causes incorrect re-Builds or Caching behavior as the Build system cannot reliably detect what changes have been made.
+4. Therefore, when the modifications are made to the copied files in 'D' directory, the sources and the Build area is clean and reproducible.
+5. For example, if there is a need to replace the hard-coded paths in a script with the value of variables provided by the Build system:
+	=> do_install () {
+	=>	install -d ${D}${sysconfdir}/init-script
+	=>	install -m 0644 ${S}/my-app.init ${D}${sysconfdir}/init-script/my-app
+
+	=>	# Modify the hard-coded path '/usr/bin' to be replaced with '${bindir}' in the Installed file.
+	=>	sed -i "s|/usr/bin/|${bindir}/|g" ${D}${sysconfdir}/init-script/my-app
