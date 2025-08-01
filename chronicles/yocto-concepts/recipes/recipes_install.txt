@@ -51,6 +51,7 @@ Modification of Installed Files:
 
 	=>	# Modify the hard-coded path '/usr/bin' to be replaced with '${bindir}' in the Installed file.
 	=>	sed -i "s|/usr/bin/|${bindir}/|g" ${D}${sysconfdir}/init-script/my-app
+	=> }
 
 Parallel Make Failures:
 ***********************
@@ -61,3 +62,15 @@ Parallel Make Failures:
 5. These race conditions manifest themselves as intermittent Build failures during the installations and they are tricky to reproduce consistently.
 6. The best workaround for these type of errors is to disable the Parallel Makefile installs by adding the statement in the Recipes:
 	=> PARALLEL_MAKEINST = ""
+
+Installation Path cmake/Modules:
+********************************
+1. During the Build, if the CMake based SW or library supplies a custom CMake Toolchain files, there is a standard path to install it.
+	---> ${D}${datadir}/cmake/Modules/
+2. If they are kept under this location, they can be even used by the other SW (if necessary).
+3. This is a standard search location for CMake Modules. It keeps the CMake infrastructure files separate from the binaries and the Headers.
+4. They can be installed into this directory in the 'do_install' Task.
+	=> do_install () {
+	=>      install -d ${D}${datadir}/cmake/Modules/
+	=>	install -m 0644 cmake/my-toolchain.cmake ${D}${datadir}/cmake/Modules/
+	=> }
