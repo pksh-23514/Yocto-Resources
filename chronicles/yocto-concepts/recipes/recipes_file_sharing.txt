@@ -1,0 +1,17 @@
+Sharing Files Between Recipes:
+==============================
+1. The Recipes often need to use the files provided by the other Recipes on the Host Machine. It is essential to Build complex SW systems.
+	1) Suppose an Application is linked to a Shared library, it would need the access to the library files and it's associated Headers.
+	2) In such a scenario, the Application Recipes depends on the other Recipes.
+2. The Yocto Project handles these kind of access by populating a 'sysroot' with the necessary files.
+	1) The Built Outputs from one Recipe file is made available in a Shared or per-Recipe 'sysroot' so that the other Recipes can use them during the Build.
+	2) The per-Recipes 'sysroots' provides better isolation and avoids conflicts in comparision to the Shared 'sysroots'.
+3. Each Recipes has two 'sysroots' in their work directories i.e. the 'recipe-sysroot' and the 'recipe-sysroot-native'.
+4. The 'recipe-sysroot' is the Target 'sysroot' of the Recipes.
+	1) It contains the files Built for the Target Architecture.
+	2) It is used when the Recipes Build Applications or libraries that are meant to run on the Target Device.
+5. The 'recipe-sysroot-native' is the Native 'sysroot' of the Recipes.
+	1) It contains the files Built for the Host Architecture.
+	2) It is used when the Recipes Build native tools that are meant to run on the Host Machine during the Build process.
+6. The Yocto Project isolates these 2 Environments to prevent the contamination between the Host and the Target Builds.
+7. The term 'staging' is used within the Yocto Project regarding the process of populating the files in 'sysroots'.
