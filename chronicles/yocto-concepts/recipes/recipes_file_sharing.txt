@@ -15,6 +15,7 @@ Sharing Files Between Recipes:
 	2) It is used when the Recipes Build native tools that are meant to run on the Host Machine during the Build process.
 6. The Yocto Project isolates these 2 Environments to prevent the contamination between the Host and the Target Builds.
 7. The term 'staging' is used within the Yocto Project regarding the process of populating the files in 'sysroots'.
+	1) The 'staging' Class file is used to install the files.
 
 Process of Populating sysroots:
 *******************************
@@ -40,8 +41,8 @@ Process of Populating sysroots:
 		       ${nonarch_base_libdir} \
 		       ${datadir} \
 		       /sysroot-only \
-	3) It is possible to modify these list of directories that populate the current Recipe's 'sysroot'.
 		       "
+	3) It is possible to modify these list of directories that populate the current Recipe's 'sysroot'.
 8. Therefore, the dependencies install the files into it's 'D' directory. Based on the 'SYSROOT_DIRS' value, these files are copied to current Recipe's 'sysroot' path.
 	---> Dependency Recipes					Current Recipe 'sysroot'
 	=> ${D}/usr/lib/lib-name.so		--->	${WORKDIR}/recipe-sysroot/usr/lib/lib-name.so
@@ -50,3 +51,25 @@ Process of Populating sysroots:
 	1) The custom directory paths must be added to the 'SYSROOT_DIRS' variable. Otherwise, the files won't be copied from this location and the linking would fail.
 		=> SYSROOT_DIRS:append = " /custom/path"
 	2) This change must be made to the dependencies Recipe files for the 'do_populate_sysroot' Task to understand the contents to be staged.
+10. If the current Recipe file has a dependency on Recipes whose files need to be staged in the 'recipe-sysroot-native' for the current Recipe.
+	1) The current Recipe file must declare a native dependency.
+		=> DEPENDS = "lib-name-native"
+	2) The dependency Recipes must be Built for the Host Machine. Therefore, the Recipes must have a '-native' in their name.
+		=> vi lib-name-native.bb
+	3) The '-native' Recipe file must inherit the 'native' Class to provide the common functionalities to Build tools for running on the Host Machine.
+		=> inherit native
+	4) The 'SYSROOT_DIRS_NATIVE' variable is a list of extra directory paths relative to 'D' directory whose contents should be staged for the '-native' Recipes.
+		=> SYSROOT_DIRS_NATIVE = " \
+		       ${bindir} \
+		       ${sbindir} \
+		       ${base_bindir} \
+		       ${base_sbindir} \
+		       ${libexecdir} \
+		       ${sysconfdir} \
+		       ${localstatedir} \
+		       "
+	5) Therefore, the dependencies install the files into it's 'D' directory. Based on the values of 'SYSROOT_DIRS' and 'SYSROOT_DIRS_NATIVE' variables:
+		---> Dependency Recipes					Current Recipe 'sysroot'
+		=> ${D}/usr/lib/lib-name.so		--->	${WORKDIR}/recipe-sysroot-native/usr/lib/lib-name.so
+		=> ${D}/usr/include/header-name.h	--->	${WORKDIR}/recipe-sysroot-native/usr/include/header-name.h
+	6) It is possible to modify the list of directories that populate the current Recipe's 'recipe-sysroot-native' path.
