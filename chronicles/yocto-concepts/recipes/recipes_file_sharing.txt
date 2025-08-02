@@ -15,3 +15,38 @@ Sharing Files Between Recipes:
 	2) It is used when the Recipes Build native tools that are meant to run on the Host Machine during the Build process.
 6. The Yocto Project isolates these 2 Environments to prevent the contamination between the Host and the Target Builds.
 7. The term 'staging' is used within the Yocto Project regarding the process of populating the files in 'sysroots'.
+
+Process of Populating sysroots:
+*******************************
+1. When a current Recipe file declares a dependency on the other Recipes, the BitBake ensures that those Recipes are Built first.
+2. After the Build, the BitBake copies the exported files from the dependencies into the current Recipe's 'sysroot'.
+3. This allows those files to be available before the current Recipe's Configuration and Compilation stages.
+4. The Recipes should never populate the 'sysroot' directly i.e. by writing the files into the current Recipe's 'sysroot' directly.
+5. The correct way to populate the 'sysroot' for the current Recipe's is:
+	1) The Built files from the dependencies must be installed into the standard locations within the 'D' directory during the 'do_install' Task.
+	2) The 'do_populate_sysroot' Task for the dependencies handle the copying of a set of files installed in the 'D' directory to populate the current Recipe's 'sysroot'.
+	3) The required files are available for the current Recipe's usage before it's 'do_configure' and 'do_compile' Tasks are executed by the BitBake.
+6. The reasons for this limitation are:
+	1) The Yocto Project cataloges all the files that each Recipes places in 'sysroot'.
+	2) This allows BitBake to clean up obsolete or replaced files whenever a Recipe file changes the dependencies. This avoids stale or conflicting files in 'sysroot'.
+	3) The direct population of 'sysroot' by the Recipes can make the Build non-deterministic and hard to debug, especially with parallel Builds.
+7. The 'SYSROOT_DIRS' variable contains a list of directory paths relative to 'D' directory whose contents should be staged into other Recipe's 'sysroot' for usage.
+	1) It is used by the 'do_populate_sysroot' Task for the dependencies to copy the files installed in the 'D' directory to populate the current Recipe's 'sysroot'.
+	2) The default value of the variable is:
+		=> SYSROOT_DIRS = " \
+		       ${includedir} \
+		       ${libdir} \
+		       ${base_libdir} \
+		       ${nonarch_base_libdir} \
+		       ${datadir} \
+		       /sysroot-only \
+	3) It is possible to modify these list of directories that populate the current Recipe's 'sysroot'.
+		       "
+8. Therefore, the dependencies install the files into it's 'D' directory. Based on the 'SYSROOT_DIRS' value, these files are copied to current Recipe's 'sysroot' path.
+	---> Dependency Recipes					Current Recipe 'sysroot'
+	=> ${D}/usr/lib/lib-name.so		--->	${WORKDIR}/recipe-sysroot/usr/lib/lib-name.so
+	=> ${D}/usr/include/header-name.h	--->	${WORKDIR}/recipe-sysroot/usr/include/header-name.h
+9. If the dependency Recipes install the files that are non-standard locations and those files are to be staged for the current Recipe file.
+	1) The custom directory paths must be added to the 'SYSROOT_DIRS' variable. Otherwise, the files won't be copied from this location and the linking would fail.
+		=> SYSROOT_DIRS:append = " /custom/path"
+	2) This change must be made to the dependencies Recipe files for the 'do_populate_sysroot' Task to understand the contents to be staged.
