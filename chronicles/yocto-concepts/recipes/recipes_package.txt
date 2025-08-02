@@ -35,3 +35,14 @@ Packaging Process:
 	6) These Packages are identical across all Target Architectures and they need not be Built separately for each Machine or Architecture.
 	7) The 'allarch' Class must be inherited in the Recipes for the Packages that are Architecture independent:
 		=> inherit allarch
+
+Significance of Package Architecture:
+*************************************
+1. The Package Architecture is not critical while Building the Image for the first few times.
+2. During the initial Build, the priority is to focus on the functionality. The 'PACKAGE_ARCH' and other Architecture related settings can be temporarily ignored.
+3. After the Recipes stabilize, it becomes necessary to define the correct Package Architecture for the Build efficiency and Package deployment.
+	1) If the Package Architecture is wrongly marked, the Build system may skip necessary re-Building Packages or re-Building of unnecessary Packages.
+	2) The BitBake uses the checksums and the Meta-data to determine the Packages re-Building.
+	3) In the multi-Machine or multi-Architecture Build system, the incorrect Package Architectures can lead to incompatible binaries deployment.
+	4) It can also cause unexpected errors or misbehavior due to missing Packages on the Target.
+4. It is important to ensure that the Recipes are re-Build appropriately in response to changes in Configurations and the correct Packages are installed on the Target.
