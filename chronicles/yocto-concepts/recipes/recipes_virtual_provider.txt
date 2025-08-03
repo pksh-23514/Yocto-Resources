@@ -26,6 +26,9 @@ Common Example of Choosing Linux Kernel Versions:
 	---> In the 'meta-yocto-bsp/conf/machine/beaglebone-yocto.conf' file, the actual provider is selected:
 		=> PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
 		=> PREFERRED_VERSION_linux-yocto ?= "5.15%"
+8. Any Recipes that 'PROVIDES' a 'virtual/*' item that is not selected through 'PREFERRED_PROVIDER_virtual' does not get Built.
+	---> Since the 'linux-yocto_5.15.bb' Recipe file is selected, the 'linux-yocto_5.10.bb' Recipe file is not Built.
+9. Preventing these Recipes from Building is usually the desired behavior since this mechanism’s purpose is to select among the mutually exclusive alternative providers.
 
 Significance of Virtual Providers:
 **********************************
