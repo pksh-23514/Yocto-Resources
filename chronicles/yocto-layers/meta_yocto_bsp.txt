@@ -2,7 +2,7 @@ meta-yocto-bsp:
 ===============
 1. The 'meta-yocto-bsp' is a reference Board Support Package (BSP) Layer provided by the Yocto Project in Poky.
 2. It is a Layer that provides the support for certain specific HW.
-	1) Texas Instruments Beaglebone (beaglebone-yocto)
+	1) Texas Instruments BeagleBone (beaglebone-yocto)
 	2) General 64-bit ARM SystemReady platforms (genericarm64)
 	3) General Intel Architecture platforms (genericx86 and genericx86-64)
 3. It provides HW-specific Meta-data to build the complete Linux Image for the Target:
