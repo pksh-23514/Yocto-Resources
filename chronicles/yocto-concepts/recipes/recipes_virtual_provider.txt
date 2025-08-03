@@ -19,8 +19,17 @@ Common Example of Choosing Linux Kernel Versions:
 		=> inherit kernel
 4. The 'linux-yocto_5.10.bb' or 'linux-yocto_5.15.bb' Recipe files can fulfill any any dependency that asks for the 'virtual/kernel'.
 5. During the Build, there is a need to call for one of these Kernel Recipes. This Configuration is done in the specific Machine Configuration file (.conf).
-6. The 'PREFERRED_PROVIDER_virtual/*' and the 'PREFERRED_VERSION_value' variables are used to perform the selection of the actual provider.
+6. The 'PREFERRED_PROVIDER_virtual/*' and the 'PREFERRED_VERSION' variables are used to perform the selection of the actual provider.
+	=> PREFERRED_PROVIDER_virtual/* = "value"
+	=> PREFERRED_VERSION_value = "version"
 7. Suppose the Target Image Build is for the BeagleBone HW and the Kernel Recipe file 'linux-yocto_5.15.bb' is to be selected.
 	---> In the 'meta-yocto-bsp/conf/machine/beaglebone-yocto.conf' file, the actual provider is selected:
 		=> PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
 		=> PREFERRED_VERSION_linux-yocto ?= "5.15%"
+
+Significance of Virtual Providers:
+**********************************
+1. They provide flexibility to the Recipes by swapping out the components easily.
+2. They make the Layers more modular by allowing the specific functionality to be modified without writing the Recipes separately.
+3. They allow the Recipes to be portable across different HW Builds by easily selecting the different providers.
+4. They avoid hard-coding the values for specific implementations.
