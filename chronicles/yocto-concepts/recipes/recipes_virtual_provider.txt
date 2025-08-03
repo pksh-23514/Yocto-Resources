@@ -33,3 +33,13 @@ Significance of Virtual Providers:
 2. They make the Layers more modular by allowing the specific functionality to be modified without writing the Recipes separately.
 3. They allow the Recipes to be portable across different HW Builds by easily selecting the different providers.
 4. They avoid hard-coding the values for specific implementations.
+
+Build Dependency using Virtual Providers:
+*****************************************
+1. When the virtual provider is used, there is no need to hard-code a Recipe name as the Build dependency.
+2. Instead, the 'DEPENDS' variable can be used to state the Build is dependent on the 'virtual/*'.
+	=> DEPENDS = "virtual/*"
+3. This allows for abstraction and flexibility in the Recipes dependency.
+4. During the Build, based on the 'PREFERRED_PROVIDER_virtual' variable, the Build system picks the correct Recipe needed for the 'virtual/*' dependency.
+5. The virtual providers can only be applied to Build-time dependencies specified with 'PROVIDES' and 'DEPENDS' variables.
+6. They cannot be applied to Run-time dependencies specified with 'RPROVIDES' and 'RDEPENDS' variables.
