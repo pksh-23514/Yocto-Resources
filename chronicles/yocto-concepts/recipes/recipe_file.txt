@@ -21,3 +21,20 @@ Recipes File Format:
 	1) The 'recipe-name' is the name of the SW or the Package being Built.
 	2) The 'version' is the version of the SW or the Package being Built.
 	---> In the 'poky/meta/recipes-core/dropbear/', the Recipe file for the SSH Dropbear is 'dropbear_2025.88.bb'.
+
+Proper Versioning of Recipes:
+=============================
+1. Sometimes the name of the Recipe file can lead to a versioning problem when the Recipe file is upgraded to a final Release.
+2. The suffix 'rcx' (like rc1, rc2, rc3 etc) is used for a Release candidate stage Recipe file.
+3. The final Release of the Recipe file is without the 'rcx' suffix.
+4. Suppose a Recipe file has a Release candidate that needs to be upgraded to the final Release, however the version name could cause the upgrade to fail.
+	1) The Release candidate Recipe file version as '0.8.16-rc1' and the final Release Recipe file version as '0.8.16'.
+	2) In such cases, the version comparision logic may interpret the final Release as the older one than the Release candidate.
+	3) The version change from '0.8.16-rc1' to '0.8.16' is seen as a decrease by the Build system and Package managers.
+	4) So the resulting Packages will not correctly trigger an upgrade to the final Release.
+5. The '-' is seen as a version that comes after. The '~' is seen as a version that was before.
+	1) 0.8.16~rc1 ---> Before the final Release
+	2) 0.8.16 ---> The final Release
+	3) 0.8.16-rc1 ---> After the final Release (which is incorrect as it is the Release candidate)
+6. Therefore, the recommended convention is to use a '~' character in the 'PV' variable for the Release candidate.
+	=> PV = 0.8.16~rc1
