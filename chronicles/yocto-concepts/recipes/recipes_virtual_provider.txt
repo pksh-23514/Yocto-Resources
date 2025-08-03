@@ -1,0 +1,26 @@
+Using Virtual Providers in Recipes:
+===================================
+1. The 'virtual/*' is used to represent an abstract capability or interface and not specific Recipes.
+2. The Recipes that fulfill the same functionality can claim to provide this 'virtual' capability.
+3. Prior to the Build, if there are several different Recipes that provide the same functionality, the virtual provider acts as a placeholder for the actual provider.
+4. The actual provider is determined at the Build-time.
+5. Each Recipe file in some way uses the 'PROVIDES' variable that essentially identifies itself as being able to provide the 'virtual' capability.
+
+Common Example of Choosing Linux Kernel Versions:
+*************************************************
+1. In the 'kirkstone' branch of Poky, there are multiple Linux Kernel Recipes at the 'meta/recipes-kernel/linux/' path.
+	1) linux-yocto_5.10.bb
+	2) linux-yocto_5.15.bb
+2. The 'meta/classes/kernel.bbclass' is used by the Kernel Recipes to include the 'PROVIDES' variable for identifying themselves as virtual provider.
+	=> PROVIDES += "virtual/kernel"
+3. The 'linux-yocto_5.15.bb' Recipe file uses the 'PROVIDES' variable by inheriting the 'kernel' Class file.
+	=> require recipes-kernel/linux/linux-yocto.inc
+	---> The 'linux-yocto.inc' inherits the 'kernel' Class file.
+		=> inherit kernel
+4. The 'linux-yocto_5.10.bb' or 'linux-yocto_5.15.bb' Recipe files can fulfill any any dependency that asks for the 'virtual/kernel'.
+5. During the Build, there is a need to call for one of these Kernel Recipes. This Configuration is done in the specific Machine Configuration file (.conf).
+6. The 'PREFERRED_PROVIDER_virtual/*' and the 'PREFERRED_VERSION_value' variables are used to perform the selection of the actual provider.
+7. Suppose the Target Image Build is for the BeagleBone HW and the Kernel Recipe file 'linux-yocto_5.15.bb' is to be selected.
+	---> In the 'meta-yocto-bsp/conf/machine/beaglebone-yocto.conf' file, the actual provider is selected:
+		=> PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
+		=> PREFERRED_VERSION_linux-yocto ?= "5.15%"
