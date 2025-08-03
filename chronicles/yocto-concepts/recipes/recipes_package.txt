@@ -46,3 +46,17 @@ Significance of Package Architecture:
 	3) In the multi-Machine or multi-Architecture Build system, the incorrect Package Architectures can lead to incompatible binaries deployment.
 	4) It can also cause unexpected errors or misbehavior due to missing Packages on the Target.
 4. It is important to ensure that the Recipes are re-Build appropriately in response to changes in Configurations and the correct Packages are installed on the Target.
+
+Post-Installation Scripts:
+==========================
+1. The post-install scripts run immediately after the Package installation on the Target or during the Image creation when the Package is included in the Image.
+2. To add a post-install script to a Package, the 'pkg_postinst:PACKAGENAME' function must be added to the Recipe file.
+	=> pkg_postinst:PACKAGENAME() {
+	=> 	    # Commands to carry out
+	=> }
+	---> The 'PACKAGENAME' is the name of the Package that should be attached to the 'postinst' script.
+3. If the Recipe's main Package is to be attached to the 'postinst' script, the '${PN}' value should be specified in 'PACKAGENAME'.
+4. The script defined in the 'pkg_postinst' function is called when the RootFS is created. If the script succeeds, the Package is marked as installed.
+5. Any RPM post-install script that runs on the Target should return zero as exit code.
+	1) The RPM does not allow non-zero exit codes for these scripts.
+	2) The RPM Package manager will cause the Package installation to fail on the Target for non-zero exit codes.
