@@ -1,0 +1,25 @@
+Board Support Package Development:
+==================================
+
+Process to Develop BSP Layer:
+*****************************
+
+Source Repositories ---> Host Machine -------->	Prepare the Host System for the Yocto Project
+				|					|
+				|					V
+				-------------->   Clone the local meta-intel Git Repository
+									|
+									V
+								Create a new BSP Layer
+									|
+									V
+								Configuration changes
+									|
+									V
+								  Recipes changes
+									|
+									V
+							     Image Build preparations
+									|
+									V
+								   Image Build
