@@ -122,3 +122,31 @@ Display or Graphics Support Files:
 2. These files are optional to the BSP Layer.
 3. It is available in the BSP Layer at the following location:
 	=> meta-bsp-root-name/recipes-graphics/*
+
+Linux Kernel Configurations:
+****************************
+1. The Kernel Recipes are used to supply or modify the Linux Kernel for the Image Build.
+2. It is available in the BSP Layer at the following location:
+	=> meta-bsp-root-name/recipes-kernel/linux/linux*.bbappend
+	=> meta-bsp-root-name/recipes-kernel/linux/*.bb
+3. The Append file (.bbappend) modifies the main Kernel Recipes used to Build the Image.
+4. The Recipe file (.bb) provides the developer supplied Kernel Recipe file.
+5. This directory can contain both the types of file.
+6. Poky provides the Yocto Kernel Recipe file in the 'meta/recipes-kernel/linux' directory.
+	1) The Kernel Recipes can be modified using the Append files for updating the Machine-specific changes.
+	2) The name of the Append file must be similar to the Kernel Recipe file located in the 'meta/recipes-kernel/linux' directory.
+		=> meta/recipes-kernel/linux/linux-yocto_6.12.bb
+		=> meta-yocto-bsp/recipes-kernel/linux/linux-yocto_6.12.bbappend
+7. There can be multiple Kernel Recipe files present in the directory. Each Kernel Recipe file corresponds to a particular Linux Kernel version.
+8. To select a particular Kernel version in the Image Build, the 'bsp-root-name.conf' file must be updated.
+	=> PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
+	---> The 'linux-yocto' value for this variable corresponds to the Kernel Recipe file name provided by the Yocto Project.
+	---> For the Raspberry Pi HW, the Layer provides the Kernel Recipe file value as 'linux-raspberrypi' with the specific version.
+	=> PREFERRED_VERSION_linux-yocto ?= "6.12%"
+	---> The '6.12%' value for this variable is the preferred version of the Linux Kernel.
+	---> The BitBake is instructed to use the 'meta/recipes-kernel/linux/linux-yocto_6.12.bb' Kernel Recipe file for the Build.
+	---> The 'linux-yocto_6.12.bbappend' file is used to provide the specific BSP settings to the Kernel.
+9. If the 'PREFERRED_VERSION' variable is not set explicitly, then the highest Kernel version available in the Layer is picked for the Build.
+10. When the 'PREFERRED_PROVIDER' variable is assumed by default, it is not present in the 'bsp-root-name.conf' file.
+	1) The default selection by the BitBake implies that the 'linux-yocto' is the Kernel Recipe available in the Layers for selection.
+	2) The variable needs to be explicitly mentioned only if the default choice has to be updated with a custom choice.
