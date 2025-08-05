@@ -23,3 +23,30 @@ Source Repositories ---> Host Machine -------->	Prepare the Host System for the 
 									|
 									V
 								   Image Build
+
+BSP Layer Development Details:
+******************************
+1. The Host system should be setup to support the Yocto Project development.
+	1) Clone the complete Poky repository on the Host Machine working directory and check-out the correct branch.
+2. The 'meta-intel' Layer repository is cloned on the Host system.
+	1) Although it is not mandatory for the BSP creation, the 'meta-intel' repository contains many BSPs for the IA Machines supported by the Yocto Project.
+	2) Having the local copies of these supported BSP Layers on the Host system provides the access to Layers that might be leveraged for creating the BSP.
+	3) Clone the 'meta-intel' Layer in the source directory of Poky and check-out the same branch as selected in Poky.
+3. The custom BSP Layer can be created using the BitBake tool. The BSP Layer is a special type of Layer in the OpenEmbedded Project.
+	1) The simplest way to create a new BSP Layer that is compliant with the Yocto Project is to use the 'bitbake-layers' script provided in Poky.
+	2) The Layers are ideal for isolating and storing the development work for a given HW.
+	3) It provides the area to store the Recipes and the Configurations for the custom BSP Layer.
+	4) In the custom BSP Layer, the standard directory structure for a BSP Layer should be followed.
+	5) The 'meta-intel' Layer can be referenced for the BSP Layer directory structure.
+4. The Configurations should be modified for the custom BSP Layer.
+	1) The standard BSP Layer directory structure organizes the files to be edited in 'conf' and several 'recipes-*' directories in the Layer.
+	2) The Configuration changes identifes and includes the custom BSP Layer into the Build Environment.
+	3) It also identifes the Linux Kernel to be used in the Image.
+5. The Recipes should be modified for the custom BSP Layer.
+	1) The Recipes changes include the addition / removal / alteration of the Recipe files.
+	2) It also includes the addition of the Append files to support the specific HW or Machine settings.
+6. The Image can be Build after all the changes have been done to the custom BSP Layer.
+	1) The Environment setup script should be sourced to enter the Build directory.
+	2) The Build system must be made aware of the custom BSP Layer by adding the Layer path to the 'conf/bblayers.conf' file.
+	3) The Target Machine name and other details (if any) must be updated in the 'conf/local.conf' file.
+7. The BitBake command can be executed to start the Build process based on the type of Image and the Configurations of the various Layers.
