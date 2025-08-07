@@ -1,0 +1,12 @@
+Syntax in Recipes:
+==================
+
+Variable Assignment and Manipulations:
+**************************************
+1. The variable assignments allow to assign the value to a variable.
+2. The assignments can be static text or might include the contents of the other variables.
+3. The appending and prepending operations are also supported.
+4. The following ways display the usage on the variables:
+	=> S = "${WORKDIR}/postfix-${PV}"
+	=> CFLAGS += "-DNO_ASM"
+	=> CFLAGS:append = " --enable-important-feature"
