@@ -1,8 +1,8 @@
 Syntax in Recipes:
 ==================
 
-Variable Assignment and Manipulations:
-**************************************
+Variable Assignments and Manipulations:
+***************************************
 1. The variable assignments allow to assign the value to a variable.
 2. The assignments can be static text or might include the contents of the other variables.
 3. The appending and prepending operations are also supported.
@@ -27,3 +27,15 @@ Functions:
 	=>     mv ${D}${bindir}/sed ${D}${base_bindir}/sed
 	=>     rmdir ${D}${bindir}/
 	=> }
+
+Keywords:
+*********
+1. The BitBake Recipes make use of a few keywords only.
+2. They are generally used:
+	1) To include the common functions using 'inherit'.
+	2) To load parts of a Recipe from other files using 'include' and 'require'.
+	3) To export the variables into the Environment using 'export'.
+3. The following ways display the usage of the keywords:
+	=> export POSTCONF = "${STAGING_BINDIR}/postconf"
+	=> inherit autoconf
+	=> require otherfile.inc
