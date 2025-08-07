@@ -60,3 +60,17 @@ Post-Installation Scripts:
 5. Any RPM post-install script that runs on the Target should return zero as exit code.
 	1) The RPM does not allow non-zero exit codes for these scripts.
 	2) The RPM Package manager will cause the Package installation to fail on the Target for non-zero exit codes.
+
+Delaying Post-Install Scripts Execution:
+****************************************
+1. Sometimes it is necessary for the execution of a post-install script to be delayed until the first Boot.
+2. To delay the script execution until Booting of the Target, the post-install must be explicitly marked.
+3. There are 2 ways to execute this case:
+	1) Using the 'pkg_postinst_ontarget:PACKAGENAME' function.
+	2) Calling the 'postinst_intercept delay_to_first_boot' from the 'pkg_postinst:PACKAGENAME' function.
+4. Any failure of a 'pkg_postinst:PACKAGENAME' script (including the exit code '1') triggers an error during the 'do_rootfs' Task and breaks the Build.
+5. If there are Recipes that use the 'pkg_postinst:PACKAGENAME' function that have dependency on the non-standard native tools during the RootFS generation.
+	1) To include these custom Host utilities, the 'PACKAGE_WRITE_DEPS' variable is used to list these tools in the Recipe file.
+	2) Otherwise, those tools may not be available during the Build process and the post-install script execution is deferred until the first Boot.
+	3) This kind of deferring of the script execution is undesirable.
+	4) And if the RootFS is Read-only, then such first  Boot script executions are impossible.
