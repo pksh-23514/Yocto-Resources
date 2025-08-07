@@ -74,3 +74,11 @@ Delaying Post-Install Scripts Execution:
 	2) Otherwise, those tools may not be available during the Build process and the post-install script execution is deferred until the first Boot.
 	3) This kind of deferring of the script execution is undesirable.
 	4) And if the RootFS is Read-only, then such first  Boot script executions are impossible.
+
+Other Lifetime Scripts Execution:
+*********************************
+1. There is equivalent support for pre-install, pre-uninstall and post-uninstall scripts in the Yocto Project.
+	1) The 'pkg_preinst' is the pre-install scripts that run immediately before the Packages installation.
+	2) The 'pkg_prerm' is the pre-uninstall scripts that run immediately before the Packages removal.
+	3) The 'pkg_postrm' is the post-uninstall scripts that run immediately after the Packages removal.
+2. They work exactly like the 'pkg_postinst' scripts. However, they only run on the Target and not during the Image Building.
