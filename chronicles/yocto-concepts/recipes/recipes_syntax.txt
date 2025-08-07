@@ -39,3 +39,10 @@ Keywords:
 	=> export POSTCONF = "${STAGING_BINDIR}/postconf"
 	=> inherit autoconf
 	=> require otherfile.inc
+
+Comments:
+*********
+1. Any line in the Recipe file beginning with the '#' character is treated as a comment line by the BitBake.
+2. They are ignored during the Recipes Build.
+3. It can be used in the Recipes as following:
+	=> # This line is a comment
