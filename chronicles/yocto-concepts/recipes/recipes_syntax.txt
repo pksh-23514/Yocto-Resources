@@ -10,3 +10,20 @@ Variable Assignment and Manipulations:
 	=> S = "${WORKDIR}/postfix-${PV}"
 	=> CFLAGS += "-DNO_ASM"
 	=> CFLAGS:append = " --enable-important-feature"
+
+Functions:
+**********
+1. The functions provide a series of actions to be performed.
+2. They are used:
+	1) To override the default implementation of a Task function.
+	2) To append or prepend an existing function.
+3. The standard functions use the Shell Syntax, although access to the OpenEmbedded variables and the internal methods are also available.
+4. However, they can also be implemented in Python Syntax rather than Shell Syntax.
+5. It is possible to implement some new functions that are called between the existing Tasks as long as those functions are not replacing or complementing the default functions.
+6. The following is an example function from the 'sed' Recipe:
+	=> do_install () {
+	=>     autotools_do_install
+	=>     install -d ${D}${base_bindir}
+	=>     mv ${D}${bindir}/sed ${D}${base_bindir}/sed
+	=>     rmdir ${D}${bindir}/
+	=> }
