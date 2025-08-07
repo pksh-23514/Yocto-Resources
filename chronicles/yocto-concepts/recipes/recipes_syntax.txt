@@ -11,6 +11,13 @@ Variable Assignments and Manipulations:
 	=> CFLAGS += "-DNO_ASM"
 	=> CFLAGS:append = " --enable-important-feature"
 
+Quote Assignments:
+******************
+1. The double quotes ("") are must around the values in the variable assignments.
+2. It can be used in the Recipes as following:
+	=> VARIABLE = "value"
+	=> VERSION = "The version is ${PV}"
+
 Functions:
 **********
 1. The functions provide a series of actions to be performed.
@@ -51,6 +58,7 @@ Lines Continuation:
 *******************
 1. The statement in the Recipe file can be split into multiple lines using the '\' character.
 2. If the '\' character is placed at the end of a line, the BitBake understands that the statement is continued on the next line.
-3. It can be used in the Recipes as following:
+3. There should not be any characters (including spaces or tabs) after the '\' character.
+4. It can be used in the Recipes as following:
 	=> VARIABLE = "The value is too \
 	               long"
