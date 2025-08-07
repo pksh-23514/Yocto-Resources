@@ -46,3 +46,11 @@ Comments:
 2. They are ignored during the Recipes Build.
 3. It can be used in the Recipes as following:
 	=> # This line is a comment
+
+Lines Continuation:
+*******************
+1. The statement in the Recipe file can be split into multiple lines using the '\' character.
+2. If the '\' character is placed at the end of a line, the BitBake understands that the statement is continued on the next line.
+3. It can be used in the Recipes as following:
+	=> VARIABLE = "The value is too \
+	               long"
