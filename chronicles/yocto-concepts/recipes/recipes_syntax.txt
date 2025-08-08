@@ -40,6 +40,19 @@ Conditional Assignments:
 6. It can be used in the Recipes as following:
 	=> VARIABLE ?= "value"		// This 'value' is assigned to the 'VARIABLE' only if it is not defined elsewhere.
 
+Appending and Prepending Operations:
+************************************
+1. The '+=' operator is used for appending the values to a variable.
+2. The operation takes into effect immediately during the parsing by the BitBake.
+3. It inserts a space between the current value of the variable and the appended value.
+4. It can be used in the Recipes as following:
+	=> SRC_URI += "file://fix-makefile.patch"
+5. The '=+' operator is used for prepending the values to a variable.
+6. The operation takes into effect immediately during the parsing by the BitBake.
+7. It inserts a space between the current value of the variable and the prepended value.
+8. It can be used in the Recipes as following:
+	=> VAR =+ "Starts"
+
 Functions:
 **********
 1. The functions provide a series of actions to be performed.
