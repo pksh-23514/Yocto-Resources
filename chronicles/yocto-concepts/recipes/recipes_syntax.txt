@@ -18,6 +18,18 @@ Quote Assignments:
 	=> VARIABLE = "value"
 	=> VERSION = "The version is ${PV}"
 
+Variables Expansion:
+********************
+1. The contents of the variables can be accessed only using '${VARIABLE_NAME}' Syntax.
+2. The '=' operator doesn't immediately expand the variable references on the right-hand side.
+3. The expansion on the right-hand side is deferred until the variable which is assigned with the reference variable is actually used by the function i.e. expansion is on-demand.
+4. This behavior ensures that the values are most appropriate for the context in which they are finally used.
+5. The ':=' operator results in an immediate expansion of the variable references on the right-hand side rather than when the variable is actually used.
+6. These immediate expansions are needed only on certain rare occasions.
+7. It can be used in the Recipes as following:
+	=> VAR1 = "${VARIABLE}"		// The expansion is not immediate.
+	=> VAR2 := "${VARIABLE}"	// The expansion is immediate.
+
 Functions:
 **********
 1. The functions provide a series of actions to be performed.
