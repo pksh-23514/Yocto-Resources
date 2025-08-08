@@ -30,6 +30,16 @@ Variables Expansion:
 	=> VAR1 = "${VARIABLE}"		// The expansion is not immediate.
 	=> VAR2 := "${VARIABLE}"	// The expansion is immediate.
 
+Conditional Assignments:
+************************
+1. The conditional assignments are used to assign the value to a variables only if the variables are currently not set anywhere else.
+2. The '?=' operator is used to assign a default value for the variable. The Soft assignments are used for the conditional assignments.
+3. However, the default value is replaced by the value of the variable if that variable is defined.
+4. They are typically used in the 'conf/local.conf' file for the variables that are allowed to come through from the external Environment.
+5. If there are multiple '?=' type of assignments to a single variable, the first of all the '?=' assignments is used as the value for the variable.
+6. It can be used in the Recipes as following:
+	=> VARIABLE ?= "value"		// This 'value' is assigned to the 'VARIABLE' only if it is not defined elsewhere.
+
 Functions:
 **********
 1. The functions provide a series of actions to be performed.
