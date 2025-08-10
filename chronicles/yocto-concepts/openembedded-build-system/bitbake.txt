@@ -116,3 +116,47 @@ Materials	|				|		   |
 	=> SRC_URI += "file://mypatch1.patch;patchdir=subdir/path"
 	---> It indicates that the 'mypatch1.patch' is to be applied inside the 'subdir/path' directory of the source tree.
 10. Once the Patches are found, they are applied to the Recipe's source files that are located in the directory pointed by the 'S' variable.
+
+Configuration, Compilation and Staging:
+***************************************
+1. After the source code is Patched, the BitBake executes the Tasks that Configure and Compile the source code.
+2. The expanded view of the 'Configuration, Compilation and Staging' in the 'OpenEmbedded Build Workflow' is as follows:
+
+     Upstream Project Releases		Local Projects		  SCMs
+----------------------------------- ----------------------- ----------------
+|  busybox			  | |  Local Source Tree  | |  meta-qt5	   |
+|  busybox-1.35.0.tar.bz2	  | |  <directory>	  | |    Git	   |
+|				  | |      <file>	  | |		   |
+|  <recipe>			  | |      <directory>	  | |  opkg	   |
+|  Tarball / ZIP / Archive Files  | |          <file>	  | |  Subversion  |
+----------------------------------- ----------------------- ----------------
+		|				|		   |
+Source		|				|		   |
+Materials	|				|		   |
+		V				V		   V
+---------------------------------------------------------------------------------------------------------------------------
+|															  |
+| BitBake									Build Directory				  |
+|		Configure / Compile						----------------------------------------- |
+|		Autoreconf as needed						| tmp <---------------------------------|-|--- TMPDIR
+|		--------------------						|   work				| |
+|		| ---------------- |			B			|     ${PACKAGE_ARCH}-poky-${TARGET_OS} | |
+|	------->| | do_configure | |<-------------------------------------------|       ${PN}				| |
+|   	|	| ---------------- |<-----------|				|         ${PV} <-----------------------|-|--- WORKDIR
+|	|	|		   |		|	S			|           sources-unpack <------------|-|--- UNPACKDIR
+|	|	| ---------------- |		|-------------------------------|           ${BP} <---------------------|-|--- S / B
+|	|	| |		 | |		|				|           image <---------------------|-|--- D
+|	|	| |  do_compile  | |<-----------|	B			|             ${PN}			| |
+|	|	| |		 | |<------------------------------------------>|           recipe-sysroot		| |
+|	|	| ---------------- |						|           recipe-sysroot-native	| |
+|	|	|		   |						|     ${MACHINE_ARCH}-poky-${TARGET_OS}	| |
+|	|	| ---------------- |			B			|       ${PN}				| |
+|	|	| |		 | |<-------------------------------------------|         ${PV}	<-----------------------|-|--- WORKDIR
+|	|	| |  do_install	 | |			D			|           sources-unpack <------------|-|--- UNPACKDIR
+|	|	| |		 | |------------------------------------------->|           ${BP} <---------------------|-|--- S / B
+|	|	| ---------------- |						|           image <---------------------|-|--- D
+|	|	--------------------						|             ${PN}			| |
+|	|									|           recipe-sysroot		| |
+|	EXTRA_OECONF = "<extra configure script options>"			|           recipe-sysroot-native	| |
+|										----------------------------------------- |
+---------------------------------------------------------------------------------------------------------------------------
