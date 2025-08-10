@@ -128,3 +128,11 @@ Lines Continuation:
 4. It can be used in the Recipes as following:
 	=> VARIABLE = "The value is too \
 	               long"
+
+Indentation:
+************
+1. It is preferred to use 'spaces' for indentation rather than 'tabs'.
+2. The Shell functions in the Recipes support both the 'tabs' and 'spaces' for indentation.
+3. However, it is a Policy decision of the Yocto Project to use the 'tabs' in Shell functions.
+4. Some Layers (especially custom Layers) may have the Policy to use 'spaces' for all indentation.
+5. The mixing of the 'tabs' and 'spaces' can lead to subtle bugs or inconsistent behavior during the BitBake parsing.
