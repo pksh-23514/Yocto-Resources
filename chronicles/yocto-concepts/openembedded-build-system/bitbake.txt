@@ -14,7 +14,7 @@ BitBake Tool:
 Source Fetching:
 ****************
 1. In this stage of the Build, the Recipes are fetched and unpacked.
-2. The expanded view of the 'Source fetching' in the 'OpenEmbedded Build Workflow' is as follows:
+2. The expanded view of the 'Source Fetching' in the 'OpenEmbedded Build Workflow' is as follows:
 
      Upstream Project Releases		Local Projects		  SCMs
 ----------------------------------- ----------------------- ----------------
@@ -119,7 +119,7 @@ Materials	|				|		   |
 
 Configuration, Compilation and Staging:
 ***************************************
-1. After the source code is Patched, the BitBake executes the Tasks that Configure and Compile the source code.
+1. After the source code is Patched, the BitBake executes the Tasks that Configure and Compile the source code. After Compilation, the files are staged for Packaging.
 2. The expanded view of the 'Configuration, Compilation and Staging' in the 'OpenEmbedded Build Workflow' is as follows:
 
      Upstream Project Releases		Local Projects		  SCMs
@@ -175,3 +175,53 @@ Materials	|				|		   |
 6. The 'do_install' Task is executed after the Compilation of the sources completes.
 	1) This Task copies the files from the 'B' directory and places them in a holding area pointed to by the 'D' variable.
 	2) The Packaging occurs later using the files from this holding directory.
+
+Package Splitting:
+******************
+1. After the source code is Configured, Compiled and staged in the holding area, the Build system analyzes the resulting Output files and splits them into Packages.
+2. The expanded view of the 'Package Splitting' in the 'OpenEmbedded Build Workflow' is as follows:
+
+     Upstream Project Releases		Local Projects		  SCMs
+----------------------------------- ----------------------- ----------------	-------------------------
+|  busybox			  | |  Local Source Tree  | |  meta-qt5	   |	|			|
+|  busybox-1.35.0.tar.bz2	  | |  <directory>	  | |    Git	   |	|			|
+|				  | |      <file>	  | |		   |	|     Package Feeds	|
+|  <recipe>			  | |      <directory>	  | |  opkg	   |	|			|
+|  Tarball / ZIP / Archive Files  | |          <file>	  | |  Subversion  |	|			|
+----------------------------------- ----------------------- ----------------	-------------------------
+		|				|		   |		^	|
+Source		|				|		   |		|	|
+Materials	|				|	-----------|-------------	|
+		V				V	|	   V			V
+---------------------------------------------------------------------------------------------------------------------------
+|							|								  |
+| BitBake						|			Build Directory				  |
+|		-------------------------		|			----------------------------------------- |
+|		|---------------------- |		|			| tmp <---------------------------------|-|--- TMPDIR
+|		||do_package_write_rpm|	|-------------->|			|   work				| |
+|		||		      |	|		|			|     ${PACKAGE_ARCH}-poky-${TARGET_OS} | |
+|		||do_package_write_deb|	|-------------->|			|       ${PN}				| |
+|		||		      |	|		|			|         ${PV} <-----------------------|-|--- WORKDIR
+|		||do_package_write_ipk| |-------------->|			|           sources-unpack <------------|-|--- UNPACKDIR
+|		|----------------------	|					|           ${BP} <---------------------|-|--- S / B
+|		|			|					|           image <---------------------|-|--- D
+|		|		FILES	|					|           package <-------------------|-|--- PKGD
+|		|		  |	|					|           pkgdata <-------------------|-|--- PKGDESTWORK
+|		|	      PACKAGES	|					|           packages-split <------------|-|--- PKGDEST
+|		|		  |	|					|             ${PN}			| |
+|		|		  V	|					|           recipe-sysroot		| |
+|		| --------------------	|					|           recipe-sysroot-native	| |
+|		| |    do_package     |	|					|     ${MACHINE_ARCH}-poky-${TARGET_OS}	| |
+|		| |  do_packagedata   |	|					|       ${PN}				| |
+|		| |do_populate_sysroot| |					|         ${PV} <-----------------------|-|--- WORKDIR
+|		| |     PKGD          | |					|           sources-unpack <------------|-|--- UNPACKDIR
+|		| |  PKGDESTWORK      | |					|           ${BP} <---------------------|-|--- S / B
+|		| |    PKGDEST        | |					|           image <---------------------|-|--- D
+|		| |  STAGING_DIR      | |					|           package <-------------------|-|--- PKGD
+|		| | STAGING_DIR_HOST  | |					|           pkgdata <-------------------|-|--- PKGDESTWORK
+|		| |STAGING_DIR_NATIVE | |					|           packages-split <------------|-|--- PKGDEST
+|		| |STAGING_DIR_TARGET | |					|             ${PN}                     | |
+|		| --------------------- |					|           recipe-sysroot              | |
+|		-------------------------					|           recipe-sysroot-native       | |
+|										----------------------------------------- |
+---------------------------------------------------------------------------------------------------------------------------
