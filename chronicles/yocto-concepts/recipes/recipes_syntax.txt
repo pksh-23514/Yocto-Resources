@@ -136,3 +136,15 @@ Indentation:
 3. However, it is a Policy decision of the Yocto Project to use the 'tabs' in Shell functions.
 4. Some Layers (especially custom Layers) may have the Policy to use 'spaces' for all indentation.
 5. The mixing of the 'tabs' and 'spaces' can lead to subtle bugs or inconsistent behavior during the BitBake parsing.
+
+Python for Complex Operations:
+******************************
+1. It is possible to introduce the Python code during variable assignments in the Recipes for more advanced processing.
+2. The Python code is indicated using '${@python_code}' Syntax. It allows inline Python expressions inside the variable assignments.
+3. It is recommended to put large Python blocks inside these inline expressions.
+4. It can be used in the Recipes as following:
+	=> SRC_URI = "ftp://ftp.info-zip.org/pub/infozip/src/zip${@d.getVar('PV',1).replace('.', '')}.tgz
+	---> The above expression can be described as follows:
+	---> 'PV' is the Package version. The 'd.getVar('PV',1)' retrieves the value of 'PV'.
+	---> The 'replace('.', '')' removes the '.' in the value of 'PV' and replaces it with ''. Suppose, the value of 'PV' is '3.0', it becomes '30'.
+	---> The final value is: SRC_URI = "ftp://ftp.info-zip.org/pub/infozip/src/zip30.tgz"
