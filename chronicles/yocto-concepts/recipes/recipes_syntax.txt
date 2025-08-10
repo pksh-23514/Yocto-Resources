@@ -6,7 +6,7 @@ Variable Assignments and Manipulations:
 1. The variable assignments allow to assign the value to a variable.
 2. The assignments can be static text or might include the contents of the other variables.
 3. The appending and prepending operations are also supported.
-4. The following ways display the usage on the variables:
+4. It can be used in the Recipes as following:
 	=> S = "${WORKDIR}/postfix-${PV}"
 	=> CFLAGS += "-DNO_ASM"
 	=> CFLAGS:append = " --enable-important-feature"
@@ -62,7 +62,7 @@ Functions:
 3. The standard functions use the Shell Syntax, although access to the OpenEmbedded variables and the internal methods are also available.
 4. However, they can also be implemented in Python Syntax rather than Shell Syntax.
 5. It is possible to implement some new functions that are called between the existing Tasks as long as those functions are not replacing or complementing the default functions.
-6. The following is an example function from the 'sed' Recipe:
+6. It can be used in the Recipes as following:
 	=> do_install () {
 	=>     autotools_do_install
 	=>     install -d ${D}${base_bindir}
@@ -77,10 +77,21 @@ Keywords:
 	1) To include the common functions using 'inherit'.
 	2) To load parts of a Recipe from other files using 'include' and 'require'.
 	3) To export the variables into the Environment using 'export'.
-3. The following ways display the usage of the keywords:
+3. It can be used in the Recipes as following:
 	=> export POSTCONF = "${STAGING_BINDIR}/postconf"
 	=> inherit autoconf
 	=> require otherfile.inc
+
+Overrides:
+**********
+1. The Overrides are used for conditional variable assignments typically based on how the Recipes are being Built.
+2. They can also be used to provide per-Package Meta-data in the Recipes.
+3. The Override Syntax has been modified from '_' to ':' in the modern Yocto Project versions.
+4. It can be used in the Recipes as following:
+	=> KBRANCH = "standard/base"
+	=> KBRANCH:qemuarm = "standard/arm-versatile-926ejs"	// The Kernel branch only for 'qemuarm' Machine is set to a different value.
+	=> FILES:${PN} += "/usr/bin/mybinary"
+	=> RDEPENDS:${PN}-tools = "bash"
 
 Comments:
 *********
