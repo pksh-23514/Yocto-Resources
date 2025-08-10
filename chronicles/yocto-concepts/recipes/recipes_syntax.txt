@@ -148,3 +148,12 @@ Python for Complex Operations:
 	---> 'PV' is the Package version. The 'd.getVar('PV',1)' retrieves the value of 'PV'.
 	---> The 'replace('.', '')' removes the '.' in the value of 'PV' and replaces it with ''. Suppose, the value of 'PV' is '3.0', it becomes '30'.
 	---> The final value is: SRC_URI = "ftp://ftp.info-zip.org/pub/infozip/src/zip30.tgz"
+
+Shell Functions Syntax:
+***********************
+1. While writing the Shell functions in the Recipes, it must be written to be compatible with a generic '/bin/sh' i.e. minimal Shell.
+2. It should not be requiring any '/bin/bash' i.e. Bash-specific or other Shell-specific functionalities.
+3. This ensures maximum compatibility, especially as in Targets, where the tools like 'BusyBox' are often used and they may only support a minimal set of utilities.
+4. While using common tools (sed, awk, grep, find etc), it must be considered that the 'BusyBox' implementations may not support all the flags or behaviors.
+5. If there is any doubt whether the Shell function is portable, it must be manually tested with '/bin/sh' or in a Docker with a minimal 'BusyBox' based RootFS.
+6. It is a Policy decision of the Yocto Project to use the 'tabs' in Shell functions for indentation.
