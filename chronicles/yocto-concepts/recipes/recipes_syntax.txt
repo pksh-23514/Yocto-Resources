@@ -93,6 +93,26 @@ Overrides:
 	=> FILES:${PN} += "/usr/bin/mybinary"
 	=> RDEPENDS:${PN}-tools = "bash"
 
+Appending and Prepending Operations using Override Style Syntax:
+****************************************************************
+1. The Override Syntax (:append) can be used for appending the values to a variable.
+2. It does not insert any space between the current value of the variable and the appended value. Therefore, the space controlling shall be done while using this Syntax.
+3. The operation takes into effect during the variable expansion only i.e. it is not applied immediately.
+4. It can be used in the Recipes as following:
+	=> CFLAGS:append = " --enable-important-feature"
+	=> CFLAGS:append:sh4 = " --enable-important-sh4-specific-feature"	// It can be used with the other Overrides as well.
+5. The Override Syntax (:prepend) can be used for prepending the values to a variable.
+6. It does not insert any space between the current value of the variable and the prepended value. Therefore, the space controlling shall be done while using this Syntax.
+7. The operation takes into effect during the variable expansion only i.e. it is not applied immediately.
+8. It can be used in the Recipes as following:
+	=> CFLAGS:prepend = "-I${S}/myincludes "
+	=> CFLAGS:prepend:sh4 = "-I${S}/myincludes "		// It can be used with the other Overrides as well.
+9. These operators are applied only after all the '+=' and the '=+' operators have been applied and after all the '=' assignments have occurred.
+10. If there is ':append' or ':prepend' operations in the Recipes, they can be only be overridden by another higher priority Layer using the special ':remove' operator.
+	1) In such cases, it prevents the other lower priority Layers from adding the value back.
+	2) Therefore, due to late binding effect of these operations, it is hard to override ':append' or ':prepend' operations unless done explicitly using ':remove' operation.
+11. The major advantage of the Override Syntax as compared to '+=' or '=+' operators is that it provides guaranteed operation on the variables.
+
 Comments:
 *********
 1. Any line in the Recipe file beginning with the '#' character is treated as a comment line by the BitBake.
