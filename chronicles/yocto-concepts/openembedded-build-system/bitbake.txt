@@ -160,3 +160,18 @@ Materials	|				|		   |
 |	EXTRA_OECONF = "<extra configure script options>"			|           recipe-sysroot-native	| |
 |										----------------------------------------- |
 ---------------------------------------------------------------------------------------------------------------------------
+
+3. The 'do_prepare_recipe_sysroot' Task sets up 2 'sysroots' in 'WORKDIR'.
+	1) During the Packaging phase, the 'sysroots' contain the contents of the 'do_populate_sysroot' Tasks of the Recipes on which the current Recipe depends.
+	2) The 'recipe-sysroot' is the Target 'sysroot' of the Recipes.
+	3) The 'recipe-sysroot-native' is the Native 'sysroot' of the Recipes.
+4. The 'do_configure' Task Configures the sources by enabling or disabling any Build-time and Configuration options for the SW being Built.
+	1) The Configurations can come from the Recipes themselves as well as from the inherited Classes.
+	2) Additionally, the SW itself might Configure itself depending on the Target for which it is being Built.
+	3) The Configurations handled by this Task are specific to the Configurations for the source code being Built by the Recipes.
+	4) If the Recipes are usign 'autoclass*' Class, there can be additional Configurations provided by the 'EXTRA_OECONF' or 'PACKAGECONFIG_CONFARGS' variables.
+5. The 'do_compile' Task is used to Compile the sources after the 'do_configure' Task has been satisfied.
+	1) The Compilation occurs in the directory pointed to by the 'B' variable. By default, it is the same directory as pointed to by the 'S' variable.
+6. The 'do_install' Task is executed after the Compilation of the sources completes.
+	1) This Task copies the files from the 'B' directory and places them in a holding area pointed to by the 'D' variable.
+	2) The Packaging occurs later using the files from this holding directory.
