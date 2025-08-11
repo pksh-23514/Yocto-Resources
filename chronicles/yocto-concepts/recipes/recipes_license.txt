@@ -1,0 +1,20 @@
+Licensing in Recipes:
+=====================
+1. The Recipes need to define the variables related to the Licenses under which the SW being Built is distributed.
+2. The 'LICENSE' and the 'LIC_FILES_CHKSUM' variables are defined in the Recipes to fulfill the Licensing requirements.
+
+LICENSE:
+********
+1. This variable specifies the Licenses applicable to the SW being Built by the Recipes.
+	=> LICENSE = "license-name"
+	---> Suppose, the given SW is under the GNU General Public License version 2. It can be set in the Recipe file as:
+		=> LICENSE = "GPL-2.0-only"
+2. If the Licenses under which the SW being Built is unknown, the source code should be referred for this information.
+	1) This information is typically provided by the COPYING files, the LICENSE files or the README files.
+	2) Sometimes, this information can is also available near the top of the source files.
+3. The Licenses specified in the 'LICENSE' variable can have name of any length without any particular restrictions.
+4. If the SW has multiple applicable Licenses, they are listed in the variable separated by 'spaces'.
+	=> LICENSE = "license-1 license-2 ..."
+5. For the standard Licenses name, the reference is:
+	1) The 'meta/files/common-licenses' directory contains the Licenses file.
+	2) The 'SPDXLICENSEMAP' flag names defined in the 'meta/conf/licenses.conf' file.
