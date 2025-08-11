@@ -210,18 +210,31 @@ Materials	|				|	-----------|-------------	|
 |		|	      PACKAGES	|					|           packages-split <------------|-|--- PKGDEST
 |		|		  |	|					|             ${PN}			| |
 |		|		  V	|					|           recipe-sysroot		| |
-|		| --------------------	|					|           recipe-sysroot-native	| |
-|		| |    do_package     |	|					|     ${MACHINE_ARCH}-poky-${TARGET_OS}	| |
-|		| |  do_packagedata   |	|					|       ${PN}				| |
+|		| ---------------------	|					|           recipe-sysroot-native	| |
+|		| |    do_package     |	|		D			|     ${MACHINE_ARCH}-poky-${TARGET_OS}	| |
+|		| |  do_packagedata   |	|<--------------------------------------|       ${PN}				| |
 |		| |do_populate_sysroot| |					|         ${PV} <-----------------------|-|--- WORKDIR
-|		| |     PKGD          | |					|           sources-unpack <------------|-|--- UNPACKDIR
-|		| |  PKGDESTWORK      | |					|           ${BP} <---------------------|-|--- S / B
-|		| |    PKGDEST        | |					|           image <---------------------|-|--- D
-|		| |  STAGING_DIR      | |					|           package <-------------------|-|--- PKGD
-|		| | STAGING_DIR_HOST  | |					|           pkgdata <-------------------|-|--- PKGDESTWORK
-|		| |STAGING_DIR_NATIVE | |					|           packages-split <------------|-|--- PKGDEST
-|		| |STAGING_DIR_TARGET | |					|             ${PN}                     | |
+|		| |     PKGD --------||-|---|					|           sources-unpack <------------|-|--- UNPACKDIR
+|		| |  PKGDESTWORK ----||-|---|					|           ${BP} <---------------------|-|--- S / B
+|		| |    PKGDEST ------||-|---|					|           image <---------------------|-|--- D
+|		| |  STAGING_DIR ----||-|---|---------------------------------->|           package <-------------------|-|--- PKGD
+|		| | STAGING_DIR_HOST ||-|---|					|           pkgdata <-------------------|-|--- PKGDESTWORK
+|		| |STAGING_DIR_NATIVE||-|---|					|           packages-split <------------|-|--- PKGDEST
+|		| |STAGING_DIR_TARGET||-|---|					|             ${PN}                     | |
 |		| --------------------- |					|           recipe-sysroot              | |
 |		-------------------------					|           recipe-sysroot-native       | |
 |										----------------------------------------- |
 ---------------------------------------------------------------------------------------------------------------------------
+
+3. The 'do_package' and 'do_packagedata' Tasks are used to analyze the files in the 'D' directory and split them into sets based on the available Packages and files.
+4. These Tasks serve the following purposes:
+	1) The Packages are split into logical sub-Packages based on the Packaging rules.
+	2) The Debug Symbols are split out into separate Packages for the use in development and Debug Environments.
+	3) The analysis of Shared library dependencies between the Packages.
+	4) To ensure the proper handling of Package relationships.
+5. The 'do_packagedata' Task creates the Package Meta-data based on the analysis so that the Build system can generate the final Packages.
+6. The 'do_populate_sysroot' Task stages (copies) a set of files installed during the 'do_install' Task into the appropriate 'sysroots'.
+7. The Build directory hierarchy uses the following variables:
+	1) PKGD => The destination directory for the files to be Packaged before they are split into the individual Packages. The default value is '${WORKDIR}/package'.
+	2) PKGDESTWORK => The temporary work directory used by the 'do_package' Task to save the Package Meta-data. The default value is '${WORKDIR}/pkgdata'.
+	3) PKGDEST => The parent directory for the files to be Packaged after they are split into the individual Packages. The default value is '${WORKDIR}/packages-split'.
