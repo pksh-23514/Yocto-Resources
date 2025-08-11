@@ -18,3 +18,27 @@ LICENSE:
 5. For the standard Licenses name, the reference is:
 	1) The 'meta/files/common-licenses' directory contains the Licenses file.
 	2) The 'SPDXLICENSEMAP' flag names defined in the 'meta/conf/licenses.conf' file.
+
+LIC_FILES_CHKSUM:
+*****************
+1. The OpenEmbedded Build system uses this variable to make sure that the Licenses text file has not been modified.
+	=> LIC_FILES_CHKSUM = "file://path;md5=license-checksum"
+	---> Suppose, the given SW has a COPYING file. It can be set in the Recipe file as:
+		=> LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+2. It points to the file in the sources that contains the Licenses text file and includes a SHA256 checksum to ensure that the file hasn't been changed silently.
+3. The Licenses can be typically found in:
+	1) LICENSE, COPYING, COPYRIGHT, or README.
+	2) The top of source files (if License Header is embedded).
+	3) The 'docs/' or the 'licenses/' directories.
+4. If it finds any modification, the Build produces an error. This error has to be then checked and corrected manually.
+	1) At the end of the Configuration step, the Build process compares the checksums of the Licenses file to be sure that the file has not changed.
+	2) Any differences in the comparision results in an error with the message containing the current checksum value.
+	3) Therefore, in the Recipes, put a placeholder for the checksum value and Build the Recipes to get the error message containing the correct checksum value to be used.
+		=> LIC_FILES_CHKSUM = "file://COPYING;md5=xxx"
+	4) Modify the Recipes with the same correct value and the Build shall proceed without any error.
+5. If the SW has multiple applicable Licenses, they are listed in the variable using multiple lines.
+	=> LIC_FILES_CHKSUM = " \
+	       file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+	       file://LICENSE;md5=1234567890abcdef1234567890abcdef \
+	       file://src/main.c;beginline=1;endline=20;md5=abcdefabcdefabcdefabcdefabcdefab \
+	   "
