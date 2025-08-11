@@ -42,3 +42,13 @@ LIC_FILES_CHKSUM:
 	       file://LICENSE;md5=1234567890abcdef1234567890abcdef \
 	       file://src/main.c;beginline=1;endline=20;md5=abcdefabcdefabcdefabcdefabcdefab \
 	   "
+
+Licenses Update:
+****************
+1. While changing the values of the 'LICENSE' or the 'LIC_FILES_CHKSUM' variables in the Recipes, the reason for the change must be explained using a 'License-Update:' tag.
+2. The 'License-Update:' tag must be put in the Git commit message to document the reasons for the changes in the Licenses.
+3. It can be trivial most of the times.
+	=> License-Update: copyright years refreshed
+4. However, in some cases, the actual Licensing terms would have changed. For such changes, the proper justification must be provided.
+	=> License-Update: upstream relicensed project from GPL-2.0-only to Apache-2.0
+5. This ensures transparency and traceability in the Build.
