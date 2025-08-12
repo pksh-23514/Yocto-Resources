@@ -238,3 +238,46 @@ Materials	|				|	-----------|-------------	|
 	1) PKGD => The destination directory for the files to be Packaged before they are split into the individual Packages. The default value is '${WORKDIR}/package'.
 	2) PKGDESTWORK => The temporary work directory used by the 'do_package' Task to save the Package Meta-data. The default value is '${WORKDIR}/pkgdata'.
 	3) PKGDEST => The parent directory for the files to be Packaged after they are split into the individual Packages. The default value is '${WORKDIR}/packages-split'.
+	4) PKGDATA_DIR => The Shared global-state directory holds the the Package Meta-data generated during the Packaging process.
+		---> During the Packaging process for the Recipes, the Meta-data is copied from the 'PKGDESTWORK' to the 'PKGDATA_DIR' area where it becomes available globally.
+		---> The default value is '${STAGING_DIR_HOST}/pkgdata'. It is used during the 'do_packagedata' Task.
+	5) STAGING_DIR_HOST =>
+	6) STAGING_DIR_NATIVE =>
+	7) STAGING_DIR_TARGET =>
+8. The Packages for the Recipes are listed in the 'PACKAGES' variable. The default value of the variable is defined in the 'meta/conf/bitbake.conf' file.
+	=> PACKAGES = "${PN}-src ${PN}-dbg ${PN}-staticdev ${PN}-dev ${PN}-doc ${PN}-locale ${PACKAGE_BEFORE_PN} ${PN}"
+9. Each of these Packages contains a default list of files listed in the 'FILES' variable. The default value of the variable is defined in the 'meta/conf/bitbake.conf' file.
+	=> FILES:${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
+	               ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+	               ${base_bindir}/* ${base_sbindir}/* \
+	               ${base_libdir}/*${SOLIBS} \
+	               ${base_prefix}/lib/udev ${prefix}/lib/udev \
+	               ${base_libdir}/udev ${libdir}/udev \
+	               ${datadir}/${BPN} ${libdir}/${BPN}/* \
+	               ${datadir}/pixmaps ${datadir}/applications \
+	               ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
+	               ${libdir}/bonobo/servers"
+	=> FILES:${PN}-bin = "${bindir}/* ${sbindir}/*"
+	=> FILES:${PN}-doc = "${docdir} ${mandir} ${infodir} ${datadir}/gtk-doc \
+	               ${datadir}/gnome/help"
+	=> FILES:${PN}-dev = "${includedir} ${FILES_SOLIBSDEV} ${libdir}/*.la \
+	                   ${libdir}/*.o ${libdir}/pkgconfig ${datadir}/pkgconfig \
+	                   ${datadir}/aclocal ${base_libdir}/*.o \
+	                   ${libdir}/${BPN}/*.la ${base_libdir}/*.la \
+	                   ${libdir}/cmake ${datadir}/cmake"
+	=> FILES:${PN}-staticdev = "${libdir}/*.a ${base_libdir}/*.a ${libdir}/${BPN}/*.a"
+	=> FILES:${PN}-dbg = "/usr/lib/debug /usr/lib/debug-static /usr/src/debug"
+	=> FILES:${PN}-src = ""
+	=> FILES:${PN}-locale = "${datadir}/locale"
+10. The above mentioned paths in the variables are Absolute paths from the point of view of the RootFS on the Target.
+	1) They must not make any reference to the 'D' variable or any 'WORKDIR' related variable.
+11. A given file can only ever be in one Package.
+	1) By iterating from the leftmost to the rightmost Package in the 'PACKAGES' variable, each file in the 'FILES' variable matching a particular Package is included in it.
+	2) The 'oe-pkgdata-util' command utility is used to find the Package that installs a particular file.
+12. The custom Package variant of the '${PN}' Recipe can be added in the following ways:
+	1) It can be appended to the 'PACKAGE_BEFORE_PN' variable.
+		=> PACKAGE_BEFORE_PN += "${PN}-extra"
+	2) It can be prepended to the 'PACKAGES' variable directly.
+		=> PACKAGES =+ "${PN}-extra"
+13. Based on the type of Packages being created (RPM, DEB or IPK), the corresponding 'do_package_write_*' Task creates the actual Packages and places them in the Package Feeds.
+	1) The directory for the Package Feeds area is '${TMPDIR}/deploy'.
