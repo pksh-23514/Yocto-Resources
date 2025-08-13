@@ -357,3 +357,14 @@ Source Mirrors
 	6) PACKAGE_INSTALL => It provides the final list of Packages passed to the Package manager for the installation into the Image.
 	7) IMAGE_ROOTFS => It points to the directory of the RootFS under construction during the 'do_rootfs' Task. It is not configurable and should not be changed.
 5. With the 'IMAGE_ROOTFS' variable pointing to the RootFS location and the 'PACKAGE_INSTALL' variable providing the final list of Packages, the RootFS is generated.
+6. The Package installation is under the control of the Package manager regardless of whether or not the Package management is enabled for the Target.
+	1) .ipk => The Package manager is 'opkg'. This is used as default for Poky.
+	2) .deb => The Package manager is 'dpkg' or 'apt'.
+	3) .rpm => The Package manager is 'dnf', 'smart' or 'rpm'.
+7. If the Package management is enabled for the Target, after the RootFS is generated, the Package manager's data files are retained into the RootFS.
+8. If the Package management is disabled for the Target, after the RootFS is generated, the Package manager's data files are deleted from the RootFS.
+9. As a part of the final stage of the Package installation on the Target, many Packages include post-install scripts.
+	1) The post-install scripts run immediately after the Package installation on the Target or during the Image creation when the Package is included in the Image.
+	2) If these scripts can be run during the Image Build, they are executed on the Host Machine immediately.
+	3) If these scripts require some Run-time dependencies and fail to run on the Build Host, their execution are deferred until the first Boot of the Target.
+	4) If the RootFS on the Target is Read-only, then all these scripts execution must succeed on the Build Host during the Package installation.
