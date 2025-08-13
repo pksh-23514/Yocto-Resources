@@ -281,3 +281,67 @@ Materials	|				|	-----------|-------------	|
 		=> PACKAGES =+ "${PN}-extra"
 13. Based on the type of Packages being created (RPM, DEB or IPK), the corresponding 'do_package_write_*' Task creates the actual Packages and places them in the Package Feeds.
 	1) The directory for the Package Feeds area is '${TMPDIR}/deploy'.
+
+Image Generation:
+*****************
+1. After the Packages are split and stored in the Package Feeds area, the Build system uses the BitBake to generate the RootFS Image.
+2. The expanded view of the 'Image Generation' in the 'OpenEmbedded Build Workflow' is as follows:
+
+---------------------- -------------------- ----------
+   Upstream Project       Local Projects       SCMs
+---------------------- -------------------- ----------
+Source Mirrors
+------------------------------------------------------
+		|
+		V		-----------------------------------------------------------------
+-------------------------	|								|
+|			|	|			  Package Feeds				|
+|	BitBake		|	|								|
+|			|	-----------------------------------------------------------------
+|			|		|
+|			---------------------------------------------------------------------------------
+|					|								|
+|					|			Image Generation			|
+|					|			---------------------------------	|
+|					|-IMAGE_INSTALL	--------|---->----------------		|	|
+|					|-IMAGE_FEATURES -------|---->|		     |		|	|
+|					|-PACKAGE_CLASSES ------|---->|	   Package   |----------|---	|
+|					|-IMAGE_LINGUAS	--------|---->| Installation |		|  |	|
+|					|-PACKAGE_EXCLUDE ------|---->|		     |		|  |	|
+|								|     ----------------		|  V	|
+|								|				| PACKAGE_INSTALL
+|								|     ----------------		|  |	|
+|								|     |		     |		|  |	|
+|					  IMAGE_ROOTFS ---------|---->| File System  |<---------|---	|
+|								|     |   Creation   |		|	|
+|								|     ----------------		|	|
+|								|				|	|
+|								|     ----------------		|	|
+|			ROOTFS_POSTPROCESS_COMMAND -------------|->|  |	    Post     |		|	|
+|								|  |  |  Processing  |		|	|
+|					  IMAGE_MANIFEST -------|->|  |	------------ |		|	|
+|								|  |->| Optimization |		|	|
+|								|  |  |		     |		|	|
+|								|  |->|   Manifest   |		|	|
+|								|     |  Generation  |		|	|
+|								|     ----------------		|	|
+|								|     ----------------		|	|
+|				IMAGE_PREPROCESS_COMMAND -------|---->|   do_image   |		|	|
+|								|     ----------------		|	|
+|								|     ----------------		|	|
+|								|     |  do_image_*  |		|	|
+|					  IMAGE_FSTYPES --------|---->|		     |		|	|
+|								|     |  Compression |		|	|
+|								|     ----------------		|	|
+|								|     -------------------	|	|
+|				IMAGE_POSTPROCESS_COMMAND ------|---->|do_image_complete|	|	|
+|								|     -------------------	|	|
+|								---------------------------------	|
+|										|			|
+---------------------------------------------------------------------------------------------------------
+										|
+										V
+								------------------------------------------
+								|		Images			 |
+								|tmp/deploy/images/${PACKAGE_ARCH}/images|
+								------------------------------------------
