@@ -314,6 +314,7 @@ Source Mirrors
 |								|     |		     |		|  |	|
 |					  IMAGE_ROOTFS ---------|---->| File System  |<---------|---	|
 |								|     |   Creation   |		|	|
+|								|     |		     |		|	|
 |								|     ----------------		|	|
 |								|				|	|
 |								|     ----------------		|	|
@@ -345,3 +346,14 @@ Source Mirrors
 								|		Images			 |
 								|tmp/deploy/images/${PACKAGE_ARCH}/images|
 								------------------------------------------
+
+3. The 'do_rootfs' Task is used to create the RootFS (the files and the directory structures) for an Image.
+4. The Build directory hierarchy uses the following variables:
+	1) IMAGE_INSTALL => It is used by the Recipes to specify the Packages to be installed into the Image from the Package Feeds using the 'image' Class file.
+	2) PACKAGES_EXCLUDE => It is used to specify the Packages that should not be installed into the Image.
+	3) IMAGE_FEATURES => It specifies the primary list of features to be included into the Image. These features are mostly mapped to the Packages to be installed.
+	4) PACKAGE_CLASSES => It specifies the Package manager to be used for the Packaging. It helps to determine the location of the Packages within the Package Feeds.
+	5) IMAGE_LINGUAS => It provides the list of locales for which additional Packages are to be installed into the Image.
+	6) PACKAGE_INSTALL => It provides the final list of Packages passed to the Package manager for the installation into the Image.
+	7) IMAGE_ROOTFS => It points to the directory of the RootFS under construction during the 'do_rootfs' Task. It is not configurable and should not be changed.
+5. With the 'IMAGE_ROOTFS' variable pointing to the RootFS location and the 'PACKAGE_INSTALL' variable providing the final list of Packages, the RootFS is generated.
