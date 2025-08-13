@@ -367,4 +367,26 @@ Source Mirrors
 	1) The post-install scripts run immediately after the Package installation on the Target or during the Image creation when the Package is included in the Image.
 	2) If these scripts can be run during the Image Build, they are executed on the Host Machine immediately.
 	3) If these scripts require some Run-time dependencies and fail to run on the Build Host, their execution are deferred until the first Boot of the Target.
-	4) If the RootFS on the Target is Read-only, then all these scripts execution must succeed on the Build Host during the Package installation.
+	4) If the RootFS on the Target is Read-only, then all these scripts execution must succeed on the Build Host during the Package installation i.e Image creation.
+10. The final stage of the 'do_rootfs' Task handles the post-processing that includes the creation of a 'manifest' file for the Image and performing certain optimizations.
+	1) The 'manifest' file has an extension of '.manifest' and it resides in the same directory as the RootFS Image.
+	2) The 'manifest' file is used to list out all the installed Packages, line-by-line.
+	3) The 'manifest' file is useful for the 'testimage' Class to determine if there is a requirement for specific tests.
+	4) The optimization process that runs across the Image is aimed at optimizing the final Image.
+	5) The optimization process includes 'mklibs' to reduce the size of the libraries by removing the unused Symbols. It is pretty helpful for Images with size restrictions.
+	6) The optimization process includes certain other post-processing commands defined by the 'ROOTFS_POSTPROCESS_COMMAND' variable for additional tweaking in the Image.
+11. After the RootFS is Built, the 'do_image' Task begins the processing on the Image.
+	1) The Build system runs the pre-processing commands as defined by the 'IMAGE_PREPROCESS_COMMAND' variable.
+	2) This variable lists the functions to be called by the Build system before creating the final Image Output files.
+12. The Build system dynamically creates the 'do_image_*' Tasks as required based on the Image type as specified in the 'IMAGE_FSTYPES' variable.
+	1) The process transforms everything into an Image file or a set of Image files.
+	2) It can compress the RootFS Image to reduce the overall size of the Image.
+	3) The formats used for the RootFS depends on the 'IMAGE_FSTYPES' variable value. The compression depends on whether the chosen format supports compression or not.
+	4) Therefore, the Task created dynamically for the Image 'type' specified in the 'IMAGE_FSTYPES' variable is:
+		---> do_image_type
+13. The final Task involved in the Image creation is the 'do_image_complete' Task.
+	1) The Build system runs the post-processing commands as defined by the 'IMAGE_POSTPROCESS_COMMAND' variable.
+	2) This variable lists the functions to be called by the Build system after creating the final Image Output files.
+14. The entire Image generation process is run under Pseudo.
+	1) It is a tool that is used during the Build process to simulate Root privileges.
+	2) It allows the Build system to assign the correct file ownerships and permissions in the RootFS Image without needing the actual Root access on the Host Machine.
