@@ -390,3 +390,17 @@ Source Mirrors
 14. The entire Image generation process is run under Pseudo.
 	1) It is a tool that is used during the Build process to simulate Root privileges.
 	2) It allows the Build system to assign the correct file ownerships and permissions in the RootFS Image without needing the actual Root access on the Host Machine.
+
+SDK Generation:
+***************
+1. The OpenEmbedded Build system uses the BitBake to generate the Software Development Kit (SDK) installer scripts for both the standard SDK and the Extensible SDK (eSDK).
+2. Similar to the Image generation, the SDK script process consists of several stages and depends on several variables.
+3. The 'do_populate_sdk' and the 'do_populate_sdk_ext' Tasks use these key variables to help create the list of Packages to be actually installed.
+4. The 'do_populate_sdk' Task helps to create the standard SDK and handles a Target part and a Host part.
+	1) The Target part is the part of the SDK Built for the Target HW that includes the libraries and the Headers.
+	2) The Host part is the part of the SDK that runs on the Machine pointed to by the 'SDKMACHINE' variable.
+5. The 'do_populate_sdk_ext' Task helps to create the Extensible SDK. It handles the Target and the Host parts differently as compared to the standard SDK.
+	1) This Task encapsulates the Build system, which includes everything needed i.e. the Host and the Target for the SDK.
+6. Regardless of the type of SDK being constructed, these Tasks perform some clean up activities.
+	1) After the clean ups are done, the Cross-development Environment setup script and any needed Configuration files are created.
+7. The final Output is the Cross-development Toolchain installation script (.sh) file that includes the Environment setup script.
