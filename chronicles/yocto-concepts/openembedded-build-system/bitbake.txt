@@ -404,3 +404,22 @@ SDK Generation:
 6. Regardless of the type of SDK being constructed, these Tasks perform some clean up activities.
 	1) After the clean ups are done, the Cross-development Environment setup script and any needed Configuration files are created.
 7. The final Output is the Cross-development Toolchain installation script (.sh) file that includes the Environment setup script.
+
+Stamp Files and Re-running of Tasks:
+************************************
+1. Each of the Tasks that is completed successfully by the BitBake, it writes a stamp file into the directory pointed to by the 'STAMPS_DIR' variable.
+2. The default value of the 'STAMPS_DIR' is '${TMPDIR}/stamps'.
+	1) It is a sub-directory of the 'TMPDIR' and removing the 'TMPDIR' completely would make the BitBake run the Tasks again to populate the 'TMPDIR'.
+3. The beginning of the stamp file name is determined by the 'STAMP' variable and the ending of the stamp file name consists of the Task's name and current Input checksum.
+4. This naming scheme assumes that the 'BB_SIGNATURE_HANDLER' variable is 'OEBasicHash', which is almost always the case in the OpenEmbedded Build system.
+5. To determine if a Task needs to run again, the BitBake checks if a stamp file with a matching Input checksum exists for the Task.
+	1) In such case, the Task's Output is assumed to exist and is still valid.
+	2) If the stamp file does not exists for the Input checksum, the Task is executed again.
+6. The stamp mechanism is more generic than the Shared-State Cache mechanism.
+	1) The BitBake avoids the running of any Task that has a valid stamp file.
+	2) It is not limited just to the Tasks that can be accelerated through the 'sstate-cache'.
+	3) However, the stamp files do not record the Task Output. They only serve as a marker that some work has been completed successfully.
+	4) The actual Task Output would somewhere be in the work directory for the Build.
+7. There is a mechanism to mark the Task to always be considered as 'out-of-date'.
+	1) It can be done using the 'nostamp' flag.
+	2) If some other Task depends on such a marked Task, then that Task will also be considered 'out-of-date'. This may not be desirable always.
