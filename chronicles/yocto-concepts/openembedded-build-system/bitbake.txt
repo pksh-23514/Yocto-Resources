@@ -449,3 +449,18 @@ SetScene Tasks and Shared-State:
 7. It becomes more complicated if everything can come from the 'sstate-cache' because some Objects are simply not required at all.
 	1) Suppose, if there isn’t anything to Compile or patch, there is no need for the Compiler or native tools like 'quilt'.
 	2) Suppose, if the 'do_package_write_*' Packages are available from the 'sstate-cache', the BitBake doesn't need the 'do_package' Task data.
+8. To handle the complexities, the BitBake performs 2 phase execution.
+	1) The SetScene phase is executed before the Build to find and use the files from the 'sstate-cache' as much as possible.
+	2) If no such files are found for a Target or it's dependencies, the BitBake moves on to main Build from the sources.
+9. The complete workflow can be described as:
+	1) The BitBake performs a fast existence check for all the Tasks required for the Build to check the 'sstate-cache' for the needed Output. This is the SetScene stage.
+	2) If the Objects are found in the 'sstate-cache', the Build system works backwards from the end results specified.
+	3) It skips the unnecessary tools and Tasks if they are not required.
+	4) However, if the required Objects are missing or a SetScene Task fails to execute, the fallback logic is implemented.
+	5) The BitBake searches and tries to install the dependencies for these Objects or Tasks from the 'sstate-cache'.
+	---> Suppose, an Image is being Built and the Build system is able to find the Packages needed for that Image and the tools needed to construct the Image.
+	---> The Build system works backwards and figures that all the requirements for the Image is present in the 'sstate-cache'.
+	---> Therefore, there is no need to Compile anything as everything is needed for the Image is present. The BitBake would not download the Compiler for the Image Build.
+	---> If some of the Packages are unavailable or the SetScene Tasks fail, then the BitBake would proceed for the dependency installation.
+	---> In this case, the dependency would be the Compiler required to Compile and generate the missing Packages.
+	6) If the dependency installation fails or if the Objects are not found in the 'sstate-cache' in the SetScene stage, the BitBake starts the Build from the sources.
