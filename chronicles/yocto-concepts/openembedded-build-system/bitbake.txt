@@ -441,3 +441,11 @@ SetScene Tasks and Shared-State:
 	4) do_packagedata
 	5) do_populate_sysroot.
 	6) The common point that should be noticed among these Tasks is that most of the Task Output is an end result.
+6. The BitBake understands the relationships between the Tasks i.e. it knows what Task needs to be run before some other Tasks are executed.
+	1) If the Output is to be restored, there is no need to run the Tasks that generate these Output files.
+		---> For the 'do_populate_sysroot_setscene' Task, there is no need to run 'do_fetch', 'do_unpack', 'do_patch', 'do_configure', 'do_compile' and 'do_install' Task.
+	2) If the Output is not present in the Shared-State Cache, there is a need to run the Tasks that generate these Output files.
+		---> For the 'do_package' Task, there is a need to run 'do_fetch', 'do_unpack', 'do_patch', 'do_configure', 'do_compile' and 'do_install' Task.
+7. It becomes more complicated if everything can come from the 'sstate-cache' because some Objects are simply not required at all.
+	1) Suppose, if there isn’t anything to Compile or patch, there is no need for the Compiler or native tools like 'quilt'.
+	2) Suppose, if the 'do_package_write_*' Packages are available from the 'sstate-cache', the BitBake doesn't need the 'do_package' Task data.
