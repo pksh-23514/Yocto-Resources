@@ -1,0 +1,32 @@
+Images:
+=======
+1. The Images produced by the Build system are the compressed forms of the RootFS and are ready to Boot the Target Device.
+2. The expanded view of the 'Linux Images' in the 'OpenEmbedded Build Workflow' is as follows:
+
+-----------------------------------------
+|					|
+| BitBake				|
+|			Image		|
+|			Generation	|
+|			   |		|
+-----------------------------------------
+			   |
+			   |	bitbake <image>
+			   |
+	Images		   V
+-------------------------------------------
+| Build Directory			  |
+| --------------------------------------- |
+| | build				| |
+| |   tmp				| |
+| |     deploy <------------------------|-|--- DEPLOY_DIR
+| |       images			| |
+| |         <machine> <-----------------|-|--- DEPLOY_DIR_IMAGE
+| |           <kernel-image> <----------|-|--- KERNEL_IMAGETYPE
+| |           <root-filesystem-image> <-|-|--- IMAGE_FSTYPES
+| |           <kernel-modules> <--------|-|--- MODULE_TARBALL_DEPLOY
+| |           <bootloaders>		| |
+| |           <symlinks>		| |
+| |       sdk				| |
+| --------------------------------------- |
+-------------------------------------------
