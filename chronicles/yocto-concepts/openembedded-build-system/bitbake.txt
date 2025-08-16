@@ -426,7 +426,7 @@ Stamp Files and Re-running of Tasks:
 
 SetScene Tasks and Shared-State:
 ********************************
-1. The BitBake does support skipping the Tasks if pre-Built Object files are available.
+1. The BitBake does support skipping the Tasks if pre-Built Object files are available. This is a key optimization, avoiding unnecessary Tasks in the Build.
 2. These Object files are usually made available in the form of a Shared-State Cache i.e. 'sstate-cache'.
 3. If the BitBake determines that the Output files already exists in the 'sstate-cache' and are valid still, the particular Task can be skipped.
 4. There are special versions of SetScene Tasks where instead of the Task execution, the BitBake skips to the end result and simply place the Output into the correct locations.
@@ -440,7 +440,7 @@ SetScene Tasks and Shared-State:
 	3) do_deploy
 	4) do_packagedata
 	5) do_populate_sysroot.
-	6) The common point that should be noticed among these Tasks is that most of the Task Output is an end result.
+	---> The common point that should be noticed among these Tasks is that most of the Task Output is an end result.
 6. The BitBake understands the relationships between the Tasks i.e. it knows what Task needs to be run before some other Tasks are executed.
 	1) If the Output is to be restored, there is no need to run the Tasks that generate these Output files.
 		---> For the 'do_populate_sysroot_setscene' Task, there is no need to run 'do_fetch', 'do_unpack', 'do_patch', 'do_configure', 'do_compile' and 'do_install' Task.
@@ -464,3 +464,10 @@ SetScene Tasks and Shared-State:
 	---> If some of the Packages are unavailable or the SetScene Tasks fail, then the BitBake would proceed for the dependency installation.
 	---> In this case, the dependency would be the Compiler required to Compile and generate the missing Packages.
 	6) If the dependency installation fails or if the Objects are not found in the 'sstate-cache' in the SetScene stage, the BitBake starts the Build from the sources.
+10. The availability of Objects in the 'sstate-cache' is handled by the function specified by the 'BB_HASHCHECK_FUNCTION' variable. It returns a list of available Objects.
+11. There is another function specified by the 'BB_SETSCENE_DEPVALID' variable.
+	1) It determines whether a given dependency needs to be followed during the SetScene stage.
+	2) When running a SetScene Task, the BitBake needs to know which dependencies of that SetScene Task also need to run.
+	3) The function only returns the value as True or False.
+		---> The 'True' value means to follow the dependency.
+		---> The 'False' value means to skip the dependency during the SetScene Task.
