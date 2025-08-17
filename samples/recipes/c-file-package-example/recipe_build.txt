@@ -1,0 +1,20 @@
+Recipe Build Tasks:
+===================
+1. The individual Tasks can be executed to get a better understanding of the Recipe Build steps.
+2. These individual Tasks can be run using the BitBake.
+	=> bitbake -c CMD recipe-name
+3. The common options for the 'CMD' are as follows:
+	1) build (default CMD)
+	2) clean
+	3) cleanall
+	4) fetch
+	5) unpack
+	6) patch
+	7) configure
+	8) compile
+	9) install
+	10) package
+	11) cleansstate
+	12) menuconfig
+	13) listtasks
+	14) rootfs
