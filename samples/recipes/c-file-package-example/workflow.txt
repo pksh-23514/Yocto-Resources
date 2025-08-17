@@ -53,3 +53,13 @@ Details of WORKDIR Variable:
 	---> The 'EXTENDPE' variable is used to specify the prefix for a Recipe's version based on the Epoch of the Recipe. In most cases, it is left blank.
 	---> The 'PV' variable is used to specify the Recipe version. The value is normally extracted from the Recipe file name.
 	---> The 'PR' variable is used to specify the Recipe revision. The default value is 'r0' and subsequent revisions are 'r1', 'r2' etc.
+
+Including the Recipe into the Image:
+====================================
+1. Even if the Recipe Build is successful, it would not automatically be included as a part of the Image.
+2. The Recipe must be added to the Image Recipe file for it to be included in the Image Build.
+3. This can be done by appending the 'IMAGE_INSTALL' variable in the Image Recipe file.
+	=> IMAGE_INSTALL:append = " package-name"
+	---> The 'package-name' is normally extracted from the Recipe file name.
+4. Once the Image Recipe file is updated, the Image Build command can be executed.
+5. After the Image Build is successful, the Image can be tested on the Target Device for verifying the Recipe addition.
