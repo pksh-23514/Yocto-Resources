@@ -21,6 +21,16 @@ Recipe Build for C File:
 	3) The Recipe file License information.
 	4) The Tasks function to be executed by the BitBake.
 10. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+11. The list of Tasks to be performed during the Build of this Recipe can be checked using the 'bitbake -c listtasks' command.
+12. The various OpenEmbedded Build system variable values can be checked in the BitBake Environment using the 'bitbake -e' command.
+13. After the Build is successful, the 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+	1) The original C file is present in this directory.
+	2) The Cross-Compiled binary file of the source C file is present in this directory.
+	3) The 'image' directory contains the Output of the 'do_install' Task. It is specified by the 'D' variable in the Task.
+	4) The 'package' directory contains the Output of the 'do_package' Task before the Output files are split into the individual Packages.
+	5) The 'packages-split' directory contains the Output of the 'do_package' Task after the Output files are split into the individual Packages in separate sub-directories.
+	6) The 'temp' directory contains the log files for each Task executed for the Recipe, the 'run' files for each executed Task and log file with the order of execution.
+14. The Build for a Recipe can be cleaned using the 'bitbake -c cleanall' command.
 
 Using install Utility in Recipe File:
 *************************************
