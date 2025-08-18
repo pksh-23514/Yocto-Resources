@@ -245,4 +245,88 @@ run.extend_recipe_sysroot.2980013      log.do_install                           
 run.patch_do_patch.2979492             log.do_install.2980013                      run.do_compile                           run.do_prepare_recipe_sysroot
 run.remove_libtool_la.2980013
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls -l image/usr/bin/hello
--rwxr-xr-x 1 uic97426 domain_users 10512 Aug 17 20:21 image/usr/bin/hello
+-rwxr-xr-x 1 prabhat_kiran prabhat_kiran 10512 Aug 17 20:21 image/usr/bin/hello
+
+Package Stage:
+**************
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c package hello
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1775 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 148 (0% match, 99% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 632 tasks of which 631 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls
+configure.sstate   deploy-source-date-epoch  hello.c  package         patches  pkgdata-sysroot  recipe-sysroot         source-date-epoch
+debugsources.list  hello                     image    packages-split  pkgdata  pseudo           recipe-sysroot-native  temp
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls temp
+depsig.do_deploy_source_date_epoch        log.do_prepare_recipe_sysroot               run.do_fetch                             run.extend_recipe_sysroot.2979546
+run.split_and_strip_files.2980264         depsig.do_deploy_source_date_epoch.2979503  log.do_prepare_recipe_sysroot.2979493    run.do_fetch.2979055
+run.extend_recipe_sysroot.2980013         run.sstate_create_package.2979503           depsig.do_package                        log.do_unpack
+run.do_install                            run.extend_recipe_sysroot.2980264           run.sstate_create_package.2980264        depsig.do_package.2980264
+log.do_unpack.2979271                     run.do_install.2980013                      run.fixup_perms.2980264                  run.sstate_hardcode_path.2979503
+log.do_compile                            log.task_order                              run.do_package                           run.package_convert_pr_autoinc.2980264
+run.sstate_hardcode_path.2980264          log.do_compile.2979784                      run.base_do_fetch.2979055                run.do_package.2980264
+run.package_depchains.2980264             run.sstate_hardcode_path_unpack.2979503     log.do_configure                         run.base_do_unpack.2979271
+run.do_patch                              run.package_do_filedeps.2980264             log.do_configure.2979546                 run.sstate_hardcode_path_unpack.2980264
+run.buildhistory_emit_outputsigs.2979503  run.do_patch.2979492                        run.package_do_pkgconfig.2980264         run.sstate_report_unihash.2979503
+log.do_deploy_source_date_epoch           run.buildhistory_emit_outputsigs.2980264    run.do_prepare_recipe_sysroot            run.package_do_shlibs.2980264
+run.sstate_report_unihash.2980264         log.do_deploy_source_date_epoch.2979503     run.buildhistory_list_pkg_files.2980264  run.do_prepare_recipe_sysroot.2979493
+run.package_do_split_locales.2980264      run.sstate_task_postfunc.2979503            log.do_fetch                             run.create_source_date_epoch_stamp.2979271
+run.do_qa_configure.2979546               run.package_fixsymlinks.2980264             run.sstate_task_postfunc.2980264         log.do_fetch.2979055
+run.debian_package_name_hook.2980264      run.do_qa_patch.2979492                     run.package_name_hook.2980264            run.sstate_task_prefunc.2979503
+log.do_install                            run.do_compile                              run.do_qa_unpack.2979271                 run.package_prepare_pkgdata.2980264
+run.sstate_task_prefunc.2980264           log.do_install.2980013                      run.do_compile.2979784                   run.do_unpack
+run.patch_do_patch.2979492                run.target_add_sysroot_deps.2979503         log.do_package                           run.do_configure
+run.do_unpack.2979271                     run.perform_packagecopy.2980264             run.target_add_sysroot_deps.2980264      log.do_package.2980264
+run.do_configure.2979546                  run.emit_pkgdata.2980264                    run.populate_packages.2980264            run.uninative_changeinterp.2979503
+log.do_patch                              run.do_deploy_source_date_epoch             run.extend_recipe_sysroot.2979492        run.read_shlibdeps.2980264
+run.uninative_changeinterp.2980264        log.do_patch.2979492                        run.do_deploy_source_date_epoch.2979503  run.extend_recipe_sysroot.2979493
+run.remove_libtool_la.2980013             run.write_srcrev.2979055
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ tree package
+package
+└── usr
+    └── bin
+        └── hello
+
+2 directories, 1 file
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ tree packages-split
+packages-split/
+├── hello
+│   └── usr
+│       └── bin
+│           └── hello
+├── hello-dbg
+│   └── usr
+│       └── bin
+├── hello-dev
+├── hello-doc
+├── hello-locale
+├── hello.shlibdeps
+├── hello-src
+└── hello-staticdev
+
+11 directories, 2 files
