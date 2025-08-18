@@ -193,3 +193,56 @@ run.base_do_unpack.2979271                run.do_patch                          
 run.buildhistory_emit_outputsigs.2979503  run.do_patch.2979492                        run.patch_do_patch.2979492               log.do_fetch.2979055
 run.do_prepare_recipe_sysroot             run.sstate_create_package.2979503           log.do_patch                             run.create_source_date_epoch_stamp.2979271
 run.do_compile                            run.do_prepare_recipe_sysroot.2979493       run.sstate_hardcode_path.2979503
+
+Install Stage:
+**************
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c install hello
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1775 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 72 (0% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 317 tasks of which 316 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls
+configure.sstate  deploy-source-date-epoch  hello  hello.c  image  patches  pseudo  recipe-sysroot  recipe-sysroot-native  source-date-epoch  temp
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls temp
+depsig.do_deploy_source_date_epoch     log.do_patch                                run.do_compile.2979784                   run.do_prepare_recipe_sysroot.2979493
+run.sstate_create_package.2979503      depsig.do_deploy_source_date_epoch.2979503  log.do_patch.2979492                     run.do_configure
+run.do_qa_configure.2979546            run.sstate_hardcode_path.2979503            log.do_compile                           log.do_prepare_recipe_sysroot
+run.do_configure.2979546               run.do_qa_patch.2979492                     run.sstate_hardcode_path_unpack.2979503  log.do_compile.2979784
+log.do_prepare_recipe_sysroot.2979493  run.do_deploy_source_date_epoch             run.do_qa_unpack.2979271                 run.sstate_report_unihash.2979503
+log.do_configure                       log.do_unpack                               run.do_deploy_source_date_epoch.2979503  run.do_unpack
+run.sstate_task_postfunc.2979503       log.do_configure.2979546                    log.do_unpack.2979271                    run.do_fetch
+run.do_unpack.2979271                  run.sstate_task_prefunc.2979503             log.do_deploy_source_date_epoch          log.task_order
+run.do_fetch.2979055                   run.extend_recipe_sysroot.2979492           run.target_add_sysroot_deps.2979503      log.do_deploy_source_date_epoch.2979503
+run.base_do_fetch.2979055              run.do_install                              run.extend_recipe_sysroot.2979493        run.uninative_changeinterp.2979503
+log.do_fetch                           run.base_do_unpack.2979271                  run.do_install.2980013                   run.extend_recipe_sysroot.2979546
+run.write_srcrev.2979055               log.do_fetch.2979055                        run.do_patch                             run.buildhistory_emit_outputsigs.2979503
+run.extend_recipe_sysroot.2980013      log.do_install                              run.do_patch.2979492                     run.create_source_date_epoch_stamp.2979271
+run.patch_do_patch.2979492             log.do_install.2980013                      run.do_compile                           run.do_prepare_recipe_sysroot
+run.remove_libtool_la.2980013
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls -l image/usr/bin/hello
+-rwxr-xr-x 1 uic97426 domain_users 10512 Aug 17 20:21 image/usr/bin/hello
