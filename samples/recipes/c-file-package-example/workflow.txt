@@ -80,8 +80,8 @@ Using Header File for C File and Building the Image:
 1. If the C file includes a Header file, the Recipe file must be updated to accomodate the Header file for the Cross-Compilation of the C file.
 2. The 'SRC_URI' variable in the Recipe file must now include the path to the Header file as well along with the C file.
 	=> SRC_URI = " \
-	=>     file://hello.c" \
-	=>     file://hello.h" \
+	=>     file://hello.c \
+	=>     file://hello.h \
 	=> "
 3. The Header file shall also be placed in the 'files' sub-directory along with the C file. The BitBake can then locate the Header file while Compiling the C file.
 4. Once the Recipe file is completed, the Build command can be executed for the Recipe.
