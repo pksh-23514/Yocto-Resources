@@ -1,0 +1,57 @@
+Integration of Recipe to the Image Build:
+=========================================
+
+1. Although the Recipe Build is successful, it does not gets automatically included in the Image Build.
+
+2. The Recipe must be appended to the 'IMAGE_INSTALL' variable of the Image Recipe for it to be included in the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta/recipes-core/images/core-image-minimal.bb
+=> IMAGE_INSTALL:append = " hello"
+
+3. After the Image Recipe file is updated, run the 'bitbake' command with Target Image as 'core-image-minimal' for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake core-image-minimal
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1775 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 980 .bb files complete (972 cached, 8 parsed). 1775 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:02
+Sstate summary: Wanted 14 Local 12 Mirrors 0 Missed 2 Current 1391 (85% match, 99% complete)
+Removing 5 stale sstate objects for arch qemuarm: 100% |###########################################################################################################| Time: 0:00:00
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 3610 tasks of which 3600 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 9 seconds
+
+4. After the Build is successful, the Target Image binaries are present under the 'build' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/deploy/images/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ ls
+qemuarm
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images$ cd qemuarm
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm$ ls
+core-image-minimal-qemuarm-<buildhash>.qemuboot.conf		core-image-minimal-qemuarm.tar.bz2
+core-image-minimal-qemuarm-<buildhash>.rootfs.ext4		core-image-minimal-qemuarm.testdata.json
+core-image-minimal-qemuarm-<buildhash>.rootfs.manifest		modules--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-qemuarm-<buildhash>.tgz
+core-image-minimal-qemuarm-<buildhash>.rootfs.tar.bz2		modules-qemuarm.tgz
+core-image-minimal-qemuarm-<buildhash>.testdata.json		zImage
+core-image-minimal-qemuarm.ext4					zImage--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-qemuarm-<buildhash>.bin
+core-image-minimal-qemuarm.manifest				zImage-qemuarm.bin
+core-image-minimal-qemuarm.qemuboot.conf
