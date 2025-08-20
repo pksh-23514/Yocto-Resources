@@ -1,0 +1,55 @@
+Yocto Image Build for ARM Architecture having C File that Includes Header:
+==========================================================================
+
+1. For building the Image for ARM Architecture instead of the Intel (x86) Architecture, the changes shall be made to the 'local.conf' file in the 'build/conf' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> MACHINE ?= "qemuarm"
+=> #MACHINE ?= "qemux86-64"
+
+2. Include the C file's Header file in the 'files' directory of the Layer.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer$ ls
+conf  COPYING.MIT  README  recipes-example
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer$ cd recipes-example/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ ls
+example  hello
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello$ cd files/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/files$ vi hello.h
+=> void display();
+
+3. Modify the C file to include the Header file and use the function call for the required purpose.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/files$ vi hello.c
+=> #include <stdio.h>
+=> #include "hello.h"
+
+=> int main()
+=> {
+	   printf ("Hello World!\n");
+	   display();
+	   return 0;
+=> }
+
+=> void display()
+=> {
+=> 	   printf ("Hello from Function!\n");
+=> }
+
+4. Update the Recipe file in the Recipe folder i.e. 'hello' to accomodate the Header file in the C file Compilation.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/files$ cd ..
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello$ vi hello_0.1.bb
+=> SRC_URI = " \
+=>     file://hello.c \
+=>     file://hello.h \
+=> "
+
+5. This is the final Layer directory structure which is compatible with the BitBake for the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello$ cd ..
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello
+hello
+├── files
+│   ├── hello.c
+│   └── hello.h
+└── hello_0.1.bb
+
+1 directory, 3 files
