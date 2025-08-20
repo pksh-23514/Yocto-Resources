@@ -1,0 +1,20 @@
+Verifying the OpenEmbedded Build Variables and Tasks for Recipe Build:
+======================================================================
+
+1. The Recipe Build Environment can be used to fetch the various variables related to the Recipe using the 'bitbake -e' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^WORKDIR=
+WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^S=
+S="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^D=
+D="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0/image"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^PN=
+PN="hello"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^PV=
+PV="0.1"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^PR=
+PR="r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^BP=
+BP="hello-0.1"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^BPN=
+BPN="hello"
