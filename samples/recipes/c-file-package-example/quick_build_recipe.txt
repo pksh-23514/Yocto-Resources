@@ -123,5 +123,89 @@ Summary: 1 task failed:
 Summary: There were 2 ERROR messages, returning a non-zero exit code.
 
 8. As the 'LIC_FILES_CHKSUM' is unknown, the Build would fail with an error. However, the error message contains the correct checksum value to be used in the Recipe file.
-uic97426@ozd2945u:~/Datadrive/Poky/poky/build$ vi ../meta-layer/recipes-example/hello/hello_0.1.bb
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello/hello_0.1.bb
 => LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+9. After updating the correct checksum value to the 'LIC_FILES_CHKSUM' variable, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1775 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 980 .bb files complete (979 cached, 1 parsed). 1775 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:01
+Sstate summary: Wanted 8 Local 0 Mirrors 0 Missed 8 Current 154 (0% match, 95% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 667 tasks of which 655 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+10. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls
+configure.sstate   deploy-ipks               hello       image            packages-split  pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
+debugsources.list  deploy-rpms               hello.c     license-destdir  patches         pkgdata-sysroot      recipe-sysroot-native  temp
+deploy-debs        deploy-source-date-epoch  hello.spec  package          pkgdata         pseudo               source-date-epoch
+
+11. These files and directories can be analyzed for getting an understanding of the Recipe Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ cat hello.c
+=> #include <stdio.h>
+
+=> int main()
+=> {
+=> 	   printf ("Hello World!\n");
+=> 	   return 0;
+=> }
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ file hello
+hello: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=xxx, ..., with debug_info, not stripped
+---> Since the selected 'MACHINE' is ARM-32 bit, so the file is Cross-Compiled to that Architecture.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ tree package
+package
+└── usr
+    └── bin
+        └── hello
+
+2 directories, 1 file
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ tree image
+image
+└── usr
+    └── bin
+        └── hello
+
+2 directories, 1 file
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ tree packages-split
+packages-split
+├── hello
+│   └── usr
+│       └── bin
+│           └── hello
+├── hello-dbg
+│   └── usr
+│       └── bin
+├── hello-dev
+├── hello-doc
+├── hello-locale
+├── hello.shlibdeps
+├── hello-src
+└── hello-staticdev
+
+11 directories, 2 files
