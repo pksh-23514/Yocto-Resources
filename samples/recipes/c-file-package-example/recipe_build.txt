@@ -314,7 +314,7 @@ package
 
 2 directories, 1 file
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ tree packages-split
-packages-split/
+packages-split
 ├── hello
 │   └── usr
 │       └── bin
@@ -364,13 +364,11 @@ NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 2 seconds
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls
-configure.sstate	deploy-source-date-epoch	license-destdir		pkgdata-pdata-input	source-date-epoch
-debugsources.list	hello.c				package			pkgdata-sysroot		sysroot-destdir
-deploy-debs		hello				packages-split		pseudo			temp
-deploy-ipks		hello.spec			patches			recipe-sysroot-native
-deploy-rpms		image				pkgdata			recipe-sysroot
+configure.sstate   deploy-ipks               hello       image            packages-split  pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
+debugsources.list  deploy-rpms               hello.c     license-destdir  patches         pkgdata-sysroot      recipe-sysroot-native  temp
+deploy-debs        deploy-source-date-epoch  hello.spec  package          pkgdata         pseudo               source-date-epoch
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ tree deploy-rpms
-deploy-rpms/
+deploy-rpms
 └── cortexa15t2hf_neon
     ├── hello-0.1-r0.cortexa15t2hf_neon.rpm
     ├── hello-dbg-0.1-r0.cortexa15t2hf_neon.rpm
