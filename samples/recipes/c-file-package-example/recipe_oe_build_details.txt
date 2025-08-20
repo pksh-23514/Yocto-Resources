@@ -2,12 +2,6 @@ Verifying the OpenEmbedded Build Variables and Tasks for Recipe Build:
 ======================================================================
 
 1. The Recipe Build Environment can be used to fetch the various variables related to the Recipe using the 'bitbake -e' command.
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^WORKDIR=
-WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0"
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^S=
-S="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0"
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^D=
-D="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0/image"
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^PN=
 PN="hello"
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^PV=
@@ -18,6 +12,12 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ b
 BP="hello-0.1"
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^BPN=
 BPN="hello"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^WORKDIR=
+WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^S=
+S="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello | grep ^D=
+D="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0/image"
 
 2. The list of Tasks to be performed by the BitBake during the Build of the particular Recipe can be checked using the 'bitbake -c listtasks' command.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c listtasks hello
