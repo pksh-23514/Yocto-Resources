@@ -43,7 +43,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/files$ cd ..
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello$ vi hello_0.1.bb
 ---> Add the contents of the Recipe file to Build the C file.
----> It is possible that the 'LIC_FILES_CHKSUM' is unknown. Therefore, just add some random value to the variable and proceed with the Build.
+---> It is possible that the 'LIC_FILES_CHKSUM' is unknown. Therefore, just add a placeholder for the checksum value to the variable and proceed with the Build.
 => LICENSE = "MIT"
 => LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=xxx"
 
@@ -56,3 +56,72 @@ hello/
 └── hello_0.1.bb
 
 1 directory, 2 files
+
+7. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:01
+Loaded 1775 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:01
+Sstate summary: Wanted 9 Local 0 Mirrors 0 Missed 9 Current 153 (0% match, 94% complete)
+NOTE: Executing Tasks
+ERROR: hello-0.1-r0 do_populate_lic: QA Issue: hello: The LIC_FILES_CHKSUM does not match for file:///home/prabhat_kiran/.../Poky/poky/meta/files/common-licenses/MIT;md5=xxx
+hello: The new md5 checksum is 0835ade698e0bcf8506ecda2f7b4f302
+hello: Here is the selected license text:
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+MIT License
+
+Copyright (c) <year> <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+...
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hello: Check if the license information has changed in /home/.../Poky/poky/meta/files/common-licenses/MIT to verify that the LICENSE value "MIT" remains valid [license-checksum]
+ERROR: hello-0.1-r0 do_populate_lic: Fatal QA errors were found, failing task.
+ERROR: Logfile of failure stored in: /home/prabhat_kiran/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0/temp/log.do_populate_lic.2796018
+ERROR: Task (/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/hello_0.1.bb:do_populate_lic) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 656 tasks of which 650 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/hello_0.1.bb:do_populate_lic
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+
+8. As the 'LIC_FILES_CHKSUM' is unknown, the Build would fail with an error. However, the error message contains the correct checksum value to be used in the Recipe file.
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build$ vi ../meta-layer/recipes-example/hello/hello_0.1.bb
+=> LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
