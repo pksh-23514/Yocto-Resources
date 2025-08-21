@@ -87,3 +87,17 @@ Using Header File for C File and Building the Image:
 4. Once the Recipe file is completed, the Build command can be executed for the Recipe.
 5. After the Recipe Build is successful, the Image Build command can be executed.
 6. The Image can be tested on the Target Device for verifying the Recipe addition.
+
+Using Multiple C Files and Header Files for Building the Image:
+===============================================================
+1. Even if there are multiple C files having multiple Header files, this above approach can be taken to include all the C files and the Header files in the Recipe Build.
+	=> SRC_URI = " \
+	=>     file://hello.c \
+	=>     file://function.c \
+	=>     file://hello.h \
+	=>     file://function.h \
+	=> "
+2. The C files and the Header files shall be placed in the 'files' sub-directory. The BitBake can then locate these files during the Recipe Build.
+3. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+4. After the Recipe Build is successful, the Image Build command can be executed.
+5. The Image can be tested on the Target Device for verifying the Recipe addition.
