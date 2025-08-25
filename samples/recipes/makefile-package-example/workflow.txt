@@ -36,3 +36,16 @@ Recipe Build for C Files Using Makefile Without do_compile Task:
 	4) The 'oe_runmake_call' function invokes the 'make' command for Building the C files using the available Makefile.
 6. The 'WORKDIR' directory can be checked for the files and directories generated during the Build.
 7. The Outputs are exactly the same as obtained during the previous Build with the 'do_compile' Task defined explicitly.
+
+Details of WORKDIR Variable:
+****************************
+1. The path of the work directory being used to Build a Recipe is specified by the 'WORKDIR' variable. It is located within the 'TMPDIR' directory.
+2. It is specific to the Recipe being Built and the system for which the Recipe is getting Built.
+3. The default value of the 'WORKDIR' variable is:
+	=> ${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PN}/${EXTENDPE}${PV}-${PR}
+	---> The 'TMPDIR' variable is used to specify the top-level Build Output directory.
+	---> The 'MULTIMACH_TARGET_SYS' variable is used to specify the type of the Target system for which the Recipe is being Built.
+	---> The 'PN' variable is used to specify the Package name. The name is normally extracted from the Recipe file name.
+	---> The 'EXTENDPE' variable is used to specify the prefix for a Recipe's version based on the Epoch of the Recipe. In most cases, it is left blank.
+	---> The 'PV' variable is used to specify the Recipe version. The value is normally extracted from the Recipe file name.
+	---> The 'PR' variable is used to specify the Recipe revision. The default value is 'r0' and subsequent revisions are 'r1', 'r2' etc.
