@@ -22,3 +22,17 @@ Recipe Build for C Files Using Makefile:
 	1) If the 'do_compile' Task is provided explicitly in the Recipe file, it would suppress the default 'do_compile' call from the BitBake.
 	2) This can be verified by checking the contents of the 'temp/run.do_compile' log file.
 12. The Build for a Recipe can be cleaned using the 'bitbake -c cleanall' command.
+
+Recipe Build for C Files Using Makefile Without do_compile Task:
+================================================================
+1. In the Recipe file, the 'do_compile' Task is removed. This will affect the Build behavior as the default 'do_compile' Task would be called by the BitBake.
+2. The 'WORKDIR' directory for the Recipe Build must be cleaned using the 'bitbake -c cleanall' command before trying the Build with these modifications.
+3. The Build command can then be executed for the Recipe.
+4. It is observed that the 'do_compile' Task for the Recipe is successfully executed. Although, there is no such 'do_compile' Task definition in the Recipe file.
+5. The Compilation steps can be verified by checking the 'temp/run.do_compile' log file that points to the latest Compilation stage log.
+	1) The 'do_compile' Task is called as default by the BitBake.
+	2) The 'do_compile' Task calls the 'base_do_compile' function which verifies if there is a 'Makefile' or 'makefile' or 'GNUmakefile' available.
+	3) The 'base_do_compile' function then calls the 'oe_runmake' function which then calls the 'oe_runmake_call' function.
+	4) The 'oe_runmake_call' function invokes the 'make' command for Building the C files using the available Makefile.
+6. The 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+7. The Outputs are exactly the same as obtained during the previous Build with the 'do_compile' Task defined explicitly.
