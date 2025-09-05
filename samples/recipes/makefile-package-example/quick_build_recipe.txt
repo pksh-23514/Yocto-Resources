@@ -97,12 +97,12 @@ deploy-debs        deploy-source-date-epoch  license-destdir  packages-split  pk
 
 9. In the 'do_compile' Task, the GNU 'make' is explicitly called. Although, it is optional, this call would suppress the default 'do_compile' call from the BitBake.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ vi temp/run.do_compile
-...
+=> ...
 => # line: 12, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-make/hello-make_0.1.bb
 => do_compile() {
 =>     make
 => }
-...
+=> ...
 
 10. The files and directories can be analyzed for getting an understanding of the Recipe Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ file program
