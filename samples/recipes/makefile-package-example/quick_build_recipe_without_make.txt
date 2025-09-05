@@ -129,6 +129,8 @@ packages-split
 │                   └── 0.1-r0
 │                       └── program.c
 └── hello-make-staticdev
+
+16 directories, 3 files
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree image
 image
 └── usr
