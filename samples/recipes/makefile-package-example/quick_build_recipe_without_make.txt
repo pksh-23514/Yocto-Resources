@@ -1,0 +1,21 @@
+Quick Build of Recipe for ARM Architecture without do_compile Task:
+===================================================================
+
+1. For building the Image for ARM Architecture instead of the Intel (x86) Architecture, the changes shall be made to the 'local.conf' file in the 'build/conf' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> MACHINE ?= "qemuarm"
+=> #MACHINE ?= "qemux86-64"
+
+2. The Recipe file in the Recipe folder i.e. 'hello-make' must be updated to remove the 'do_compile' Task.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello-make/hello-make_0.1.bb
+---> Remove the 'do_compile' Task from the contents of the Recipe file to Build the C file.
+
+3. The final Layer directory structure remains the same as used in the earlier Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ tree ../meta-layer/recipes-example/hello-make
+hello-make
+├── files
+│   ├── Makefile
+│   └── program.c
+└── hello-make_0.1.bb
+
+1 directory, 3 files
