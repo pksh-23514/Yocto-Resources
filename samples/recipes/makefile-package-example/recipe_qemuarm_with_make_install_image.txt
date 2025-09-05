@@ -1,0 +1,126 @@
+Yocto Image Build for ARM Architecture having Makefile with 'install' and 'uninstall' Rules:
+============================================================================================
+
+1. For building the Image for ARM Architecture instead of the Intel (x86) Architecture, the changes shall be made to the 'local.conf' file in the 'build/conf' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> MACHINE ?= "qemuarm"
+=> #MACHINE ?= "qemux86-64"
+
+2. In the Makefile, there can be 'install' and 'uninstall' rules explicitly defined. This can be utilized in the Recipe Build as well to place the files into the Image.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello-make/files/Makefile
+=> ...
+=>	install:
+=>			install -d $(DESTDIR)
+=>			install -m 0755 $(TARGET) $(DESTDIR)
+...
+=>	uninstall:
+=>			rm $(DESTDIR)$(TARGET)
+=> ...
+
+3. In order to try the 'make install' command, the 'do_install' Task is removed from the Recipe file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello-make/hello-make_0.1.bb
+---> Remove the 'do_install' Task from the contents of the Recipe file to Build the C file.
+
+4. On the Host Machine, run the 'bitbake - cleanall' command with Target as the Recipe name for cleaning the existing Recipe Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c cleanall hello-make
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1776 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 981 .bb files complete (980 cached, 1 parsed). 1776 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 0 (0% match, 0% complete)
+NOTE: No setscene tasks
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 5 seconds
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ ls
+temp
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ rm -rf *
+
+5. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-make
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1776 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:01
+Sstate summary: Wanted 9 Local 0 Mirrors 0 Missed 9 Current 153 (0% match, 94% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 667 tasks of which 650 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+6. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ ls
+configure.sstate  deploy-rpms               image            package         pkgdata              program    recipe-sysroot         sysroot-destdir
+deploy-debs       deploy-source-date-epoch  license-destdir  packages-split  pkgdata-pdata-input  program.c  recipe-sysroot-native  temp
+deploy-ipks       hello-make.spec           Makefile         patches         pkgdata-sysroot      pseudo     source-date-epoch
+
+7. The files and directories can be analyzed for getting an understanding of the Recipe Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree image
+image
+
+0 directories, 0 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree package
+package
+
+0 directories, 0 files
+
+8. There is no files and directories present in the 'image', the 'package' or the 'packages-split' directories. The 'run.do_install' file can be analyzed for the Task logs.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ vi temp/run.do_install
+=> ...
+=> # line: 1, file: autogenerated
+=> do_install() {
+=>     base_do_install
+=> }
+
+=> # line: 376, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/classes/base.bbclass
+=> base_do_install() {
+=>         :
+=> }
+
+=> cd '/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0'
+=> do_install
+=> ...
+---> The 'do_install' Task by default does nothing. Therefore, nothing is added in the 'image', the 'package' or the 'packages-split' directories.
