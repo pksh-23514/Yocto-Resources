@@ -91,3 +91,73 @@ oe_runmake_call() {
 cd '/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0'
 do_compile
 ...
+
+7. The files and directories can be analyzed for getting an understanding of the Recipe Build. They are identical to the earlier Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ file program
+program: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=xxx, ..., with debug_info, not stripped
+---> Since the selected 'MACHINE' is ARM-32 bit, so the file is Cross-Compiled to that Architecture.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree package
+package
+└── usr
+    ├── bin
+    │	└── program
+    └── src
+        └── debug
+            └── hello-make
+                └── 0.1-r0
+                    └── program.c
+
+6 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree packages-split
+packages-split
+├── hello-make
+│   └── usr
+│       └── bin
+│           └── program
+├── hello-make-dbg
+│   └── usr
+│       └── bin
+├── hello-make-dev
+├── hello-make-doc
+├── hello-make-locale
+├── hello-make.shlibdeps
+├── hello-make-src
+│   └── usr
+│       └── src
+│           └── debug
+│               └── hello-make
+│                   └── 0.1-r0
+│                       └── program.c
+└── hello-make-staticdev
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree image
+image
+└── usr
+    └── bin
+        └── program
+
+2 directories, 1 file
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ cat Makefile
+=> CFLAGS = -g -Wall -DUSE_SYSCALL
+
+=> TARGET = program
+
+=> all: $(TARGET)
+
+=> $(TARGET): $(TARGET).c
+=> 	   $(CC) $(CFLAGS) $(LDFALGS) -o $(TARGET) $(TARGET).c
+
+=> clean:
+=> 	   rm -f $(TARGET)
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ cat program.c
+=> #include <stdio.h>
+=> #include <unistd.h>
+
+=> int main()
+=> {
+=> 	   #ifdef USE_SYSCALL
+=> 		   write (1, "Hello System Call!\n", 19);
+=> 	   #else
+=> 		   printf ("Hello World\n");
+=> 	   #endif
+=> 	   return 0;
+=> }
