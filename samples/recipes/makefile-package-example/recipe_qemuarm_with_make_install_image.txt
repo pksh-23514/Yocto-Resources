@@ -124,3 +124,98 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 => do_install
 => ...
 ---> The 'do_install' Task by default does nothing. Therefore, nothing is added in the 'image', the 'package' or the 'packages-split' directories.
+
+9. Therefore, the 'do_install' Task cannot be removed from the Recipe file. Instead, the 'oe_runmake install' command must be used in the 'do_install' Task.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello-make/hello-make_0.1.bb
+=> ...
+=> do_install() {
+=>     oe_runmake install DESTDIR=${D}/usr/bin
+=> }
+---> The Makefile expects the value of 'DESTDIR' variable and it has the same value as in the earlier Build. Otherwise, the Build will throw an error.
+
+10. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-make
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1776 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 981 .bb files complete (980 cached, 1 parsed). 1776 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 9 Local 0 Mirrors 0 Missed 9 Current 153 (0% match, 94% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 667 tasks of which 650 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+11. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ ls
+configure.sstate   deploy-ipks               hello-make.spec  Makefile        patches              pkgdata-sysroot  pseudo                 source-date-epoch
+debugsources.list  deploy-rpms               image            package         pkgdata              program          recipe-sysroot         sysroot-destdir
+deploy-debs        deploy-source-date-epoch  license-destdir  packages-split  pkgdata-pdata-input  program.c        recipe-sysroot-native  temp
+
+12. The files and directories can be analyzed for getting an understanding of the Recipe Build. The 'image', the 'package' and the 'packages-split' directories are now correct.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ file program
+program: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=xxx, ..., with debug_info, not stripped
+---> Since the selected 'MACHINE' is ARM-32 bit, so the file is Cross-Compiled to that Architecture.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree package
+package
+└── usr
+    ├── bin
+    │	└── program
+    └── src
+        └── debug
+            └── hello-make
+                └── 0.1-r0
+                    └── program.c
+
+6 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree packages-split
+packages-split
+├── hello-make
+│   └── usr
+│       └── bin
+│           └── program
+├── hello-make-dbg
+│   └── usr
+│       └── bin
+├── hello-make-dev
+├── hello-make-doc
+├── hello-make-locale
+├── hello-make.shlibdeps
+├── hello-make-src
+│   └── usr
+│       └── src
+│           └── debug
+│               └── hello-make
+│                   └── 0.1-r0
+│                       └── program.c
+└── hello-make-staticdev
+
+16 directories, 3 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ tree image
+image
+└── usr
+    └── bin
+        └── program
+
+2 directories, 1 file
