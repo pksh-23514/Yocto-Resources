@@ -126,7 +126,7 @@ NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 2 seconds
 
 9. The Build error was expected in the 'do_configure' Task due to the 'clean' rule missing from the Makefile. The Recipe 'WORKDIR' directory can be checked for the logs.
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0
 
 10. The general flow of the default 'do_configure' Task is present in the 'temp/run.do_configure' log file. The 'oe_runmake clean' is called which executes 'make clean'.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0$ vi temp/run.do_configure
@@ -167,3 +167,131 @@ DEBUG: Python function do_qa_configure finished
 
 12. The possible reason for this Build behavior could be the BitBake has restored the Task from the Shared-State Cache i.e. 'sstate-cache'.
 ---> So, even though the Makefile has been modified for the Recipe Build, there is no change observed in the Recipe Build behavior.
+
+13. The BitBake must be forced to execute the 'do_configure' Task instead of restoring from the 'sstate-cache'. This can be achieved using the 'bitbake -C recipe-name' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -C configure sample
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+NOTE: Tainting hash to force rebuild of task /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/sample/sample_0.1.bb, do_configure
+WARNING: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/sample/sample_0.1.bb:do_configure is tainted from a forced run
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 7 Local 0 Mirrors 0 Missed 7 Current 155 (0% match, 95% complete)
+Removing 1 stale sstate objects for arch qemuarm: 100% |###########################################################################################################| Time: 0:00:00
+Removing 6 stale sstate objects for arch cortexa15t2hf-neon: 100% |################################################################################################| Time: 0:00:00
+NOTE: Executing Tasks
+ERROR: sample-0.1-r0 do_configure: oe_runmake failed
+ERROR: sample-0.1-r0 do_configure: ExecutionError('/home/.../build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978', 1, None, None)
+ERROR: Logfile of failure stored in: /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/log.do_configure.2303978
+Log data follows:
+| DEBUG: Executing python function extend_recipe_sysroot
+| NOTE: Direct dependencies are ['/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/glibc/glibc_2.35.bb:do_populate_sysroot', ...
+| NOTE: Installed into sysroot: []
+| NOTE: Skipping as already exists in sysroot: ['glibc', 'gcc-cross-arm', 'gcc-runtime', 'quilt-native', 'patch-native', 'pseudo-native', 'linux-libc-headers', ...
+| DEBUG: Python function extend_recipe_sysroot finished
+| DEBUG: Executing shell function do_configure
+| NOTE: make clean
+| make: *** No rule to make target 'clean'.  Stop.
+| ERROR: oe_runmake failed
+| WARNING: /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978:186 exit 1 from 'exit 1'
+| WARNING: Backtrace (BB generated script):
+| 	#1: bbfatal_log, /home/../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 186
+| 	#2: die, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 170
+| 	#3: oe_runmake, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 165
+| 	#4: base_do_configure, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 150
+| 	#5: do_configure, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 141
+| 	#6: main, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 199
+ERROR: Task (/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/sample/sample_0.1.bb:do_configure) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 657 tasks of which 656 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/sample/sample_0.1.bb:do_configure
+Summary: There was 1 WARNING message.
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+
+14. Thus, the 'do_configure' Task produces the error of missing 'clean' rule. This can now be observed in the Recipe Build too.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake sample
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+WARNING: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/sample/sample_0.1.bb:do_configure is tainted from a forced run
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 7 Local 0 Mirrors 0 Missed 7 Current 155 (0% match, 95% complete)
+NOTE: Executing Tasks
+ERROR: sample-0.1-r0 do_configure: oe_runmake failed
+ERROR: sample-0.1-r0 do_configure: ExecutionError('/home/.../build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978', 1, None, None)
+ERROR: Logfile of failure stored in: /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/log.do_configure.2303978
+Log data follows:
+| DEBUG: Executing python function extend_recipe_sysroot
+| NOTE: Direct dependencies are ['/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/glibc/glibc_2.35.bb:do_populate_sysroot', ...
+| NOTE: Installed into sysroot: []
+| NOTE: Skipping as already exists in sysroot: ['glibc', 'gcc-cross-arm', 'gcc-runtime', 'quilt-native', 'patch-native', 'pseudo-native', 'linux-libc-headers', ...
+| DEBUG: Python function extend_recipe_sysroot finished
+| DEBUG: Executing shell function do_configure
+| NOTE: make clean
+| make: *** No rule to make target 'clean'.  Stop.
+| ERROR: oe_runmake failed
+| WARNING: /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978:186 exit 1 from 'exit 1'
+| WARNING: Backtrace (BB generated script):
+| 	#1: bbfatal_log, /home/../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 186
+| 	#2: die, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 170
+| 	#3: oe_runmake, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 165
+| 	#4: base_do_configure, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 150
+| 	#5: do_configure, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 141
+| 	#6: main, /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0/temp/run.do_configure.2303978, line 199
+ERROR: Task (/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/sample/sample_0.1.bb:do_configure) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 657 tasks of which 656 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/sample/sample_0.1.bb:do_configure
+Summary: There was 1 WARNING message.
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+
+15. Since, the Recipe Build failed, there is no changes observed in the Recipe 'WORKDIR' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0$ ls
+configure.sstate   deploy-ipks               hello-make.spec  Makefile        patches              pkgdata-sysroot  pseudo                 source-date-epoch
+debugsources.list  deploy-rpms               image            package         pkgdata              program          recipe-sysroot         sysroot-destdir
+deploy-debs        deploy-source-date-epoch  license-destdir  packages-split  pkgdata-pdata-input  program.c        recipe-sysroot-native  temp
