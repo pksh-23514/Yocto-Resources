@@ -35,7 +35,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-make$ mkdir files
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-make$ cd files/
 
-4. Include the C file in the 'files' directory of the Layer.
+4. Include the C file and the Makefile in the 'files' directory of the Layer.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-make/files$ vi program.c
 ---> Add the contents of the C file to be Built using the Recipe.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-make/files$ vi Makefile
