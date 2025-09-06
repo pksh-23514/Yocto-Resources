@@ -292,6 +292,73 @@ Summary: There were 2 ERROR messages, returning a non-zero exit code.
 15. Since, the Recipe Build failed, there is no changes observed in the Recipe 'WORKDIR' directory.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/sample/0.1-r0$ ls
-configure.sstate   deploy-ipks               hello-make.spec  Makefile        patches              pkgdata-sysroot  pseudo                 source-date-epoch
-debugsources.list  deploy-rpms               image            package         pkgdata              program          recipe-sysroot         sysroot-destdir
-deploy-debs        deploy-source-date-epoch  license-destdir  packages-split  pkgdata-pdata-input  program.c        recipe-sysroot-native  temp
+configure.sstate   deploy-ipks               image            package         pkgdata              program    recipe-sysroot         source-date-epoch
+debugsources.list  deploy-rpms               license-destdir  packages-split  pkgdata-pdata-input  program.c  recipe-sysroot-native  sysroot-destdir
+deploy-debs        deploy-source-date-epoch  Makefile         patches         pkgdata-sysroot      pseudo     sample.spec            temp
+
+16. The 'CLEANBROKEN' Environment variable can be set to '1' for the BitBake to skip the 'oe_runmake clean' call during the 'do_configure' Task.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e sample | grep ^CLEANBROKEN=
+CLEANBROKEN="0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/sample/sample_0.1.bb
+=> ...
+=> S = "${WORKDIR}"
+=> CLEANBROKEN = "1"
+=> ...
+
+17. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake sample
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+WARNING: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/sample/sample_0.1.bb:do_configure is tainted from a forced run
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 7 Local 0 Mirrors 0 Missed 7 Current 155 (0% match, 95% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 667 tasks of which 661 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+
+Summary: There was 1 WARNING message.
+
+18. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ ls
+configure.sstate   deploy-ipks               image            package         pkgdata              program    recipe-sysroot         source-date-epoch
+debugsources.list  deploy-rpms               license-destdir  packages-split  pkgdata-pdata-input  program.c  recipe-sysroot-native  sstate-install-packagedata
+deploy-debs        deploy-source-date-epoch  Makefile         patches         pkgdata-sysroot      pseudo     sample.spec            sstate-install-package_qa
+sstate-install-package_write_deb             sysroot-destdir  sstate-install-package_write_ipk     sstate-install-package_write_rpm  temp
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-make/0.1-r0$ cat Makefile
+=> CFLAGS = -g -Wall -DUSE_SYSCALL
+
+=> TARGET = program
+
+=> all: $(TARGET)
+
+=>	$(TARGET): $(TARGET).c
+=>		$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) $(TARGET).c
+
+=>	install:
+=>		install -d $(DESTDIR)
+=>		install -m 0755 $(TARGET) $(DESTDIR)
+
+=>	uninstall:
+=>		rm $(DESTDIR)$(TARGET)
