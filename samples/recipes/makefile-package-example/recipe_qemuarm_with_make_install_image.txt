@@ -21,7 +21,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ v
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello-make/hello-make_0.1.bb
 ---> Remove the 'do_install' Task from the contents of the Recipe file to Build the C file.
 
-4. On the Host Machine, run the 'bitbake - cleanall' command with Target as the Recipe name for cleaning the existing Recipe Build.
+4. On the Host Machine, run the 'bitbake -c cleanall' command with Target as the Recipe name for cleaning the existing Recipe Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c cleanall hello-make
 Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
 Loaded 1776 entries from dependency cache.
