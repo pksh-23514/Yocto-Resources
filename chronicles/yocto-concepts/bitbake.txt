@@ -55,7 +55,7 @@ bitbake Command Usage:
 	8) -R POSTFILE, --postread=POSTFILE => Reads the specified file after bitbake.conf.
 	9) -v, --verbose => Enables tracing of the Shell Tasks (with 'set -x'). It also prints bb.note(...) Messages to 'stdout' along with writing them to ${T}/log.do_<task>).
 	10) -q, --quiet => Outputs less log Message data to the terminal. It can be specified more than once.
-	11) -p, --parse-only => Parses the BB Recipes and exit.
+	11) -p, --parse-only => Parses the BitBake Recipes and exit.
 	12) -s, --show-versions => Shows the current and the preferred versions of all the Recipes.
 	13) -e, --environment => Shows the global or per-Recipe Environment complete details along with the information about where the variables were set/changed.
 	14) --server-only => Runs the BitBake without a UI i.e. only starting a Server (Cooker) process.
@@ -69,6 +69,8 @@ bitbake Command Usage:
 	22) --status-only => Checks the status of the remote BitBake Server.
 	23) --runall=RUNALL => Runs the specified Task for any Recipe in the Task-graph of the specified Target even if it wouldn't otherwise have to be run.
 	24) --runonly=RUNONLY => Runs only the specified Task within the Task-graph of the specified Targets and any Task dependencies that those Tasks may have.
+	25) -f, --force => Forces the specified Target/Task to run. It invalidates any existing stamp file.
+	26) -C INVALIDATE_STAMP, --clear-stamp INVALIDATE_STAMP => It invalidates the stamp file for the specified Task and then runs the default Task for the specified Target.
 5. The common options for the 'CMD' are as follows:
 	1) build (default CMD)
 	2) clean
