@@ -96,3 +96,38 @@ Recipe and Image Build for C File Using Makefile with 'install' and 'uninstall' 
 14. If the C binary is present, execute the binary to verify if the expected Output is displayed.
 15. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
+
+Recipe Build for C File Using Makefile without 'clean' Rule:
+============================================================
+1. The Layer can be created and added to the Build system using the 'bitbake-layers' command.
+	1) Inside the Layer directory, there is a 'recipes-*' directory that shall contain the Recipes.
+	2) The C file, the Makefile and the particular Recipe file to Build this C file shall be placed in this 'recipes-*' directory.
+	3) The directory structure must be compatible for the BitBake to pick it up during the Build.
+	4) The contents of the C file, the Makefile and the particular Recipe file are same as used in the previous Build with 'install' rule in the Makefile.
+2. In the Makefile, the 'clean' rule is removed to verify if there is any change in the Build behavior. This is the only change performed to the Recipe.
+3. The Build command can then be executed for the Recipe. It is observed that the Build is successful which is contrary to the expected behavior.
+4. There is an error expected from the 'do_configure' Task for the Recipe. The general flow of the 'do_configure' Task can be verified using the 'temp/run.do_configure' log file.
+	1) The 'do_configure' Task is called as default by the BitBake.
+	2) The 'do_configure' Task calls the 'base_do_configure' function which verifies if there is a 'Makefile' or 'makefile' or 'GNUmakefile' available.
+	3) The 'base_do_configure' function then calls the 'oe_runmake clean' function which then calls the 'oe_runmake_call' function.
+	4) The 'oe_runmake_call' function invokes the 'make clean' command.
+	5) Since, the Makefile doesn't have a 'clean' rule, this should have thrown an error in the Recipe Build.
+5. The Configuration steps can verified by checking the 'temp/log.do_configure' log file that points to the latest Configuration stage log.
+	1) In the log file, there is no call to 'oe_runmake clean' during the 'do_configure' Task execution.
+	2) The possible reason for this Build behavior could be the BitBake has restored the Task from the Shared-State Cache i.e. 'sstate-cache'.
+	3) Therefore, even though the Makefile has been modified for the Recipe Build, there is no change observed in the Recipe Build behavior.
+6. The BitBake must be forced to execute the 'do_configure' Task instead of restoring from the 'sstate-cache'. This can be achieved using the 'bitbake -C recipe-name' command.
+	1) The forced execution throws a warning of 'Tainting Hash'. This happens because the prior signature of that Task is invalidated.
+	2) The Task execution throws an error of missing 'clean' rule in the Makefile which causes the 'oe_runmake' to fail.
+	3) After this Task execution, if the Recipe Build command is executed, then the error appears in the Recipe Build as well.
+7. Since, the Recipe Build has failed, there is no change observed in the 'WORKDIR' directory as compared to the successful Recipe Build.
+8. The way to fix this error is to use the 'CLEANBROKEN' Environment variable in the Recipe file.
+	1) This variable causes the BitBake to skip the 'oe_runmake clean' command execution during the 'do_configure' Task.
+9. The Build command can then be executed for the Recipe. It is observed that the Build is successful.
+	1) Although the Makefile doesn't define the 'clean' rule, the Recipe Build is successful as there is no 'make clean' execution performed.
+10. The 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+11. The Outputs are exactly the same as obtained during the previous Build with the Makefile defining the 'clean' rule.
+	1) However, there are certain additional 'sstate-install-*' directories present along with the general expected Outputs.
+	2) These are generated during the forced execution of the 'do_configure' Task.
+	3) The BitBake would reuse the 'sstate-cache' to restore the pre-Built Task Outputs as required during the execution.
+	4) These directories are usually named with the 'sstate-install-' as prefix depending on the Task being restored.
