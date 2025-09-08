@@ -1,5 +1,5 @@
-Recipe Build for C Files Using Makefile:
-========================================
+Recipe Build for C File Using Makefile:
+=======================================
 1. This sample Recipe is used to Build the C files using Makefile and include it into the RootFS.
 2. The C file must be written with the contents to Build. The Makefile must be written with the contents about the Build process.
 3. The next step is to place this C file and Makefile in a directory structure for the BitBake to pick it up during the Build.
@@ -23,8 +23,8 @@ Recipe Build for C Files Using Makefile:
 	2) This can be verified by checking the contents of the 'temp/run.do_compile' log file.
 12. The Build for a Recipe can be cleaned using the 'bitbake -c cleanall' command.
 
-Recipe Build for C Files Using Makefile Without do_compile Task:
-================================================================
+Recipe Build for C File Using Makefile without do_compile Task:
+===============================================================
 1. In the Recipe file, the 'do_compile' Task is removed. This will affect the Build behavior as the default 'do_compile' Task would be called by the BitBake.
 2. The 'WORKDIR' directory for the Recipe Build must be cleaned using the 'bitbake -c cleanall' command before trying the Build with these modifications.
 3. The Build command can then be executed for the Recipe.
@@ -69,4 +69,30 @@ Running the Added Recipe Yocto Image on QEMU:
 4. After the Root Login stage is done, it should be verified whether the Cross-Compiled C file binary is present at the correctly installed location.
 5. If the C binary is present, execute the binary to verify if the expected Output is displayed.
 6. The QEMU can be closed by powering OFF the virtual HW.
+	=> poweroff
+
+Recipe and Image Build for C File Using Makefile with 'install' and 'uninstall' Rules:
+======================================================================================
+1. In the Makefile, the 'install' and the 'uninstall' rules are written for replacing the 'do_install' Task in the Recipe file.
+2. In the Recipe file, the 'do_install' Task is removed.
+3. This is a way to verify if the default 'do_install' Task by the BitBake can use these rules in the Makefile to place the files into the Image.
+4. The 'WORKDIR' directory for the Recipe Build must be cleaned using the 'bitbake -c cleanall' command before trying the Build with these modifications.
+5. The Build command can then be executed for the Recipe. It is observed that the 'do_install' Task for the Recipe is successfully executed.
+6. However, in the 'WORKDIR' directory, it is observed that no files are installed into the the 'image', the 'package' or the 'packages-split' directories.
+7. The Installation steps can be verified by checking the 'temp/run.do_install' log file that points to the latest Installation stage log.
+	1) The 'do_install' Task is called as default by the BitBake.
+	2) The 'do_compile' Task calls the 'base_do_install' function which performs no action.
+	3) This proves that the default 'do_install' Task cannot use the 'install' and the 'uninstall' rules of the Makefile.
+	4) The 'do_install' Task has to be defined explicitly for the files to be placed into the Image.
+8. The 'oe_runmake install' command can be used in the 'do_install' Task that will execute the 'make install' from the Makefile.
+	1) Any parameter if expected as an Input to the Makefile must be passed along with the 'oe_runmake install' command.
+	2) If the parameter is missed, the Makefile would cause an error in the Recipe Build.
+9. After restoring the 'do_install' Task, the Build command can then be executed for the Recipe.
+10. The 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+11. The Outputs are exactly the same as obtained during the previous Build with the Makefile not defining the 'install' and the 'uninstall' rules.
+12. With the updated Recipe, the Image Build command can be executed. After the Image Build is successful, the Image can be tested on QEMU.
+	=> runqemu qemuarm core-image-minimal nographic
+13. After the Root Login stage is done, it should be verified whether the Cross-Compiled C file binary is present at the correctly installed location.
+14. If the C binary is present, execute the binary to verify if the expected Output is displayed.
+15. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
