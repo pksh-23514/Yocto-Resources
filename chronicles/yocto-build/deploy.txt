@@ -1,0 +1,6 @@
+tmp/deploy:
+===========
+1. The 'tmp/deploy' directory contains the final Output produced by the OpenEmbedded Build process.
+2. It is essential for the deployment, flashing or further sharing of the Build Output.
+3. The 'DEPLOY_DIR' variable controls the directory path.
+4. The following sub-directories are present in this directory:
