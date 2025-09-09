@@ -23,6 +23,21 @@ tmp/buildstats:
 
 tmp/cache:
 **********
+1. When the BitBake parses the Meta-data for a Build, it caches the results in the 'tmp/cache' directory to speed up the future Builds.
+2. These results are stored on a per 'MACHINE' basis in this directory.
+3. The general parsing of all the Meta-data files can be very time consuming. Therefore, the BitBake caches the parsed Meta-data.
+4. During the subsequent Builds, the BitBake checks each file to see if there is any modification present for the file.
+5. This file changes can be detected by:
+	1) The file modification time (mtime).
+	2) The hashing of the file contents.
+	3) The changes in dependencies for the file.
+6. The caching allows the BitBake to skip the parsing of the files that are unchanged as compared to the previous Builds.
+7. The BitBake simply uses the parsed result stored in this directory.
+8. Only if there is any changes detected for the file, it is parsed again during the Build. Thus, the Build performance is improved drastically.
+9. However, the caching has a certain implication as well.
+	1) If some Recipes are being modified but the BitBake is not seeming to notice the changes during the Build.
+	2) Then removing the 'tmp/cache' directory can help restoring the normal workflow of the BitBake.
+	3) Although, it will slow down the Build as all the files are now needed to be parsed by the BitBake.
 
 tmp/deploy:
 ***********
