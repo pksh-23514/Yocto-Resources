@@ -41,6 +41,10 @@ tmp/cache:
 
 tmp/deploy:
 ***********
+1. The 'tmp/deploy' directory contains the final Output produced by the OpenEmbedded Build process.
+2. This is the location where the Output files are placed after they are successfully Built and Packaged.
+3. It is essential for the deployment, flashing or further sharing of the Build Output.
+4. The 'DEPLOY_DIR' variable points to this directory in the Build.
 
 tmp/work:
 *********
