@@ -51,7 +51,20 @@ tmp/cache:
 9. However, the caching has a certain implication as well.
 	1) If some Recipes are being modified but the BitBake is not seeming to notice the changes during the Build.
 	2) Then removing the 'tmp/cache' directory can help restoring the normal workflow of the BitBake.
+		=> rm -rf build/tmp/cache
 	3) Although, it will slow down the Build as all the files are now needed to be parsed by the BitBake.
+	4) It can be safely deleted without having any impact on the Build behavior. They are generated again on the next Build.
+10. The directory structure is as follows:
+	=> cache/
+	   └── default-glibc/
+	       ├── qemuarm/
+	       │   └── x86-64/
+	       │       └── bb_cache.dat.<buildhash>
+	       ├── qemux86-64/
+               │   └── x86-64/
+               │       └── bb_cache.dat.<buildhash>
+	       ├── ...
+	---> These files are encoded into a format different from a normal text file.
 
 tmp/deploy:
 ***********
