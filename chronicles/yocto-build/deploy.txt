@@ -4,3 +4,27 @@ tmp/deploy:
 2. It is essential for the deployment, flashing or further sharing of the Build Output.
 3. The 'DEPLOY_DIR' variable controls the directory path.
 4. The following sub-directories are present in this directory:
+	1) deb
+	2) images
+	3) ipk
+	4) licenses
+	5) rpm
+
+deploy/deb:
+***********
+
+
+deploy/images:
+**************
+
+
+deploy/ipk:
+***********
+
+
+deploy/licenses:
+****************
+
+
+deploy/rpm:
+***********
