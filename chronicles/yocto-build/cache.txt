@@ -1,6 +1,6 @@
 build/cache:
 ============
-1. The Build system creates the 'cache' directory to contain several internal files used by the Build system.
+1. The 'cache' directory is created to contain the persistent internal Meta-data that is used by the OpenEmbedded Build system.
 2. It contains a 'sanity_info' text file to keep track of the important Build information variable values like 'SANITY_VERSION', 'TMPDIR', 'SSTATE_DIR' and 'NATIVELSBSTRING'.
 3. It ensures that the Build Environment remains unchanged between the Builds.
 	1) If there are any changes in the Build Environment, it could potentially break the Build.

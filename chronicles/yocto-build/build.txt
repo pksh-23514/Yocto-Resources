@@ -24,6 +24,7 @@ build/cache:
 ************
 1. The Build system creates the 'cache' directory to contain several internal files used by the Build system.
 2. It contains a 'sanity_info' text file to keep track of the important Build information variable values like 'SANITY_VERSION', 'TMPDIR', 'SSTATE_DIR' and 'NATIVELSBSTRING'.
+3. The 'PERSISTENT_DIR' variable controls the directory path.
 
 build/conf:
 ***********
