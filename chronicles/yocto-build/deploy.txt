@@ -34,7 +34,32 @@ deploy/deb:
 
 deploy/images:
 **************
-
+1. The 'deploy/images' directory is used to contain the Output files i.e. generated artifacts of the Build process for a specific Machine.
+2. These Output files are critical while preparing to deploy or flash the Built Image on the HW.
+3. The type of files that are stored here are:
+	1) Bootloader binaries (u-boot.img, MLO, SPL, u-boot-spl.bin etc.)
+	2) Kernel Images (zImage, uImage, Image, vmlinux etc.)
+	3) Device Tree Blobs (.dtb)
+	4) RootFS (core-image-minimal-<machine>-<buildhash>.rootfs.ext4, core-image-minimal-<machine>-<buildhash>.rootfs.tar.bz2 etc.)
+	5) Complete Flashable Images (.sdimg, .wic, .img etc.)
+	6) Symlinks (core-image-minimal-<machine>.ext4 -> core-image-minimal-<machine>-<buildhash>.rootfs.ext4)
+4. It is important to be careful while deleting the files in this directory.
+	1) The old or unused full Images or temporary artifacts can be deleted safely.
+	2) However, the Bootloader, Kernel or Device Tree files must be deleted with caution.
+	3) The reason being these files could be pre-Built or copied manually and not generated automatically during the Build.
+5. If these files can be re-Built, it can be done through the 'bitbake' command.
+	=> bitbake -c clean virtual/kernel
+	=> bitbake virtual/kernel
+6. The directory structure is as follows:
+	=> images/
+	   ├── beaglebone/
+	   │   └── ...
+	   ├── qemuarm/
+	   │   └── ...
+	   ├── <other-machines>/
+	   │   └── ...
+	   └── qemux86-64/
+	       └── ...
 
 deploy/ipk:
 ***********
