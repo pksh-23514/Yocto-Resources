@@ -46,3 +46,22 @@ deploy/licenses:
 
 deploy/rpm:
 ***********
+1. The 'deploy/rpm' directory is used to contain all the '.rpm' (Red Hat Package Manager) Packages produced during the Build process.
+2. These Packages are organized into the sub-directories that categorize these Packages based on the various Architectures.
+3. This method of Package organization makes it easy to locate and deploy the relevant Packages.
+4. The directory structure is as follows:
+	=> rpm/
+	   ├── armv7at2hf-neon/
+	   │   └── <armv7at2hf-packages>.rpm
+	   ├── beaglebone/
+	   │   └── <beaglebone-packages>.rpm
+	   ├── noarch/
+	   │   └── <noarch-packages>.rpm
+	   ├── <other-archs>/
+	   │   └── <arch-specific-packages>.rpm
+	   └── qemuarm/
+	       └── <qemuarm-packages>.rpm
+	---> armv7at2hf => Architecture-specific RPM Packages.
+	---> beaglebone => Machine-specific RPM Packages.
+	---> noarch => Architecture-independent RPM Packages.
+	---> qemuarm => QEMU Target-specific RPM Packages.
