@@ -31,7 +31,7 @@ build/conf/local.conf:
 		---> The default Policy Configuration for the Yocto Project is Poky.
 		---> DISTRO ?= "poky"
 	6) PACKAGE_CLASSES => It controls the type of Package formats to be enabled in the Build system. Even multiple Package formats can be enabled at once.
-		---> The order in which the Package formats are listed matters. The first item listed in the variable (if available) is used by the BitBake.
+		---> The order in which the Package formats are listed matters. The first format listed in this variable is used by the BitBake to generate the RootFS.
 		---> PACKAGE_CLASSES ?= "package_rpm package_deb package_ipk"
 		---> The 'package_rpm' is the default format for Poky.
 		---> PACKAGE_CLASSES ?= "package_rpm"
