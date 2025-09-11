@@ -73,8 +73,37 @@ tmp/deploy:
 3. It is essential for the deployment, flashing or further sharing of the Build Output.
 4. The 'DEPLOY_DIR' variable points to this directory in the Build.
 
+tmp/hosttools:
+**************
+
+
+tmp/log:
+********
+
+
+tmp/pkgdata:
+************
+
+
+tmp/sstate-control:
+*******************
+
+
+tmp/stamps:
+***********
+
+
+tmp/sysroots:
+*************
+
+
+tmp/sysroots-components:
+************************
+
+
 tmp/work:
 *********
+
 
 tmp/work-shared:
 ****************
