@@ -38,7 +38,25 @@ deploy/images:
 
 deploy/ipk:
 ***********
-
+1. The 'deploy/ipk' directory is used to contain all the '.ipk' (Itsy) Packages produced during the Build process.
+2. These Packages are organized into the sub-directories that categorize these Packages based on the various Architectures.
+3. This method of Package organization makes it easy to locate and deploy the relevant Packages.
+4. The directory structure is as follows:
+	=> ipk/
+	   ├── all/
+	   │   └── <noarch-packages>.ipk
+	   ├── armv7at2hf-neon/
+	   │   └── <armv7at2hf-packages>.ipk
+	   ├── beaglebone/
+	   │   └── <beaglebone-packages>.ipk
+	   ├── <other-archs>/
+	   │   └── <arch-specific-packages>.ipk
+	   └── qemuarm/
+	       └── <qemuarm-packages>.ipk
+	---> all => Architecture-independent Itsy Packages.
+	---> armv7at2hf => Architecture-specific Itsy Packages.
+	---> beaglebone => Machine-specific Itsy Packages.
+	---> qemuarm => QEMU Target-specific Itsy Packages.
 
 deploy/licenses:
 ****************
