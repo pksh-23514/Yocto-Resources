@@ -7,3 +7,24 @@ build/cache:
 	2) The Debug process of finding these changes that led to the Build errors is very difficult.
 4. It performs the Sanity checks at the start of the Build.
 5. It helps maintain the Build reproducibility and the Build stability.
+
+build/cache and build/temp/cache Differences:
+*********************************************
+1. In the Yocto Project Build system, both the 'build/cache' and the 'build/tmp/cache' directories are related to the caching mechanisms.
+2. However, they serve very different purposes.
+3. The 'build/cache' is the persistent Cache. It stores the persistent Build state and Meta-data that the BitBake uses across multiple Builds.
+	1) This directory is defined by the 'PERSISTENT_DIR' variable.
+	2) It stores the various internal files used by the OpenEmbedded Build system that are intended to persist across multiple Builds.
+	3) It contains the crucial information which tracks the important Build parameters and details about the Host Distribution.
+	4) This helps the BitBake for Sanity checks and the tracking of the Build Environment i.e. if the Build Environment is valid or if something has changed.
+	5) It is more persistent and aims to store the information that helps maintain the Build integrity and consistency over time, rather than being a temporary artifact.
+	6) It is fine to delete this directory. It is generated again in the next Build. However, it is not recommended unless there are major changes in the Build system.
+	7) This directory can survive the clean Builds i.e. cleaning the Build using the 'bitbake -c clean/cleanall/cleansstate' commands. It has to be deleted manually.
+4. The 'build/tmp/cache' is the temporary working Cache. The BitBake uses this data to optimize the parsing and execution of the Recipes during the current Build session.
+	1) This directory is part of the directory structure defined by the 'TMPDIR'variable.
+	2) It typically stores the temporary Cached data from the parsed Recipes.
+	3) This helps the BitBake to speed up the parsing of the Recipes and consequently optimize the execution time of the Build.
+	4) It is generally more ephemeral and contains data that is relevant to the current Build state.
+	5) It is not designed for long-term persistence across multiple distinct Build invocations.
+	6) It is completely safe to delete this directory. It is generated again in the next Build.
+	7) This directory cannot survive the clean Builds. It can also be deleted manually.
