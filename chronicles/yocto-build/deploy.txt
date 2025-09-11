@@ -85,7 +85,22 @@ deploy/ipk:
 
 deploy/licenses:
 ****************
-
+1. The 'deploy/licenses' directory is used to contain all the License information on per Package basis.
+2. It organizes and preserves the License compliance information for all the Built Packages.
+3. Each of the sub-directory corresponds to a Package containing the following files:
+	1) 'COPYING', 'LICENSE' or similarly named License files.
+	2) The files containing a prefix 'generic_' containing the similar License details as the received License file from the sources used to Build the Package.
+	3) A file with the name 'recipeinfo' containing the Meta-data about the origin of the License file for the Package.
+4. The directory structure is as follows:
+	=> licenses/
+	   ├── bash/
+	   │   └── ...
+	   ├── dropbear/
+	   │   └── ...
+	   ├── <other-packages>/
+	   │   └── ...
+	   └── xz/
+	       └── ...
 
 deploy/rpm:
 ***********
