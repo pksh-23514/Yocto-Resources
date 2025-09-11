@@ -28,3 +28,21 @@ Packages:
 	=> FILES_${PN}-extras = "${datadir}/extras"
 	=> DESCRIPTION_${PN}-tools = "Extra tools"
 	=> RDEPENDS_${PN}-tools = "${PN}"
+
+.ipk Packages:
+**************
+1. The '.ipk' stands for the Itsy Package. It was created for the Itsy Linux Project (a precursor to the OpenEmbedded Project).
+2. It is designed to be light-weight, fast and with minimal features. It is highly suitable for the Embedded systems with high limitations on the HW resources.
+3. It is used by the OpenEmbedded Project, the OpenWRT and the Yocto Project.
+
+.deb Packages:
+**************
+1. The '.deb' stands for the Debian Package. It was created to support the Debian-style Package management.
+2. It contains the Compiled SW along with the Meta-data, scripts and dependency information. It is highly suitable for complex Package management.
+3. It is used by the Debian and the Debian based Linux Distributions.
+
+.rpm Packages:
+**************
+1. The '.rpm' stands for the Red Hat Package Manager. It was created to support the Red Hat Package management.
+2. It contains the Compiled SW along with the Meta-data, scripts, dependency information and digital signature. It is highly suitable for powerful Enterprise Linux Environments.
+3. It is used by the Red Hat Linux and the Red Hat based Distributions.
