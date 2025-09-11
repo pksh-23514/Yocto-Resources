@@ -12,10 +12,10 @@ tmp/deploy:
 
 deploy/deb:
 ***********
-1. The 'deploy/deb' directory is used to contain all the '.deb' Packages produced during the Build process.
+1. The 'deploy/deb' directory is used to contain all the '.deb' (Debian) Packages produced during the Build process.
 2. These Packages are organized into the sub-directories that categorize these Packages based on the various Architectures.
 3. This method of Package organization makes it easy to locate and deploy the relevant Packages.
-3. The directory structure is as follows:
+4. The directory structure is as follows:
 	=> deb/
 	   ├── all/
 	   │   └── <noarch-packages>.deb
@@ -27,10 +27,10 @@ deploy/deb:
 	   │   └── <arch-specific-packages>.deb
 	   └── qemuarm/
 	       └── <qemuarm-packages>.deb
-	---> all => Architecture-independent Packages.
-	---> armv7at2hf => Architecture-specific Packages.
-	---> beaglebone => Machine-specific Packages.
-	---> qemuarm => QEMU Target-specific Packages.
+	---> all => Architecture-independent Debian Packages.
+	---> armv7at2hf => Architecture-specific Debian Packages.
+	---> beaglebone => Machine-specific Debian Packages.
+	---> qemuarm => QEMU Target-specific Debian Packages.
 
 deploy/images:
 **************
