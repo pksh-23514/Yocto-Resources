@@ -123,3 +123,14 @@ deploy/rpm:
 	---> beaglebone => Machine-specific RPM Packages.
 	---> noarch => Architecture-independent RPM Packages.
 	---> qemuarm => QEMU Target-specific RPM Packages.
+
+deploy/sdk:
+***********
+1. The 'deploy/sdk' directory is used to contain the generated SDK installer '.sh' script and additional support files depending on the Configurations.
+2. This Cross-development Toolchain script can be executed to install the 'sysroot' that matches the Target Image and HW.
+3. The directory structure is as follows:
+	=> sdk/
+	   ├── poky-glibc-x86-64-core-image-minimal-cortexa15t2hf-neon-qemuarm-toolchain-4.0.27.host.manifest
+	   ├── poky-glibc-x86-64-core-image-minimal-cortexa15t2hf-neon-qemuarm-toolchain-4.0.27.target.manifest
+	   ├── poky-glibc-x86-64-core-image-minimal-cortexa15t2hf-neon-qemuarm-toolchain-4.0.27.sh
+	   └── poky-glibc-x86-64-core-image-minimal-cortexa15t2hf-neon-qemuarm-toolchain-4.0.27.testdata.json
