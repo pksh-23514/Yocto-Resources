@@ -143,14 +143,14 @@ bdf5a02880df7ae1889e4490395bee62c2bb6f6c
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ file program
 program: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=xxx, ..., with debug_info, not stripped
 ---> Since the selected 'MACHINE' is ARM-32 bit, so the file is Cross-Compiled to that Architecture.
-uic97426@ozd2945u:~/Datadrive/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ tree image
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ tree image
 image
 └── usr
     └── bin
         └── program
 
 2 directories, 1 file
-uic97426@ozd2945u:~/Datadrive/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ tree package
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ tree package
 package
 └── usr
     ├── bin
@@ -163,7 +163,7 @@ package
                         └── program.c
 
 7 directories, 2 files
-uic97426@ozd2945u:~/Datadrive/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ tree packages-split
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ tree packages-split
 packages-split
 ├── hello-remote-git
 │   └── usr
