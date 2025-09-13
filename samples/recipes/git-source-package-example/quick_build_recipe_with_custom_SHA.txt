@@ -1,0 +1,19 @@
+Quick Build of Recipe for ARM Architecture with custom Git Commit SHA Hash Value:
+=================================================================================
+
+1. For building the Image for ARM Architecture instead of the Intel (x86) Architecture, the changes shall be made to the 'local.conf' file in the 'build/conf' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> MACHINE ?= "qemuarm"
+=> #MACHINE ?= "qemux86-64"
+
+2. The Recipe file in the Recipe folder i.e. 'hello-remote-git' must be updated to modify the 'SRCREV' variable.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb
+=> SRC_URI = "git://github.com/prabhat_kiran/hello-world.git;branch=master;protocol=https"
+=> SRCREV = "c8bce8d13511d9f67fea140435ad4a0397340d1a"
+
+3. The final Layer directory structure remains the same as used in the earlier Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ tree ../meta-layer/recipes-example/hello-remote-git
+hello-remote-git
+└── hello-remote-git_0.1.bb
+
+0 directories, 1 file
