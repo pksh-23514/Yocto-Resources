@@ -46,3 +46,20 @@ hello-remote-git
 └── hello-remote-git_0.1.bb
 
 0 directories, 1 file
+
+6. If the GitHub repository is not 'public' with the 'https' protocol, the Recipe Build would throw an error with the 'bitbake' command execution.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-remote-git
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+WARNING: /home/.../Poky/poky/meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb: Exception during build_dependencies for AUTOREV                 | ETA:  --:--:--
+WARNING: /home/.../Poky/poky/meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb: Error during finalise of /home/.../hello-remote-git/hello-remote-git_0.1.bb
+ERROR: ExpansionError during parsing /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb
+...
+fatal: could not read Username for 'https://github.com': No such device or address
+
+The variable dependency chain for the failure is: SRCPV -> AUTOREV[vardepvalue]
+
+ERROR: Parsing halted due to errors, see error messages above
+
+Summary: There were 2 WARNING messages.
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
