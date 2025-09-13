@@ -60,3 +60,31 @@ NOTE: Writing buildhistory took: 2 seconds
 Summary: 1 task failed:
   /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb:do_package_qa
 Summary: There were 2 ERROR messages, returning a non-zero exit code.
+
+5. The 'WORKDIR' directory can be checked for the changes in the Build behavior.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ ls
+LICENSE  Makefile  program  program.c  README.md
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ cat Makefile
+=> CFLAGS = -g -Wall -DUSE_SYSCALL
+
+=> TARGET = program
+
+=> all: $(TARGET)
+
+=>	$(TARGET): $(TARGET).c
+=>		$(CC) $(CFLAGS) $(LDFALGS) -o $(TARGET) $(TARGET).c
+
+=>	clean:
+=>		rm -f $(TARGET)
+prabhat_kiran@coldstone:~/Documents/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ git log --pretty=format:"%H"
+c8bce8d13511d9f67fea140435ad4a0397340d1a <--- This is the commit SHA hash value of the GitHub repository specified in the 'SRCREV' variable.
+f8f890cf3f12ad5fafd9d3b6c446017cbf4ea777
+bbb737ca9a7c01a7cde235f33d5b86320bda83a0
+d9c6af2a7a4405753c4674cb5c61e1d1e4321a94
+bdf5a02880df7ae1889e4490395bee62c2bb6f6c
+53efa004577802916ae93a6d6533482f450a6313
+641d9a68d7131642cf39dcd9703a4cef25d50cd5
+
+---> The error of 'didn't pass LDFLAGS?' is due to the spelling error of 'LDFALGS' in the Makefile.
+---> This error is rectified on the latest commit of the source code. However, the local clone of the Git repository is cloned upto the SHA hash value specified in the 'SRCREV'.
