@@ -64,7 +64,7 @@ ERROR: Parsing halted due to errors, see error messages above
 Summary: There were 2 WARNING messages.
 Summary: There were 2 ERROR messages, returning a non-zero exit code.
 
-7. After making the GitHub repository as 'public', on he Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+7. After making the GitHub repository as 'public', on the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-remote-git
 Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
 Loaded 1777 entries from dependency cache.
@@ -138,6 +138,8 @@ d9c6af2a7a4405753c4674cb5c61e1d1e4321a94
 bdf5a02880df7ae1889e4490395bee62c2bb6f6c
 53efa004577802916ae93a6d6533482f450a6313
 641d9a68d7131642cf39dcd9703a4cef25d50cd5
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ git branch
+* master
 
 10. The files and directories can be analyzed for getting an understanding of the Recipe Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ file program

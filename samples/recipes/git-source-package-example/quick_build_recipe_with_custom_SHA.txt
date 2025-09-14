@@ -85,7 +85,8 @@ d9c6af2a7a4405753c4674cb5c61e1d1e4321a94
 bdf5a02880df7ae1889e4490395bee62c2bb6f6c
 53efa004577802916ae93a6d6533482f450a6313
 641d9a68d7131642cf39dcd9703a4cef25d50cd5
-
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ git branch
+* master
 ---> The error of 'didn't pass LDFLAGS?' is due to the spelling error of 'LDFALGS' in the Makefile.
 ---> This error is rectified on the latest commit of the source code. However, the local clone of the Git repository is cloned upto the SHA hash value specified in the 'SRCREV'.
 
