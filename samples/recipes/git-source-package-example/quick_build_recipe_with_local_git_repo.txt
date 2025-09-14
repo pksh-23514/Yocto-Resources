@@ -179,3 +179,49 @@ d0b576c22ce9064c20442785954970c7143f32ed <--- This is the latest commit SHA hash
 b5856efb8210d6f45573b634a3887c481aff27da
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git branch
 * master
+
+12. The files and directories can be analyzed for getting an understanding of the Recipe Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ tree image
+image
+└── usr
+    └── bin
+        └── program
+
+2 directories, 1 file
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ tree package
+package
+└── usr
+    ├── bin
+    │	└── program
+    └── src
+        └── debug
+            └── hello-local-git
+                └── 0.1-r0
+                    └── git
+                        └── program.c
+
+7 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ tree packages-split
+packages-split
+├── hello-local-git
+│   └── usr
+│       └── bin
+│           └── program
+├── hello-local-git-dbg
+│   └── usr
+│       └── bin
+├── hello-local-git-dev
+├── hello-local-git-doc
+├── hello-local-git-locale
+├── hello-local-git.shlibdeps
+├── hello-local-git-src
+│   └── usr
+│       └── src
+│           └── debug
+│               └── hello-local-git
+│                   └── 0.1-r0
+│                       └── git
+│                           └── program.c
+└── hello-local-git-staticdev
+
+17 directories, 3 files
