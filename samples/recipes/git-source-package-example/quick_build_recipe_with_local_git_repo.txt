@@ -1,0 +1,54 @@
+Quick Build of Recipe for ARM Architecture with Local Git Source:
+=================================================================
+
+1. On the Home directory of the Host Machine, create a local Git repository to contain the sources to be Build using a Recipe.
+prabhat_kiran@coldstone:~$ mkdir hello-world
+prabhat_kiran@coldstone:~$ cd hello-world/
+prabhat_kiran@coldstone:~/hello-world$ git init
+Initialized empty Git repository in /home/prabhat_kiran/hello-world/.git/
+
+2. Include the C file and the Makefile in the local Git repository.
+prabhat_kiran@coldstone:~/hello-world$ vi program.c
+---> Add the contents of the C file to be Built using the Recipe.
+prabhat_kiran@coldstone:~/hello-world$ vi Makefile
+---> Add the contents of the Makefile to Build the C file using the Recipe.
+
+3. Commit these files into the local Git repository.
+prabhat_kiran@coldstone:~/hello-world$ git status 
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Makefile
+	program.c
+
+nothing added to commit but untracked files present (use "git add" to track)
+prabhat_kiran@coldstone:~/hello-world$ git add Makefile 
+prabhat_kiran@coldstone:~/hello-world$ git commit -m "Added the Makefile"
+[master (root-commit) b5856ef] Added the Makefile
+ 1 file changed, 11 insertions(+)
+ create mode 100644 Makefile
+prabhat_kiran@coldstone:~/hello-world$ git add program.c 
+prabhat_kiran@coldstone:~/hello-world$ git commit -m "Added the C file"
+[master d0b576c] Added the C file
+ 1 file changed, 7 insertions(+)
+ create mode 100644 program.c
+prabhat_kiran@coldstone:~/hello-world$ git status 
+On branch master
+nothing to commit, working tree clean
+
+4. Verify the Git log for the local Git repository.
+prabhat_kiran@coldstone:~/hello-world$ git log
+commit d0b576c22ce9064c20442785954970c7143f32ed (HEAD -> master)
+Author: prabhat_kiran <prabhat_kiran@github.com>
+Date:   Fri Sep 12 18:26:51 2025 +0530
+
+    Added the C file
+
+commit b5856efb8210d6f45573b634a3887c481aff27da
+Author: prabhat_kiran <prabhat_kiran@github.com>
+Date:   Fri Sep 12 18:26:33 2025 +0530
+
+    Added the Makefile
