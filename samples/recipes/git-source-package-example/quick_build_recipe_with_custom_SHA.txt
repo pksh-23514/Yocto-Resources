@@ -88,3 +88,21 @@ bdf5a02880df7ae1889e4490395bee62c2bb6f6c
 
 ---> The error of 'didn't pass LDFLAGS?' is due to the spelling error of 'LDFALGS' in the Makefile.
 ---> This error is rectified on the latest commit of the source code. However, the local clone of the Git repository is cloned upto the SHA hash value specified in the 'SRCREV'.
+
+6. In the Recipe file, the 'SRC_URI' variable is updated to remove the 'branch' option.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb
+=> SRC_URI = "git://github.com/prabhat_kiran/hello-world.git;protocol=https"
+
+7. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-remote-git
+...
+WARNING: URL: git://github.com/prabhat_kiran/hello-world.git;protocol=https does not set any branch parameter.
+The future default branch used by tools and repositories is uncertain and we will therefore soon require this is set in all git urls.
+...
+---> There is no change in the Build behavior as compared to the previous Build.
+---> However, a warning is displayed on the account that no 'branch' option is specified in the 'SRC_URI' variable.
+---> Since there is no 'branch' option specified in the 'SRC_URI' variable, the BitBake will fetch the 'master' branch for the GitHub repository as default.
+---> The commit SHA hash value of the GitHub repository specified in the 'SRCREV' variable is validated against the 'master' branch as no other 'branch' option is specified.
+---> If the commit SHA hash value specified in the 'SRCREV' variable is not present in the 'master' branch, the Build error of Fetcher failure is observed.
+---> Therefore, it is always recommended to specify the 'branch' option to avoid any confusion with the source revision being used in the Build.
+---> Even if the 'branch' option is provided along with a commit SHA hash value present in another branch, the Build error of Fetcher failure is observed.
