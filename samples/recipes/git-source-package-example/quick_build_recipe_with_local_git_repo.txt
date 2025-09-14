@@ -87,7 +87,7 @@ example  hello-local-git
 8. Include the Recipe file in the Recipe folder i.e. 'hello-local-git' for the BitBake to be able to read it during the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-local-git/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ vi hello-local-git_0.1.bb
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ cat hello-local-git_0.1.bb 
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ cat hello-local-git_0.1.bb
 => DESCRIPTION = "A sample C-program from a Local Git Repository"
 => LICENSE = "MIT"
 => LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
@@ -109,3 +109,73 @@ hello-local-git
 └── hello-local-git_0.1.bb
 
 0 directories, 1 file
+
+9. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-local-git
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1778 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 984 .bb files complete (982 cached, 2 parsed). 1779 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 162 (0% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 667 tasks of which 667 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+10. After the Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ ls
+configure.sstate   deploy-ipks               git                    license-destdir  pkgdata              pseudo                 source-date-epoch
+debugsources.list  deploy-rpms               hello-remote-git.spec  package          pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
+deploy-debs        deploy-source-date-epoch  image                  packages-split   pkgdata-sysroot      recipe-sysroot-native  temp
+
+11. In the 'git' directory defined by the 'S' variable, the contents of the GitHub repository are checked-out at the latest commit SHA hash value.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ cd git/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ ls
+Makefile  program  program.c
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ cat Makefile
+=> CFLAGS = -g -Wall -DUSE_SYSCALL
+
+=> TARGET = program
+
+=> all: $(TARGET)
+
+=>	$(TARGET): $(TARGET).c
+=>		$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) $(TARGET).c
+
+=>	clean:
+=>		rm -f $(TARGET)
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ cat program.c
+=> #include <stdio.h>
+
+=> int main()
+=> {
+=>	printf ("Hello World from Local Git Repository!\n");
+=>	return 0;
+=> }
+prabhat_kiran@coldstone:~/Documents/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git log --pretty=format:"%H"
+d0b576c22ce9064c20442785954970c7143f32ed <--- This is the latest commit SHA hash value of the local Git repository.
+b5856efb8210d6f45573b634a3887c481aff27da
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git branch
+* master
