@@ -64,3 +64,15 @@ Running the Added Recipe Yocto Image on QEMU:
 5. If the C binary is present, execute the binary to verify if the expected Output is displayed.
 6. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
+
+Recipe Build for C file Using Makefile in Remote Git Repository with Custom Git Commit SHA Hash Value:
+======================================================================================================
+1. The particular revision of the source can be used in the Build by providing the full commit SHA hash value in the 'SRCREV' variable.
+2. This avoids the BitBake to perform a query to the remote GitHub repository each time the Recipe is Built.
+3. There is no change to the Recipe file or folder apart from updating the 'SRCREV' variable in the Recipe file.
+4. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+5. After the Build is completed, the 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+	1) In the 'S' variable controlled directory, the contents of the GitHub repository are checked-out at the latest commit SHA hash value.
+	2) The source code has been changed to the particular revision specified in the 'SRCREV' variable.
+	3) In the 'branch' specified in the 'SRC_URI' variable, the specified full commit SHA hash value is validated against this 'branch'.
+6. In the 'GITDIR' directory, the local clone of the GitHub repository is present.
