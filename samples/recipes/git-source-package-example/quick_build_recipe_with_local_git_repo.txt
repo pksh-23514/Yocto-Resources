@@ -225,3 +225,9 @@ packages-split
 └── hello-local-git-staticdev
 
 17 directories, 3 files
+
+13. In the 'GITDIR' directory, the local clone of the GitHub repository is present.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd downloads/git2/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/downloads/git2$ ls | grep "hello-world"
+home.prabhat_kiran.hello-world
+home.prabhat_kiran.hello-world.done
