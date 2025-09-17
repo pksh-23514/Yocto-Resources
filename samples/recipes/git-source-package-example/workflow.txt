@@ -91,3 +91,40 @@ Recipe Build for C file Using Makefile in Remote Git Repository without Git Bran
 10. Therefore, it is always recommended to specify:
 	1) The correct 'branch' option in the 'SRC_URI' variable.
 	2) The corresponding full commit SHA hash value of the specified 'branch' in the 'SRCREV' variable.
+
+Recipe Build for C file Using Makefile in Local Git Repository:
+===============================================================
+1. The Yocto Project supports the ability to pull the source code from the local Git repositories as a part of the Build process.
+2. This sample Recipe is used to Build a C file using Makefile present in the local Git repository on the Host Machine and include it into the RootFS.
+3. On the Host Machine, a directory is initialized as a local Git repository to contain the sources to be Build using the Recipe.
+4. Since, the source code is not a part of the Recipe directory structure, the Recipe folder would only contain a Recipe file.
+5. The Layer can be created and added to the Build system using the 'bitbake-layers' command.
+	1) Inside the Layer directory, there is a 'recipes-*' directory that shall contain the Recipes.
+6. It is important to note that the name of the Recipe folder must match with the name of the Recipe file name being used to Build the SW.
+7. The Recipe file must be created inside the Recipe folder as per the path pointed to by the 'BBFILES' variable.
+8. The contents of the Recipe file must provide:
+	1) The 'SRC_URI' variable must point to the local Git repository along with the various options like 'protocol', 'branch', 'rev', 'tag' etc.
+	2) Although there is no actual link involved for the local Git repository, the 'git://' Fetcher is used in the 'SRC_URI' variable.
+	3) In the 'git://' Fetcher, the Absolute path of the local Git repository must be specified in place of the GitHub repository link.
+	4) The 'protocol' option must be specified as 'file' in place of 'https' as the sources are on the Host Machine.
+	5) The 'git://' Fetcher fetches the code from the local Git repository and clones it into the directory controlled by the 'GITDIR' variable.
+		=> GITDIR = "${TOPDIR}/downloads/git2"
+	6) This local clone from the 'GITDIR' directory is then cloned into the Recipe 'WORKDIR' during the 'do_unpack' Task when a specific Tree is checked-out.
+	7) The 'SRCREV' variable is mandatory to be provided in the Recipe file. Otherwise, the Build would throw an error of Fetcher failure.
+	8) The BitBake uses this variable to determine the specific revision of the source to be used in the Build.
+		=> SRCREV = "${AUTOREV}" or "<Full-Git-Commit-SHA-hash-value>"
+		---> The 'AUTOREV' variable specifies to use the latest revision of the source in the repository.
+		---> The '<Full-Git-Commit-SHA-hash-value>' specifies to use a particular revision of the source in the repository.
+	9) The 'S' variable must be set to the '${WORKDIR}/git' value.
+	10) The 'do_compile' Task is optional as by default the BitBake starts the 'make' command to Compile the SW.
+	11) If there is any additional 'make' options, they can be stored in 'EXTRA_OEMAKE' or 'PACKAGECONFIG_CONFARGS' variables.
+	12) The BitBake passes these options into the GNU 'make' invocation.
+	13) The 'do_install' Task is still required in the Recipe file.
+9. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+10. The list of Tasks to be performed during the Build of this Recipe can be checked using the 'bitbake -c listtasks' command.
+11. The various OpenEmbedded Build system variable values can be checked in the BitBake Environment using the 'bitbake -e' command.
+12. After the Build is successful, the 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+	1) In the 'S' variable controlled directory, the contents of the local Git repository are checked-out at the latest commit SHA hash value.
+	2) The final binary produced by the Recipe Build is also present in this directory.
+13. In the 'GITDIR' directory, the local clone of the GitHub repository is present.
+14. This method can be really helpful to verify the Build is successful with the modifications done to the Recipes before finally pushing them into the remote GitHub repository.
