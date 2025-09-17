@@ -76,3 +76,18 @@ Recipe Build for C file Using Makefile in Remote Git Repository with Custom Git 
 	2) The source code has been changed to the particular revision specified in the 'SRCREV' variable.
 	3) In the 'branch' specified in the 'SRC_URI' variable, the specified full commit SHA hash value is validated against this 'branch'.
 6. In the 'GITDIR' directory, the local clone of the GitHub repository is present.
+
+Recipe Build for C file Using Makefile in Remote Git Repository without Git Branch Value:
+=========================================================================================
+1. Using the same Recipe file having the custom commit SHA hash value, the 'branch' option is removed in the 'SRC_URI' variable.
+2. The BitBake would fetch the 'master' branch of the GitHub repository as a default if there is no 'branch' option specified in the 'SRC_URI' variable.
+3. There is no change to the Recipe file or folder apart from updating the 'SRC_URI' variable in the Recipe file.
+4. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+5. There is no change in the Build behavior as compared to the earlier Build as the same 'master' branch was used in the earlier Build as well.
+6. However, a warning is displayed on the account that no 'branch' option is specified in the 'SRC_URI' variable.
+7. As there is no 'branch' specified in the 'SRC_URI' variable, the specified full commit SHA hash value is validated against the 'master' branch by default.
+8. If this commit SHA hash value specified in the 'SRCREV' variable is not present in the 'master' branch, the Build error of Fetcher failure is observed.
+9. Even with the 'branch' option specified in the 'SRC_URI' variable, the correct commit SHA hash value must be provided for the successful validation of the source to be cloned.
+10. Therefore, it is always recommended to specify:
+	1) The correct 'branch' option in the 'SRC_URI' variable.
+	2) The corresponding full commit SHA hash value of the specified 'branch' in the 'SRCREV' variable.
