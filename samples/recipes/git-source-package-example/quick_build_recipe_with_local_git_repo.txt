@@ -87,20 +87,9 @@ example  hello-local-git
 8. Include the Recipe file in the Recipe folder i.e. 'hello-local-git' for the BitBake to be able to read it during the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-local-git/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ vi hello-local-git_0.1.bb
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ cat hello-local-git_0.1.bb
-=> DESCRIPTION = "A sample C-program from a Local Git Repository"
-=> LICENSE = "MIT"
-=> LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-
-=> SRC_URI = "git:///home/prabhat_kiran/hello-world;branch=master;protocol=file"
-=> SRCREV = "${AUTOREV}"
-
-=> S = "${WORKDIR}/git"
-
-=> do_install() {
-=>     install -d ${D}${bindir}
-=>     install -m 0755 program ${D}${bindir}
-=> }
+---> Add the contents of the Recipe file to Build the C file kept in the local Git repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ ls
+hello-local-git_0.1.bb
 
 9. This is the final Layer directory structure which is compatible with the BitBake for the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ cd ..
