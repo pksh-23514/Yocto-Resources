@@ -1,5 +1,5 @@
-Integration of Recipe to the Image Build:
-=========================================
+Integration of Recipe Fetching from Remote Public Git Sources to the Image Build:
+=================================================================================
 
 1. Although the Recipe Build is successful, it does not gets automatically included in the Image Build.
 

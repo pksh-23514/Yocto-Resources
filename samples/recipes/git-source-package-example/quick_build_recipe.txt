@@ -1,5 +1,5 @@
-Quick Build of Recipe for ARM Architecture using the Build Directory:
-=====================================================================
+Quick Build of Recipe for ARM Architecture with Remote Public Git Source:
+=========================================================================
 
 1. For building the Image for ARM Architecture instead of the Intel (x86) Architecture, the changes shall be made to the 'local.conf' file in the 'build/conf' directory.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf

@@ -1,5 +1,5 @@
-Running the Yocto Image for ARM Architecture on QEMU:
-=====================================================
+Running the Yocto Image with Recipe Build from Remote Public Git Sources for ARM Architecture on QEMU:
+======================================================================================================
 
 1. To execute the 'core-image-minimal' Image Built for 'qemuarm' Architecture on QEMU, the below commands can be provided.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ runqemu qemuarm core-image-minimal nographic
