@@ -118,3 +118,49 @@ prabhat_kiran@coldstone:~/Documents/.../Poky/poky/build/tmp/work/cortexa15t2hf-n
 b7e8ca868c2666699dab801b2eba471d49077805
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0/git$ git branch
 * master
+
+9. The files and directories can be analyzed for getting an understanding of the Recipe Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0$ tree image
+image
+└── usr
+    └── bin
+        └── program
+
+2 directories, 1 file
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0$ tree package
+package
+└── usr
+    ├── bin
+    │   └── program
+    └── src
+        └── debug
+            └── hello-private-git
+                └── 0.1-r0
+                    └── git
+                        └── program.c
+
+7 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0$ tree packages-split
+packages-split
+├── hello-private-git
+│   └── usr
+│       └── bin
+│           └── program
+├── hello-private-git-dbg
+│   └── usr
+│       └── bin
+├── hello-private-git-dev
+├── hello-private-git-doc
+├── hello-private-git-locale
+├── hello-private-git.shlibdeps
+├── hello-private-git-src
+│   └── usr
+│       └── src
+│           └── debug
+│               └── hello-private-git
+│                   └── 0.1-r0
+│                       └── git
+│                           └── program.c
+└── hello-private-git-staticdev
+
+17 directories, 3 files
