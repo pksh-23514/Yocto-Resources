@@ -88,6 +88,9 @@ example  hello-local-git
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-local-git/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ vi hello-local-git_0.1.bb
 ---> Add the contents of the Recipe file to Build the C file kept in the local Git repository.
+---> In the 'SRC_URI' variable, there is no URL involved with the local Git repository.
+---> The 'git://' Fetcher must be specified with the Absolute path of the local Git repository.
+---> The 'protocol' option must be specified as 'file' for the local Git repository.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ ls
 hello-local-git_0.1.bb
 
@@ -135,11 +138,11 @@ NOTE: Writing buildhistory took: 2 seconds
 10. After the Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ ls
-configure.sstate   deploy-ipks               git                    license-destdir  pkgdata              pseudo                 source-date-epoch
-debugsources.list  deploy-rpms               hello-remote-git.spec  package          pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
-deploy-debs        deploy-source-date-epoch  image                  packages-split   pkgdata-sysroot      recipe-sysroot-native  temp
+configure.sstate   deploy-ipks               git                   license-destdir  pkgdata              pseudo                 source-date-epoch
+debugsources.list  deploy-rpms               hello-local-git.spec  package          pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
+deploy-debs        deploy-source-date-epoch  image                 packages-split   pkgdata-sysroot      recipe-sysroot-native  temp
 
-11. In the 'git' directory defined by the 'S' variable, the contents of the GitHub repository are checked-out at the latest commit SHA hash value.
+11. In the 'git' directory defined by the 'S' variable, the contents of the local Git repository are checked-out at the latest commit SHA hash value.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ cd git/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ ls
 Makefile  program  program.c
@@ -215,7 +218,7 @@ packages-split
 
 17 directories, 3 files
 
-13. In the 'GITDIR' directory, the local clone of the GitHub repository is present.
+13. In the 'GITDIR' directory, the local clone of the local Git repository is present.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd downloads/git2/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/downloads/git2$ ls | grep "hello-world"
 home.prabhat_kiran.hello-world
