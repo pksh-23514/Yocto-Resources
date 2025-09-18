@@ -36,6 +36,9 @@ example  hello-remote-git
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-remote-git/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-remote-git$ vi hello-remote-git_0.1.bb
 ---> Add the contents of the Recipe file to Build the C file kept in the remote GitHub repository.
+---> In the 'SRC_URI' variable, the URL of the GitHub repository must be specified. However, the URL must be modified.
+---> The 'https://' part of the URL must be removed as the 'git://' Fetcher is being used for the remote GitHub repository.
+---> The 'protocol' option must be specified as 'https' for the 'public' remote GitHub repository.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-remote-git$ ls
 hello-remote-git_0.1.bb
 
