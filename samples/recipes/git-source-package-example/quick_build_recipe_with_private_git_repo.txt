@@ -164,3 +164,9 @@ packages-split
 └── hello-private-git-staticdev
 
 17 directories, 3 files
+
+10. In the 'GITDIR' directory, the local clone of the 'private' GitHub repository is present.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd downloads/git2/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/downloads/git2$ ls | grep "hello-world"
+github.com.prabhat_kiran.hello-world.git
+github.com.prabhat_kiran.hello-world.git.done
