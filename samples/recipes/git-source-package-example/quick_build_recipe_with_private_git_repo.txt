@@ -46,3 +46,75 @@ hello-private-git
 └── hello-private-git_0.1.bb
 
 0 directories, 1 file
+
+6. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-private-git
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 985 .bb files complete (982 cached, 3 parsed). 1780 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 9 Local 0 Mirrors 0 Missed 9 Current 153 (0% match, 94% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 667 tasks of which 650 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 second
+
+7. After the Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0$ ls
+configure.sstate   deploy-ipks               git                     license-destdir  pkgdata              pseudo                 source-date-epoch
+debugsources.list  deploy-rpms               hello-private-git.spec  package          pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
+deploy-debs        deploy-source-date-epoch  image                   packages-split   pkgdata-sysroot      recipe-sysroot-native  temp
+
+8. In the 'git' directory defined by the 'S' variable, the contents of the 'private' GitHub repository are checked-out at the latest commit SHA hash value.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0$ cd git/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0/git$ ls
+Makefile  program  program.c  README.md
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0/git$ cat Makefile
+=> CFLAGS = -g -Wall -DUSE_SYSCALL
+
+=> TARGET = program
+
+=> all: $(TARGET)
+
+=>	$(TARGET): $(TARGET).c
+=>		$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) $(TARGET).c
+
+=>	clean:
+		rm -f $(TARGET)
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0/git$ cat program.c
+=> #include <stdio.h>
+
+=> int main()
+=> {
+=> 	printf ("Hello World from Remote Private Git Repository!\n");
+=> 	return 0;
+=> }
+prabhat_kiran@coldstone:~/Documents/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0/git$ git log --pretty=format:"%H"
+5243001935f3ee1bba70be9ec9da9944c332d8b3 <--- This is the latest commit SHA hash value of the 'private' GitHub repository.
+0baf02436b1c2dc7569ac543330b438dade9e7c6
+82bf8a5683f6cf3b54bf2b0fe0cfe9ac9e56bcba
+b7e8ca868c2666699dab801b2eba471d49077805
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-private-git/0.1-r0/git$ git branch
+* master
