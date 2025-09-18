@@ -1,0 +1,48 @@
+Quick Build of Recipe for ARM Architecture with Remote Private Git Source:
+==========================================================================
+
+1. For building the Image for ARM Architecture instead of the Intel (x86) Architecture, the changes shall be made to the 'local.conf' file in the 'build/conf' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> MACHINE ?= "qemuarm"
+=> #MACHINE ?= "qemux86-64"
+
+2. The Layer directory should be created for the the BitBake to pick it up during the Build. The 'bitbake-layers' command is used to create and add the compatible Layer.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers create-layer ../meta-layer
+NOTE: Starting bitbake server...
+Add your new layer with 'bitbake-layers add-layer /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer'
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers add-layer ../meta-layer
+NOTE: Starting bitbake server...
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers show-layers
+NOTE: Starting bitbake server...
+layer                 path                                      priority
+==========================================================================
+meta                  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta   5
+meta-poky             /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-poky  5
+meta-yocto-bsp        /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-yocto-bsp  5
+meta-layer            /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer  5
+
+3. The Recipe file must be placed in the Layer structure in such a way that the BitBake is able to pick them up during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer$ ls
+conf  COPYING.MIT  README  recipes-example
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer$ cd recipes-example/
+
+---> It is important to note that the name of the Recipe folder must match with the name of the Recipe file name being used to Build the SW.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ mkdir hello-private-git
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ ls
+example  hello-private-git
+
+4. Include the Recipe file in the Recipe folder i.e. 'hello-private-git' for the BitBake to be able to read it during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-private-git/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-private-git$ vi hello-private-git_0.1.bb
+---> Add the contents of the Recipe file to Build the C file kept in the remote GitHub repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-private-git$ ls
+hello-private-git_0.1.bb
+
+5. This is the final Layer directory structure which is compatible with the BitBake for the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-private-git$ cd ..
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello-private-git
+hello-private-git
+└── hello-private-git_0.1.bb
+
+0 directories, 1 file
