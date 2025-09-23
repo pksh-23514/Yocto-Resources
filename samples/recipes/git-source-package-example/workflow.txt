@@ -149,3 +149,38 @@ Running the Added Recipe Build for Local Git Repository Yocto Image on QEMU:
 5. If the C binary is present, execute the binary to verify if the expected Output is displayed.
 6. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
+
+Recipe Build for C file Using Makefile in Remote Private Git Repository:
+========================================================================
+1. The Yocto Project supports the ability to pull the source code from the remote 'private' GitHub repositories as a part of the Build process.
+2. This sample Recipe is used to Build a C file using Makefile present in an online 'private' Git repository and include it into the RootFS.
+3. Since, the source code is not a part of the Recipe directory structure, the Recipe folder would only contain a Recipe file.
+4. The Layer can be created and added to the Build system using the 'bitbake-layers' command.
+	1) Inside the Layer directory, there is a 'recipes-*' directory that shall contain the Recipes.
+5. It is important to note that the name of the Recipe folder must match with the name of the Recipe file name being used to Build the SW.
+6. The Recipe file must be created inside the Recipe folder as per the path pointed to by the 'BBFILES' variable.
+7. On the Host Machine, the SSH key pair must be generated and the 'public' SSH key must be added to the GitHub account. This is mandatory for using the SSH cloning option.
+8. The contents of the Recipe file must provide:
+	1) The 'SRC_URI' variable must point to the 'private' GitHub repository along with the various options like 'protocol', 'branch', 'rev', 'tag' etc.
+	2) In the 'git://' Fetcher, the SSH link of the 'private' GitHub repository must be specified in place of the URL of the GitHub repository.
+	3) The 'protocol' option must be specified as 'ssh' in place of 'https' as the sources are on the 'private' remote GitHub repository.
+	4) The 'git://' Fetcher fetches the code from the GitHub and clones it into the directory controlled by the 'GITDIR' variable.
+		=> GITDIR = "${TOPDIR}/downloads/git2"
+	5) This local clone from the 'GITDIR' directory is then cloned into the Recipe 'WORKDIR' during the 'do_unpack' Task when a specific Tree is checked-out.
+	6) The 'SRCREV' variable is mandatory to be provided in the Recipe file. Otherwise, the Build would throw an error of Fetcher failure.
+	7) The BitBake uses this variable to determine the specific revision of the source to be used in the Build.
+		=> SRCREV = "${AUTOREV}" or "<Full-Git-Commit-SHA-hash-value>"
+		---> The 'AUTOREV' variable specifies to use the latest revision of the source in the repository.
+		---> The '<Full-Git-Commit-SHA-hash-value>' specifies to use a particular revision of the source in the repository.
+	8) The 'S' variable must be set to the '${WORKDIR}/git' value.
+	9) The 'do_compile' Task is optional as by default the BitBake starts the 'make' command to Compile the SW.
+	10) If there is any additional 'make' options, they can be stored in 'EXTRA_OEMAKE' or 'PACKAGECONFIG_CONFARGS' variables.
+	11) The BitBake passes these options into the GNU 'make' invocation.
+	12) The 'do_install' Task is still required in the Recipe file.
+9. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+10. The list of Tasks to be performed during the Build of this Recipe can be checked using the 'bitbake -c listtasks' command.
+11. The various OpenEmbedded Build system variable values can be checked in the BitBake Environment using the 'bitbake -e' command.
+12. After the Build is successful, the 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+	1) In the 'S' variable controlled directory, the contents of the 'private' GitHub repository are checked-out at the latest commit SHA hash value.
+	2) The final binary produced by the Recipe Build is also present in this directory.
+13. In the 'GITDIR' directory, the local clone of the GitHub repository is present.
