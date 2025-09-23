@@ -184,3 +184,13 @@ Recipe Build for C file Using Makefile in Remote Private Git Repository:
 	1) In the 'S' variable controlled directory, the contents of the 'private' GitHub repository are checked-out at the latest commit SHA hash value.
 	2) The final binary produced by the Recipe Build is also present in this directory.
 13. In the 'GITDIR' directory, the local clone of the GitHub repository is present.
+
+Including the Recipe Build for Remote Private Git Repository into the Image:
+============================================================================
+1. Even if the Recipe Build is successful, it would not automatically be included as a part of the Image.
+2. The Recipe must be added to the Image Recipe file for it to be included in the Image Build.
+3. This can be done by appending the 'IMAGE_INSTALL' variable in the Image Recipe file.
+	=> IMAGE_INSTALL:append = " package-name"
+	---> The 'package-name' is normally extracted from the Recipe file name.
+4. Once the Image Recipe file is updated, the Image Build command can be executed.
+5. After the Image Build is successful, the Image can be tested on the Target Device for verifying the Recipe addition.
