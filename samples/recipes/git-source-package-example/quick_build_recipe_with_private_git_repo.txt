@@ -36,6 +36,9 @@ example  hello-private-git
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-private-git/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-private-git$ vi hello-private-git_0.1.bb
 ---> Add the contents of the Recipe file to Build the C file kept in the remote GitHub repository.
+---> In the 'SRC_URI' variable, the SSH of the 'private' GitHub repository must be specified. However, the SSH link must be modified for the BitBake to parse it correctly.
+---> The 'git://' Fetcher must be specified with the SSH link of the 'private' GitHub repository. Any identifier ':' in the SSH link must be replaced by '/'.
+---> The 'protocol' option must be specified as 'ssh' for the 'private' remote GitHub repository.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-private-git$ ls
 hello-private-git_0.1.bb
 
