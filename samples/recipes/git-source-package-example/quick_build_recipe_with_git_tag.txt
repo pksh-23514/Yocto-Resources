@@ -111,3 +111,44 @@ NOTE: Writing buildhistory took: 2 seconds
 Summary: 1 task failed:
   /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb:do_fetch
 Summary: There was 1 ERROR message, returning a non-zero exit code.
+
+8. To remove all the files and directories generated during the Build, the 'cleanall' command of the BitBake can be used. However, that would fail with the floating Tag error.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c cleanall hello-remote-git
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1778 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 985 .bb files complete (982 cached, 3 parsed). 1780 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 0 (0% match, 0% complete)
+NOTE: No setscene tasks
+NOTE: Executing Tasks
+ERROR: hello-remote-git-0.1-r0 do_cleanall: Fetcher failure: Recipe uses a floating tag/branch 'v1.0.0' for repo 'github.com/prabhat_kiran/hello-world.git' without a fixed SRCREV
+ERROR: Logfile of failure stored in: /home/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/temp/log.do_cleanall.4123698
+ERROR: Task (/home/.../Poky/poky/meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb:do_cleanall) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb:do_cleanall
+Summary: There was 1 ERROR message, returning a non-zero exit code.
