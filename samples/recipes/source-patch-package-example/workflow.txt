@@ -1,0 +1,18 @@
+Modifying the Sources in Recipe Work Directory for Recipe Build:
+================================================================
+1. The Yocto Project always uses everything from the sources to Build the Recipe.
+2. The most simple way to make changes in the sources for it to get Built is:
+	1) In the 'WORKDIR' directory of the Recipe, all the work done during the Build is stored.
+	2) Depending on the way the sources are fetched during the Build, they are either stored in the 'WORKDIR' directory or a sub-directory of the 'WORKDIR' directory.
+	3) In the sources, apply the modifications required to be Build.
+3. After the sources are modified, if the Build command is executed for the Recipe, it is observed that there is no Task executed for the Recipe Build.
+	1) Since, the sources are modified directly in the 'WORKDIR' directory, the BitBake is not aware that the sources have been modified.
+	2) Therefore, the BitBake understands there is no change to the Build and it finishes the Recipe Build instantly without executing any Tasks.
+4. To include these modifications in the Recipe Build, the BitBake has to be forced to execute the necessary Tasks.
+	=> bitbake -c CMD -f [recipe-name]
+	---> The '-c CMD' option specifies the Task to be executed. Generally, the 'CMD' should be 'compile' to execute the 'do_compile' Task on the modifications.
+	---> The '-f' option is used to force the BitBake to execute the Task.
+5. After the execution of the Build command with the above options, the modifications are picked up by the BitBake during the Recipe Build.
+6. However, this way to implement the modifications to the sources is problematic.
+	1) The major disadvantage is the modifications can be lost if the Recipe Build is cleaned using the 'bitbake -c cleanall' command.
+	2) The second issue with this method is the BitBake has to be forced to execute the Tasks as it is not aware about the changes done to the sources.
