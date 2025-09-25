@@ -223,3 +223,10 @@ Recipe Build for C file Using Makefile in Remote Git Repository with Git Release
 	2) The error of conflicting revisions provided in the form of Tag and from the 'SRCREV' variable.
 	3) Although, the revisions provided by the Tag and the 'SRCREV' variable is same, still the BitBake is treating them as different revisions causing the conflict.
 6. The Recipe file must be updated by commenting the 'SRCREV' variable in the Recipe file in order to resolve the Build error of conflicting revisions.
+7. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+	1) The Recipe Build throws the BitBake Fetcher error during the 'do_fetch' Task of the Recipe:
+		=> FetchError("Recipe uses a floating tag/branch 'v1.0.0' for repo 'github.com/prabhat_kiran/hello-world.git' without a fixed SRCREV 
+		=> yet doesn't call bb.fetch2.get_srcrev()
+		=> (use SRCPV in PV for OE).", None)
+	2) The error of conflicting revisions is resolved but still the BitBake is not able to Build the Recipe successfully.
+8. This behavior is observed for both the Lightweight and the Annotated Tags.
