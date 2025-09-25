@@ -205,3 +205,21 @@ Running the Added Recipe Build for Remote Private Git Repository Yocto Image on 
 5. If the C binary is present, execute the binary to verify if the expected Output is displayed.
 6. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
+
+Recipe Build for C file Using Makefile in Remote Git Repository with Git Release Tag Value:
+===========================================================================================
+1. The Tag is a reference to a specific point in the history of a Git repository (local or remote). They are commonly used to mark the Release versions of the repository.
+2. There are 2 types of Tags:
+	1) Lightweight Tag => It is just a name pointing to a particular commit. It is just like an immovable branch.
+	2) Annotated Tag => It contains the information like Tagger name, Tag date and Tag message. It is stored as a full Git Object. It is the recommended method.
+3. The BitBake would fetch the 'master' branch of the GitHub repository as a default.
+	1) However, the Tags have complete Release information including the full commit SHA hash value and the branch name.
+	2) Therefore, it is not logical to provide the 'branch' option in the 'SRC_URI' variable.
+4. There is no change to the Recipe file or folder apart from updating the 'SRC_URI' variable in the Recipe file.
+	1) For observational purpose, the 'SRCREV' variable is updated to the full commit SHA hash value pointed by the Tag.
+5. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+	1) The Recipe Build throws the BitBake Fetcher error during the 'do_fetch' Task of the Recipe:
+		=> FetchError('Conflicting revisions (edb0eb4ab1f2eb685ea18b6d14413afcff598891 from SRCREV and v1.0.0 from the url) found, please specify one valid value', None)
+	2) The error of conflicting revisions provided in the form of Tag and from the 'SRCREV' variable.
+	3) Although, the revisions provided by the Tag and the 'SRCREV' variable is same, still the BitBake is treating them as different revisions causing the conflict.
+6. The Recipe file must be updated by commenting the 'SRCREV' variable in the Recipe file in order to resolve the Build error of conflicting revisions.
