@@ -235,3 +235,19 @@ Recipe Build for C file Using Makefile in Remote Git Repository with Git Release
 	=> yet doesn't call bb.fetch2.get_srcrev()
 	=> (use SRCPV in PV for OE).
 	2) Therefore, the Recipe Build cannot be cleaned without manually removing the Recipe Build 'WORKDIR' directory.
+
+Important Considerations in Recipe Build with Git Release Tag Value:
+********************************************************************
+1. Deterministic Build:
+	1) Although the use of Tags are convinient, it is highly recommended to use a fixed 'SRCREV' value for the Build.
+	2) For the Build to be deterministic, the full commit SHA hash value which the Tag points to can be used in the Recipe.
+	3) This ensures that even if the Tag is moved or deleted in the Git repository, the Build remains consistent.
+2. Floating reference:
+	1) The Tags are considered as floating references in the context of the 'SRC_URI' variable.
+	2) The reason being the Tag can be moved to point to a different commit SHA hash value that can cause the Build to behave differently.
+	3) If the 'tag' option is used in the 'SRC_URI' variable, the BitBake throws the error of using a floating branch.
+3. Reproducible Build:
+	1) The BitBake requires a fixed 'SRCREV' value for a reproducible Build.
+	2) If the Tag is used in the Recipe, it becomes ambiguous due to the non-deterministic nature of the Tag.
+	3) Therefore, the latest Releases of the BitBake are not accepting the usage of Tags in the Recipe.
+4. The conclusion is to always use the full commit SHA hash value and the 'branch' option to determine the sources revision to be used in the Recipe Build.
