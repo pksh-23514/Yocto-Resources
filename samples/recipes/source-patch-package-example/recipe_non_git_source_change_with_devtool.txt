@@ -87,3 +87,15 @@ appends  conf  README  sources
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace$ cd sources/hello
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello$ ls -a
 .  ..  .git  hello.c  hello.h  oe-local-files  source-date-epoch
+
+6. The source C file can be modified in the 'workspace/sources/hello' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello$ vi hello.c
+=> ...
+=> void display()
+=> {
+=> 	printf ("Function updated using 'devtool' command!\n");
+=> }
+
+7. This change in the 'workspace/sources/hello' directory cannot be tracked as the original Recipe sources is not a Git repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello$ git diff
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello$
