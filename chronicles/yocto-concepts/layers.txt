@@ -40,7 +40,7 @@ Types of Layers:
 
 5. Tool or SDK Layers:
 	1) They are used to provide support for enhancing the development tools or SDK support.
-	2) The 'meta-devtools' and 'meta-sdk' can be considered as the Tool Layers. They include tooling like extensible SDK etc.
+	2) The 'meta-devtools' and 'meta-sdk' can be considered as the Tool Layers. They include tooling like Extensible SDK etc.
 
 6. User-Interface or Graphical Layers:
 	1) They are used to provide support for adding the graphical Environments or User-Interfaces to the custom Linux Image.
