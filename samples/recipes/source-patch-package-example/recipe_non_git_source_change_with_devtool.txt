@@ -301,6 +301,12 @@ hello
 
 1 directory, 3 files
 
+17. Alternatively, the Recipe can be removed from the 'workspace' Layer by using the 'devtool reset' command in the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool reset hello
+NOTE: Starting bitbake server...
+INFO: Cleaning sysroot for recipe hello...
+INFO: Leaving source tree /home/prabhat_kiran/.../Poky/poky/build/workspace/sources/hello as-is; if you no longer need it then please delete it manually
+
 18. The 'workspace' Layer needs to be manually deleted from the Build directory.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello$ cd ../../../build/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ls
