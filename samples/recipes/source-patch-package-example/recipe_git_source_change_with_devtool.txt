@@ -217,3 +217,49 @@ Parsing recipes: 100% |#########################################################
 Parsing of 986 .bb files complete (982 cached, 4 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
 INFO: Adding new patch 0001-Updated-the-C-File.patch
 INFO: Updating recipe hello-git-tag_0.1.bb
+
+14. The Recipe folder can be checked and verified for the changes to be modified in the Recipe sources directly.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello-git-tag
+hello-git-tag
+├── hello-git-tag
+│   └── 0001-Updated-the-C-File.patch
+└── hello-git-tag_0.1.bb
+
+1 directory, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cat hello-git-tag/hello-git-tag_0.1.bb
+DESCRIPTION = "A sample C-program from a Remote Git Repository"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+SRC_URI = "git://github.com/prabhat_kiran/hello-world.git;branch=master;protocol=https \
+           file://0001-Updated-the-C-File.patch \
+           "
+SRCREV = "${AUTOREV}"
+
+S = "${WORKDIR}/git"
+
+do_install() {
+    install -d ${D}${bindir}
+    install -m 0755 program ${D}${bindir}
+}
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cat hello-git-tag/hello-git-tag/0001-Updated-the-C-File.patch
+From 918d4eb22616951bfd0f226daf451744a8058681 Mon Sep 17 00:00:00 2001
+From: prabhat_kiran <prabhat_kiran@github.com>
+Date: Fri, 26 Sep 2025 17:07:23 +0530
+Subject: [PATCH] Updated the C File
+
+---
+ program.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/program.c b/program.c
+index 6cee723..0a11853 100644
+--- a/program.c
++++ b/program.c
+@@ -3,5 +3,6 @@
+ int main()
+ {
+	printf ("Hello World from Remote Git Repository!\n");
++	printf ("Program updated using 'devtool' command!\n");
+	return 0;
+ }
