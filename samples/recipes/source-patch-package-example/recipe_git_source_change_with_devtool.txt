@@ -282,3 +282,13 @@ Parsing of 986 .bb files complete (982 cached, 4 parsed). 1781 targets, 159 skip
 INFO: Updating patch 0001-Updated-the-C-File.patch
 INFO: Cleaning sysroot for recipe hello-git-tag...
 INFO: Leaving source tree /home/prabhat_kiran/.../Poky/poky/build/workspace/sources/hello-git-tag as-is; if you no longer need it then please delete it manually
+
+16. The Recipe folder can be checked and verified for the changes to be modified in the Recipe sources directly after the 'devtool finish' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/recipes-example/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello-git-tag
+hello-git-tag
+├── hello-git-tag
+│   └── 0001-Updated-the-C-File.patch
+└── hello-git-tag_0.1.bb
+
+1 directory, 2 files
