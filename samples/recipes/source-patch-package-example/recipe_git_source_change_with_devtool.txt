@@ -197,3 +197,11 @@ debugsources.list         image    packages-split  pkgdata-pdata-input  pseudo  
 deploy-source-date-epoch  package  pkgdata         pkgdata-sysroot      recipe-sysroot  source-date-epoch      temp
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0$ ls image/usr/bin/
 program
+
+12. Since, the changes made to the sources are being tracked by the Git, they must be committed to the 'workspace/sources/hello-git-tag' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd workspace/sources/hello-git-tag/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ git add program.c
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ git commit -m "Updated the C File"
+[devtool 918d4eb] Updated the C File
+ 1 file changed, 1 insertion(+)
