@@ -227,7 +227,8 @@ Parsing of 986 .bb files complete (981 cached, 5 parsed). 1781 targets, 159 skip
 NOTE: Writing append file /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/hello_0.1.bbappend
 NOTE: Copying hello.c to /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/hello/hello.c
 
-14. The Recipe folder can be checked and verified for the changes to be modified in the Recipe sources directly.
+14. The Recipe folder can be checked and verified for the changes to be modified in the Recipe sources.
+---> If the 'devtool update-recipe' command is executed, the original Recipe sources in the corresponding Meta-Layer are modified directly.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/recipes-example/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello
 hello
@@ -237,7 +238,29 @@ hello
 └── hello_0.1.bb
 
 1 directory, 3 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello$ vi files/hello.c
+=> #include <stdio.h>
+=> ...
+=> void display()
+=> {
+=> 	printf ("Function updated using 'devtool' command!\n");
+=> }
+---> If the 'devtool update-recipe -a' command is executed, the Recipe folder in the command-specified Meta-Layer contains the updated sources and the Recipe's Append file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/recipes-example/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello
+hello
+├── files
+│   ├── hello.c
+│   └── hello.h
+├── hello
+│   └── hello.c
+├── hello_0.1.bb
+└── hello_0.1.bbappend
+
+2 directories, 5 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello$ vi hello/hello.c
 => #include <stdio.h>
 => ...
 => void display()
