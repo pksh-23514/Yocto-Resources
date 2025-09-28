@@ -215,6 +215,18 @@ Removing 1 recipes from the cortexa15t2hf-neon sysroot: 100% |##################
 Removing 1 recipes from the qemuarm sysroot: 100% |################################################################################################################| Time: 0:00:00
 INFO: Updating file hello.c
 
+13. Alternatively, the final changes can be put in form of the Append file to be applied by any Layer by using the 'devtool update-recipe -a' command in the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool update-recipe -a ../meta-layer/ hello
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)...
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 986 .bb files complete (981 cached, 5 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Writing append file /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/hello_0.1.bbappend
+NOTE: Copying hello.c to /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello/hello/hello.c
+
 14. The Recipe folder can be checked and verified for the changes to be modified in the Recipe sources directly.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/recipes-example/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello
