@@ -107,3 +107,10 @@ hello-local-git
 └── hello-local-git_0.1.bb
 
 1 directory, 3 files
+
+8. To remove all the files and directories generated during the Build, the 'cleanall' command of the BitBake can be used. However, the 'WORKDIR' directory is still present.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd ../../build/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c cleanall hello-local-git
+...
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ rm -rf *
