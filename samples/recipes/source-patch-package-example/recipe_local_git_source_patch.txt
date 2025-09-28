@@ -9,7 +9,7 @@ hello-local-git
 
 0 directories, 1 file
 
-2. The 'WORKDIR' directory has to be fetched to modify the sources and generating the Patch file.
+2. The 'WORKDIR' directory has to be fetched to modify the sources and to generate the Patch file.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-local-git | grep ^WORKDIR=
 WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0"
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0
@@ -65,3 +65,19 @@ index f8b9b47..6d58119 100644
 +{
 +       printf ("Patched the Source!\n");
 +}
+
+5. Since, the changes made to the sources are being tracked by the Git, they must be committed to the 'git' directory to generate the Patch file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git add program.c
+prabhat_kiran@coldstone:~/Documents/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git commit -m "Updated the C File"
+[master 54d16f4] Updated the C File
+ 1 file changed, 7 insertions(+)
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git add program.h
+prabhat_kiran@coldstone:~/Documents/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git commit -m "Added the Header File"
+[master 4c42639] Added the Header File
+ 1 file changed, 1 insertion(+)
+ create mode 100644 program.h
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git format-patch -2 HEAD
+0001-Updated-the-C-File.patch
+0002-Added-the-Header-File.patch
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ ls
+0001-Updated-the-C-File.patch  0002-Added-the-Header-File.patch  Makefile  program  program.c  program.h
