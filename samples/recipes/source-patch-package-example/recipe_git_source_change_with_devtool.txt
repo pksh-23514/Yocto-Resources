@@ -302,3 +302,12 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ r
 18. The path to the 'workspace' directory needs to be manually deleted from the 'conf/bblayers.conf' file.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
 => Remove the 'workspace' directory path from the 'BBLAYERS' variable.
+
+19. After the Recipe file is modified, on the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-git-tag
+...
+
+20. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0$ ls
+...
