@@ -28,3 +28,40 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 ---> Add the contents of the Header file to be Built using the Recipe.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ ls
 Makefile  program  program.c  program.h
+
+4. These changes in the 'git' directory can be tracked on the 'master' branch of the Git repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   program.c
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	program
+	program.h
+
+no changes added to commit (use "git add" and/or "git commit -a")
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ git diff
+diff --git a/program.c b/program.c
+index f8b9b47..6d58119 100644
+--- a/program.c
++++ b/program.c
+@@ -1,7 +1,14 @@
+ #include <stdio.h>
++#include "program.h"
+
+ int main()
+ {
+        printf ("Hello World from Local Git Repository!\n");
++       display();
+        return 0;
+ }
++
++void display()
++{
++       printf ("Patched the Source!\n");
++}
