@@ -81,3 +81,29 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 0002-Added-the-Header-File.patch
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ ls
 0001-Updated-the-C-File.patch  0002-Added-the-Header-File.patch  Makefile  program  program.c  program.h
+
+6. Move the Patch files from the 'git' directory to the Recipe folder in the corresponding Meta-Layer.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/.../hello-local-git/0.1-r0/git$ cp *.patch ../../../../../../../meta-layer/recipes-example/hello-local-git/files/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ rm *.patch program.h
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ ls
+Makefile  program  program.c
+
+7. Update the Recipe file in the Recipe folder to include the Patch files in the Recipe Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ cd ../../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/recipes-example/hello-local-git/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ vi hello-local-git_0.1.bb
+=> ...
+=> SRC_URI = "git:///home/prabhat_kiran/hello-world;branch=master;protocol=file \
+=>     file://0001-Updated-the-C-File.patch \
+=>     file://0002-Added-the-Header-File.patch \
+=> "
+=> ...
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git$ cd ..
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello-local-git
+hello-local-git
+├── files
+│   ├── 0001-Updated-the-C-File.patch
+│   └── 0002-Added-the-Header-File.patch
+└── hello-local-git_0.1.bb
+
+1 directory, 3 files
