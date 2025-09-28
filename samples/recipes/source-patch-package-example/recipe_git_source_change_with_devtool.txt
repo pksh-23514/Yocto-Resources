@@ -107,3 +107,67 @@ index 6cee723..0a11853 100644
 +       printf ("Program updated using 'devtool' command!\n");
         return 0;
  }
+
+8. The changes made to the Recipe sources can be tested by using the 'devtool build' command in the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources$ cd ../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool build hello-git-tag
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)...
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 986 .bb files complete (982 cached, 4 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:02
+Loaded 1777 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 986 .bb files complete (982 cached, 4 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+workspace            = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:01
+Sstate summary: Wanted 4 Local 0 Mirrors 0 Missed 4 Current 147 (0% match, 97% complete)
+NOTE: Executing Tasks
+NOTE: hello-git-tag: compiling from external source tree /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag
+NOTE: Tasks Summary: Attempted 631 tasks of which 623 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+
+9. The files and directories can be checked in the 'workspace' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ tree workspace
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ tree workspace
+workspace
+├── appends
+│   └── hello-git-tag_0.1.bbappend
+├── conf
+│   └── layer.conf
+├── README
+└── sources
+    └── hello-git-tag
+        ├── LICENSE
+        ├── Makefile
+        ├── oe-logs -> /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0/temp
+        ├── oe-workdir -> /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0
+        ├── program
+        ├── program.c
+        └── README.md
+
+6 directories, 8 files
