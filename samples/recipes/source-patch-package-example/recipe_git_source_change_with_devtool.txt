@@ -79,3 +79,31 @@ workspace
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd workspace/sources/hello-git-tag/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ ls -a
 .  ..  .git  LICENSE  Makefile  program.c  README.md
+
+6. The source C file can be modified in the 'workspace/sources/hello-git-tag' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ vi program.c
+=> ...
+=> 	printf ("Program updated using 'devtool' command!\n");
+=> ...
+
+7. This change in the 'workspace/sources/hello-git-tag' directory can be tracked on the 'devtool' branch as the original Recipe sources is a Git repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ git status
+On branch devtool
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   program.c
+
+no changes added to commit (use "git add" and/or "git commit -a")
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ git diff
+diff --git a/program.c b/program.c
+index 6cee723..0a11853 100644
+--- a/program.c
++++ b/program.c
+@@ -3,5 +3,6 @@
+ int main()
+ {
+        printf ("Hello World from Remote Git Repository!\n");
++       printf ("Program updated using 'devtool' command!\n");
+        return 0;
+ }
