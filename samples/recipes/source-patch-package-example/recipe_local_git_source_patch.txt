@@ -1,0 +1,30 @@
+Patching Local Git Sources using Git Command for Recipe Build:
+==============================================================
+
+1. The existing Recipe local Git repository can be modified by using a Patch file in the Recipe Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/recipes-example/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello-local-git
+hello-local-git
+└── hello-local-git_0.1.bb
+
+0 directories, 1 file
+
+2. The 'WORKDIR' directory has to be fetched to modify the sources and generating the Patch file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-local-git | grep ^WORKDIR=
+WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ ls
+configure.sstate   deploy-ipks               git                   license-destdir  pkgdata              pseudo                 source-date-epoch
+debugsources.list  deploy-rpms               hello-local-git.spec  package          pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
+deploy-debs        deploy-source-date-epoch  image                 packages-split   pkgdata-sysroot      recipe-sysroot-native  temp
+
+3. The sources can be modified in the 'git' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ cd git/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ ls
+Makefile  program  program.c
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ vi program.c
+---> Update the contents of the C file for generating the Patch file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ vi program.h
+---> Add the contents of the Header file to be Built using the Recipe.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0/git$ ls
+Makefile  program  program.c  program.h
