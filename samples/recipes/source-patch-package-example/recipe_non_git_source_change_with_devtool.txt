@@ -265,3 +265,13 @@ hello
 └── hello_0.1.bb
 
 1 directory, 3 files
+
+18. The 'workspace' Layer needs to be manually deleted from the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello$ cd ../../../build/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ ls
+bitbake-cookerdaemon.log  buildhistory  cache  conf  deploy-ti  downloads  pn-buildlist  sstate-cache  task-depends.dot  tmp  workspace
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ rm -rf workspace/
+
+19. The path to the 'workspace' directory needs to be manually deleted from the 'conf/bblayers.conf' file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
+=> Remove the 'workspace' directory path from the 'BBLAYERS' variable.
