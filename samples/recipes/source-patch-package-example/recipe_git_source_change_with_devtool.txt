@@ -205,3 +205,15 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/wo
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ git commit -m "Updated the C File"
 [devtool 918d4eb] Updated the C File
  1 file changed, 1 insertion(+)
+
+13. After committing the changes, the original Recipe sources in the corresponding Meta-Layer can be updated by using the 'devtool update-recipe' command in the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool update-recipe hello-git-tag
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)...
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 986 .bb files complete (982 cached, 4 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
+INFO: Adding new patch 0001-Updated-the-C-File.patch
+INFO: Updating recipe hello-git-tag_0.1.bb
