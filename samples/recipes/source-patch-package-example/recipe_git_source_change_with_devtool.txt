@@ -1,0 +1,81 @@
+Modifying Git Sources using 'devtool' Command for Recipe Build:
+===============================================================
+
+1. The existing Recipe Git sources can be modified by using the 'devtool' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/recipes-example/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello-git-tag
+hello-git-tag
+└── hello-git-tag_0.1.bb
+
+1 directory, 1 file
+
+2. The Recipe Git sources can be fetched and unpacked in the 'workspace' Layer directory by using the 'devtool modify' command in the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool modify hello-git-tag
+NOTE: Starting bitbake server...
+INFO: Creating workspace layer in /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace
+NOTE: Reconnecting to bitbake server...
+NOTE: Previous bitbake instance shutting down?, waiting to retry...
+NOTE: Retrying server connection (#1)...
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 986 .bb files complete (981 cached, 5 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+workspace            = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 20 (0% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+INFO: Source tree extracted to /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag
+INFO: Using source tree as build directory since that would be the default for this recipe
+INFO: Recipe hello-git-tag now set up to build from /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag
+
+3. The 'workspace' Layer is included in the 'conf/bblayers.conf' file of the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/bblayers.conf
+=> BBLAYERS ?= " \
+=> ...
+=>   /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace \
+=> ...
+
+4. The files and directories can be checked in the 'workspace' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ tree workspace
+workspace
+├── appends
+│   └── hello-git-tag_0.1.bbappend
+├── conf
+│   └── layer.conf
+├── README
+└── sources
+    └── hello-git-tag
+        ├── LICENSE
+        ├── Makefile
+        ├── program.c
+        └── README.md
+
+4 directories, 7 files
+
+5. The 'hello-git-tag' Recipe folder contains all the Git sources fetched which is present in the 'workspace/sources' directory. It is already a Git repository.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd workspace/sources/hello-git-tag/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ ls -a
+.  ..  .git  LICENSE  Makefile  program.c  README.md
