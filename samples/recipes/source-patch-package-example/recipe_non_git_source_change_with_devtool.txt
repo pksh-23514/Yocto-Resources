@@ -200,3 +200,17 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 => {
 => 	printf ("Function updated using 'devtool' command!\n");
 => }
+
+12. The final changes can be updated in the original Recipe sources in the corresponding Meta-Layer by using the 'devtool update-recipe' command in the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool update-recipe hello
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)...
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 986 .bb files complete (981 cached, 5 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
+Removing 1 recipes from the cortexa15t2hf-neon sysroot: 100% |#####################################################################################################| Time: 0:00:01
+Removing 1 recipes from the qemuarm sysroot: 100% |################################################################################################################| Time: 0:00:00
+INFO: Updating file hello.c
