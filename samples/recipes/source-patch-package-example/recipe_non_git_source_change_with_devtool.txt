@@ -165,3 +165,37 @@ workspace
             └── __source_date_epoch.txt
 
 8 directories, 9 files
+
+10. The final Cross-Compiled C file binary is also kept in the 'workspace/sources/hello' directory. This file is newly added and tracked by the Git.
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build$ cd workspace/sources/hello/
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build/workspace/sources/hello$ ls -a
+.  ..  .git  hello  hello.c  hello.h  oe-local-files  oe-logs  oe-workdir  source-date-epoch
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build/workspace/sources/hello$ git status
+On branch devtool
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	hello
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+11. The 'WORKDIR' directory used by the 'devtool' command can be checked for the changes made to the sources can be verified.
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build/workspace/sources/hello$ cd ../../../
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ ls
+debugsources.list         hello.c  image    packages-split  pkgdata-pdata-input  pseudo          recipe-sysroot-native  sysroot-destdir
+deploy-source-date-epoch  hello.h  package  pkgdata         pkgdata-sysroot      recipe-sysroot  source-date-epoch      temp
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello/0.1-r0$ cat hello.c
+=> #include <stdio.h>
+=> #include "hello.h"
+
+=> int main()
+=> {
+=> 	printf ("Hello World!\n");
+=> 	display();
+=> 	return 0;
+=> }
+
+=> void display()
+=> {
+=> 	printf ("Function updated using 'devtool' command!\n");
+=> }
