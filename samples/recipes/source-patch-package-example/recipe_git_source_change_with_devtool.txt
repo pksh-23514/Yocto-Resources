@@ -263,3 +263,22 @@ index 6cee723..0a11853 100644
 +	printf ("Program updated using 'devtool' command!\n");
 	return 0;
  }
+
+15. The modifications made to the Recipe sources in the 'workspace' Layer can be finished by using the 'devtool finish' command in the Build directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool finish hello-git-tag meta-layer
+NOTE: Starting bitbake server...
+ERROR: Source tree is not clean:
+
+?? program
+
+Ensure you have committed your changes or use -f/--force if you are sure there's nothing that needs to be committed
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool finish -f hello-git-tag meta-layer
+NOTE: Starting bitbake server...
+WARNING: Source tree is not clean, continuing as requested by -f/--force
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 986 .bb files complete (982 cached, 4 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
+INFO: Updating patch 0001-Updated-the-C-File.patch
+INFO: Cleaning sysroot for recipe hello-git-tag...
+INFO: Leaving source tree /home/prabhat_kiran/.../Poky/poky/build/workspace/sources/hello-git-tag as-is; if you no longer need it then please delete it manually
