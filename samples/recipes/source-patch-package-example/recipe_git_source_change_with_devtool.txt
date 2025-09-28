@@ -171,3 +171,29 @@ workspace
         └── README.md
 
 6 directories, 8 files
+
+10. The final Cross-Compiled C file binary is also kept in the 'workspace/sources/hello-git-tag' directory. This file is newly added and tracked by the Git.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd workspace/sources/hello-git-tag/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ ls -a
+.  ..  .git  LICENSE  Makefile  oe-logs  oe-workdir  program  program.c  README.md
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ git status
+On branch devtool
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   program.c
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	program
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+11. The 'WORKDIR' directory used by the 'devtool' command can be checked for the changes made to the sources can be verified.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/workspace/sources/hello-git-tag$ cd ../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0$ ls
+debugsources.list         image    packages-split  pkgdata-pdata-input  pseudo          recipe-sysroot-native  sysroot-destdir
+deploy-source-date-epoch  package  pkgdata         pkgdata-sysroot      recipe-sysroot  source-date-epoch      temp
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-git-tag/0.1-r0$ ls image/usr/bin/
+program
