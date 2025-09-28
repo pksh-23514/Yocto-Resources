@@ -7,7 +7,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 hello-git-tag
 └── hello-git-tag_0.1.bb
 
-1 directory, 1 file
+0 directories, 1 file
 
 2. The Recipe Git sources can be fetched and unpacked in the 'workspace' Layer directory by using the 'devtool modify' command in the Build directory.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ devtool modify hello-git-tag
