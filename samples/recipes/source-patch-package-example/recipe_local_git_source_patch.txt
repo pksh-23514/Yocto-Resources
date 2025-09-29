@@ -171,6 +171,8 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 => DEBUG: Python function do_qa_patch finished
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ ls git/
 Makefile  patches  program  program.c  program.h
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ ls git/patches
+0001-Updated-the-C-File.patch  0002-Added-the-Header-File.patch  series
 
 12. The Recipe must be appended to the 'IMAGE_INSTALL' variable of the Image Recipe for it to be included in the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-local-git/0.1-r0$ cd ../../../../../
