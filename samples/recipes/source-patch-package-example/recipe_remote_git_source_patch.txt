@@ -165,3 +165,21 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 0001-Updated-the-C-File.patch     debugsources.list  deploy-rpms               hello-remote-git.spec  package         pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
 0002-Added-the-Header-File.patch  deploy-debs        deploy-source-date-epoch  image                  packages-split  pkgdata-sysroot      recipe-sysroot-native  temp
 configure.sstate                  deploy-ipks        git                       license-destdir        pkgdata         pseudo               source-date-epoch
+
+13. The 'do_patch' Task execution log is present in the 'temp/log.do_patch' file. The modified sources can be verified in the 'git' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ vi temp/log.do_patch
+=> ...
+=> DEBUG: Searching for 0001-Updated-the-C-File.patch in paths:
+=> ...
+=>  DEBUG: Searching for 0002-Added-the-Header-File.patch in paths:
+=> ...
+=> NOTE: Applying patch '0001-Updated-the-C-File.patch' (../meta-layer/recipes-example/hello-remote-git/files/0001-Updated-the-C-File.patch)
+=> NOTE: Applying patch '0002-Added-the-Header-File.patch' (../meta-layer/recipes-example/hello-remote-git/files/0002-Added-the-Header-File.patch)
+=> DEBUG: Python function patch_do_patch finished
+=> DEBUG: Python function do_patch finished
+=> DEBUG: Executing python function do_qa_patch
+=> DEBUG: Python function do_qa_patch finished
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ ls git/
+LICENSE  Makefile  patches  program  program.c  program.h  README.md
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0$ ls git/patches
+0001-Updated-the-C-File.patch  0002-Added-the-Header-File.patch  series
