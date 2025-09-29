@@ -40,3 +40,35 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 => void display();
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ ls
 LICENSE  Makefile  program  program.c  program.h  program_orig.c  README.md
+
+4. The Patch file to an existing file can be generated using the 'git diff --no-index' command. It works on the files that are not part of a Git repository as well.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/.../hello-remote-git/0.1-r0/git$ git diff --no-index program_orig.c program.c > 0001-Updated-the-C-File.patch
+prabhat_kiran@coldstone:~/Documents/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git$ cat 0001-Updated-the-C-File.patch
+diff --git a/program_orig.c b/program.c
+index 6cee723..d054db5 100644
+--- a/program_orig.c
++++ b/program.c
+@@ -1,7 +1,14 @@
+ #include <stdio.h>
++#include "program.h"
+
+ int main()
+ {
+	printf ("Hello World from Remote Git Repository!\n");
++	display();
+	return 0;
+ }
++
++void display()
++{
++	printf ("Patched the Source!\n");
++}
+
+5. However, the generated Patch file cannot be directly used by the Recipe for patching the sources. The BitBake expects such Patch files to be a part of the Git repository.
+---> The Patch file requires certain manual changes so that the BitBake can apply them to the correct source file in their respective directory structure.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../hello-remote-git/0.1-r0/git$ vi 0001-Updated-the-C-File.patch
+=> diff --git a/program.c b/program.c  <--- The source file name must be the same in both the paths.
+=> index 6cee723..d054db5 100644
+=> --- a/program.c  <--- If this path is not directly pointing to the directory initialized as a Git repository, modify this path correctly.
+=> +++ b/program.c  <--- This path and the file name must be identical to the above specified values.
+=> ...
