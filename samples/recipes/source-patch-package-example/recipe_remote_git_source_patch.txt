@@ -72,3 +72,20 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 => --- a/program.c  <--- If this path is not directly pointing to the directory initialized as a Git repository, modify this path correctly.
 => +++ b/program.c  <--- This path and the file name must be identical to the above specified values.
 => ...
+
+6. The Patch file to add a new file can be generated using the 'diff' command. This command comes handy to generate a one-time Patch file mostly for non-Git sources.
+---> Since, there is no existing file for the 'diff' command to compare the original file with the modified file, the new file must be compared against "/dev/null".
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/.../hello-remote-git/0.1-r0/git$ diff -Nau /dev/null program.h > 0002-Added-the-Header-File.patch
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../hello-remote-git/0.1-r0/git$ cat 0002-Added-the-Header-File.patch
+=> --- /dev/null	2025-09-19 15:02:05.464228654 +0530
+=> +++ program.h	2025-09-26 22:46:56.487330159 +0530
+=> @@ -0,0 +1 @@
+=> +void display();
+
+7. However, the generated Patch file cannot be directly used by the Recipe for patching the sources. The BitBake expects such Patch files to be a part of the Git repository.
+---> The Patch file requires certain manual changes so that the BitBake can apply them to the correct source file in their respective directory structure.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../hello-remote-git/0.1-r0/git$ vi 0002-Added-the-Header-File.patch
+=> --- a/program.h 2025-09-19 15:02:05.464228654 +0530  <--- The '/dev/null' path must be modified correctly to directly point to the directory initialized as a Git repository.
+=> +++ b/program.h 2025-09-26 22:46:56.487330159 +0530  <--- This path and the file name must be identical to the above specified values.
+=> @@ -0,0 +1 @@
+=> +void display();
