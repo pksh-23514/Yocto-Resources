@@ -118,7 +118,7 @@ hello-remote-git
 
 1 directory, 3 files
 
-10. To remove all the files and directories generated during the Build, the 'cleanall' command of the BitBake can be used. However, the 'WORKDIR' directory is still present.
+10. To remove all the files and directories generated during the earlier Build, the 'cleanall' command of the BitBake can be used.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd ../../build/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c cleanall hello-remote-git
 ...
