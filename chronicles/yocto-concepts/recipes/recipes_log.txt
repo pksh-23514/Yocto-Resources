@@ -22,3 +22,22 @@ Logging the Build Tasks in Recipes:
 7. There is another single file in the 'temp' directory named as 'log.task_order'.
 	1) It is created by the BitBake to list down all the Tasks in the order they were executed for the particular Recipe.
 	2) It is used for checking the order in which the Tasks were executed and to understand why a particular Task was skipped during the Recipe Build.
+
+Logging Mechanisms in Recipes:
+==============================
+1. The Yocto Project provides several logging functions for producing debugging Output and reporting the errors or warnings.
+2. The BitBake provides the logging functions to be used in both the Python and the Shell code.
+3. The following Python logging functions are available:
+	1) bb.plain(msg) => It writes 'msg' as it is to the log file as well as to the 'stdout' i.e. printed on the Console.
+	2) bb.note(msg) => It writes 'NOTE: msg' to the log file. It can write to the 'stdout' if the BitBake is called with '-v' option.
+	3) bb.debug(level, msg) => It writes 'DEBUG: msg' to the log file. It can write to the 'stdout' if the Debug-level set during the BitBake call is greater than 'level'.
+	4) bb.warn(msg) => It writes 'WARNING: msg' to the log file as well as to the 'stdout'.
+	5) bb.error(msg) => It writes 'ERROR: msg' to the log file as well as to the 'stdout'. However, this function call doesn't cause the Task execution to fail.
+	6) bb.fatal(msg) => It is similar to the 'bb.error(msg)' function. However, this function call causes the Task execution to fail. It raises an Exception to the caller.
+4. These Python logging functions are implemented in the BitBake's 'bb' Python Module.
+	1) The 'bb' Module is imported implicitly in the BitBake parser.
+	2) The Python logging functions can be called directly from inside the Recipes in the Python functions or inline Python code.
+	2) Therefore, there is no need to explicitly import this Module inside the Recipes.
+5. All the above mentioned Python logging functions write to:
+	1) The respective Task's '${T}/log.do_<task>.pid' log file.
+	2) The 'stdout' i.e. prints on the Console with the right settings provided to the functions.
