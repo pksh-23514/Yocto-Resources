@@ -1,0 +1,21 @@
+Logging the Build Tasks in Recipes:
+===================================
+1. The Build logs for each of the BitBake Tasks executed for the Recipes are stored in their respective 'WORKDIR' directory.
+2. The individual Recipe stores all the logs under the 'temp' directory.
+	1) The 'T' variable is used to point to the 'temp' directory for the particular Recipe.
+		=> bitbake -e recipe-name | grep ^T=
+	2) This 'temp' directory is used by the BitBake to store the temporary files while Building the particular Recipe.
+	3) The default value of the variable is defined in the 'meta/conf/bitbake.conf' file.
+		=> T = "${WORKDIR}/temp"
+3. Each Task that is executed during the individual Recipe Build produces the following kind of files in the 'WORKDIR/temp' directory.
+	1) The 'log' file which is the Output log from 'stdout' or 'stderr' for a specific Task executed by the BitBake. It is helpful to debug when a particular Task fails.
+	2) The 'run' file which is the actual script containing the commands executed for a specific Task by the BitBake. It is generated based on the Recipe's Meta-data.
+4. The naming convention for the 'log' and the 'run' files are as follows:
+	1) log.do_<task>.pid
+	2) run.<task>.pid
+	---> The 'task' represents the name of the specific Task being executed by the BitBake during the Recipe Build.
+	---> The 'pid' represents the Linux PID of the specific Task being executed by the BitBake during the Recipe Build.
+5. If the particular Recipe's Tasks are executed repeatedly, for each time the Task is executed, the 'log' and the 'run' files are newly generated with the corresponding PID.
+6. Therefore, there are Symbolic link provided for each Task's 'log' and 'run' file. They point to the latest generated Task's 'log' and 'run' file respectively.
+	=> log.do_compile ---> Latest 'log' file for the 'do_compile' Task executed for the particular Recipe Build.
+	=> run.do_compile ---> Latest 'run' file for the 'do_compile' Task executed for the particular Recipe Build.
