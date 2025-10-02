@@ -13,7 +13,7 @@ Image features Available for All Images:
 2. allow-root-login:
 	1) It allows the Dropbear or the OpenSSH to accept the Root Logins.
 3. dbg-pkgs:
-	1) It installs the Debug Symbol Packages for all the Packages installed in a given Image.
+	1) It installs the Debug-Symbol Packages for all the Packages installed in a given Image.
 4. dev-pkgs:
 	1) It installs the development Packages (Headers and extra library links) for all the Packages installed in a given Image.
 5. doc-pkgs:
@@ -65,7 +65,7 @@ Image features Available with core-image Class:
 	1) It installs the OpenSSH SSH Server.
 	2) If both the OpenSSH SSH Server and the Dropbear minimal SSH Server are present in the 'IMAGE_FEATURES' variable, then OpenSSH will take precedence.
 6. tools-debug:
-	1) It installs the Debugging tools such as 'strace' and 'gdb'.
+	1) It installs the debugging tools such as 'strace' and 'gdb'.
 7. tools-sdk:
 	1) It installs a full SDK that runs on the Device.
 8. tools-testapps:

@@ -229,7 +229,7 @@ Materials	|				|	-----------|-------------	|
 3. The 'do_package' and 'do_packagedata' Tasks are used to analyze the files in the 'D' directory and split them into sets based on the available Packages and files.
 4. These Tasks serve the following purposes:
 	1) The Packages are split into logical sub-Packages based on the Packaging rules.
-	2) The Debug Symbols are split out into separate Packages for the use in development and Debug Environments.
+	2) The Debug-Symbols are split out into separate Packages for the use in development and debug Environments.
 	3) The analysis of Shared library dependencies between the Packages.
 	4) To ensure the proper handling of Package relationships.
 5. The 'do_packagedata' Task creates the Package Meta-data based on the analysis so that the Build system can generate the final Packages.

@@ -41,7 +41,7 @@ Creating Base Recipes using recipetool create:
 	---> The extracted code is placed in it's own Layer defined by the 'EXTERNALSRC' variable. The Recipe file points to this directory.
 	=> recipetool create -d -o OUTFILE source
 	---> The above Syntax is used to generate a Recipe based on the source. Once generated, the Recipe file resides in the existing source code Layer.
-	---> The '-d' option directs the 'recipetool' to generate the Debug information.
+	---> The '-d' option directs the 'recipetool' to generate the debug information.
 
 Creating Base Recipes using devtool add:
 ****************************************

@@ -38,7 +38,7 @@ Using install Utility in Recipe File:
 2. The reasons to use the 'install' utility are:
 	1) It copies the files into the specified location.
 	2) It changes the ownership and permissions for the specified files.
-	3) It can optimally remove the Debug Symbols from the executables.
+	3) It can optimally remove the Debug-Symbols from the executables.
 3. Therefore, it can be used to perform the same functions as the 'chmod', 'chown' and 'strip' commands.
 
 Details of WORKDIR Variable:

@@ -19,7 +19,7 @@ Booting Process of the BeagleBone Black:
 7. The third stage is the execution of the u-Boot Bootloader (also called the full Bootloader). In case of BeagleBone Black, the u-Boot file is named as 'u-boot.img'.
 	1) The primary goal of the u-Boot Bootloader is to load the Linux Kernel and the Device Tree Blob on the DRAM.
 	2) It sets up the Kernel Boot arguments and u-Boot Environment through the u-Boot Environment variables stored.
-	3) It provides a powerful CLI and a good number of commands to interact with the HW and even perform basic Debugging on the Peripherals.
+	3) It provides a powerful CLI and a good number of commands to interact with the HW and even perform basic debugging on the Peripherals.
 	4) The file size of the 'u-boot.img' is typically greater than 1 MB. Hence, the execution cannot be completed by the internal SRAM.
 8. The final stage is the Linux Kernel Boot process. After the Kernel is loaded by the u-Boot Bootloader, the complete execution control is passed to the Kernel.
 	1) The Kernel initializes the HW Drivers and mounts the RootFS from the storage.

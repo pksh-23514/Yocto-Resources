@@ -4,7 +4,7 @@ build/cache:
 2. It contains a 'sanity_info' text file to keep track of the important Build information variable values like 'SANITY_VERSION', 'TMPDIR', 'SSTATE_DIR' and 'NATIVELSBSTRING'.
 3. It ensures that the Build Environment remains unchanged between the Builds.
 	1) If there are any changes in the Build Environment, it could potentially break the Build.
-	2) The Debug process of finding these changes that led to the Build errors is very difficult.
+	2) The debug process of finding these changes that led to the Build errors is very difficult.
 4. It performs the Sanity checks at the start of the Build.
 5. It helps maintain the Build reproducibility and the Build stability.
 

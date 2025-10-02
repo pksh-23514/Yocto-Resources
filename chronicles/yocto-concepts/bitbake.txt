@@ -50,7 +50,7 @@ bitbake Command Usage:
 	3) -b BUILDFILE, --buildfile=BUILDFILE => Executes the Tasks from a specific Recipe (.bb) directly. It does not handle any dependencies from the other Recipes.
 	4) -k, --continue => Continues the Build as much as possible after an error. However, the Target that failed and anything depending on it cannot be Built.
 	5) -c CMD, --cmd=CMD => Specifies the Task to execute. The exact 'CMD' options available depend on the Meta-data.
-	6) -D, --debug => Increases the Debug level. If '-DD' is used, both bb.debug(1, ...) and bb.debug(2, ...) Messages are printed. It only affects the Output to 'stdout'.
+	6) -D, --debug => Increases the Debug-level. If '-DD' is used, both bb.debug(1, ...) and bb.debug(2, ...) Messages are printed. It only affects the Output to 'stdout'.
 	7) -r PREFILE, --read=PREFILE => Reads the specified file before 'bitbake.conf'.
 	8) -R POSTFILE, --postread=POSTFILE => Reads the specified file after bitbake.conf.
 	9) -v, --verbose => Enables tracing of the Shell Tasks (with 'set -x'). It also prints bb.note(...) Messages to 'stdout' along with writing them to ${T}/log.do_<task>).
@@ -130,7 +130,7 @@ bitbake-layers Command Usage:
 2. Syntax:
 	bitbake-layers [options] <subcommand>
 3. The 'options' are as follows:
-	1) -d, --debug => Enables the Debug Output.
+	1) -d, --debug => Enables the Debug-Output.
 	2) -q, --quiet => Prints only the errors.
 	3) -h, --help => Shows this help Message and exit.
 4. The 'subcommand' are as follows:
