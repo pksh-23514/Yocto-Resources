@@ -136,3 +136,63 @@ Patching the Sources from Local Git Repository using 'git format-patch' Command 
 	2) The changes in the Patch files must be visible in the Output of the binary execution.
 15. The QEMU can be closed by powering OFF the virtual HW.
 	=> poweroff
+
+Patching the Sources from Remote Git Repository using 'git diff --no-index' and 'diff' Commands for Recipe Build:
+=================================================================================================================
+1. The Patch file can be easily generated and applied to the sources during the Recipe Build.
+	1) When the sources are from Open-Source, this is the easiest solution to modify the sources as per the requirements.
+	2) The BitBake performs the 'do_patch' Task during the Recipe Build to patch the sources for the corresponding Recipe.
+2. The existing Recipe's 'WORKDIR' directory has to be fetched for the purpose of modifying the sources.
+3. In the 'WORKDIR/git' directory, the modifications can be made to the source code present in this directory.
+	1) Although, these sources are cloned from a remote Git repository, the Git tracking is not being used for the changes made to the sources.
+	2) For the modifications to an existing file, prepare an original copy of the existing file before making changes to that file.
+	3) For any new file i.e. non-existing file, it can be created and modified normally.
+4. The Patch file to an existing file can be generated using the 'git diff --no-index' command.
+	1) The original copy of the existing file is compared to the modified file and the Patch file is generated.
+	2) It works on the files that are not part of a Git repository as well.
+5. However, the generated Patch file cannot be directly used by the Recipe for patching the sources.
+	1) The BitBake expects such Patch files to be a part of the Git repository i.e. the directory path where the Patch file shall be applied must be a Git repository path.
+	2) The Patch file requires certain manual changes so that the BitBake can apply them to the correct source file in their respective directory structure.
+	3) The first thing to make sure in the Patch file is that the file name must be same in both the directory paths.
+	4) The next thing is that the directory path where the Patch file shall be applied must be represented as a proper Git repository path.
+	5) Irrespective of where the file is present, the complete path must be mentioned in such a way that the top directory must be initialized as a Git repository.
+		=> The variables 'a' and 'b' in the directory paths of the Patch file must be a Git repository.
+		---> If the Device Tree has to be patched, the complete Kernel repository path as 'a/arch/arm/boot/dts/*.dts' must be provided in the Patch file.
+	6) The before i.e. 'a' and after i.e. 'b' versions of the file's directory paths must be same for the Patch file to be applied successfully.
+	7) After these changes are updated manually in the Patch file, it is compatible with the BitBake patching mechanism.
+6. The Patch file to add a new file i.e. a non-existing file in the sources can be generated using the 'diff -Nau' command.
+	1) Since, there is no existing file for the 'diff' command to compare the original file with the modified file, the new file must be compared against "/dev/null".
+	2) It comes handy to generate a one-time Patch file mostly for non-Git sources.
+7. However, the generated Patch file cannot be directly used by the Recipe for patching the sources.
+	1) The BitBake expects such Patch files to be a part of the Git repository i.e. the directory path where the Patch file shall be applied must be a Git repository path.
+	2) The Patch file requires certain manual changes so that the BitBake can apply them to the correct source file in their respective directory structure.
+	3) The first thing to make sure in the Patch file is that the directory paths mentioned are simply the file names and not the file paths.
+	4) The BitBake would not understand these file names (like "/dev/null") as paths and the patching would throw an error.
+	5) The directory path where the Patch file shall be applied must be represented as a proper Git repository path.
+	6) Irrespective of where the file is present, the complete path must be mentioned in such a way that the top directory must be initialized as a Git repository.
+		=> The variables 'a' and 'b' in the directory paths of the Patch file must be a Git repository.
+		---> If the Device Tree has to be patched, the complete Kernel repository path as 'a/arch/arm/boot/dts/*.dts' must be provided in the Patch file.
+	7) The before i.e. 'a' and after i.e. 'b' versions of the file's directory paths must be same for the Patch file to be applied successfully.
+	8) After these changes are updated manually in the Patch file, it is compatible with the BitBake patching mechanism.
+8. Once the Patch files are generated, they have to be moved manually to the Recipe folder in the corresponding Meta-Layer.
+	1) The Patch files are moved under a sub-directory (generally named as 'files') in the Recipe folder for the BitBake to be able to pick them during the Recipe Build.
+	2) The Patch files can then be removed along with all the other new files present in the 'WORKDIR/git' directory. This is not mandatory.
+9. The Patch files have to be specified in the 'SRC_URI' variable in the Recipe file for the BitBake to include them during the Recipe Build.
+10. Before the Recipe is Built along with the Patch files, the earlier Build must be cleaned. This is recommended by the Yocto Project.
+11. Once the Recipe Build is cleaned, the Build command can be executed for the Recipe.
+12. After the Build is successful, the 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+	1) To ensure that the sources are patched correctly, the 'temp/log.do_patch' file can be checked.
+	2) It contains the 'do_patch' Task execution log which verifies the Patch files are applied successfully.
+13. The Recipe must be added to the Image Recipe file for it to be included in the Image Build.
+	1) This can be done by appending the 'IMAGE_INSTALL' variable in the Image Recipe file.
+		=> IMAGE_INSTALL:append = " package-name"
+		---> The 'package-name' is normally extracted from the Recipe file name.
+14. Once the Image Recipe file is updated, the Image Build command can be executed.
+15. After the Image Build is successful, the Image can be tested on the QEMU Target for verifying the Recipe addition.
+	1) The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
+		=> runqemu qemuarm core-image-minimal nographic
+16. After the Root Login stage is done, it should be verified whether the Cross-Compiled C file binary is present at the correctly installed location.
+	1) If the C binary is present, execute the binary to verify if the expected Output is displayed.
+	2) The changes in the Patch files must be visible in the Output of the binary execution.
+17. The QEMU can be closed by powering OFF the virtual HW.
+	=> poweroff
