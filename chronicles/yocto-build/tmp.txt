@@ -130,6 +130,8 @@ tmp/log:
 7. Therefore, it is referred to as a global log area.
 8. The Build logs can be checked to verify which Tasks have been started during the Build. This can be displayed by using the following command:
 	=> cat tmp/log/cooker/<MACHINE>/<time-stamp>.log | grep 'NOTE:.*task.*Started'
+9. The Build logs can be checked to verify which Tasks have been completed successfully during the Build. This can be displayed by using the following command:
+	=> cat tmp/log/cooker/<MACHINE>/<time-stamp>.log | grep 'NOTE:.*task.*Succeeded'
 
 tmp/pkgdata:
 ************
