@@ -8,8 +8,8 @@ build/cache:
 4. It performs the Sanity checks at the start of the Build.
 5. It helps maintain the Build reproducibility and the Build stability.
 
-build/cache and build/temp/cache Differences:
-*********************************************
+build/cache and build/tmp/cache Differences:
+********************************************
 1. In the Yocto Project Build system, both the 'build/cache' and the 'build/tmp/cache' directories are related to the caching mechanisms.
 2. However, they serve very different purposes.
 3. The 'build/cache' is the persistent Cache. It stores the persistent Build state and Meta-data that the BitBake uses across multiple Builds.
