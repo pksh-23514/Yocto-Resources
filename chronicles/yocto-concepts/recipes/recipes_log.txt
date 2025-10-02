@@ -19,3 +19,6 @@ Logging the Build Tasks in Recipes:
 6. Therefore, there are Symbolic link provided for each Task's 'log' and 'run' file. They point to the latest generated Task's 'log' and 'run' file respectively.
 	=> log.do_compile ---> Latest 'log' file for the 'do_compile' Task executed for the particular Recipe Build.
 	=> run.do_compile ---> Latest 'run' file for the 'do_compile' Task executed for the particular Recipe Build.
+7. There is another single file in the 'temp' directory named as 'log.task_order'.
+	1) It is created by the BitBake to list down all the Tasks in the order they were executed for the particular Recipe.
+	2) It is used for checking the order in which the Tasks were executed and to understand why a particular Task was skipped during the Recipe Build.
