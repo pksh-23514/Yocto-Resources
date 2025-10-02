@@ -41,3 +41,19 @@ Logging Mechanisms in Recipes:
 5. All the above mentioned Python logging functions write to:
 	1) The respective Task's '${T}/log.do_<task>.pid' log file.
 	2) The 'stdout' i.e. prints on the Console with the right settings provided to the functions.
+6. The following Shell logging functions are available:
+	1) bbplain => bb.plain(msg)
+	2) bbnote => bb.note(msg)
+	3) bbdebug => bb.debug(level, msg)
+	4) bbwarn => bb.warn(msg)
+	5) bberror => bb.error(msg)
+	6) bbfatal => bb.fatal(msg)
+7. The Shell logging functions are implemented in the 'meta/classes/logging.bbclass' file.
+	1) This Class file is inherited by default in the Recipes.
+	2) These Shell logging functions can be called directly from inside the Recipes in the Python functions.
+	3) They are intended to map one to one in the intentions and the Output format with the Python logging functions of the similar naming convention.
+8. All the above mentioned Shell functions write to:
+	1) The respective Task's '${T}/log.do_<task>.pid' log file.
+	2) The 'stdout' i.e. prints on the Console with the right settings provided to the functions.
+9. If these Shell logging functions are being used in the Python functions of the Recipes, they can be verified in:
+	1) The respective Task's '${T}/run.<task>.pid' log file which defines the specific Shell logging function along with the other commands for the Task.
