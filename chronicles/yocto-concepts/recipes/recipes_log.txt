@@ -57,3 +57,10 @@ Logging Mechanisms in Recipes:
 	2) The 'stdout' i.e. prints on the Console with the right settings provided to the functions.
 9. If these Shell logging functions are being used in the Python functions of the Recipes, they can be verified in:
 	1) The respective Task's '${T}/run.<task>.pid' log file which defines the specific Shell logging function along with the other commands for the Task.
+10. Among all the functions mentioned, the 'bb.fatal()' or the 'bbfatal' functions have the highest priority. They cause the Recipe Build to terminate with an error code.
+11. The color codes for the Output displayed on the Console by the functions are as follows:
+	1) bb.fatal(msg) or bbfatal => Red
+	2) bb.error(msg) or bberror => Red
+	3) bb.warn(msg) or bbwarn => Yellow
+	4) bb.plain(msg) or bbplain => White
+	5) bb.debug(level, msg) or bbdebug => Cyan or Blue
