@@ -128,6 +128,8 @@ tmp/log:
 	---> The '2978831' value is the PID for the 'do_clean' Task performed by the BitBake during the Recipes cleaning.
 	---> The 'log.do_clean' and the 'run.do_clean' are the Symbolic links pointing to the latest cleaning log in that directory.
 7. Therefore, it is referred to as a global log area.
+8. The Build logs can be checked to verify which Tasks have been started during the Build. This can be displayed by using the following command:
+	=> cat tmp/log/cooker/<MACHINE>/<time-stamp>.log | grep 'NOTE:.*task.*Started'
 
 tmp/pkgdata:
 ************
