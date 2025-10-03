@@ -58,7 +58,14 @@ Logging Mechanisms in Recipes:
 9. If these Shell logging functions are being used in the Shell Task functions of the Recipes, they can be verified in:
 	1) The respective Task's '${T}/run.<task>.pid' log file which defines the specific Shell logging function along with the other commands for the Task.
 10. Among all the functions mentioned, the 'bb.fatal()' or the 'bbfatal' functions have the highest priority. They cause the Recipe Build to terminate with an error code.
-11. The color codes for the Output displayed on the Console by the functions are as follows:
+11. The 'bb.debug(level. msg)' or the 'bbdebug' functions can only display the logs on the Console:
+	1) If the parameter 'level' for the 'msg' is smaller than or equal to the Debug-level passed to the BitBake during the Recipes Build.
+	2) To enable the Debug-level Output on Console, the '-D' option is used to increase the Debug-level in the range of 1 to 3.
+		=> Level-0: bitbake recipe-name
+		=> Level-1: bitbake -D recipe-name
+		=> Level-2: bitbake -DD recipe-name
+		=> Level-3: bitbake -DDD recipe-name
+12. The color codes for the Output displayed on the Console by the functions are as follows:
 	1) bb.fatal(msg) or bbfatal => Red
 	2) bb.error(msg) or bberror => Red
 	3) bb.warn(msg) or bbwarn => Yellow
