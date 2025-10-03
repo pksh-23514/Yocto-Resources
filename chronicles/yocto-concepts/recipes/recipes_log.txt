@@ -36,8 +36,8 @@ Logging Mechanisms in Recipes:
 	6) bb.fatal(msg) => It is similar to the 'bb.error(msg)' function. However, this function call causes the Task execution to fail. It raises an Exception to the caller.
 4. These Python logging functions are implemented in the BitBake's 'bb' Python Module.
 	1) The 'bb' Module is imported implicitly in the BitBake parser.
-	2) The Python logging functions can be called directly from inside the Recipes in the Python functions or inline Python code.
-	2) Therefore, there is no need to explicitly import this Module inside the Recipes.
+	2) The Python logging functions can be called directly from inside the Recipes in the Python Task functions or inline Python code.
+	3) Therefore, there is no need to explicitly import this Module inside the Recipes.
 5. All the above mentioned Python logging functions write to:
 	1) The respective Task's '${T}/log.do_<task>.pid' log file.
 	2) The 'stdout' i.e. prints on the Console with the right settings provided to the functions.
@@ -50,12 +50,12 @@ Logging Mechanisms in Recipes:
 	6) bbfatal => bb.fatal(msg)
 7. The Shell logging functions are implemented in the 'meta/classes/logging.bbclass' file.
 	1) This Class file is inherited by default in the Recipes.
-	2) These Shell logging functions can be called directly from inside the Recipes in the Python functions.
+	2) These Shell logging functions can be called directly from inside the Recipes in the Shell Task functions.
 	3) They are intended to map one to one in the intentions and the Output format with the Python logging functions of the similar naming convention.
 8. All the above mentioned Shell functions write to:
 	1) The respective Task's '${T}/log.do_<task>.pid' log file.
 	2) The 'stdout' i.e. prints on the Console with the right settings provided to the functions.
-9. If these Shell logging functions are being used in the Python functions of the Recipes, they can be verified in:
+9. If these Shell logging functions are being used in the Shell Task functions of the Recipes, they can be verified in:
 	1) The respective Task's '${T}/run.<task>.pid' log file which defines the specific Shell logging function along with the other commands for the Task.
 10. Among all the functions mentioned, the 'bb.fatal()' or the 'bbfatal' functions have the highest priority. They cause the Recipe Build to terminate with an error code.
 11. The color codes for the Output displayed on the Console by the functions are as follows:
@@ -64,3 +64,50 @@ Logging Mechanisms in Recipes:
 	3) bb.warn(msg) or bbwarn => Yellow
 	4) bb.plain(msg) or bbplain => White
 	5) bb.debug(level, msg) or bbdebug => Cyan or Blue
+
+Logging with Python Functions:
+******************************
+1. While creating the Recipes using Python and inserting code that handles Build logs, the goal should be:
+	1) To have the most informative logs.
+	2) The Console should be kept as 'silent' as possible.
+2. If there is a requirement to display status messages in the log, the Debug-levels must be used.
+3. The Python logging functions can be used in the Python Task function as follows:
+	=> python do_listtasks() {
+	=>     bb.debug(2, "Starting to figure out the Task list.")
+	=>     if noteworthy_condition:
+	=>         bb.note("There are 47 Tasks to run.")
+	=>     bb.debug(2, "Got to point x.")
+	=>     if warning_trigger:
+	=>         bb.warn("Detected a warning trigger, this might be a problem later.")
+	=>     if recoverable_error:
+	=>         bb.error("Hit a recoverable error, need to fix this!")
+	=>     if fatal_error:
+	=>         bb.fatal("Fatal error detected, unable to print the Task list.")
+	=>     bb.plain("The Tasks present are ...")
+	=>     bb.debug(2, "Finished figuring out the Task list.")
+	=> }
+
+Logging with Shell Functions:
+*****************************
+1. While creating the Recipes using Shell and inserting code that handles Build logs, the goal should be:
+	1) To have the most informative logs
+	2) The Console should be kept as 'silent' as possible.
+2. If there is a requirement to display status messages in the log, the Debug-levels must be used.
+3. The Shell logging functions can be used in the Shell Task function as follows:
+	=> do_my_function() {
+	=>     bbdebug 2 "Running do_my_function."
+	=>     if [ exceptional_condition ]; then
+	=>         bbnote "Hit an exceptional condition."
+	=>     fi
+	=>     bbdebug 2  "Got to point x."
+	=>     if [ warning_trigger ]; then
+	=>         bbwarn "Detected a warning trigger, this might cause a problem later."
+	=>     fi
+	=>     if [ recoverable_error ]; then
+	=>         bberror "Hit a recoverable error, correcting ..."
+	=>     fi
+	=>     if [ fatal_error ]; then
+	=>         bbfatal "Fatal error detected!"
+	=>     fi
+	=>     bbdebug 2 "Completed do_my_function."
+	=> }
