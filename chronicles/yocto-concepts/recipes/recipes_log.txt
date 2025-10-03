@@ -30,7 +30,7 @@ Logging Mechanisms in Recipes:
 3. The following Python logging functions are available:
 	1) bb.plain(msg) => It writes 'msg' as it is to the log file as well as to the 'stdout' i.e. printed on the Console.
 	2) bb.note(msg) => It writes 'NOTE: msg' to the log file. It can write to the 'stdout' if the BitBake is called with '-v' option.
-	3) bb.debug(level, msg) => It writes 'DEBUG: msg' to the log file. It can write to the 'stdout' if the Debug-level set during the BitBake call is greater than 'level'.
+	3) bb.debug(level, msg) => It writes 'DEBUG: msg' to the log file. It can write to the 'stdout' if 'level' is smaller than the Debug-level set during the BitBake call.
 	4) bb.warn(msg) => It writes 'WARNING: msg' to the log file as well as to the 'stdout'.
 	5) bb.error(msg) => It writes 'ERROR: msg' to the log file as well as to the 'stdout'. However, this function call doesn't cause the Task execution to fail.
 	6) bb.fatal(msg) => It is similar to the 'bb.error(msg)' function. However, this function call causes the Task execution to fail. It raises an Exception to the caller.
