@@ -1,0 +1,10 @@
+Packages:
+=========
+1. Packages are the Recipe's packaged Compiled Output produced by the BitBake.
+2. They are the binaries that get installed on the Target Image (or RootFS).
+3. It is a binary file in the format of '.ipk', '.deb' or '.rpm' which is Compiled from the Recipe's source code.
+4. The format of the binaries is defined by the Package manager selected by the Build system using the 'PACKAGE_CLASSES' variable.
+5. The Packages can be installed, updated or removed using the respective Package manager based on the Package format.
+6. Packaging is the process of taking the Built SW and organizing it into installable units called Packages.
+7. The successful Packaging is a combination of the automated processes performed by the OpenEmbedded Build system and some processes that need to be executed manually.
+8. The Built SW can include binaries, libraries, scripts, documentation etc.
