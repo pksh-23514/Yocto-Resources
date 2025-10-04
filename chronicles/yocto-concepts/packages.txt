@@ -23,11 +23,11 @@ Packages:
 8. If the 'PACKAGES' variable is not defined by the Recipe, the BitBake will use the default value automatically.
 9. Any additional logical Package can be defined in the Recipe file. The prefix '${PN}-' is maintained to distinguish it as a Package.
 	=> PACKAGES = "${PN}-tools ${PN}-extras ${PN}"
-	=> FILES_${PN} = "${bindir}/main-app"
-	=> FILES_${PN}-tools = "${bindir}/tools/*"
-	=> FILES_${PN}-extras = "${datadir}/extras"
-	=> DESCRIPTION_${PN}-tools = "Extra tools"
-	=> RDEPENDS_${PN}-tools = "${PN}"
+	=> FILES:${PN} = "${bindir}/main-app"
+	=> FILES:${PN}-tools = "${bindir}/tools/*"
+	=> FILES:${PN}-extras = "${datadir}/extras"
+	=> DESCRIPTION:${PN}-tools = "Extra tools"
+	=> RDEPENDS:${PN}-tools = "${PN}"
 
 .ipk Packages:
 **************
