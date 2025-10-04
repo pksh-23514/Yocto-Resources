@@ -69,6 +69,27 @@ Details of oe_runmake Function:
 	=> 	${MAKE} ${EXTRA_OEMAKE} "$@"
 	=> }
 
+Details of EXTRA_OEMAKE Variable:
+*********************************
+1. The 'EXTRA_OEMAKE' variable is used to pass the required additional 'make' options during the 'oe_runmake_call' function call.
+	=> EXTRA_OEMAKE = "PREFIX=${prefix} CC='${CC}' CFLAGS='${CFLAGS}' DESTDIR=${D} LIBDIR=${libdir} INCLUDEDIR=${includedir} BUILD_STATIC=no"
+2. It is defined in the 'meta/conf/bitbake.conf' file:
+	=> export MAKE = "make"
+	=> EXTRA_OEMAKE = ""
+	=> EXTRA_OECONF = ""
+3. The 'PARALLEL_MAKE' variable is used to enable parallelism in the 'make' command.
+4. It is defined in the 'meta/conf/bitbake.conf' file:
+	=> # Default to setting automatically based on cpu count
+	=> PARALLEL_MAKE ?= "-j ${@oe.utils.cpu_count()}"
+5. The 'EXTRA_OEMAKE' variable uses the 'PARALLEL_MAKE' variable for certain BitBake Tasks by default.
+6. It is defined in the 'meta/conf/bitbake.conf' file. The Configuration file sets them as follows:
+	=> # Pass parallel make options to the compile task
+	=> EXTRA_OEMAKE:prepend:task-compile = "${PARALLEL_MAKE} "
+	=> PARALLEL_MAKEINST ??= "${PARALLEL_MAKE}"
+	=> PARALLEL_MAKEINST[vardepvalue] = "1"
+	=> # Pass parallel make options to the install task
+	=> EXTRA_OEMAKE:prepend:task-install = "${PARALLEL_MAKEINST} "
+
 Including the Recipe into the Image:
 ====================================
 1. Even if the Recipe Build is successful, it would not automatically be included as a part of the Image.
