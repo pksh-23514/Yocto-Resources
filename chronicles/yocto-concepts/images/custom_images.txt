@@ -13,7 +13,7 @@ Images:
 8. There is no single Image that can fit all the use cases in the Embedded systems. Therefore, the customization of the Image Recipe files is often necessary.
 
 Custom Image Recipe:
----------------------
+********************
 1. There is always a necessity to customize the Image Recipe to meet the specific requirements.
 	1) To support the specific HW.
 	2) To include the relevant SW.
