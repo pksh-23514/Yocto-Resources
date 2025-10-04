@@ -50,6 +50,25 @@ Details of WORKDIR Variable:
 	---> The 'PV' variable is used to specify the Recipe version. The value is normally extracted from the Recipe file name.
 	---> The 'PR' variable is used to specify the Recipe revision. The default value is 'r0' and subsequent revisions are 'r1', 'r2' etc.
 
+Details of oe_runmake Function:
+*******************************
+1. The 'oe_runmake' is a helper function provided by the Yocto Project to run the 'make' command safely and consistently with the right Environment.
+2. It is defined in the 'meta/classes/base.bbclass' file. The Class file has the function definition as follows:
+	=> oe_runmake() {
+	=> 	oe_runmake_call "$@" || die "oe_runmake failed"
+	=> }
+3. The default behavior of the Tasks like 'do_configure' and 'do_compile' is to call the 'oe_runmake' function if a Makefile is found in the 'SRC_URI' variable.
+4. The 'oe_runmake' function is used to:
+	1) It passes the 'EXTRA_OEMAKE' settings to the 'make' command.
+	2) It displays the 'make' command.
+	3) It checks for the errors generated during the 'make' command call.
+5. In the OpenEmbedded Environment, it is not recommended to call the 'make' command directly. It should always be called through the 'oe_runmake' function.
+6. The 'oe_runmake_call' function is the function that executes the 'make' command along with the other passed settings and displays the 'make' command as well.
+	=> oe_runmake_call() {
+	=> 	bbnote ${MAKE} ${EXTRA_OEMAKE} "$@"
+	=> 	${MAKE} ${EXTRA_OEMAKE} "$@"
+	=> }
+
 Including the Recipe into the Image:
 ====================================
 1. Even if the Recipe Build is successful, it would not automatically be included as a part of the Image.
