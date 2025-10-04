@@ -1,6 +1,6 @@
 meta-ti-bsp:
 ============
-1. The 'meta-ti' is an official Board Support Package (BSP) Layer sub-directory provided by the Texas Instruments (TI) for their HW in the 'meta-ti' Layer.
+1. The 'meta-ti-bsp' is an official Board Support Package (BSP) Layer sub-directory provided by the Texas Instruments (TI) for their HW in the 'meta-ti' Layer.
 2. It contains the Meta-data, Configurations and Recipes specifically to support the TI SoC Devices within the Yocto Project Build system.
 3. It provides the support for the following TI HW:
 	1) AM335x, AM437x, AM57xx, AM62xx, AM65xx etc.
