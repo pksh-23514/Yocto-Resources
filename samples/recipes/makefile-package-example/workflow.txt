@@ -100,7 +100,7 @@ Recipe and Image Build for C File Using Makefile with 'install' and 'uninstall' 
 6. However, in the 'WORKDIR' directory, it is observed that no files are installed into the the 'image', the 'package' or the 'packages-split' directories.
 7. The Installation steps can be verified by checking the 'temp/run.do_install' log file that points to the latest Installation stage log.
 	1) The 'do_install' Task is called as default by the BitBake.
-	2) The 'do_compile' Task calls the 'base_do_install' function which performs no action.
+	2) The 'do_install' Task calls the 'base_do_install' function which performs no action.
 	3) This proves that the default 'do_install' Task cannot use the 'install' and the 'uninstall' rules of the Makefile.
 	4) The 'do_install' Task has to be defined explicitly for the files to be placed into the Image.
 8. The 'oe_runmake install' command can be used in the 'do_install' Task that will execute the 'make install' from the Makefile.
