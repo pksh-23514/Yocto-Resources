@@ -97,3 +97,11 @@ Summary: There was 1 ERROR message, returning a non-zero exit code.
 	1) The 'bbnote' message is not displayed in the Build log as expected.
 	2) The 'bbdebug' messages are not displayed in the Build log as the Debug-level is not passed with the 'bitbake' call.
 	3) The color codes for the Output displayed on the Console is as expected.
+
+9. To remove all the files and directories generated during the Build, the 'cleanall' command of the BitBake can be used. However, the 'WORKDIR' directory is still present.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c cleanall example
+....
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0$ rm -rf *
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
