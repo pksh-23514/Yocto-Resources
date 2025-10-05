@@ -137,3 +137,131 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ c
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0$ rm -rf *
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0$ cd ../../../../../
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
+
+11. On the Host Machine, run the 'bitbake' command along with the '-DDD' option i.e. Debug-level set to '3' with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -DDD example
+DEBUG: Using cache in '/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/cache/bb_unihashes.dat'
+DEBUG: Processing core in collection list
+DEBUG: Processing yocto in collection list
+DEBUG: Processing yoctobsp in collection list
+DEBUG: Processing meta-layer in collection list
+DEBUG: Processing meta-ti-bsp in collection list
+DEBUG: Processing meta-arm in collection list
+DEBUG: Processing arm-toolchain in collection list
+DEBUG: Sanity-checking tuning 'cortexa15thf-neon' (default) features:
+DEBUG:   arm: Enable ARM instruction set
+DEBUG:   vfp: Enable Vector Floating Point (vfp) unit.
+DEBUG:   cortexa15: Enable Cortex-A15 specific processor optimizations
+DEBUG:   neon: Enable Neon SIMD accelerator unit.
+DEBUG:   thumb: Support Thumb instructions
+DEBUG:   callconvention-hard: Enable EABI hard float call convention, requires VFP.
+DEBUG: Cache: default: Cache dir: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/cache/default-glibc/qemuarm/x86_64                  | ETA:  --:--:--
+DEBUG: Cache: default: Checking if /home/prabhat_kiran/.../Poky/poky/build/tmp/cache/default-glibc/qemuarm/x86_64/bb_cache.dat.96ff9231679d31... exists: True
+DEBUG: Cache: default: Loading cache file: /home/prabhat_kiran/.../Poky/poky/build/tmp/cache/default-glibc/qemuarm/x86_64/bb_cache.dat.96ff92316...
+Loading cache: 100% |#############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+DEBUG: Cache: default: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-git-tag/hello-git-tag_0.1.bb is not cached
+DEBUG: Cache: default: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-local-git/hello-local-git_0.1.bb is not cached
+DEBUG: Cache: default: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-private-git/hello-private-git_0.1.bb is not cached
+DEBUG: Cache: default: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-remote-git/hello-remote-git_0.1.bb is not cached
+...
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 986 .bb files complete (982 cached, 4 parsed). 1781 targets, 159 skipped, 0 masked, 0 errors.
+DEBUG: Cache: default: Cache is clean, not saving.
+DEBUG: Target list: ['example']
+DEBUG: providers for example are: ['example']
+DEBUG: sorted providers for example are: ['/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/example/example_0.1.bb']
+DEBUG: adding /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/example/example_0.1.bb to satisfy example
+DEBUG: Added dependencies ['virtual/arm-poky-linux-gnueabi-gcc', 'virtual/arm-poky-linux-gnueabi-compilerlibs', 'virtual/libc'] for /home/.../recipes-example/.../example_0.1.bb
+DEBUG: Added runtime dependencies ['example-dev', 'example'] for /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb
+NOTE: Resolving any missing task queue dependencies
+DEBUG: providers for quilt-native are: ['quilt-native']
+DEBUG: sorted providers for quilt-native are: ['/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-devtools/quilt/quilt-native_0.67.bb']
+DEBUG: adding /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-devtools/quilt/quilt-native_0.67.bb to satisfy quilt-native
+DEBUG: Added dependencies [] for /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-devtools/quilt/quilt-native_0.67.bb
+DEBUG: Added runtime dependencies ['quilt-native-dev', 'quilt-native', 'diffstat-native', 'patch-native', 'bzip2-native'] for /home/.../recipes-devtools/quilt/quilt-native_0.67.bb
+DEBUG: providers for patch-replacement-native are: ['patch-native']
+DEBUG: sorted providers for patch-replacement-native are: ['virtual:native:/home/prabhat_kiran/.../Poky/poky/meta/recipes-devtools/patch/patch_2.7.6.bb']
+DEBUG: adding virtual:native:/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-devtools/patch/patch_2.7.6.bb to satisfy patch-replacement-native
+DEBUG: Added dependencies ['autoconf-native', 'automake-native', 'libtool-native', 'attr-native'] for virtual:native:/home/.../poky/meta/recipes-devtools/patch/patch_2.7.6.bb
+DEBUG: providers for virtual/arm-poky-linux-gnueabi-binutils are: ['binutils-cross-arm']
+DEBUG: selecting /.../recipes-devtools/binutils/binutils-cross_2.38.bb as PREFERRED_VERSION 2.38% of package binutils-cross-arm (for item virtual/arm-poky-linux-gnueabi-binutils)
+NOTE: selecting binutils-cross-arm to satisfy virtual/arm-poky-linux-gnueabi-binutils due to PREFERRED_PROVIDERS
+...
+DEBUG: Resolved 7 extra dependencies
+DEBUG: Resolved 0 extra dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+DEBUG: Added 0 recursive dependencies in this loop                                                                                                                 | ETA:  0:00:01
+NOTE: Marking Active Tasks########################################################################                                                                 | ETA:  0:00:00
+NOTE: Pruned 1415 inactive tasks, 667 left########################################################                                                                 | ETA:  0:00:00
+NOTE: Assign Weightings
+NOTE: Compute totals (have 1 endpoint(s))##########################################################                                                                | ETA:  0:00:00
+DEBUG: virtual/arm-poky-linux-gnueabi-binutils resolved to: binutils-cross-arm (/home/.../Poky/poky/meta/recipes-devtools/binutils/binutils-cross_2.38.bb)         | ETA:  0:00:00
+DEBUG: virtual/fakeroot-native resolved to: pseudo-native (virtual:native:/home/prabhat_kiran/.../Poky/poky/meta/recipes-devtools/pseudo/pseudo_git.bb)
+DEBUG: virtual/libc resolved to: glibc (/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/glibc/glibc_2.35.bb)
+DEBUG: virtual/arm-poky-linux-gnueabi-gcc resolved to: gcc-cross-arm (/home/prabhat_kiran/.../Poky/poky/meta/recipes-devtools/gcc/gcc-cross_11.5.bb)
+DEBUG: virtual/arm-poky-linux-gnueabi-compilerlibs resolved to: gcc-runtime (/home/prabhat_kiran/.../meta/recipes-devtools/gcc/gcc-runtime_11.5.bb)
+DEBUG: virtual/update-alternatives-native resolved to: opkg-utils-native (virtual:native:/home/prabhat_kiran/.../Poky/poky/meta/recipes-devtools/opkg-utils/opkg-utils_0.5.0.bb)
+DEBUG: virtual/arm-poky-linux-gnueabi-g++ resolved to: gcc-cross-arm (/home/prabhat_kiran/.../Poky/poky/meta/recipes-devtools/gcc/gcc-cross_11.5.bb)
+DEBUG: Starting bitbake-worker###########################################################################################                                          | ETA:  0:00:00
+DEBUG: Using runqueue scheduler 'speed'####################################################################################                                        | ETA:  0:00:00
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+...
+Sstate summary: Wanted 9 Local 0 Mirrors 0 Missed 9 Current 153 (0% match, 94% complete)
+NOTE: Executing Tasks
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_package_qa
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_package_write_deb
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_package_write_ipk
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_package_write_rpm
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_packagedata
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_package
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_populate_lic
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_populate_sysroot
+DEBUG: No package found, so skipping setscene task /home/prabhat_kiran/.../Poky/poky/meta-layer/recipes-example/example/example_0.1.bb:do_deploy_source_date_epoch
+NOTE: Setscene tasks completed
+...
+DEBUG: Executing task do_compile
+DEBUG: example-0.1-r0 do_compile: Executing shell function do_compile
+Plain Message  <--- *White Font*
+DEBUG: example-0.1-r0 do_compile: Debug Message 1  <--- *Cyan Font*
+DEBUG: example-0.1-r0 do_compile: Debug Message 2  <--- *Cyan Font*
+DEBUG: example-0.1-r0 do_compile: Debug Message 3  <--- *Cyan Font*
+WARNING: example-0.1-r0 do_compile: Warning Message  <--- *Yellow Font*
+ERROR: example-0.1-r0 do_compile: Error Message  <--- *Red Font*
+DEBUG: example-0.1-r0 do_compile: Shell function do_compile finished
+...
+NOTE: Tasks Summary: Attempted 667 tasks of which 650 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+DEBUG: Executing python function buildhistory_write_sigs
+DEBUG: Python function buildhistory_write_sigs finished
+DEBUG: Cannot find /home/prabhat_kiran/.../poky/build/tmp/work/.../defaultpkgname/1.0-r0/source-date-epoch/__source_date_epoch.txt. SOURCE_DATE_EPOCH will default to 1302044400
+DEBUG: Executing shell function buildhistory_commit
+DEBUG: Shell function buildhistory_commit finished
+NOTE: Writing buildhistory took: 2 seconds
+
+Summary: There was 1 WARNING message.
+Summary: There was 1 ERROR message, returning a non-zero exit code.
+
+12. The Build log displays the Recipe's Shell logging mechanism.
+	1) The 'bbnote' message is not displayed in the Build log as expected.
+	2) The 'bbdebug' messages are displayed in the Build log as the Debug-level is now passed as 'level-3' with the 'bitbake' call.
+	3) The color codes for the Output displayed on the Console is as expected.
+	4) Apart from the 'bbdebug' message in the Recipe file, there are a lot of other debug messages getting printed on the Console as the Debug-level is now set to '3'.
