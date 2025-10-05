@@ -52,3 +52,73 @@ example
 └── example_0.1.bb
 
 1 directory, 2 files
+
+7. On the Host Machine, run the 'bitbake' command along with the '-D' option i.e. Debug-level set to '1' with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -D example
+DEBUG: Using cache in '/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/cache/bb_unihashes.dat'
+DEBUG: Processing core in collection list
+DEBUG: Processing yocto in collection list
+DEBUG: Processing yoctobsp in collection list
+DEBUG: Processing meta-layer in collection list
+DEBUG: Processing meta-ti-bsp in collection list
+DEBUG: Processing meta-arm in collection list
+DEBUG: Processing arm-toolchain in collection list
+DEBUG: Cache: default: Cache dir: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/cache/default-glibc/qemuarm/x86_64                  | ETA:  --:--:--
+DEBUG: Cache: default: Loading cache file: /home/prabhat_kiran/.../build/tmp/cache/default-glibc/qemuarm/x86_64/bb_cache.dat.96ff923167...
+Loading cache: 100% |#############################################################################################################################################| Time: 0:00:00
+Loaded 1777 entries from dependency cache.
+...
+DEBUG: Resolved 7 extra dependencies
+DEBUG: Resolved 0 extra dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+DEBUG: Added 0 recursive dependencies in this loop                                                                                                                 | ETA:  0:00:01
+NOTE: Marking Active Tasks########################################################################                                                                 | ETA:  0:00:00
+NOTE: Pruned 1415 inactive tasks, 667 left########################################################                                                                 | ETA:  0:00:00
+NOTE: Assign Weightings
+NOTE: Compute totals (have 1 endpoint(s))##########################################################                                                                | ETA:  0:00:00
+DEBUG: Starting bitbake-worker###########################################################################################                                          | ETA:  0:00:00
+DEBUG: Using runqueue scheduler 'speed'####################################################################################                                        | ETA:  0:00:00
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+...
+Sstate summary: Wanted 9 Local 0 Mirrors 0 Missed 9 Current 153 (0% match, 94% complete)
+NOTE: Executing Tasks
+NOTE: Setscene tasks completed
+...
+DEBUG: Executing task do_compile
+Plain Message  <--- *White Font*
+DEBUG: example-0.1-r0 do_compile: Debug Message 1  <--- *Cyan Font*
+WARNING: example-0.1-r0 do_compile: Warning Message  <--- *Yellow Font*
+ERROR: example-0.1-r0 do_compile: Error Message  <--- *Red Font*
+DEBUG: example-0.1-r0 do_compile: Shell function do_compile finished
+...
+NOTE: Tasks Summary: Attempted 667 tasks of which 650 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+DEBUG: Cannot find /home/prabhat_kiran/.../poky/build/tmp/work/.../defaultpkgname/1.0-r0/source-date-epoch/__source_date_epoch.txt. SOURCE_DATE_EPOCH will default to 1302044400
+NOTE: Writing buildhistory took: 2 seconds
+
+Summary: There was 1 WARNING message.
+Summary: There was 1 ERROR message, returning a non-zero exit code.
+
+8. The Build log displays the Recipe's Shell logging mechanism.
+	1) The 'bbnote' message is not displayed in the Build log as expected.
+	2) The 'bbdebug' messages are displayed in the Build log as the Debug-level is now passed as 'level-1' with the 'bitbake' call.
+	3) The color codes for the Output displayed on the Console is as expected.
+	4) Apart from the 'bbdebug' message in the Recipe file, there are a lot of other debug messages getting printed on the Console as the Debug-level is now set to '1'.
