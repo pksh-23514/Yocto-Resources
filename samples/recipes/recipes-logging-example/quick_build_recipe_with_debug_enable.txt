@@ -119,7 +119,7 @@ Summary: There was 1 ERROR message, returning a non-zero exit code.
 
 8. The Build log displays the Recipe's Shell logging mechanism.
 	1) The 'bbnote' message is not displayed in the Build log as expected.
-	2) The 'bbdebug' messages are displayed in the Build log as the Debug-level is now passed as 'level-1' with the 'bitbake' call.
+	2) The 'bbdebug' message is displayed in the Build log as the Debug-level is now passed as 'level-1' with the 'bitbake' call.
 	3) The color codes for the Output displayed on the Console is as expected.
 	4) Apart from the 'bbdebug' message in the Recipe file, there are a lot of other debug messages getting printed on the Console as the Debug-level is now set to '1'.
 
@@ -264,4 +264,4 @@ Summary: There was 1 ERROR message, returning a non-zero exit code.
 	1) The 'bbnote' message is not displayed in the Build log as expected.
 	2) The 'bbdebug' messages are displayed in the Build log as the Debug-level is now passed as 'level-3' with the 'bitbake' call.
 	3) The color codes for the Output displayed on the Console is as expected.
-	4) Apart from the 'bbdebug' message in the Recipe file, there are a lot of other debug messages getting printed on the Console as the Debug-level is now set to '3'.
+	4) Apart from the 'bbdebug' messages in the Recipe file, there are a lot of other debug messages getting printed on the Console as the Debug-level is now set to '3'.
