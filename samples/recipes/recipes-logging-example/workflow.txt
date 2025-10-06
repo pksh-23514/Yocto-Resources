@@ -71,3 +71,15 @@ Recipe Build for C File with Shell Logging Mechanisms and Debug Output Enable in
 12. The various OpenEmbedded Build system variable values can be checked in the BitBake Environment using the 'bitbake -e' command.
 13. After the Build is successful, the 'WORKDIR' directory can be checked for the files and directories generated during the Build.
 14. The Build for a Recipe can be cleaned using the 'bitbake -c cleanall' command.
+15. Once the Recipe file is cleaned, the Build command with Debug-level set to '3' can be executed for the Recipe.
+16. In the Build log displayed on the Console, the following can be observed:
+	1) The 'bbnote' message is not displayed in the Build log as expected.
+	2) The 'bbdebug' messages are displayed in the Build log as the Debug-level is now passed as 'level-3' with the 'bitbake' call.
+	3) The color codes for the Output displayed on the Console is as expected.
+		=> Plain Message  <--- *White Font*
+		=> DEBUG: example-0.1-r0 do_compile: Debug Message 1  <--- *Cyan Font*
+		=> DEBUG: example-0.1-r0 do_compile: Debug Message 2  <--- *Cyan Font*
+		=> DEBUG: example-0.1-r0 do_compile: Debug Message 3  <--- *Cyan Font*
+		=> WARNING: example-0.1-r0 do_compile: Warning Message  <--- *Yellow Font*
+		=> ERROR: example-0.1-r0 do_compile: Error Message  <--- *Red Font*
+	4) Apart from the 'bbdebug' messages in the Recipe file, there are a lot of other debug messages getting printed on the Console as the Debug-level is now set to '3'.
