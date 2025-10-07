@@ -1,0 +1,20 @@
+Verifying the OpenEmbedded Build Variables and Tasks for Recipe Build with Remote Public Git Source:
+====================================================================================================
+
+1. The Recipe Build Environment can be used to fetch the various variables related to the Recipe using the 'bitbake -e' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-remote-git | grep ^PN=
+PN="hello-remote-git"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-remote-git | grep ^PV=
+PV="0.1"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-remote-git | grep ^PR=
+PR="r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-remote-git | grep ^BP=
+BP="hello-remote-git-0.1"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-remote-git | grep ^BPN=
+BPN="hello-remote-git"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-remote-git | grep ^WORKDIR=
+WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-remote-git | grep ^S=
+S="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/git"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-remote-git | grep ^D=
+D="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-remote-git/0.1-r0/image"
