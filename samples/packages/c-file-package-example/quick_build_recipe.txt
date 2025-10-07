@@ -72,3 +72,40 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 => #    install -d ${D}${docdir}
 => #    install -m 0444 README.txt ${D}${docdir}
 => }
+
+8. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ cd ../../../build/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-package
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1646 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 885 .bb files complete (884 cached, 1 parsed). 1646 targets, 63 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.30"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:7f12221f49c32ba320ee175a3f47eb8005db574c"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 7 Local 0 Mirrors 0 Missed 7 Current 147 (0% match, 95% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 638 tasks of which 623 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 1 seconds
+
+9. The Recipe Build Environment can be used to fetch 'FILES' and 'PACKAGES' variables related to the Recipe using the 'bitbake -e' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^FILES=
+FILES=""
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^PACKAGES=
+PACKAGES="hello-package-src hello-package-dbg hello-package-staticdev hello-package-dev hello-package-doc hello-package-locale  hello-package"
