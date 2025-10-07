@@ -109,3 +109,44 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ b
 FILES=""
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^PACKAGES=
 PACKAGES="hello-package-src hello-package-dbg hello-package-staticdev hello-package-dev hello-package-doc hello-package-locale  hello-package"
+
+10. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^WORKDIR=
+WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ ls
+configure.sstate   deploy-ipks               hello       image            packages-split  pkgdata-pdata-input  recipe-sysroot         sysroot-destdir
+debugsources.list  deploy-rpms               hello.c     license-destdir  patches         pkgdata-sysroot      recipe-sysroot-native  temp
+deploy-debs        deploy-source-date-epoch  hello.spec  package          pkgdata         pseudo               source-date-epoch
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ tree image
+image
+└── usr
+    └── bin
+        └── hello
+
+2 directories, 1 file
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ tree packages-split
+packages-split
+├── hello-package
+│   └── usr
+│       └── bin
+│           └── hello
+├── hello-package-dbg
+│   └── usr
+│       └── bin
+├── hello-package-dev
+├── hello-package-doc
+├── hello-package-locale
+├── hello-package.shlibdeps
+├── hello-package-src
+└── hello-package-staticdev
+
+11 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ tree deploy-rpms
+deploy-rpms
+└── cortexa15t2hf_neon
+    ├── hello-package-0.1-r0.cortexa15t2hf_neon.rpm
+    ├── hello-package-dbg-0.1-r0.cortexa15t2hf_neon.rpm
+    └── hello-package-dev-0.1-r0.cortexa15t2hf_neon.rpm
+
+1 directory, 3 files
