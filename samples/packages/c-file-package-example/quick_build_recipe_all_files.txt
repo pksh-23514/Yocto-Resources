@@ -56,3 +56,36 @@ hello-package
 └── hello-package_0.1.bb
 
 1 directory, 3 files
+
+7. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd ../../build/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-package
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1646 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 885 .bb files complete (884 cached, 1 parsed). 1646 targets, 63 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.30"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:7f12221f49c32ba320ee175a3f47eb8005db574c"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 7 Local 1 Mirrors 0 Missed 6 Current 147 (14% match, 96% complete)
+Removing 5 stale sstate objects for arch cortexa15t2hf-neon: 100% |################################################################################################| Time: 0:00:00
+Removing 1 stale sstate objects for arch qemuarm: 100% |###########################################################################################################| Time: 0:00:00
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 638 tasks of which 624 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 1 seconds
