@@ -52,3 +52,43 @@ core-image-minimal-qemuarm-<buildhash>.testdata.json		zImage
 core-image-minimal-qemuarm.ext4					zImage--5.15.184+git0+9c4fc176ec_27eaa24a04-r0-qemuarm-<buildhash>.bin
 core-image-minimal-qemuarm.manifest				zImage-qemuarm.bin
 core-image-minimal-qemuarm.qemuboot.conf
+
+5. To execute the 'core-image-minimal' Image Built for 'qemuarm' Architecture on QEMU, the below commands can be provided.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ runqemu qemuarm core-image-minimal nographic
+runqemu - INFO - Running MACHINE=qemuarm bitbake -e ...
+runqemu - INFO - Continuing with the following parameters:
+KERNEL: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/zImage]
+MACHINE: [qemuarm]
+FSTYPE: [ext4]
+ROOTFS: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.ext4]
+CONFFILE: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.qemuboot.conf]
+
+...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 5.15.184-yocto-standard (oe-user@oe-host) (arm-poky-linux-gnueabi-gcc (GCC) 11.5.0, GNU ld (GNU Binutils) 2.38.20220708) ...
+[    0.000000] CPU: ARMv7 Processor [412fc0f1] revision 1 (ARMv7), cr=30c5387d
+...
+
+Poky (Yocto Project Reference Distro) 4.0.27 qemuarm /dev/ttyAMA0
+
+qemuarm login: root
+root@qemuarm:~#
+
+6. The Cross-Compiled C file binary and the README file should be located in the directory on which it is installed in the Recipe file along with the specified file permissions.
+root@qemuarm:~# ls -l /usr/bin/hello
+-rwxr-xr-x    1 root     root          5508 Mar  9  2018 /usr/bin/hello
+root@qemuarm:~# hello
+Hello World!
+root@qemuarm:~# ls /usr/share/
+dict    info    man     misc    udhcpc
+
+7. After running the Built Image containing all the installed files on the QEMU, the following observation is made:
+	1) The Cross-Compiled C file binary is located in the 'bindir' directory i.e. "/usr/bin/" as specified in the Recipe file.
+	2) However, the README file is not located in the 'docdir' directory i.e. "/usr/share/doc/" as specified in the Recipe file.
+	3) The complete "/usr/share/doc/" directory is absent from the Built Image. This can only happen if there is no file to kept under this directory.
+
+8. The reason for the above observations is that the values mentioned in the 'IMAGE_INSTALL' variable are actually the Package names.
+	1) In the above Image Build, the 'IMAGE_INSTALL' variable is appended with 'hello-package' Package only in the Image Recipe file.
+	2) The 'hello-package-doc' Package name is not appended in the 'IMAGE_INSTALL' variable in the Image Recipe file.
+	3) Therefore, the README file is not present in the Built Image.
