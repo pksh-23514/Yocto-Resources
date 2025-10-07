@@ -1,0 +1,34 @@
+Running the Yocto Image with Recipe having All Files Installed for ARM Architecture on QEMU:
+============================================================================================
+
+1. To execute the 'core-image-minimal' Image Built for 'qemuarm' Architecture on QEMU, the below commands can be provided.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ runqemu qemuarm core-image-minimal nographic
+runqemu - INFO - Running MACHINE=qemuarm bitbake -e ...
+runqemu - INFO - Continuing with the following parameters:
+KERNEL: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/zImage]
+MACHINE: [qemuarm]
+FSTYPE: [ext4]
+ROOTFS: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.ext4]
+CONFFILE: [/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/deploy/images/qemuarm/core-image-minimal-qemuarm.qemuboot.conf]
+
+...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 5.15.184-yocto-standard (oe-user@oe-host) (arm-poky-linux-gnueabi-gcc (GCC) 11.5.0, GNU ld (GNU Binutils) 2.38.20220708) ...
+[    0.000000] CPU: ARMv7 Processor [412fc0f1] revision 1 (ARMv7), cr=30c5387d
+...
+
+Poky (Yocto Project Reference Distro) 4.0.27 qemuarm /dev/ttyAMA0
+
+qemuarm login: root
+root@qemuarm:~#
+
+2. The Cross-Compiled C file binary and the README file should be located in the directory on which it is installed in the Recipe file along with the specified file permissions.
+root@qemuarm:~# ls -l /usr/bin/hello
+-rwxr-xr-x    1 root     root          5508 Mar  9  2018 /usr/bin/hello
+root@qemuarm:~# hello
+Hello World!
+root@qemuarm:~# ls -l /usr/share/doc/README.txt
+-rw-r--r--    1 root     root            50 Mar  9  2018 /usr/share/doc/README.txt
+root@qemuarm:~# cat /usr/share/doc/README.txt
+A simple Recipe to Build a C-program Application.
