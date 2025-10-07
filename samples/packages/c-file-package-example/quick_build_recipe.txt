@@ -150,3 +150,12 @@ deploy-rpms
     └── hello-package-dev-0.1-r0.cortexa15t2hf_neon.rpm
 
 1 directory, 3 files
+
+11. The Packages in the 'deploy-rpms' directory are created based on the files installed by the Recipe in the 'do_install' Task.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^FILES:hello-package=
+FILES:hello-package="/usr/bin/* /usr/sbin/* /usr/libexec/* /usr/lib/lib*.so.* /usr/share/hello-package /usr/lib/hello-package* ..."
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^FILES:hello-package-dbg=
+FILES:hello-package-dbg="/usr/lib/debug /usr/lib/debug-static /usr/src/debug"
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^FILES:hello-package-dev=
+FILES:hello-package-dev="/usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la /usr/lib/*.o /usr/lib/hello-package/*.la /lib/*.la /usr/lib/cmake /usr/share/cmake"
