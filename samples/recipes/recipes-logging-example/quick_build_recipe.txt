@@ -104,6 +104,91 @@ WORKDIR="/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0$ ls
 ...
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0$ vi temp/run.do_compile
+=> ...
+# line: 9, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/example/example_0.1.bb
+=> do_compile() {
+=>     bbplain "Plain Message"
+=>     bbdebug 1 "Debug Message 1"
+=>     bbdebug 2 "Debug Message 2"
+=>     bbdebug 3 "Debug Message 3"
+=>     bbnote "Note Message"
+=>     arm-poky-linux-gnueabi-gcc  -mthumb -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a15 -Wformat ...  -Wl,-z,relro,-z,now program.c -o program
+=>     bbwarn "Warning Message"
+=>     bberror "Error Message"
+=> }
+
+=> # line: 81, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/classes/logging.bbclass
+=> bbdebug() {
+=> 	USAGE='Usage: bbdebug [123] "message"'
+=> 	if [ $# -lt 2 ]; then
+=> 		bbfatal "$USAGE"
+=> 	fi
+
+=> 	# Strip off the debug level and ensure it is an integer
+=> 	DBGLVL=$1; shift
+=> 	NONDIGITS=$(echo "$DBGLVL" | tr -d "[:digit:]")
+=> 	if [ "$NONDIGITS" ]; then
+=> 		bbfatal "$USAGE"
+=> 	fi
+
+=> 	# All debug output is printed to the logs
+=> 	if [ -p /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0/temp/fifo.1004164 ] ; then
+=> 		printf "%b\0" "bbdebug $DBGLVL $*" > /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../example/0.1-r0/temp/fifo.1004164
+=> 	else
+=> 		echo "DEBUG: $*"
+=> 	fi
+=> }
+
+=> # line: 43, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/classes/logging.bbclass
+=> bberror() {
+=> 	if [ -p /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0/temp/fifo.1004164 ] ; then
+=> 		printf "%b\0" "bberror $*" > /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../example/0.1-r0/temp/fifo.1004164
+=> 	else
+=> 		echo "ERROR: $*"
+=> 	fi
+=> }
+
+=> # line: 21, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/classes/logging.bbclass
+=> bbnote() {
+=> 	if [ -p /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0/temp/fifo.1004164 ] ; then
+=> 		printf "%b\0" "bbnote $*" > /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../example/0.1-r0/temp/fifo.1004164
+=> 	else
+=> 		echo "NOTE: $*"
+=> 	fi
+=> }
+
+=> # line: 11, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/classes/logging.bbclass
+=> bbplain() {
+=> 	if [ -p /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0/temp/fifo.1004164 ] ; then
+=> 		printf "%b\0" "bbplain $*" > /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../example/0.1-r0/temp/fifo.1004164
+=> 	else
+=> 		echo "$*"
+=> 	fi
+=> }
+
+=> # line: 32, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/classes/logging.bbclass
+=> bbwarn() {
+=> 	if [ -p /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0/temp/fifo.1004164 ] ; then
+=> 		printf "%b\0" "bbwarn $*" > /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../example/0.1-r0/temp/fifo.1004164
+=> 	else
+=> 		echo "WARNING: $*"
+=> 	fi
+=> }
+
+=> # line: 54, file: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/classes/logging.bbclass
+=> bbfatal() {
+=> 	if [ -p /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0/temp/fifo.1004164 ] ; then
+=> 		printf "%b\0" "bbfatal $*" > /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../example/0.1-r0/temp/fifo.1004164
+=> 	else
+=> 		echo "ERROR: $*"
+=> 	fi
+=> 	exit 1
+=> }
+
+=> cd '/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/example/0.1-r0'
+=> do_compile
+=> ...
 
 10. To remove all the files and directories generated during the Build, the 'cleanall' command of the BitBake can be used. However, the 'WORKDIR' directory is still present.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c cleanall example
