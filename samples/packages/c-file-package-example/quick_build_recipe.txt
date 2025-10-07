@@ -35,7 +35,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ mkdir files
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ cd files/
 
-4. Include the C file and the README.txt file in the 'files' directory of the Layer.
+4. Include the C file and the README file in the 'files' directory of the Layer.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package/files$ vi hello.c
 ---> Add the contents of the C file to be Built using the Recipe.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package/files$ vi README.txt
@@ -56,3 +56,19 @@ hello-package
 └── hello-package_0.1.bb
 
 1 directory, 3 files
+
+7. Modify the Recipe file in the Recipe folder i.e. 'hello-package' for the BitBake to exclude the Build of the README file.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-package/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ vi hello-package_0.1.bb
+=> ...
+=> SRC_URI = " \
+=>     file://hello.c"
+=> #    file://README.txt \
+=> #    "
+=> ...
+=> do_install() {
+=>     install -d ${D}${bindir}
+=>     install -m 0755 hello ${D}${bindir}
+=> #    install -d ${D}${docdir}
+=> #    install -m 0444 README.txt ${D}${docdir}
+=> }
