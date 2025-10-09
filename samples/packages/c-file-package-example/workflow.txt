@@ -87,3 +87,16 @@ Including the Recipe with All Files Installed to the Image:
 12. Once the Image Recipe file is updated, the Image Build command can be executed.
 13. After the Image Build is successful, the Image can be tested on the Target Device for verifying the Recipe addition.
 	=> poweroff
+
+Running the Added Recipe Yocto Image on QEMU:
+=============================================
+1. For testing the Built Yocto Image on the Host, QEMU is used to execute the Image on an Emulator mimicking the Target HW.
+2. Poky repository provides a script 'runqemu' which allows to start the QEMU for running the Yocto Image.
+3. The 'runqemu' script can be executed anywhere in the Build directory after setting up the Build Environment.
+	=> runqemu qemuarm core-image-minimal nographic
+4. After the Root Login stage is done, it should be verified whether the Cross-Compiled C file binary and the README file is present at the correctly installed location.
+	1) The Cross-Compiled C file binary is located in the 'bindir' directory i.e. "/usr/bin/" as specified in the Recipe file.
+	2) The README file is located in the 'docdir' directory i.e. "/usr/share/doc/" as specified in the Recipe file.
+5. If the C binary is present, execute the binary to verify if the expected Output is displayed.
+6. The QEMU can be closed by powering OFF the virtual HW.
+	=> poweroff
