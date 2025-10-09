@@ -56,3 +56,12 @@ hello-package
 └── hello-package_0.1.bb
 
 1 directory, 3 files
+
+7. Modify the Recipe file in the Recipe folder i.e. 'hello-package' to set a custom value to the 'PACKAGES' variable along with their respective 'FILES' variable.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-package/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ vi hello-package_0.1.bb
+=> ...
+
+=> PACKAGES = "${PN} ${PN}-dbg"
+=> FILES:${PN}-dbg += "${bindir}/hello"
+=> FILES:${PN} += "${bindir}/hello"
