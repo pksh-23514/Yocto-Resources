@@ -56,3 +56,11 @@ hello-package
 └── hello-package_0.1.bb
 
 1 directory, 3 files
+
+7. Modify the Recipe file in the Recipe folder i.e. 'hello-package' to include the same file in '${PN}' and '${PN}-dbg' Packages produced by the BitBake.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-package/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ vi hello-package_0.1.bb
+=> ...
+
+=> FILES:${PN}-dbg += "${bindir}/hello"
+=> FILES:${PN} += "${bindir}/hello"
