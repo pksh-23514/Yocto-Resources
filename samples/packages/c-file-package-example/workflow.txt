@@ -34,15 +34,15 @@ Recipe Build for C File:
 Recipe Build for All Files Installed by Recipe:
 ===============================================
 1. This sample Recipe is used to Build a single C file and a README file and include it into the RootFS.
-2. The C file must be written with the contents to Build.
-3. The next step is to place this C file in a directory structure for the BitBake to pick it up during the Build.
+2. The C file and the README file must be written with the contents to Build.
+3. The next step is to place this C file and the README file in a directory structure for the BitBake to pick it up during the Build.
 	1) The BitBake finds the Recipes using the 'BBFILES' variable in the 'conf/layer.conf' file of the corresponding Layer.
 		=> BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
 		               ${LAYERDIR}/recipes-*/*/*.bbappend"
 	2) Consequently, the Recipe file must be placed at this path in the Layer such that it can be located by the Build system.
 4. The Layer can be created and added to the Build system using the 'bitbake-layers' command.
 	1) Inside the Layer directory, there is a 'recipes-*' directory that shall contain the Recipes.
-	2) The C file and the particular Recipe file to Build this C file shall be placed in this 'recipes-*' directory.
+	2) The C file, the README file and the particular Recipe file to Build this C file shall be placed in this 'recipes-*' directory.
 5. In the Build directory, the 'conf/bblayers.conf' file can be verified if the Layer is added to the 'BBLAYERS' variable. Otherwise, it would be excluded from the Build.
 6. It is important to note that the name of the Recipe folder must match with the name of the Recipe file name being used to Build the SW.
 	=> meta/recipes-core/busybox ---> busybox_1.37.0.bb
@@ -104,15 +104,15 @@ Running the Added Recipe Yocto Image on QEMU:
 Image Build with the Recipe having README file Installed at Other Location:
 ===========================================================================
 1. This sample Recipe is used to Build a single C file and a README file and include it into the RootFS.
-2. The C file must be written with the contents to Build.
-3. The next step is to place this C file in a directory structure for the BitBake to pick it up during the Build.
+2. The C file and the README file must be written with the contents to Build.
+3. The next step is to place this C file and the README file in a directory structure for the BitBake to pick it up during the Build.
 	1) The BitBake finds the Recipes using the 'BBFILES' variable in the 'conf/layer.conf' file of the corresponding Layer.
 		=> BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
 		               ${LAYERDIR}/recipes-*/*/*.bbappend"
 	2) Consequently, the Recipe file must be placed at this path in the Layer such that it can be located by the Build system.
 4. The Layer can be created and added to the Build system using the 'bitbake-layers' command.
 	1) Inside the Layer directory, there is a 'recipes-*' directory that shall contain the Recipes.
-	2) The C file and the particular Recipe file to Build this C file shall be placed in this 'recipes-*' directory.
+	2) The C file , the README file and the particular Recipe file to Build this C file shall be placed in this 'recipes-*' directory.
 5. In the Build directory, the 'conf/bblayers.conf' file can be verified if the Layer is added to the 'BBLAYERS' variable. Otherwise, it would be excluded from the Build.
 6. It is important to note that the name of the Recipe folder must match with the name of the Recipe file name being used to Build the SW.
 	=> meta/recipes-core/busybox ---> busybox_1.37.0.bb
