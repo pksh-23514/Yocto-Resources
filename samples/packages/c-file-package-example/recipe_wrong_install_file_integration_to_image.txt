@@ -161,3 +161,11 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ b
 FILES:hello-package-dbg="/usr/lib/debug /usr/lib/debug-static /usr/src/debug"
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^FILES:hello-package-dev=
 FILES:hello-package-dev="/usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la /usr/lib/*.o /usr/lib/hello-package/*.la /lib/*.la /usr/lib/cmake /usr/share/cmake"
+
+11. Therefore, after analysing the 'deploy-rpms' and the 'packages-split' directory, it is observed that:
+	1) The files installed are packaged in 'hello-package', 'hello-package-dbg' and 'hello-package-dev' Packages.
+	2) There is no 'hello-package-doc' created as there is no file installed in the directories that are packaged into this Package.
+	3) The README file is now being installed in the 'hello-package-dev' Package.
+	4) Since, the Image Recipe file includes 'hello-package-doc' Package in the 'IMAGE_INSTALL' variable, the Image Build throws the unmatched Package error.
+		=> IMAGE_INSTALL:append = " hello-package hello-package-doc"
+	5) As there is no issue with the path on which the README file is being installed, the Recipe Build is successful.
