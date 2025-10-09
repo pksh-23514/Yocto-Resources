@@ -151,3 +151,38 @@ NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 638 tasks of which 633 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 1 seconds
+
+12. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ ls
+configure.sstate   deploy-source-date-epoch  hello-package.spec  package         pkgdata              pseudo          recipe-sysroot-native                    sysroot-destdir
+debugsources.list  hello                     image               packages-split  pkgdata-pdata-input  README.txt      source-date-epoch                        temp
+deploy-rpms        hello.c                   license-destdir     patches         pkgdata-sysroot      recipe-sysroot  sstate-install-deploy_source_date_epoch
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ tree packages-split
+packages-split
+├── hello-package
+│   └── usr
+│       └── include
+│           └── README.txt
+├── hello-package-dbg
+│   └── usr
+│       └── bin
+│           └── hello
+├── hello-package-dbg.shlibdeps
+└── hello-package-src
+
+7 directories, 3 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ tree deploy-rpms
+deploy-rpms
+└── cortexa15t2hf_neon
+    ├── hello-package-0.1-r0.cortexa15t2hf_neon.rpm
+    └── hello-package-dbg-0.1-r0.cortexa15t2hf_neon.rpm
+
+1 directory, 2 files
+
+13. The Recipe Build Environment can be used to fetch the 'PACKAGES' variable related to the Recipe using the 'bitbake -e' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^PACKAGES=
+PACKAGES="hello-package hello-package-dbg"
+
+14. Although, the new definition of the 'PACKAGES' variable is such that the order of the Package list is ${PN}' and then '${PN}-dbg', the 'hello' file is under '${PN}-dbg'.
