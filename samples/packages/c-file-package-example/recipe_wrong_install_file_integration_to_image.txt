@@ -67,3 +67,53 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 =>     install -d ${D}${includedir}
 =>     install -m 0444 README.txt ${D}${includedir}
 => }
+
+8. On the Host Machine, run the 'bitbake' command with Target Image as 'core-image-minimal' for a quick Build. This will Build the Recipe again after modifications.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ cd ../../../build/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake core-image-minimal
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1646 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 885 .bb files complete (884 cached, 1 parsed). 1646 targets, 63 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.30"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:7f12221f49c32ba320ee175a3f47eb8005db574c"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:02
+Sstate summary: Wanted 6 Local 0 Mirrors 0 Missed 6 Current 1391 (0% match, 99% complete)
+Removing 3 stale sstate objects for arch qemuarm: 100% |###########################################################################################################| Time: 0:00:00
+Removing 3 stale sstate objects for arch cortexa15t2hf-neon: 100% |################################################################################################| Time: 0:00:00
+NOTE: Executing Tasks
+ERROR: core-image-minimal-1.0-r0 do_rootfs: Could not invoke dnf. Command '/home/.../build/tmp/work/.../core-image-minimal/1.0-r0/recipe-sysroot-native/usr/bin/dnf -v ...
+DNF version: 4.11.1
+cachedir: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/qemuarm-poky-linux-gnueabi/core-image-minimal/1.0-r0/rootfs/var/cache/dnf
+Added oe-repo repo from /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/qemuarm-poky-linux-gnueabi/core-image-minimal/1.0-r0/oe-rootfs-repo
+User-Agent: falling back to 'libdnf': could not detect OS or basearch
+repo: using cache for: oe-repo
+oe-repo: using metadata from Sun 05 Oct 2025 05:21:08 PM UTC.
+Last metadata expiration check: 0:00:01 ago on Sun 05 Oct 2025 05:21:08 PM UTC.
+No match for argument: hello-package-doc
+Error: Unable to find a match: hello-package-doc
+
+ERROR: Logfile of failure stored in: /home/prabhat_kiran/.../Poky/poky/build/tmp/work/qemuarm-poky-linux-gnueabi/core-image-minimal/1.0-r0/temp/log.do_rootfs.2547891
+ERROR: Task (/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 3586 tasks of which 3580 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 1 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs
+Summary: There was 1 ERROR message, returning a non-zero exit code.
