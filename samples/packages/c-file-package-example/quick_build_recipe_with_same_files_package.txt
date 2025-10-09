@@ -124,3 +124,14 @@ deploy-rpms
     └── hello-package-dev-0.1-r0.cortexa15t2hf_neon.rpm
 
 1 directory, 2 files
+
+10. The Recipe Build Environment can be used to fetch 'PACKAGES' variable related to the Recipe using the 'bitbake -e' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^PACKAGES=
+PACKAGES="hello-package-src hello-package-dbg hello-package-staticdev hello-package-dev hello-package-doc hello-package-locale  hello-package"
+
+11. After analysing the 'packages-split' directory, it is observed that:
+	1) The 'hello' binary file is packaged under the 'hello-package-dbg' directory.
+	2) Although, the 'hello' binary is mentioned in the 'FILES' variable for the 'hello-package' and the 'hello-package-dbg' Packages, it is put under one Package only.
+	3) The reason for such observation is that the 'hello-package-dbg' is mentioned earlier than the 'hello-package' in the 'PACKAGES' variable.
+	4) If a file matches in the 'FILES' variable for more than one Package in the 'PACKAGES' variable, it is assigned to the earliest (leftmost) Package in the list.
+	5) For each file installed by the Recipe, the first Package whose 'FILES' variable has the value matching the file is the one in which it is packaged.
