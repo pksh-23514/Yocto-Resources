@@ -96,3 +96,31 @@ NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 638 tasks of which 632 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 1 seconds
+
+9. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ tree packages-split
+packages-split
+├── hello-package
+├── hello-package-dbg
+│   └── usr
+│       └── bin
+│           └── hello
+├── hello-package-dbg.shlibdeps
+├── hello-package-dev
+│   └── usr
+│       └── include
+│           └── README.txt
+├── hello-package-doc
+├── hello-package-locale
+├── hello-package-src
+└── hello-package-staticdev
+
+11 directories, 3 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ tree deploy-rpms
+deploy-rpms
+└── cortexa15t2hf_neon
+    ├── hello-package-dbg-0.1-r0.cortexa15t2hf_neon.rpm
+    └── hello-package-dev-0.1-r0.cortexa15t2hf_neon.rpm
+
+1 directory, 2 files
