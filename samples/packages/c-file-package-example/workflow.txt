@@ -33,7 +33,7 @@ Recipe Build for C File:
 
 Recipe Build for All Files Installed by Recipe:
 ===============================================
-1. This sample Recipe is used to Build a single C file and include it into the RootFS.
+1. This sample Recipe is used to Build a single C file and a README file and include it into the RootFS.
 2. The C file must be written with the contents to Build.
 3. The next step is to place this C file in a directory structure for the BitBake to pick it up during the Build.
 	1) The BitBake finds the Recipes using the 'BBFILES' variable in the 'conf/layer.conf' file of the corresponding Layer.
@@ -103,7 +103,7 @@ Running the Added Recipe Yocto Image on QEMU:
 
 Image Build with the Recipe having README file Installed at Other Location:
 ===========================================================================
-1. This sample Recipe is used to Build a single C file and include it into the RootFS.
+1. This sample Recipe is used to Build a single C file and a README file and include it into the RootFS.
 2. The C file must be written with the contents to Build.
 3. The next step is to place this C file in a directory structure for the BitBake to pick it up during the Build.
 	1) The BitBake finds the Recipes using the 'BBFILES' variable in the 'conf/layer.conf' file of the corresponding Layer.
