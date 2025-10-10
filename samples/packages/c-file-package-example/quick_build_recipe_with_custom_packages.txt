@@ -212,3 +212,53 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ cd ../../../../../
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^PACKAGES=
 PACKAGES="hello-package hello-package-binary"
+
+17. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-package
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1646 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.30"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:7f12221f49c32ba320ee175a3f47eb8005db574c"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 4 Local 0 Mirrors 0 Missed 4 Current 150 (0% match, 97% complete)
+Removing 3 stale sstate objects for arch cortexa15t2hf-neon: 100% |################################################################################################| Time: 0:00:00
+Removing 1 stale sstate objects for arch qemuarm: 100% |###########################################################################################################| Time: 0:00:00
+NOTE: Executing Tasks
+ERROR: hello-package-0.1-r0 do_package: QA Issue: hello-package: Files/directories were installed but not shipped in any package:
+  /usr/bin/.debug
+  /usr/bin/.debug/hello
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+hello-package: 2 installed and not shipped files. [installed-vs-shipped]
+ERROR: hello-package-0.1-r0 do_package: Fatal QA errors were found, failing task.
+ERROR: Logfile of failure stored in: /home/prabhat_kiran/.../Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0/temp/log.do_package.2579704
+ERROR: Task (/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package/hello-package_0.1.bb:do_package) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 634 tasks of which 633 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 1 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package/hello-package_0.1.bb:do_package
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+
+18. The Recipe Build failed as the Debug-Symbol file is not packaged into any of the Packages created for this Recipe. This is a classic 'installed-vs-shipped' error.
+	1) The BitBake's 'split_and_strip' process defined in the 'meta/lib/oe/package.py' file is executed. The process depends on the 'INHIBIT_PACKAGE_DEBUG_SPLIT' value.
+	2) The BitBake's 'split_and_strip' process automatically moves the stripped binary and their Debug-Symbol file into the '${PN}-dbg' Package.
+	3) The 'hello' binary is stripped i.e. the debug info is removed. The debug info is supposed to be copied to the '${PN}-dbg' Package.
+	4) There is no '${PN}-dbg' Package mentioned in the 'PACKAGES' variable. Hence, that Package is never created by the BitBake.
+	5) Therefore, the '.debug' directory is installed at "/usr/bin/" directory by the 'do_install' Task.
+	6) However, the '.debug' directory is not packaged into any of the Packages specified in the 'PACKAGES' variable in the Recipe file.
