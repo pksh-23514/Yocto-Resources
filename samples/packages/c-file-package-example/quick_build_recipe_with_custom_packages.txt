@@ -185,4 +185,13 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tm
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^PACKAGES=
 PACKAGES="hello-package hello-package-dbg"
 
-14. Although, the new definition of the 'PACKAGES' variable is such that the order of the Package list is ${PN}' and then '${PN}-dbg', the 'hello' file is under '${PN}-dbg'.
+14. Although, the new definition of the 'PACKAGES' variable is such that the order of the Package list is '${PN}' and then '${PN}-dbg', the 'hello' file is under '${PN}-dbg'.
+	1) This is a classic Yocto Packaging behavior that often confuses even experienced developers.
+	2) During the 'do_package' Task, the BitBake splits the Built files into per-Package directories according to the 'FILES' variable.
+	3) Then, the BitBake's 'split_and_strip' process defined in the 'meta/lib/oe/package.py' file is executed. The process depends on the 'INHIBIT_PACKAGE_DEBUG_SPLIT' value.
+	4) The 'hello' binary is stripped i.e. the debug info is removed. The debug info gets copied to the '${PN}-dbg' Package.
+	5) Depending on the Build Configuration, the complete binary with debug info can also be copied to the '${PN}-dbg' Package.
+	6) This process happens before the 'FILES' variable is processed by the BitBake.
+	7) Therefore, even if the 'hello' file should be packaged under the '${PN}' as per the order in the 'PACKAGES', it is already assigned to the '${PN}-dbg' Package.
+	8) The '${PN}-dbg' Package is a special Package automatically handled by the BitBake, all the files that match the debug patterns are directed to this Package.
+	9) The BitBake's 'split_and_strip' process automatically moves the stripped binary and their Debug-Symbol file into the '${PN}-dbg' Package.
