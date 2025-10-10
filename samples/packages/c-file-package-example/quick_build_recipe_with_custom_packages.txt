@@ -262,3 +262,48 @@ Summary: There were 2 ERROR messages, returning a non-zero exit code.
 	4) There is no '${PN}-dbg' Package mentioned in the 'PACKAGES' variable. Hence, that Package is never created by the BitBake.
 	5) Therefore, the '.debug' directory is installed at "/usr/bin/" directory by the 'do_install' Task.
 	6) However, the '.debug' directory is not packaged into any of the Packages specified in the 'PACKAGES' variable in the Recipe file.
+
+19. Modify the Recipe file in the Recipe folder i.e. 'hello-package' to include the '.debug' directory in the '${PN}-dbg' Package.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-package/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ vi hello-package_0.1.bb
+=> ...
+
+PACKAGES = "${PN} ${PN}-binary ${PN}-dbg"
+FILES:${PN}-dbg += "${bindir}/.debug/*"
+FILES:${PN} += "${bindir}/hello ${includedir}/README.txt"
+FILES:${PN}-binary += "${bindir}/hello"
+
+20. The Recipe Build Environment can be used to fetch the 'PACKAGES' variable related to the Recipe using the 'bitbake -e' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^PACKAGES=
+PACKAGES="hello-package hello-package-binary hello-package-dbg"
+
+21. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-package
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1646 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:00
+Parsing of 885 .bb files complete (884 cached, 1 parsed). 1646 targets, 63 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.30"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:7f12221f49c32ba320ee175a3f47eb8005db574c"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 4 Local 0 Mirrors 0 Missed 4 Current 150 (0% match, 97% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 638 tasks of which 633 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 1 seconds
