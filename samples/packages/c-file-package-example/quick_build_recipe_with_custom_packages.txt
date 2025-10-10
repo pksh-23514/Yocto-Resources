@@ -337,3 +337,13 @@ deploy-rpms
     └── hello-package-dbg-0.1-r0.cortexa15t2hf_neon.rpm
 
 1 directory, 2 files
+
+23. Finally, the BitBake has packaged the 'hello' file under '${PN}' although the order of the Package list in the 'PACKAGES' variable is quite similar to that in earlier Build.
+	1) This is the real mechanics of how BitBake’s Packaging order and pattern precedence works. It is very less documented in the Yocto Project.
+	2) If a file matches in the 'FILES' variable for more than one Package in the 'PACKAGES' variable, it is assigned to the earliest (leftmost) Package in the list.
+	3) For each file installed by the Recipe, the first Package whose 'FILES' variable has the value matching the file is the one in which it is packaged.
+	4) So, the BitBake assigns the 'hello' file to the '${PN}' Package and the '${PN}-binary' Package is left empty.
+	5) In this Build, the 'hello' file is not kept under the '${PN}-dbg' Package during the automatic handling by the BitBake.
+	6) This is due to the fact that the 'FILES:${PN}-dbg' variable is overriding the usual way the hello' binary is stripped and packaged.
+	7) By setting the 'FILES:${PN}-dbg' variable explicitly, the Recipe is effectively telling the BitBake to do not treat the main binary 'hello' as a debug file.
+	8) This resolves the conflict of keeping the 'hello' binary between the '${PN}' and the '${PN}-dbg' Packages.
