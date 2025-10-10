@@ -116,6 +116,8 @@ Summary: There were 2 ERROR messages, returning a non-zero exit code.
 	3) However, the README file is not packaged into any of the Packages specified in the 'PACKAGES' variable in the Recipe file.
 
 10. Modify the Recipe file in the Recipe folder i.e. 'hello-package' to include the README file in the 'FILES:${PN}' variable.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-package/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ vi hello-package_0.1.bb
 => ...
 
 => PACKAGES = "${PN} ${PN}-dbg"
@@ -195,3 +197,18 @@ PACKAGES="hello-package hello-package-dbg"
 	7) Therefore, even if the 'hello' file should be packaged under the '${PN}' as per the order in the 'PACKAGES', it is already assigned to the '${PN}-dbg' Package.
 	8) The '${PN}-dbg' Package is a special Package automatically handled by the BitBake, all the files that match the debug patterns are directed to this Package.
 	9) The BitBake's 'split_and_strip' process automatically moves the stripped binary and their Debug-Symbol file into the '${PN}-dbg' Package.
+
+15. To override the default implementation of the BitBake, the Recipe file in the Recipe folder i.e. 'hello-package' must be modified.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-package/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-package$ vi hello-package_0.1.bb
+=> ...
+
+=> PACKAGES = "${PN} ${PN}-binary"
+=> # FILES:${PN}-dbg += "${bindir}/hello"
+=> FILES:${PN} += "${bindir}/hello ${includedir}/README.txt"
+=> FILES:${PN}-binary += "${bindir}/hello"
+
+16. The Recipe Build Environment can be used to fetch the 'PACKAGES' variable related to the Recipe using the 'bitbake -e' command.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-package/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-package | grep ^PACKAGES=
+PACKAGES="hello-package hello-package-binary"
