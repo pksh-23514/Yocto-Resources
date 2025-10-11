@@ -48,3 +48,23 @@ Splitting Files:
 9. Therefore, the 'PACKAGES' and the 'FILES' variables define how the files installed by the 'do_install' Task are packaged.
 	1) The Recipe Building the SW generally installs these files to be packaged into the standard locations as defined in the 'bitbake.conf' Configuration file.
 	2) Consequently, there is no need to set these variables explicitly unless the SW getting Built installs these files to be packaged into non-standard locations.
+
+Rule of Thumb:
+**************
+1. If a file matches in the 'FILES' variable for more than one Package in the 'PACKAGES' variable, it is assigned to the earliest (leftmost) Package in the list.
+2. For each file installed by the Recipe, the first Package whose 'FILES' variable has the value matching the file is the one in which it is packaged.
+3. It is recommended to avoid the overlapping of the 'FILES' variable or else the Packages may not generated as expected.
+
+installed-vs-shipped Error:
+***************************
+1. This is the error when the files that have been installed by the 'do_install' Task for the Recipe but have not been included in any of the Packages produced for the Recipe.
+2. Thus, the error is thrown by the Recipe Build as 'Files/directories were installed but not shipped in any package'.
+3. In the Recipe's 'WORKDIR' directory, the following observations can be made:
+	1) Since, the 'do_install' Task for the Recipe is executed successfully, the file would be present at the specified location in the 'image' sub-directory.
+	2) However, there is no Package under which this file is placed. So, the file would not be present in the 'packages-split' sub-directory.
+4. These kind of files cannot be included in the Image Build as there is no Package name that can be mentioned in the 'IMAGE_INSTALL' variable in the Image Recipe file.
+5. There are 2 ways to resolve this error.
+	1) These files should be included in the 'FILES' variable for the Package under which they are desired to be placed.
+		=> FILES:${PN}-xyz = "file-1 file-2 ..."
+	2) These files can be deleted at the end of the 'do_install' Task for the Recipe if they are no longer needed in any of the Packages.
+6. The BitBake ensures that every file that is installed by the Recipe must be either packaged or explicitly removed.
