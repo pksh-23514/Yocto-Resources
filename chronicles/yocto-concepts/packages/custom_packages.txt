@@ -1,0 +1,37 @@
+Packages:
+=========
+1. Packages are the Recipe's packaged Compiled Output produced by the BitBake.
+2. They are the binaries that get installed on the Target Image (or RootFS).
+3. It is a binary file in the format of '.ipk', '.deb' or '.rpm' which is Compiled from the Recipe's source code.
+4. The format of the binaries is defined by the Package manager selected by the Build system using the 'PACKAGE_CLASSES' variable.
+	1) .ipk => The Package manager is 'opkg'. This is used as default for Poky.
+	2) .deb => The Package manager is 'dpkg' or 'apt'.
+	3) .rpm => The Package manager is 'dnf', 'smart' or 'rpm'.
+5. A single Recipe can generate multiple Packages which are then split based on the 'PACKAGES' and the 'FILES' variable.
+6. The 'PACKAGES' variable lists all the Packages to be produced from the corresponding Recipe.
+7. The default value of the 'PACKAGES' variable is:
+	=> PACKAGES = "${PN}-src ${PN}-dbg ${PN}-staticdev ${PN}-dev ${PN}-doc ${PN}-locale ${PACKAGE_BEFORE_PN} ${PN}"
+	---> where the 'PN' variable refers to the primary Package name which is the Recipe name.
+8. If the 'PACKAGES' variable is not defined by the Recipe, the BitBake will use the default value automatically.
+9. The 'FILES' variable lists all the files and the directories that are to be included in each Package of the 'PACKAGES' variable.
+10. The usage of 'FILES' variable requires a Package name override to identify the resulting Package. This is followed by a space separated list of files or paths.
+	=> FILES:${PN}-package-suffix-name += "${bindir}/my_dir1 ${bindir}/my_dir2/my_file"
+
+Custom Packages:
+****************
+1. There is always a necessity to produce custom Packages from the Recipes to meet the specific requirements.
+2. Any additional logical Package can be defined in the Recipe file. The prefix '${PN}-' is maintained to distinguish it as a Package.
+	=> PACKAGES = "${PN}-xxx ${PN}-yyy ... ${PN}"
+	=> FILES:${PN} = "${bindir}/main-binary"
+	=> FILES:${PN}-xxx = "${bindir}/file-or-directory-path"
+	=> FILES:${PN}-yyy = "${bindir}/file-or-directory-path"
+	=> FILES:...
+3. While specifying the paths in the 'FILES' variable, it is recommended by the Yocto Project to use the appropriate path variables.
+	1) The usage of path variables include:
+		=> '${sysconfdir}' in place of '/etc'.
+		=> '${bindir}' in place of '/usr/bin'.
+	2) The list of all the path variables is defined in the 'meta/conf/bitbake.conf' file.
+4. These 'PACKAGES' and 'FILES' variables define how the files installed by the 'do_install' Task are packaged.
+5. Once the Recipe Build is successful, the Recipe's 'WORKDIR' directory can be checked to verify if all the files are packaged into their respective Packages.
+5. These custom Package names can then be included in the 'IMAGE_INSTALL' variable of the Image Recipe file to include in the Image Build.
+	=> IMAGE_INSTALL:append = " ${PN}-xxx ${PN}-yyy ..."
