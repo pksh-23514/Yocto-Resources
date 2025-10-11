@@ -1,0 +1,10 @@
+Static Libraries:
+=================
+1. A static library is a collection of Object files that are linked into the program during the Compile time.
+2. This type of linking is called static linking.
+3. Once the linking is completed, the code from the static library becomes a part of the binary generated.
+4. The utility used to create the static libraries is known as Archiver (ar). It can perform the following:
+	1) It can create static libraries which can also be called as archive files.
+	2) It can modify the Object files present in the static libraries.
+	3) It can list the name of the Object files present in the static libraries.
+5. The static libraries have an extension of '.a' in Linux.
