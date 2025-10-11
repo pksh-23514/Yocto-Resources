@@ -8,3 +8,25 @@ Static Libraries:
 	2) It can modify the Object files present in the static libraries.
 	3) It can list the name of the Object files present in the static libraries.
 5. The static libraries have an extension of '.a' in Linux.
+
+Steps to Create a Static Library:
+=================================
+1. The first step is to collect all the C files and the Header files that needs to be included in the static library.
+2. The C files must be partially Compiled by using the '-c' option to generate their individual Object files.
+	=> gcc -c <file-1>.c <file-2>.c ...
+3. The Object files are created from the C files with an extension of '.o' in Linux.
+4. After the Object files are generated, they can be used to create the static library by using the Archiver utility with the 'rcs' options.
+	=> ar rcs lib_static-lib-name.a <file-1>.o <file-2>.o ...
+	---> 'r' is used to replace an existing file or insert new file(s) into the archive.
+	---> 'c' is used to not warn if the library had to be created if it doesn't exists.
+	---> 's' is used to create an archive index which can be used by the Compiler to speed up the Symbol-lookup inside the library.
+	---> 'lib_static-lib-name.a' is a conventional way to name the libraries.
+5. The static library is created from the Object files with an extension of '.a' in Linux.
+6. The additional step (which is not a part of the Recipes) to use this static library while Compiling a C file.
+	=> gcc <file.c> -o <file> -I<path-to-Header-file> -l_static-lib-name -L<path-to-static-library>
+	---> '-I' is used to provide the path to the Header file especially when it is placed in a non-standard location.
+	---> '-l' is used to provide the library name to be linked. Only the name of the library without the extension and along with '_' (if present) must be provided.
+	---> '-L' is used to provide the path to the library especially when it is placed in a non-standard location.
+7. The standard locations for the Header files and the libraries are:
+	=> Header files ---> "/usr/include/"
+	=> Libraries ---> "/usr/lib"
