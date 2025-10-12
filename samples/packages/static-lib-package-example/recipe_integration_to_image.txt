@@ -1,0 +1,64 @@
+Integration of Recipe with Static Library Installed to the Image Build:
+=======================================================================
+
+1. Although the Recipe Build is successful, it does not gets automatically included in the Image Build.
+
+2. The Recipe must be appended to the 'IMAGE_INSTALL' variable of the Image Recipe for it to be included in the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta/recipes-core/images/core-image-minimal.bb
+=> IMAGE_INSTALL:append = " hello-static-lib-staticdev"
+
+3. After the Image Recipe file is updated, run the 'bitbake' command with Target Image as 'core-image-minimal' for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake core-image-minimal
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1778 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 987 .bb files complete (975 cached, 12 parsed). 1782 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:02
+Sstate summary: Wanted 3 Local 0 Mirrors 0 Missed 3 Current 1402 (0% match, 99% complete)
+Removing 2 stale sstate objects for arch qemuarm: 100% |###########################################################################################################| Time: 0:00:00
+NOTE: Executing Tasks
+ERROR: core-image-minimal-1.0-r0 do_rootfs: Could not invoke dnf. Command '/home/.../build/tmp/work/.../1.0-r0/recipe-sysroot-native/usr/bin/dnf -v ...' returned 1:
+DNF version: 4.11.1
+cachedir: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/qemuarm-poky-linux-gnueabi/core-image-minimal/1.0-r0/rootfs/var/cache/dnf
+Added oe-repo repo from /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/qemuarm-poky-linux-gnueabi/core-image-minimal/1.0-r0/oe-rootfs-repo
+User-Agent: falling back to 'libdnf': could not detect OS or basearch
+repo: using cache for: oe-repo
+oe-repo: using metadata from Mon 06 Oct 2025 06:08:17 PM UTC.
+Last metadata expiration check: 0:00:01 ago on Mon 06 Oct 2025 06:08:19 PM UTC.
+--> Starting dependency resolution
+--> Finished dependency resolution
+Error: 
+ Problem: package hello-static-lib-staticdev-0.1-r0.cortexa15t2hf_neon requires hello-static-lib-dev = 0.1-r0, but none of the providers can be installed
+  - conflicting requests
+  - nothing provides hello-static-lib = 0.1-r0 needed by hello-static-lib-dev-0.1-r0.cortexa15t2hf_neon
+(try to add '--skip-broken' to skip uninstallable packages)
+
+ERROR: Logfile of failure stored in: /home/prabhat_kiran/.../Poky/poky/build/tmp/work/qemuarm-poky-linux-gnueabi/core-image-minimal/1.0-r0/temp/log.do_rootfs.448413
+ERROR: Task (/home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 3601 tasks of which 3600 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs
+Summary: There was 1 ERROR message, returning a non-zero exit code.
