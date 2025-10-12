@@ -59,3 +59,80 @@ hello-static-lib
 └── hello-static-lib_0.1.bb
 
 1 directory, 4 files
+
+7. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-static-lib$ cd ../../../build/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-static-lib
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1778 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 987 .bb files complete (982 cached, 5 parsed). 1782 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 9 Local 0 Mirrors 0 Missed 9 Current 153 (0% match, 94% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 667 tasks of which 650 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+
+8. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ ls
+configure.sstate  deploy-rpms               image            maths.c  packages-split  pkgdata-pdata-input  print.o         recipe-sysroot-native  sysroot-destdir
+deploy-debs       deploy-source-date-epoch  lib_static.a     maths.o  patches         pkgdata-sysroot      pseudo          source-date-epoch      temp
+deploy-ipks       hello-static-lib.spec     license-destdir  package  pkgdata         print.c              recipe-sysroot  static_lib.h
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ file lib_static.a
+lib_static.a: current ar archive
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ tree image
+image
+└── usr
+    ├── include
+    │   └── static_lib.h
+    └── lib
+        └── lib_static.a
+
+3 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ tree packages-split
+packages-split
+├── hello-static-lib
+├── hello-static-lib-dbg
+├── hello-static-lib-dev
+│   └── usr
+│       └── include
+│           └── static_lib.h
+├── hello-static-lib-doc
+├── hello-static-lib-locale
+├── hello-static-lib-src
+└── hello-static-lib-staticdev
+    └── usr
+        └── lib
+            └── lib_static.a
+
+11 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ tree deploy-rpms
+deploy-rpms
+└── cortexa15t2hf_neon
+    ├── hello-static-lib-dbg-0.1-r0.cortexa15t2hf_neon.rpm
+    ├── hello-static-lib-dev-0.1-r0.cortexa15t2hf_neon.rpm
+    └── hello-static-lib-staticdev-0.1-r0.cortexa15t2hf_neon.rpm
+
+1 directory, 3 files
