@@ -136,3 +136,10 @@ deploy-rpms
     └── hello-static-lib-staticdev-0.1-r0.cortexa15t2hf_neon.rpm
 
 1 directory, 3 files
+
+9. The Packages in the 'deploy-rpms' directory are created based on the files installed by the Recipe in the 'do_install' Task.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-static-lib | grep ^FILES:hello-static-lib-dev=
+FILES:hello-static-lib-dev="/usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal /lib/*.o ..."
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-static-lib | grep ^FILES:hello-static-lib-staticdev=
+FILES:hello-static-lib-staticdev="/usr/lib/*.a /lib/*.a /usr/lib/hello-static-lib/*.a"
