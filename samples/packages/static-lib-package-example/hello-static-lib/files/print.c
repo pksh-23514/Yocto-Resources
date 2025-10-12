@@ -5,6 +5,6 @@ void print (char *str, int times)
 {
 	while (times--)
 	{
-		printf("%s\n", str);
+		printf ("%s\n", str);
 	}
 }
