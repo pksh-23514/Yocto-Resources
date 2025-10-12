@@ -18,7 +18,7 @@ do_compile() {
 
 do_install() {
     install -d ${D}${libdir}
-    install -m 0755 static_lib.a ${D}${libdir}
+    install -m 0755 lib_static.a ${D}${libdir}
     install -d ${D}${includedir}
     install -m 0444 static_lib.h ${D}${includedir}
 }
