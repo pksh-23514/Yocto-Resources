@@ -116,3 +116,7 @@ deploy-rpms
     └── hello-static-lib-staticdev-0.1-r0.cortexa15t2hf_neon.rpm
 
 1 directory, 4 files
+
+10. The empty '${PN}' Package is now generated in the Recipe Build as the default BitBake behavior is overridden by the 'ALLOW_EMPTY' parameter in the Recipe file.
+	1) The 'packages-split' directory can be verified for the 'hello-static-lib' Package. It is still an empty Package.
+	2) The 'deploy-rpms' directory can be verified for the generation of the 'hello-static-lib' Package.
