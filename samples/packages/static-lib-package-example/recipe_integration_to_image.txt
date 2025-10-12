@@ -62,3 +62,8 @@ NOTE: Writing buildhistory took: 2 seconds
 Summary: 1 task failed:
   /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs
 Summary: There was 1 ERROR message, returning a non-zero exit code.
+
+3. The error is thrown by the Image Build as there is a dependency which needs to be resolved.
+	1) The 'hello-static-lib-dev-0.1-r0.cortexa15t2hf_neon' Package requires the 'hello-static-lib = 0.1-r0' Package which is not generated in the Recipe Build.
+	2) Since, the 'hello-static-lib = 0.1-r0' Package is not provided to the BitBake, the Image Build has failed.
+	3) This dependency can be resolved by generating an empty 'hello-static-lib = 0.1-r0' Package during the Recipe Build.
