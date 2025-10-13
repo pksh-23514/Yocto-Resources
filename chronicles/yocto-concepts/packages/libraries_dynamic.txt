@@ -33,3 +33,49 @@ Steps to Create a Dynamic Library:
 8. There is one more additional step (which is not a part of the Recipes) necessary to run the binary generated using dynamic linking.
 	=> export LD_LIBRARY_PATH=<path-to-dynamic-library>
 	---> 'LD_LIBRARY_PATH' is an Environment variable used by the dynamic Linker at the Run-time. It is used to specify the path to the dynamic library.
+
+Real Versioned Library Name:
+****************************
+1. This is the actual name of the dynamic library. All the other Symbolic links are made to point to this actual library name.
+2. It is possible that the multiple versions of the same dynamic library can be co-existing in the same system.
+3. Therefore, the dynamic libraries often follows a naming convention to include the various versions in their name.
+	1) Major Release
+	2) Minor Release
+	3) Patch Release
+4. The actual name of the dynamic library has the following format:
+	=> lib_dynamic-lib-name.so.major.minor.patch
+	---> 'lib' is the prefix for the dynamic library name.
+	---> '_dynamic-lib-name' is the real dynamic library name.
+
+SONAME (Shared Object Name):
+****************************
+1. The SONAME is a Symbolic link that points to the actual dynamic library name. It is also embedded into the dynamic library ELF (as DT_SONAME).
+2. This name is used by the dynamic Linker to identify the file during the dynamic linking.
+3. It includes the same Major Release version as the actual name of the dynamic library. It points to the most recent Minor Release version for each Major Release version.
+4. The SONAME of the dynamic library has the following format:
+	=> lib_dynamic-lib-name.so.major
+	---> 'lib' is the prefix for the dynamic library name.
+	---> '_dynamic-lib-name' is the real dynamic library name.
+5. The 'readelf -d' command displays the contents of the dynamic section (.dynamic) of an ELF. It is used to read the SONAME of the dynamic library.
+
+Linker Name:
+************
+1. The Linker name is a Symbolic link that points to the SONAME which then points to the actual dynamic library name. It is not embedded into the dynamic library ELF.
+2. This is the plain name used with the '-l' option while Compiling a C file along with the dynamic library.
+	=> gcc <file.c> -o <file> -I<path-to-Header-file> -l_dynamic-lib-name.so -L<path-to-dynamic-library>
+3. It doesn't include any of the version related information for the dynamic library.
+4. The Linker name of the dynamic library has the following format:
+	=> lib_dynamic-lib-name.so
+	---> 'lib' is the prefix for the dynamic library name.
+	---> '_dynamic-lib-name' is the real dynamic library name.
+
+Symbolic Links:
+***************
+1. The order of the Symbolic links are as follows:
+	=> Linker Name ---> SONAME
+	=> SONAME ---> Latest versioned dynamic library name
+2. So, if there is any upgrade to the dynamic library version, updating the SONAME to point to the latest version of the dynamic library is sufficient.
+3. There is no need to upgrade the Linker name as it depends on the SONAME directly.
+4. Therefore, the Symbolic links are created for the versioned dynamic library to manage the inerface changes and compatibility.
+5. It allows the multiple versions of the same dynamic library to co-exist smoothly.
+6. It makes the process of upgrading the dynamic library version fairly simple.
