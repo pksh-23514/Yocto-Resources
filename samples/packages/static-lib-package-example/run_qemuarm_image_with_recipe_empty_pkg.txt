@@ -26,3 +26,12 @@ root@qemuarm:~#
 2. The static library should be located in the directory on which it is installed in the Recipe file along with the specified file permissions.
 root@qemuarm:~# ls -l /usr/lib/static_lib.a
 -rwxr-xr-x    1 root     root          1958 Mar  9  2018 /usr/lib/static_lib.a
+
+3. Although the Header file related Package i.e. '${PN}-dev' is not added in the 'IMAGE_INSTALL' variable of the Image Recipe file, it is still getting added into the Image.
+root@qemuarm:~# ls -l /usr/include/static_lib.h
+-rw-r--r--    1 root     root            62 Mar  9  2018 /usr/include/static_lib.h
+
+4. There is some dependency of 'hello-static-lib-staticdev' Package on the 'hello-static-lib-dev' Package as per the observations on running the Image on QEMU.
+	1) Only the 'hello-static-lib-staticdev' Package is added to the 'IMAGE_INSTALL' variable in the 'core-image-minimal.bb' file.
+	2) The 'hello-static-lib-dev' is automatically included into the Image Build without explicitly specifying in the 'IMAGE_INSTALL' variable.
+	3) The proof for this observation is the existence of the Header file in the "/usr/include" directory.
