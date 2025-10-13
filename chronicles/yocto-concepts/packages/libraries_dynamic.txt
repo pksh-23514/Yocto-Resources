@@ -5,3 +5,23 @@ Dynamic Libraries:
 3. The code is not included as a part of the binary. Instead, it is linked dynamically whenever the binary is executed.
 4. The utility used to create the dynamic libraries is GCC (gcc).
 5. The dynamic libraries have an extension of '.so' in Linux.
+
+Steps to Create a Dynamic Library:
+==================================
+1. The first step is to collect all the C files and the Header files that needs to be included in the dynamic library.
+2. The C files must be partially Compiled by using the '-c' option along with the '-fPIC' option to generate their individual position independent code Object files.
+	=> gcc -c -fPIC <file-1>.c <file-2>.c ...
+3. The Object files are created from the C files with an extension of '.o' in Linux.
+4. After the Object files are generated, they can be used to create the dynamic library by using the GCC utility with the '-shared' option.
+	=> gcc -shared -Wl,-soname,SONAME -o lib_dynamic-lib-name.so.major.minor.patch <file-1>.o <file-2>.o ...
+5. The versioned dynamic library is created from the position independent Object files with an extension of '.so' in Linux.
+6. The Symbolic links must be created for the versioned dynamic library to manage the inerface changes and compatibility to be used at the Run-time.
+	=> ln -s lib_dynamic-lib-name.so.major.minor.patch lib_dynamic-lib-name.so.major
+	=> ln -s lib_dynamic-lib-name.so.major lib_dynamic-lib-name.so
+7. The additional step (which is not a part of the Recipes) to use this dynamic library while Compiling a C file.
+	=> gcc <file.c> -o <file> -I<path-to-Header-file> -l_dynamic-lib-name.so -L<path-to-dynamic-library>
+	---> '-I' is used to provide the path to the Header file especially when it is placed in a non-standard location.
+	---> '-l' is used to provide the library name to be linked. Only the name of the library without the extension and along with '_' (if present) must be provided.
+	---> '-L' is used to provide the path to the library especially when it is placed in a non-standard location.
+8. There is one more additional step (which is not a part of the Recipes) necessary to run the binary generated using dynamic linking.
+	=> export LD_LIBRARY_PATH=<path-to-dynamic-library>
