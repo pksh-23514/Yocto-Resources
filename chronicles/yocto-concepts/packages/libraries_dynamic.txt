@@ -11,13 +11,20 @@ Steps to Create a Dynamic Library:
 1. The first step is to collect all the C files and the Header files that needs to be included in the dynamic library.
 2. The C files must be partially Compiled by using the '-c' option along with the '-fPIC' option to generate their individual position independent code Object files.
 	=> gcc -c -fPIC <file-1>.c <file-2>.c ...
+	---> '-fPIC' is used to generate the Object files with Relative Addressing (instead of Absolute Addressing). These Addresses can be modified at the Run-time.
 3. The Object files are created from the C files with an extension of '.o' in Linux.
 4. After the Object files are generated, they can be used to create the dynamic library by using the GCC utility with the '-shared' option.
 	=> gcc -shared -Wl,-soname,SONAME -o lib_dynamic-lib-name.so.major.minor.patch <file-1>.o <file-2>.o ...
+	---> '-shared' is used to create a Shared library.
+	---> '-Wl' is used to pass a comma-separated options to the Linker.
+	---> 'SONAME' is the Shared Object name embedded inside the dynamic library ELF.
+	---> 'lib_dynamic-lib-name.so.major.minor.patch' is a conventional way to name the versioned libraries.
 5. The versioned dynamic library is created from the position independent Object files with an extension of '.so' in Linux.
 6. The Symbolic links must be created for the versioned dynamic library to manage the inerface changes and compatibility to be used at the Run-time.
 	=> ln -s lib_dynamic-lib-name.so.major.minor.patch lib_dynamic-lib-name.so.major
 	=> ln -s lib_dynamic-lib-name.so.major lib_dynamic-lib-name.so
+	---> The 'lib_dynamic-lib-name.so.major' is referred to as the SONAME of the dynamic library.
+	---> The 'lib_dynamic-lib-name.so' is referred to as the Linker name of the dynamic library.
 7. The additional step (which is not a part of the Recipes) to use this dynamic library while Compiling a C file.
 	=> gcc <file.c> -o <file> -I<path-to-Header-file> -l_dynamic-lib-name.so -L<path-to-dynamic-library>
 	---> '-I' is used to provide the path to the Header file especially when it is placed in a non-standard location.
@@ -25,3 +32,4 @@ Steps to Create a Dynamic Library:
 	---> '-L' is used to provide the path to the library especially when it is placed in a non-standard location.
 8. There is one more additional step (which is not a part of the Recipes) necessary to run the binary generated using dynamic linking.
 	=> export LD_LIBRARY_PATH=<path-to-dynamic-library>
+	---> 'LD_LIBRARY_PATH' is an Environment variable used by the dynamic Linker at the Run-time. It is used to specify the path to the dynamic library.
