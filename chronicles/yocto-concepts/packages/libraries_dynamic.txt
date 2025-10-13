@@ -1,0 +1,7 @@
+Dynamic Libraries:
+==================
+1. A dynamic library (also called as Shared library) is a collection of functions and procedures that are loaded into the program at the Run-time.
+2. This type of linking is called dynamic linking.
+3. The code is not included as a part of the binary. Instead, it is linked dynamically whenever the binary is executed.
+4. The utility used to create the dynamic libraries is GCC (gcc).
+5. The dynamic libraries have an extension of '.so' in Linux.
