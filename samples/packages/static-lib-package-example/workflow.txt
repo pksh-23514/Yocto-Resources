@@ -44,3 +44,30 @@ Including the Recipe with Static Library to the Image:
 8. It is observed that the Image Build failed as here is a dependency which needs to be resolved.
 	1) The '${PN}-staticdev' Package has a dependency on the '${PN}' Package, which is not generated in the Recipe Build.
 	2) This dependency can be resolved by generating an empty '${PN}' Package during the Recipe Build.
+
+Recipe Build for Static Library with Empty Package Production by BitBake:
+=========================================================================
+1. The sample Recipe is used to Build a static library and include it into the RootFS.
+2. The static library consisting of the C files and the Header file must be written with the contents to Build.
+3. The next step is to place these C files and the Header file in a directory structure for the BitBake to pick it up during the Build.
+	1) The BitBake finds the Recipes using the 'BBFILES' variable in the 'conf/layer.conf' file of the corresponding Layer.
+		=> BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+		               ${LAYERDIR}/recipes-*/*/*.bbappend"
+	2) Consequently, the Recipe file must be placed at this path in the Layer such that it can be located by the Build system.
+4. The Layer can be created and added to the Build system using the 'bitbake-layers' command.
+	1) Inside the Layer directory, there is a 'recipes-*' directory that shall contain the Recipes.
+	2) The C files, the Header file and the particular Recipe file to Build this C file shall be placed in this 'recipes-*' directory.
+5. In the Build directory, the 'conf/bblayers.conf' file can be verified if the Layer is added to the 'BBLAYERS' variable. Otherwise, it would be excluded from the Build.
+6. It is important to note that the name of the Recipe folder must match with the name of the Recipe file name being used to Build the SW.
+	=> meta/recipes-core/busybox ---> busybox_1.37.0.bb
+	---> The name of 'busybox_1.37.0.bb' without the versions or revisions or any other suffixes is 'busybox'.
+7. There should be a sub-directory created inside the Recipe folder named as 'files' to contain the C files and the Header file for the Build.
+8. The Recipe file must be created inside the Recipe folder as per the path pointed to by the 'BBFILES' variable.
+9. The Recipe file must be modified for the Build to generate the empty Package for the dependency resolution in the Image Build.
+10. Once the Recipe file is completed, the Build command can be executed for the Recipe.
+11. After the Build is successful, the 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+	1) The 'packages-split' directory contains the Packages being created and the files packaged into each of the individual Package.
+	2) The directories 'deploy-debs', 'deploy-ipks' and 'deploy-rpms' contain the Packages produced by the BitBake in the respective Package format.
+	3) The Packages are created based on the files installed by the Recipe in the 'do_install' Task.
+	4) The BitBake uses the 'PACKAGES' variable and the 'FILES' variable corresponding to each Package in the 'PACKAGES' variable during the Packaging process.
+	5) The empty '${PN}' Package is now generated in the Recipe Build as the default BitBake behavior is overridden by the 'ALLOW_EMPTY' parameter in the Recipe file.
