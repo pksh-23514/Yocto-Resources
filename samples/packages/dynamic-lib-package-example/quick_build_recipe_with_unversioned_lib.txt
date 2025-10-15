@@ -1,0 +1,61 @@
+Quick Build of Recipe with Un-Versioned Dynamic Library for ARM Architecture using the Build Directory:
+=======================================================================================================
+
+1. For building the Image for ARM Architecture instead of the Intel (x86) Architecture, the changes shall be made to the 'local.conf' file in the 'build/conf' directory.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi conf/local.conf
+=> MACHINE ?= "qemuarm"
+=> #MACHINE ?= "qemux86-64"
+
+2. The Layer directory should be created for the the BitBake to pick it up during the Build. The 'bitbake-layers' command is used to create and add the compatible Layer.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers create-layer ../meta-layer
+NOTE: Starting bitbake server...
+Add your new layer with 'bitbake-layers add-layer /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer'
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers add-layer ../meta-layer
+NOTE: Starting bitbake server...
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake-layers show-layers
+NOTE: Starting bitbake server...
+layer                 path                                      priority
+==========================================================================
+meta                  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta   5
+meta-poky             /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-poky  5
+meta-yocto-bsp        /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-yocto-bsp  5
+meta-layer            /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer  5
+
+3. The Recipe file, the C files and the Header files must be placed in the Layer structure in such a way that the BitBake is able to pick them up during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd ../meta-layer/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer$ ls
+conf  COPYING.MIT  README  recipes-example
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer$ cd recipes-example/
+
+---> It is important to note that the name of the Recipe folder must match with the name of the Recipe file name being used to Build the SW.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ mkdir hello-dynamic-lib
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ ls
+example  hello-dynamic-lib
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-dynamic-lib
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib$ mkdir files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib$ cd files/
+
+4. Include the C files and the Header files in the 'files' directory of the Layer.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib/files$ vi maths.c
+---> Add the contents of the C file to be Built using the Recipe.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib/files$ vi print.c
+---> Add the contents of the C file to be Built using the Recipe.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib/files$ vi dynamic_lib.h
+---> Add the contents of the Header file to be Built using the Recipe.
+
+5. Include the Recipe file in the Recipe folder i.e. 'hello-dynamic-lib' for the BitBake to be able to read it during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib/files$ cd ..
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib$ vi hello-dynamic-lib_0.1.bb
+---> Add the contents of the Recipe file to Build the C files and include them into the static library.
+
+6. This is the final Layer directory structure which is compatible with the BitBake for the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib$ cd ..
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ tree hello-dynamic-lib
+hello-dynamic-lib
+├── files
+│   ├── dynamic_lib.h
+│   ├── maths.c
+│   └── print.c
+└── hello-dynamic-lib_0.1.bb
+
+1 directory, 4 files
