@@ -144,3 +144,10 @@ deploy-rpms
     └── lib-dynamic-dev-0.1-r0.cortexa15t2hf_neon.rpm
 
 1 directory, 3 files
+
+9. The Packages in the 'deploy-rpms' directory are created based on the files installed by the Recipe in the 'do_install' Task.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-dynamic-lib/0.1-r0$ cd ../../../../../
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-dynamic-lib | grep ^FILES:hello-dynamic-lib=
+FILES:hello-dynamic-lib="/usr/bin/* /usr/sbin/* /usr/libexec/* /usr/lib/lib*.so.* /lib/*.so.* ..."
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -e hello-dynamic-lib | grep ^FILES:hello-dynamic-lib-dev=
+FILES:hello-dynamic-lib-dev="/usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal /lib/*.o ..."
