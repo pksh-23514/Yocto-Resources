@@ -40,3 +40,9 @@ ls: /usr/include/dynamic_lib.h: No such file or directory
 5. The Header file and the the Linker name link to the dynamic library related Package i.e. '${PN}-dev' is not added in the 'IMAGE_INSTALL' variable of the Image Recipe file.
 	1) Unlike for the static library, for the dynamic library, there is no dependency on the 'hello-dynamic-lib-dev' Package.
 	2) So, the Header file or the Linker name link to the dynamic library is not located in the "/usr/include/" or "/usr/lib/" directories respectively.
+
+6. There is a reason for the 'lib_dynamic.so' link to be packaged into the '${PN}-dev' Package and not in the '${PN}' Package.
+	1) The logic behind is that the un-versioned Symbolic links are only used during the development phase.
+	2) So, the '/lib/lib*.so' or the '/usr/lib/lib*.so' files are placed under the '${PN}-dev' Package.
+	3) In the Release Image, generally there is no GCC present for doing any development on the Image. There is no requirement to perform any development on the Image.
+	4) Hence, it makes no sense to include the '.so' files in the '${PN}' Package.
