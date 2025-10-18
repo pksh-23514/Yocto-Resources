@@ -34,3 +34,6 @@ root@qemuarm:~# ls -l /usr/lib/lib_dynamic.so*
 4. However, the Header file is not located in the Image.
 root@qemuarm:~# ls -l /usr/include/dynamic_lib.h
 ls: /usr/include/dynamic_lib.h: No such file or directory
+
+5. Therefore, even if the library developers do not provide the source code for the dynamic library, the pre-Built dynamic library can be included in the Yocto Build.
+	1) The '.so' file can then be directly used on the Image to perform any development on the Image (if required).
