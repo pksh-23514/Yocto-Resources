@@ -153,7 +153,7 @@ packages-split
 12 directories, 3 files
 
 10. The reason for the Recipe Build to fail is the presence of the real un-versioned dynamic library in place of the Symbolic link to the dynamic library.
-	1) The '${PN}-dev' is by default assumed to have a Symbolic link to the dynamic library which shall be un-versioned.
+	1) The '${PN}-dev' is by default assumed to have a Symbolic link to the dynamic library and the link should be un-versioned.
 	2) The '/lib/lib*.so' or the '/usr/lib/lib*.so' files are by default packaged into the '${PN}-dev' Package.
 	3) The pre-Built dynamic library is un-versioned and by default, it will be placed under the '${PN}-dev' Package.
 	4) The default rules during the 'do_package_qa' Task assumes the libraries generated during the Recipe Build to be versioned.
@@ -203,3 +203,11 @@ temp
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-dynamic-lib/0.1-r0$ rm -rf *
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-dynamic-lib/0.1-r0$ ls
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-dynamic-lib/0.1-r0$ cd ../../../../../
+
+13.  Modify the Recipe file in the Recipe folder i.e. 'hello-dynamic-lib' for the BitBake to place the un-versioned dynamic library into the '${PN}' Package.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ vi ../meta-layer/recipes-example/hello-dynamic-lib/hello-dynamic-lib_0.1.bb
+=> ...
+
+=> # Update the default behavior of the Recipe Build to include the Un-Versioned Dynamic Library in the ${PN} Package instead of the ${PN}-dev Package.
+=> SOLIBS = ".so"
+=> FILES_SOLIBSDEV = ""
