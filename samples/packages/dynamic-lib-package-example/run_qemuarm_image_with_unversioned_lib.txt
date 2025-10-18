@@ -37,3 +37,31 @@ ls: /usr/include/dynamic_lib.h: No such file or directory
 
 5. Therefore, even if the library developers do not provide the source code for the dynamic library, the pre-Built dynamic library can be included in the Yocto Build.
 	1) The '.so' file can then be directly used on the Image to perform any development on the Image (if required).
+
+6. To exit the QEMU Console, run the below command.
+root@qemuarm:~# poweroff
+
+Broadcast message from root@qemuarm (ttyAMA0) (Wed Aug 20 15:04:32 2025):
+
+The system is going down for system halt NOW!
+INIT: Switching to runlevel: 0
+INIT: Sending processes configured via /etc/inittab the TERM signal
+Stopping Dropbear SSH server: stopped /usr/sbin/dropbear (pid 332)
+dropbear.
+Stopping syslogd/klogd: stopped syslogd (pid 340)
+stopped klogd (pid 343)
+done
+Unmounting remote filesystems...
+Deconfiguring network interfaces... ifdown: interface lo not configured
+done.
+Sending all processes the TERM signal...
+Sending all processes the KILL signal...
+Deactivating swap...
+Unmounting local filesystems...
+[  375.735490] EXT4-fs (vda): re-mounted. Opts: (null). Quota mode: disabled.
+[  375.954866] reboot: Power down
+runqemu - INFO - Cleaning up
+runqemu - INFO - Host uptime: 257996.61
+
+Set 'tap0' nonpersistent
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$
