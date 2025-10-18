@@ -79,3 +79,14 @@ Symbolic Links:
 4. Therefore, the Symbolic links are created for the versioned dynamic library to manage the inerface changes and compatibility.
 5. It allows the multiple versions of the same dynamic library to co-exist smoothly.
 6. It makes the process of upgrading the dynamic library version fairly simple.
+
+Un-Versioned Dynamic Libraries:
+*******************************
+1. In context of the Shared libraries, the versioned libraries are far more common than the un-versioned libraries.
+2. Whenever a Shared library is generated using the source code along with their Symbolic links, they are usually versioned.
+3. However, sometimes the library developers do not provide the source code for the dynamic library but they do Release the pre-Built dynamic library for usage.
+4. If such Shared libraries are included in the Yocto Build, the Build would fail as the default rules during the 'do_package_qa' Task assumes the libraries to be versioned.
+	1) The '${PN}-dev' Package is by default assumed to have a Symbolic link to the dynamic library. The Symbolic link should be un-versioned.
+	2) The '/lib/lib*.so' or the '/usr/lib/lib*.so' files are by default packaged into the '${PN}-dev' Package.
+	3) The pre-Built dynamic library is un-versioned and by default, it will be placed under the '${PN}-dev' Package.
+	4) Hence, the '${PN}-dev' Package is actually containing the real library instead of the Symbolic link to dynamic library which throws the error during the Build.
