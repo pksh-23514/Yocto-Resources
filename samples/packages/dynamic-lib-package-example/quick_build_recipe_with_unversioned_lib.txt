@@ -31,7 +31,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ mkdir hello-dynamic-lib
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ ls
 example  hello-dynamic-lib
-prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-dynamic-lib
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-dynamic-lib/
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib$ mkdir files
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib$ cd files/
 
@@ -59,3 +59,20 @@ hello-dynamic-lib
 └── hello-dynamic-lib_0.1.bb
 
 1 directory, 4 files
+
+7. Modify the Recipe file in the Recipe folder i.e. 'hello-dynamic-lib' for the BitBake to generate an un-versioned dynamic library without the Symbolic links.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example$ cd hello-dynamic-lib/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib$ vi hello-dynamic-lib_0.1.bb
+=> ...
+=> #    ${CC} ${LDFLAGS} -shared -Wl,-soname,lib_dynamic.so.1 -o lib_dynamic.so.1.0 *.o
+=>     # Compile the Object files into Un-Versioned Dynamic Library.
+=>     ${CC} ${LDFLAGS} -shared -o lib_dynamic.so *.o
+=> }
+
+=> ...
+=>     # Install the Un-Versioned Dynamic Library only.
+=>     install -m 0755 lib_dynamic.so ${D}${libdir}
+=>     # Comment Symbolic Link Creation to Dynamic Library.
+=> #    ln -s lib_dynamic.so.1.0 ${D}${libdir}/lib_dynamic.so.1
+=> #    ln -s lib_dynamic.so.1 ${D}${libdir}/lib_dynamic.so
+=> ...
