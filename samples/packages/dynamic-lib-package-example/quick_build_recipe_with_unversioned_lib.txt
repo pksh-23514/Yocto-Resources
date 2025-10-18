@@ -76,3 +76,78 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 => #    ln -s lib_dynamic.so.1.0 ${D}${libdir}/lib_dynamic.so.1
 => #    ln -s lib_dynamic.so.1 ${D}${libdir}/lib_dynamic.so
 => ...
+
+8. On the Host Machine, run the 'bitbake' command with Target as the Recipe name for a quick Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib$ cd ../../../build/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake hello-dynamic-lib
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1779 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 988 .bb files complete (983 cached, 5 parsed). 1783 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 7 Local 0 Mirrors 0 Missed 7 Current 155 (0% match, 95% complete)
+Removing 1 stale sstate objects for arch qemuarm: 100% |###########################################################################################################| Time: 0:00:00
+Removing 6 stale sstate objects for arch cortexa15t2hf-neon: 100% |################################################################################################| Time: 0:00:00
+NOTE: Executing Tasks
+ERROR: hello-dynamic-lib-0.1-r0 do_package_qa: QA Issue: -dev package hello-dynamic-lib-dev contains non-symlink .so '/usr/lib/lib_dynamic.so' [dev-elf]
+ERROR: hello-dynamic-lib-0.1-r0 do_package_qa: Fatal QA errors were found, failing task.
+ERROR: Logfile of failure stored in: /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/.../hello-dynamic-lib/0.1-r0/temp/log.do_package_qa.3727480
+ERROR: Task (/home/prabhat_kiran/.../Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib/hello-dynamic-lib_0.1.bb:do_package_qa) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 666 tasks of which 657 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+
+Summary: 1 task failed:
+  /home/prabhat_kiran/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/hello-dynamic-lib/hello-dynamic-lib_0.1.bb:do_package_qa
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+
+9. The Recipe's 'WORKDIR' directory can be checked for the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-dynamic-lib/0.1-r0
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-dynamic-lib/0.1-r0$ tree image
+image
+└── usr
+    ├── include
+    │   └── dynamic_lib.h
+    └── lib
+        └── lib_dynamic.so
+
+3 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-dynamic-lib/0.1-r0$ tree packages-split
+packages-split
+├── hello-dynamic-lib
+├── hello-dynamic-lib-dbg
+│   └── usr
+│       └── lib
+├── hello-dynamic-lib-dev
+│   └── usr
+│       ├── include
+│       │   └── dynamic_lib.h
+│       └── lib
+│           └── lib_dynamic.so
+├── hello-dynamic-lib-dev.shlibdeps
+├── hello-dynamic-lib-doc
+├── hello-dynamic-lib-locale
+├── hello-dynamic-lib-src
+└── hello-dynamic-lib-staticdev
+
+12 directories, 3 files
