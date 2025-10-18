@@ -151,3 +151,14 @@ packages-split
 └── hello-dynamic-lib-staticdev
 
 12 directories, 3 files
+
+10. The reason for the Recipe Build to fail is the presence of the real un-versioned dynamic library in place of the Symbolic link to the dynamic library.
+	1) The '${PN}-dev' is by default assumed to have a Symbolic link to the dynamic library which shall be un-versioned.
+	2) The '/lib/lib*.so' or the '/usr/lib/lib*.so' files are by default packaged into the '${PN}-dev' Package.
+	3) The pre-Built dynamic library is un-versioned and by default, it will be placed under the '${PN}-dev' Package.
+	4) The default rules during the 'do_package_qa' Task assumes the libraries generated during the Recipe Build to be versioned.
+
+11. In context of the Shared (dynamic) libraries, the versioned libraries are far more common than the un-versioned libraries.
+	1) If the library developers do not provide the source code for the dynamic library, it cannot be Compiled during the 'do_compile' Task of the Recipe.
+	2) The library developers provide the pre-Built dynamic library Release for usage. This can be installed directly in the 'do_install' Task of the Recipe.
+	3) However, in such cases of un-versioned libraries, the Recipe Build fails normally.
