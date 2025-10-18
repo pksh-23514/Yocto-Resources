@@ -90,3 +90,22 @@ Un-Versioned Dynamic Libraries:
 	2) The '/lib/lib*.so' or the '/usr/lib/lib*.so' files are by default packaged into the '${PN}-dev' Package.
 	3) The pre-Built dynamic library is un-versioned and by default, it will be placed under the '${PN}-dev' Package.
 	4) Hence, the '${PN}-dev' Package is actually containing the real library instead of the Symbolic link to dynamic library which throws the error during the Build.
+5. The Packaging of the un-versioned dynamic libraries requires certain modifications in the Recipes to resolve the QA error encountered during the Build.
+	1) By default, the '.so' files are packaged into the '${PN}-dev' Package which then throws the error of the presence of non-Symbolic link in the Package.
+	2) To resolve the error, the Recipe file should be updated for the BitBake to place the un-versioned dynamic library i.e. '.so' files into the '${PN}' Package.
+	3) The 'SOLIBS' variable is used to define the suffix for the Shared libraries that are to be used on the Target.
+		=> SOLIBS = ".so.*"
+		---> This variable is referenced in the default values of the 'FILES:${PN}' variable.
+		=> FILES:${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} ... ${base_libdir}/*${SOLIBS} ..."
+	4) The 'SOLIBSDEV' variable is used to define the suffix for the development Symbolic link for the Shared libraries that are to be used on the Target.
+		=> SOLIBSDEV = ".so"
+		---> This variable is referenced in the default values of the 'FILES:${PN}-dev' variable.
+		=> FILES:${PN}-dev = "${includedir} ${FILES_SOLIBSDEV} ${libdir}/*.la ..."
+		=> FILES_SOLIBSDEV ?= "${base_libdir}/lib*${SOLIBSDEV} ${libdir}/lib*${SOLIBSDEV}"
+	5) The default value for both the 'SOLIBS' and the 'SOLIBSDEV' variables is specified in the 'meta/conf/bitbake.conf' file.
+	6) The 'SOLIBS' variable is used to put the real versioned dynamic library or the versioned Symbolic link to the dynamic library into the '${PN}' Package.
+	7) The 'SOLIBSDEV' variable is used to put the real un-versioned dynamic library or the un-versioned Symbolic link to the dynamic library into the '${PN}-dev' Package.
+	8) The Recipe file should be updated with the below variables to resolve the error:
+		=> SOLIBS = ".so"
+		=> FILES_SOLIBSDEV = ""
+	9) This overrides the default behavior of the BitBake to place the un-versioned dynamic library i.e. '.so' files into the '${PN}-dev' Package.
