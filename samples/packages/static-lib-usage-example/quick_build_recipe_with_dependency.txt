@@ -44,6 +44,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/static-lib-test$ vi static-lib-test_0.1.bb
 ---> Add the contents of the Recipe file to Build the C file.
 ---> The dependency is specified on the static library Package in the Recipe file.
+---> The '-l' option used in the Compile stage must provide the library name. Only the name of the library without the extension and along with '_' (if present) must be provided.
 
 6. This is the final Layer directory structure which is compatible with the BitBake for the Build.
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/static-lib-test$ cd ..
