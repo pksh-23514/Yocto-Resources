@@ -135,3 +135,12 @@ temp
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ rm -rf *
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ ls
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ cd ../../../../../
+
+8. The 'static-lib-test' Recipe must be Built step-by-step i.e. one Task at a time to observe the Build status in the Recipe's 'WORKDIR' directories.
+---> To perform the step-by-step Task execution, there should be 2 Terminals opened parallely to see the effects of the 'DEPENDS' variable on the Recipes.
+Terminal-1:
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0/
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ ls
+Terminal-2:
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0/
+uic97426@ozd2945u:~/Datadrive/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0$ ls
