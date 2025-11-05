@@ -364,3 +364,51 @@ do_configure (1247708): log.do_configure.1247708
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ ls
 configure.sstate          image         maths.c  patches  print.o  recipe-sysroot         source-date-epoch  sysroot-destdir
 deploy-source-date-epoch  lib_static.a  maths.o  print.c  pseudo   recipe-sysroot-native  static_lib.h       temp
+
+14. On the Host Machine, run the 'bitbake' command for the 'do_compile' Task with Target as the 'static-lib-test' Recipe name.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake -c compile static-lib-test
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1780 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 989 .bb files complete (985 cached, 4 parsed). 1784 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 74 (0% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 325 tasks of which 324 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 2 seconds
+---> Terminal-2:
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0$ ls
+configure.sstate  deploy-source-date-epoch  patches  recipe-sysroot  recipe-sysroot-native  source-date-epoch  temp  program  program.c
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0$ tail -f temp/log.task_order
+do_fetch (1236446): log.do_fetch.1236446
+do_unpack (1239098): log.do_unpack.1239098
+do_patch (1239104): log.do_patch.1239104
+do_prepare_recipe_sysroot (1241053): log.do_prepare_recipe_sysroot.1241053
+do_deploy_source_date_epoch (1247671): log.do_deploy_source_date_epoch.1247671
+do_configure (1247708): log.do_configure.1247708
+do_compile (1254271): log.do_compile.1254271
+---> Terminal-1:
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ ls
+configure.sstate          image         maths.c  patches  print.o  recipe-sysroot         source-date-epoch  sysroot-destdir
+deploy-source-date-epoch  lib_static.a  maths.o  print.c  pseudo   recipe-sysroot-native  static_lib.h       temp
