@@ -9,7 +9,7 @@ SRC_URI = " \
 S = "${WORKDIR}"
 
 # Build-time Dependency for this Recipe.
-=> DEPENDS += "hello-static-lib"
+DEPENDS += "hello-static-lib"
 
 do_compile() {
     # Compile C file with Static Library.
