@@ -43,7 +43,7 @@ prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-lay
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/static-lib-test/files$ cd ..
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/meta-layer/recipes-example/static-lib-test$ vi static-lib-test_0.1.bb
 ---> Add the contents of the Recipe file to Build the C file.
----> The dependency is specified on the static library Package in the Recipe file.
+---> The dependency is specified on the static library Recipe in the Recipe file by using the 'DEPENDS' variable.
 ---> The '-l' option used in the Compile stage must provide the library name. Only the name of the library without the extension and along with '_' (if present) must be provided.
 
 6. This is the final Layer directory structure which is compatible with the BitBake for the Build.
@@ -304,3 +304,12 @@ sysroot-destdir
         └── lib_static.a
 
 4 directories, 3 files
+
+12. After the 'do_prepare_recipe_sysroot' Task execution, it is observed that the 'hello-static-lib' Recipe Build till the 'do_populate_sysroot' Task is performed by the BitBake.
+	1) The 'lib_static.a' file is generated and installed in the "/usr/lib/" directory.
+	2) The 'static-lib.h' file is installed in the "/usr/include/" directory.
+	3) This behavior is observed due to the Build dependency on the 'hello-static-lib' Recipe specified in the 'static-lib-test' Recipe.
+	4) The 'do_populate_sysroot' Task of the 'hello-static-lib' Recipe is needed to be finished before the 'do_configure' Task of the 'static-lib-test' Recipe is performed.
+	5) The order of the Task execution by the BitBake defines that the 'do_prepare_recipe_sysroot' Task is performed before the 'do_configure' Task in the Recipe Build.
+	6) This enables the library and the Header file to be provided by the 'hello-static-lib' Recipe for the static-lib-test' Recipe Build.
+	7) The Task dependency is defined in such a way that it allows the BitBake to do efficient parallel processing.
