@@ -412,3 +412,80 @@ do_compile (1254271): log.do_compile.1254271
 prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/hello-static-lib/0.1-r0$ ls
 configure.sstate          image         maths.c  patches  print.o  recipe-sysroot         source-date-epoch  sysroot-destdir
 deploy-source-date-epoch  lib_static.a  maths.o  print.c  pseudo   recipe-sysroot-native  static_lib.h       temp
+
+15. On the Host Machine, run the 'bitbake' command with Target as the 'static-lib-test' Recipe name to finish all the other Tasks for the Recipe Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ bitbake static-lib-test
+Loading cache: 100% |##############################################################################################################################################| Time: 0:00:00
+Loaded 1781 entries from dependency cache.
+Parsing recipes: 100% |############################################################################################################################################| Time: 0:00:03
+Parsing of 990 .bb files complete (986 cached, 4 parsed). 1785 targets, 159 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-poky-linux-gnueabi"
+MACHINE              = "qemuarm"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.27"
+TUNE_FEATURES        = "arm vfp cortexa15 neon thumb callconvention-hard"
+TARGET_FPU           = "hard"
+meta
+meta-poky
+meta-yocto-bsp
+meta-layer           = "my-kirkstone:81e0dc80d72d66b7f15a34c0da7a0a8c58809056"
+meta-ti-bsp          = "kirkstone:52018a8d730b2977d7163bf56c398905ef9115ac"
+meta-arm
+meta-arm-toolchain   = "kirkstone:10c27f061b22af78e17a23cf540b69501afc7160"
+
+Initialising tasks: 100% |#########################################################################################################################################| Time: 0:00:00
+Sstate summary: Wanted 13 Local 0 Mirrors 0 Missed 13 Current 153 (0% match, 92% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 678 tasks of which 650 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+
+16. After the Recipe Build is successful, the 'WORKDIR' directory contains all the files and directories generated during the Build.
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build$ cd tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0/
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0$ ls
+configure.sstate   deploy-ipks               image            packages-split  pkgdata-pdata-input  program.c       recipe-sysroot-native  sysroot-destdir
+debugsources.list  deploy-rpms               license-destdir  patches         pkgdata-sysroot      pseudo          source-date-epoch      temp
+deploy-debs        deploy-source-date-epoch  package          pkgdata         program              recipe-sysroot  static-lib-test.spec
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0$ tree image
+image
+└── usr
+    └── bin
+        └── program
+
+2 directories, 1 file
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0$ tree packages-split
+packages-split
+├── static-lib-test
+│   └── usr
+│       └── bin
+│           └── program
+├── static-lib-test-dbg
+│   └── usr
+│       └── bin
+├── static-lib-test-dev
+├── static-lib-test-doc
+├── static-lib-test-locale
+├── static-lib-test.shlibdeps
+├── static-lib-test-src
+└── static-lib-test-staticdev
+
+11 directories, 2 files
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0$ tree deploy-rpms
+deploy-rpms
+└── cortexa15t2hf_neon
+    ├── static-lib-test-0.1-r0.cortexa15t2hf_neon.rpm
+    ├── static-lib-test-dbg-0.1-r0.cortexa15t2hf_neon.rpm
+    └── static-lib-test-dev-0.1-r0.cortexa15t2hf_neon.rpm
+
+1 directory, 3 files
+prabhat_kiran@coldstone:~/Documents/Learnings/.../static-lib-test/0.1-r0$ /home/prabhat_kiran/.../Yocto_Resources/Poky/poky/build/tmp/hosttools/objdump -t program | grep "print"
+00000000 l    df *ABS*	00000000              print.c
+00000529 g     F .text	00000022              print
+prabhat_kiran@coldstone:~/Documents/Learnings/Yocto_Resources/Poky/poky/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/static-lib-test/0.1-r0$ file program
+program: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=xxx, ..., with debug_info, not stripped
